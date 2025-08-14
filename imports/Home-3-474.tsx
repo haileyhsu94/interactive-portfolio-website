@@ -1181,7 +1181,7 @@ function Container8() {
       data-name="container"
     >
       <div className="relative shrink-0 size-[61px]" data-name="avatar">
-        <img className="block max-w-none size-full" height="61" src={imgAvatar} width="61" />
+        <img className="block max-w-none size-full" height="61" src={imgAvatar.src} width="61" />
       </div>
       <div
         className="font-['Inter:Regular',_sans-serif] font-normal leading-[0] min-w-full not-italic relative shrink-0 text-[14px] text-gray-300 text-left"
