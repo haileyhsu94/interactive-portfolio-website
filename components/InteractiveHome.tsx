@@ -1251,12 +1251,17 @@ export default function InteractiveHome() {
         { ref: contactRef, name: 'contact' as const }
       ];
 
-      const scrollPosition = window.scrollY + window.innerHeight / 3;
+      // Get the scrollable container
+      const scrollContainer = document.querySelector('[data-name="middle"] > div');
+      if (!scrollContainer) return;
+
+      const scrollPosition = scrollContainer.scrollTop + scrollContainer.clientHeight / 3;
 
       for (const section of sections) {
         if (section.ref.current) {
           const rect = section.ref.current.getBoundingClientRect();
-          const elementTop = rect.top + window.scrollY;
+          const containerRect = scrollContainer.getBoundingClientRect();
+          const elementTop = rect.top - containerRect.top;
           const elementBottom = elementTop + rect.height;
 
           if (scrollPosition >= elementTop && scrollPosition < elementBottom) {
