@@ -1,75 +1,184 @@
 # Interactive Portfolio Website
 
-A modern, interactive portfolio website built with Next.js, React, TypeScript, and Tailwind CSS.
+A modern, interactive portfolio website built with Next.js, React, and TypeScript featuring an advanced audio player with Canvas-based waveform visualization.
 
 ## 🚀 Features
 
-- **Interactive Design**: Smooth animations and transitions using Framer Motion
-- **Responsive Layout**: Optimized for desktop and mobile devices
-- **Modern UI**: Clean, professional design with custom components
-- **TypeScript**: Full type safety and better development experience
-- **Tailwind CSS**: Utility-first CSS framework for rapid styling
+- **Interactive Audio Player** - Canvas-based waveform with hover and click-to-seek functionality
+- **Project Showcase** - Individual pages for each project with consistent layout
+- **Responsive Design** - Optimized for all device sizes
+- **Modern UI/UX** - Clean, professional interface with smooth animations
+- **Performance Optimized** - Efficient rendering and audio processing
 
 ## 🛠️ Tech Stack
 
-- **Framework**: Next.js 14
-- **Language**: TypeScript
-- **Styling**: Tailwind CSS
-- **Animations**: Framer Motion
-- **UI Components**: Custom component library
-- **Icons**: Lucide React
+- **Framework:** Next.js 14.0.0
+- **Language:** TypeScript
+- **Styling:** Tailwind CSS
+- **Animations:** Framer Motion
+- **Audio Processing:** Web Audio API
+- **UI Components:** Radix UI
+- **Notifications:** Sonner
 
 ## 📦 Installation
 
-1. **Clone the repository**
-   ```bash
-   git clone https://github.com/haileyhsu94/interactive-portfolio-website.git
-   cd interactive-portfolio-website
-   ```
+```bash
+# Clone the repository
+git clone https://github.com/haileyhsu94/interactive-portfolio-website.git
 
-2. **Install dependencies**
-   ```bash
-   npm install
-   ```
+# Navigate to the project directory
+cd interactive-portfolio-website
 
-3. **Run the development server**
-   ```bash
-   npm run dev
-   ```
+# Install dependencies
+npm install
 
-4. **Open your browser**
-   Navigate to [http://localhost:3000](http://localhost:3000)
+# Run the development server
+npm run dev
+```
 
-## 🎨 Customization
+## 🎵 Audio Player Features
 
-- **Colors**: Update the color scheme in `tailwind.config.js`
-- **Content**: Modify the content in `components/InteractiveHome.tsx`
-- **Images**: Replace placeholder images with your actual project images
-- **Styling**: Customize styles in `styles/globals.css`
+- **Canvas-based Waveform** - High-performance audio visualization
+- **Interactive Seeking** - Click anywhere on waveform to jump to position
+- **Hover Effects** - Visual feedback for better user experience
+- **Multi-track Support** - Switch between different project audio files
+- **Real-time Progress** - Smooth progress updates during playback
 
 ## 📁 Project Structure
 
 ```
-├── app/                    # Next.js app directory
+├── app/                    # Next.js App Router
+│   ├── projects/          # Individual project pages
+│   ├── layout.tsx         # Root layout
+│   └── page.tsx           # Home page
 ├── components/            # React components
 │   ├── ui/               # Reusable UI components
 │   └── InteractiveHome.tsx # Main portfolio component
-├── styles/               # Global styles
-├── imports/              # SVG and other assets
-└── public/               # Static assets
+├── utils/                # Utility functions
+│   └── audioUtils.ts     # Audio processing utilities
+├── public/               # Static assets
+│   ├── audio/           # Audio files
+│   └── images/          # Image assets
+└── styles/              # Global styles
 ```
+
+## 🔄 Version Control
+
+### Current Version: v1.2.0
+
+### Branching Strategy
+
+- **`main`** - Production-ready code
+- **`develop`** - Development branch for features
+- **`feature/*`** - Feature branches
+- **`hotfix/*`** - Critical bug fixes
+
+### Git Workflow
+
+1. **Feature Development:**
+   ```bash
+   git checkout -b feature/audio-player-enhancements
+   # Make changes
+   git add .
+   git commit -m "feat: add interactive waveform seeking"
+   git push origin feature/audio-player-enhancements
+   ```
+
+2. **Release Process:**
+   ```bash
+   git checkout main
+   git merge develop
+   git tag -a v1.2.0 -m "Release version 1.2.0"
+   git push origin main --tags
+   ```
+
+## 📋 Changelog
+
+### [v1.2.0] - 2024-01-15
+#### Added
+- Canvas-based audio waveform player
+- Interactive hover and click-to-seek functionality
+- 4 individual project pages (Airframe, BrainBox, Eatsy, Shelf Life)
+- Audio processing utilities for waveform generation
+- Performance optimizations for audio rendering
+
+#### Changed
+- Updated font sizes and colors in audio player
+- Improved button styling and padding
+- Enhanced UI component dependencies
+
+#### Fixed
+- Next.js configuration warnings
+- Import path issues in project pages
+- Audio player state management
+
+### [v1.1.0] - 2024-01-10
+#### Added
+- Basic portfolio layout
+- Project showcase sections
+- Contact form
+- Responsive design
+
+### [v1.0.0] - 2024-01-05
+#### Added
+- Initial project setup
+- Next.js configuration
+- Basic styling with Tailwind CSS
 
 ## 🚀 Deployment
 
-This project can be easily deployed to:
-- **Vercel** (recommended for Next.js)
-- **Netlify**
-- **GitHub Pages**
+### Vercel (Recommended)
+1. Connect your GitHub repository to Vercel
+2. Configure build settings:
+   - Build Command: `npm run build`
+   - Output Directory: `.next`
+3. Deploy automatically on push to main branch
 
-## 📝 License
+### Netlify
+1. Connect your GitHub repository to Netlify
+2. Set build command: `npm run build`
+3. Set publish directory: `.next`
 
-This project is open source and available under the [MIT License](LICENSE).
+## 🤝 Contributing
 
----
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
 
-**Built with ❤️ by Hailey Hsu** 
+## 📝 Development Guidelines
+
+### Code Style
+- Use TypeScript for all new code
+- Follow ESLint configuration
+- Use meaningful commit messages
+- Write descriptive component names
+
+### Audio Files
+- Supported formats: MP3, WAV
+- Recommended bitrate: 128-320 kbps
+- Place files in `public/audio/` directory
+
+### Images
+- Use WebP or PNG format
+- Optimize for web (compress images)
+- Place files in `public/images/` directory
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 👤 Author
+
+**Hailey Hsu**
+- Portfolio: [haileyhsu94.github.io](https://haileyhsu94.github.io)
+- LinkedIn: [yu-hsuan-hsu](https://linkedin.com/in/yu-hsuan-hsu)
+- Email: haileyhsu94@gmail.com
+
+## 🙏 Acknowledgments
+
+- Inspired by Troy Chryssos's audio waveform implementation
+- Built with Next.js and React ecosystem
+- UI components from Radix UI
+- Icons from Lucide React 
