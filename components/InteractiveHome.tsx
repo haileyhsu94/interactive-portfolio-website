@@ -633,7 +633,7 @@ function ContactSection({ sectionRef }: { sectionRef: React.RefObject<HTMLDivEle
               className="font-['Inter:Regular',_sans-serif] font-normal leading-[0] min-w-full not-italic relative shrink-0 text-[14px] text-gray-300 text-left"
               style={{ width: "min-content" }}
             >
-              <p className="block leading-[22px]">Let's discuss your next project or collaboration</p>
+              <p className="block leading-[22px]">Let&apos;s discuss your next project or collaboration</p>
             </div>
             <div className="relative shrink-0 w-full" data-name="container">
               <div className="relative size-full">
@@ -1213,6 +1213,8 @@ const MediaPlayer = forwardRef<{ playAirframeAudio: () => void }>((props, ref) =
     </div>
   );
 });
+
+MediaPlayer.displayName = 'MediaPlayer';
 
 export default function InteractiveHome() {
   const [navigation, setNavigation] = useState<NavigationState>({ activeSection: 'featured' });
