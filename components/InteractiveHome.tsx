@@ -6,6 +6,7 @@ import svgPaths from "../imports/svg-09p2j473t4";
 import { toast } from "sonner";
 import WaveformCanvas from "./ui/WaveformCanvas";
 import { generateRealisticWaveform, chunkWaveformData } from "../utils/audioUtils";
+import emailjs from '@emailjs/browser';
 
 // Image paths - replace with your actual images
 // Add your images to the public/images/ folder and update these paths
@@ -238,11 +239,30 @@ function InteractiveContactForm() {
     }
 
     setIsSubmitting(true);
-    // Simulate form submission
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    toast.success("Message sent successfully!");
-    setFormData({ email: '', message: '' });
-    setIsSubmitting(false);
+    
+    try {
+      // EmailJS configuration
+      const serviceId = 'YOUR_SERVICE_ID'; // You'll get this from EmailJS
+      const templateId = 'YOUR_TEMPLATE_ID'; // You'll get this from EmailJS
+      const publicKey = 'YOUR_PUBLIC_KEY'; // You'll get this from EmailJS
+
+      const templateParams = {
+        to_email: 'haileyhsu94@gmail.com',
+        from_email: formData.email,
+        message: formData.message,
+        subject: 'New Portfolio Contact Form Submission'
+      };
+
+      await emailjs.send(serviceId, templateId, templateParams, publicKey);
+      
+      toast.success("Message sent successfully!");
+      setFormData({ email: '', message: '' });
+    } catch (error) {
+      console.error('Email send error:', error);
+      toast.error("Failed to send message. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
