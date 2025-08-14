@@ -1218,6 +1218,7 @@ MediaPlayer.displayName = 'MediaPlayer';
 
 export default function InteractiveHome() {
   const [navigation, setNavigation] = useState<NavigationState>({ activeSection: 'featured' });
+  const [isNavigating, setIsNavigating] = useState(false);
   const featuredRef = useRef<HTMLDivElement>(null);
   const moreRef = useRef<HTMLDivElement>(null);
   const contactRef = useRef<HTMLDivElement>(null);
@@ -1225,6 +1226,7 @@ export default function InteractiveHome() {
 
   // Handle scroll to section
   const handleNavigateToSection = (section: 'featured' | 'more' | 'contact') => {
+    setIsNavigating(true);
     setNavigation({ activeSection: section });
     
     const refs = {
@@ -1240,11 +1242,19 @@ export default function InteractiveHome() {
         block: 'start'
       });
     }
+
+    // Re-enable scroll detection after navigation completes
+    setTimeout(() => {
+      setIsNavigating(false);
+    }, 1000);
   };
 
   // Update active section based on scroll position
   useEffect(() => {
     const handleScroll = () => {
+      // Don't update if we're in the middle of a navigation
+      if (isNavigating) return;
+
       const sections = [
         { ref: featuredRef, name: 'featured' as const },
         { ref: moreRef, name: 'more' as const },
@@ -1255,7 +1265,11 @@ export default function InteractiveHome() {
       const scrollContainer = document.querySelector('[data-name="middle"] > div');
       if (!scrollContainer) return;
 
-      const scrollPosition = scrollContainer.scrollTop + scrollContainer.clientHeight / 3;
+      const scrollPosition = scrollContainer.scrollTop;
+      const containerHeight = scrollContainer.clientHeight;
+      const threshold = containerHeight * 0.3; // 30% threshold
+
+      let activeSection = 'featured';
 
       for (const section of sections) {
         if (section.ref.current) {
@@ -1264,13 +1278,16 @@ export default function InteractiveHome() {
           const elementTop = rect.top - containerRect.top;
           const elementBottom = elementTop + rect.height;
 
-          if (scrollPosition >= elementTop && scrollPosition < elementBottom) {
-            if (navigation.activeSection !== section.name) {
-              setNavigation({ activeSection: section.name });
-            }
+          // Check if the section is in view with a threshold
+          if (scrollPosition + threshold >= elementTop && scrollPosition + threshold < elementBottom) {
+            activeSection = section.name;
             break;
           }
         }
+      }
+
+      if (navigation.activeSection !== activeSection) {
+        setNavigation({ activeSection: activeSection as 'featured' | 'more' | 'contact' });
       }
     };
 
@@ -1280,7 +1297,7 @@ export default function InteractiveHome() {
       scrollContainer.addEventListener('scroll', handleScroll);
       return () => scrollContainer.removeEventListener('scroll', handleScroll);
     }
-  }, [navigation.activeSection]);
+  }, [navigation.activeSection, isNavigating]);
 
   return (
     <div
