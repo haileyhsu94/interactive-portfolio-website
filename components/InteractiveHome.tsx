@@ -6,7 +6,6 @@ import svgPaths from "../imports/svg-09p2j473t4";
 import { toast } from "sonner";
 import WaveformCanvas from "./ui/WaveformCanvas";
 import { generateRealisticWaveform, chunkWaveformData } from "../utils/audioUtils";
-import emailjs from '@emailjs/browser';
 
 // Image paths - replace with your actual images
 // Add your images to the public/images/ folder and update these paths
@@ -34,11 +33,12 @@ interface MediaPlayerState {
   currentProjectIndex: number;
 }
 
-function Logo() {
+function Logo({ onClick }: { onClick?: () => void }) {
   return (
     <motion.div
       className="box-border content-stretch flex flex-row gap-2.5 items-center justify-center relative shrink-0 size-9 cursor-pointer"
       data-name="logo"
+      onClick={onClick}
       whileHover={{ scale: 1.05 }}
       whileTap={{ scale: 0.95 }}
     >
@@ -67,13 +67,13 @@ function NameAndTitle() {
   );
 }
 
-function Header() {
+function Header({ onLogoClick }: { onLogoClick?: () => void }) {
   return (
     <div
       className="box-border content-stretch flex flex-row gap-[7px] items-center justify-start p-0 relative shrink-0"
       data-name="header"
     >
-      <Logo />
+      <Logo onClick={onLogoClick} />
       <NameAndTitle />
     </div>
   );
@@ -205,12 +205,24 @@ function Items({
   );
 }
 
-function Sidebar({ 
+export function Sidebar({ 
   navigation, 
-  onNavigateToSection 
+  onNavigateToSection,
+  openProjects,
+  currentProjectId,
+  onCloseProject,
+  onNavigateToProject,
+  isProjectPage,
+  onLogoClick
 }: { 
   navigation: NavigationState; 
   onNavigateToSection: (section: 'featured' | 'more' | 'contact') => void;
+  openProjects?: { id: string; title: string }[];
+  currentProjectId?: string;
+  onCloseProject?: (projectId: string) => void;
+  onNavigateToProject?: (projectId: string) => void;
+  isProjectPage?: boolean;
+  onLogoClick?: () => void;
 }) {
   return (
     <div
@@ -221,8 +233,66 @@ function Sidebar({
         aria-hidden="true"
         className="absolute border border-[#252525] border-solid inset-0 pointer-events-none rounded-xl"
       />
-      <Header />
-      <Items navigation={navigation} onNavigateToSection={onNavigateToSection} />
+      <Header onLogoClick={onLogoClick} />
+      {!isProjectPage && <Items navigation={navigation} onNavigateToSection={onNavigateToSection} />}
+      
+      {/* Recent Section */}
+      {openProjects && openProjects.length > 0 && (
+        <div className="box-border content-stretch flex flex-col gap-2 items-start justify-start p-0 relative shrink-0 w-full">
+          <div className="font-['Inter:Medium',_sans-serif] font-medium leading-[0] not-italic relative shrink-0 text-[#515151] text-[14px] text-nowrap">
+            <p className="block leading-[normal] whitespace-pre">Recent</p>
+          </div>
+          <div className="box-border content-stretch flex flex-col gap-1 items-start justify-start p-0 relative shrink-0">
+                           {openProjects.map((project) => (
+                 <div
+                   key={project.id}
+                   className={`box-border content-stretch flex gap-3 items-center justify-start px-3 py-2 relative rounded-[999px] shrink-0 w-[175px] cursor-pointer ${
+                     currentProjectId === project.id ? 'bg-[#1f1f1f]' : 'hover:bg-[#1f1f1f]/50'
+                   }`}
+                   data-name="item"
+                   onClick={() => {
+                     if (onNavigateToProject && project.id) {
+                       onNavigateToProject(project.id);
+                     }
+                   }}
+                 >
+                <div className="basis-0 font-['Inter:Medium',_sans-serif] font-medium grow leading-[1.2] min-h-px min-w-px not-italic overflow-hidden relative shrink-0 text-[14px] text-gray-300" style={{ 
+                  display: '-webkit-box',
+                  WebkitLineClamp: 2,
+                  WebkitBoxOrient: 'vertical',
+                  overflow: 'hidden',
+                  textOverflow: 'ellipsis'
+                }}>
+                  <p className="block leading-[normal]">{project.title}</p>
+                </div>
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    if (onCloseProject) {
+                      onCloseProject(project.id);
+                    }
+                  }}
+                  className="relative shrink-0 size-4 hover:bg-white/10 rounded transition-colors"
+                  data-name="close-button"
+                >
+                  <svg className="block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 16 16">
+                    <g id="Frame">
+                      <path
+                        d="M12 4L4 12M4 4L12 12"
+                        id="Vector"
+                        stroke="var(--stroke-0, #D1D5DB)"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="1.2"
+                      />
+                    </g>
+                  </svg>
+                </button>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   );
 }
@@ -241,24 +311,29 @@ function InteractiveContactForm() {
     setIsSubmitting(true);
     
     try {
-      // EmailJS configuration
-      const serviceId = 'YOUR_SERVICE_ID'; // You'll get this from EmailJS
-      const templateId = 'YOUR_TEMPLATE_ID'; // You'll get this from EmailJS
-      const publicKey = 'YOUR_PUBLIC_KEY'; // You'll get this from EmailJS
-
-      const templateParams = {
-        to_email: 'haileyhsu94@gmail.com',
-        from_email: formData.email,
-        message: formData.message,
-        subject: 'New Portfolio Contact Form Submission'
-      };
-
-      await emailjs.send(serviceId, templateId, templateParams, publicKey);
+      // Formspree configuration - Free form backend service
+      const formspreeEndpoint = 'https://formspree.io/f/xkgzevdg'; // Replace with your Formspree endpoint
       
-      toast.success("Message sent successfully!");
-      setFormData({ email: '', message: '' });
+      const response = await fetch(formspreeEndpoint, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email: formData.email,
+          message: formData.message,
+          subject: 'New Portfolio Contact Form Submission'
+        }),
+      });
+
+      if (response.ok) {
+        toast.success("Message sent successfully!");
+        setFormData({ email: '', message: '' });
+      } else {
+        throw new Error('Failed to send message');
+      }
     } catch (error) {
-      console.error('Email send error:', error);
+      console.error('Form submission error:', error);
       toast.error("Failed to send message. Please try again.");
     } finally {
       setIsSubmitting(false);
@@ -332,15 +407,12 @@ function InteractiveContactForm() {
   );
 }
 
-function FeaturedSection({ sectionRef, mediaPlayerRef }: { sectionRef: React.RefObject<HTMLDivElement>; mediaPlayerRef: React.RefObject<{ playAirframeAudio: () => void }> }) {
+function FeaturedSection({ sectionRef, mediaPlayerRef, onNavigateToProject }: { sectionRef: React.RefObject<HTMLDivElement>; mediaPlayerRef: React.RefObject<{ playAirframeAudio: () => void }>; onNavigateToProject?: (project: string) => void }) {
   return (
-    <motion.div
+    <div
       ref={sectionRef}
       className="box-border content-stretch flex flex-col gap-5 items-start justify-start p-0 relative shrink-0 w-full scroll-mt-6"
       data-name="feature"
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}
     >
       <div
         className="box-border content-stretch flex flex-row items-start justify-between leading-[0] not-italic p-0 relative shrink-0 text-left text-nowrap w-full"
@@ -354,11 +426,15 @@ function FeaturedSection({ sectionRef, mediaPlayerRef }: { sectionRef: React.Ref
         </div>
       </div>
       
-      <motion.div
+      <div
         className="box-border content-stretch flex flex-row gap-5 items-center justify-start p-0 relative rounded-3xl shrink-0 w-full hover:bg-white/5 transition-colors duration-300 cursor-pointer"
         data-name="container"
-        whileHover={{ scale: 1.02 }}
-        onClick={() => toast.info("Opening featured project...")}
+        onClick={() => {
+          console.log('Featured project clicked');
+          if (onNavigateToProject) {
+            onNavigateToProject('airframe');
+          }
+        }}
       >
         <div className="flex-1 min-w-0 relative" data-name="text" style={{ minWidth: '40%' }}>
           <div className="relative size-full">
@@ -467,7 +543,11 @@ function FeaturedSection({ sectionRef, mediaPlayerRef }: { sectionRef: React.Ref
                   whileTap={{ scale: 0.98 }}
                   onClick={(e) => {
                     e.stopPropagation();
-                    toast.info("Opening case study...");
+                    if (onNavigateToProject) {
+                      onNavigateToProject('airframe');
+                    } else {
+                      toast.info("Opening case study...");
+                    }
                   }}
                 >
                   <div className="flex flex-row items-center justify-center relative size-full">
@@ -524,26 +604,29 @@ function FeaturedSection({ sectionRef, mediaPlayerRef }: { sectionRef: React.Ref
           data-name="hero image"
           style={{ backgroundImage: `url('${imgHeroImage}')` }}
         />
-      </motion.div>
-    </motion.div>
+      </div>
+    </div>
   );
 }
 
-function MoreProjectsSection({ sectionRef }: { sectionRef: React.RefObject<HTMLDivElement> }) {
+function MoreProjectsSection({ sectionRef, onNavigateToProject }: { sectionRef: React.RefObject<HTMLDivElement>; onNavigateToProject?: (project: string) => void }) {
   const projects = [
     { 
-      title: "Customizable Reservation Platform", 
-      description: "Reduced booking setup steps by 40% in prototype testing. Designed fully customizable workflows, giving small restaurants control over reservations and payments.",
-      tags: ["Cost Reduction", "Prototype Testing"],
+      id: "airframe",
+      title: "AI-powered B2B Procurement Platform", 
+      description: "Streamlining B2B software procurement with AI & collaboration tools. Led user flow analysis and designed 250+ screens.",
+      tags: ["AI", "B2B", "Procurement"],
       image: imgImage 
     },
     { 
+      id: "sat-prep",
       title: "AI-Powered SAT Preparation Platform", 
       description: "Conducted heatmap analysis and A/B testing to refine practice setup flow and dashboard layout. Led 4 designers to deliver 100+ screens, integrating AI tutor and performance reports.",
       tags: ["Heatmap Analysis", "A/B Testing"],
       image: imgImage1 
     },
     { 
+      id: "food-waste",
       title: "Dual-Interface Platform to Reduce Food Waste", 
       description: "Expected to help restaurants clear surplus food faster by streamlining listing to under 2 minutes. Delivered mobile B2C app & tablet B2B dashboard with 50+ unique screens.",
       tags: ["Dual Interface", "Sustainability"],
@@ -552,13 +635,10 @@ function MoreProjectsSection({ sectionRef }: { sectionRef: React.RefObject<HTMLD
   ];
 
   return (
-    <motion.div
+    <div
       ref={sectionRef}
       className="box-border content-stretch flex flex-col gap-5 items-start justify-start p-0 relative shrink-0 w-full scroll-mt-6"
       data-name="more"
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}
     >
       <div
         className="box-border content-stretch flex flex-row items-start justify-between leading-[0] not-italic p-0 relative shrink-0 text-left text-nowrap w-full"
@@ -576,15 +656,18 @@ function MoreProjectsSection({ sectionRef }: { sectionRef: React.RefObject<HTMLD
         data-name="container"
       >
         {projects.map((project, index) => (
-          <motion.div 
+          <div 
             key={project.title}
             className="basis-0 grow min-h-px min-w-px relative shrink-0 hover:bg-white/5 rounded-xl transition-colors duration-300 cursor-pointer" 
             data-name="project"
-            whileHover={{ scale: 1.05 }}
-            onClick={() => toast.info(`Opening ${project.title}...`)}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: index * 0.1 }}
+            onClick={() => {
+              console.log('Project clicked:', project.title);
+              if (onNavigateToProject && project.id) {
+                onNavigateToProject(project.id);
+              } else {
+                toast.info(`Opening ${project.title}...`);
+              }
+            }}
           >
             <div className="relative size-full">
               <div className="box-border content-stretch flex flex-col gap-4 items-start justify-start p-[12px] relative w-full">
@@ -622,22 +705,19 @@ function MoreProjectsSection({ sectionRef }: { sectionRef: React.RefObject<HTMLD
                 </div>
               </div>
             </div>
-          </motion.div>
+          </div>
         ))}
       </div>
-    </motion.div>
+    </div>
   );
 }
 
 function ContactSection({ sectionRef }: { sectionRef: React.RefObject<HTMLDivElement> }) {
   return (
-    <motion.div
+    <div
       ref={sectionRef}
       className="box-border content-stretch flex flex-col gap-2.5 items-start justify-start pb-6 pt-0 px-0 relative shrink-0 w-full scroll-mt-6"
       data-name="contact"
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}
     >
       <div className="bg-[#121212] relative rounded-xl shrink-0 w-full" data-name="container">
         <div
@@ -894,11 +974,11 @@ function ContactSection({ sectionRef }: { sectionRef: React.RefObject<HTMLDivEle
           </div>
         </div>
       </div>
-    </motion.div>
+    </div>
   );
 }
 
-const MediaPlayer = forwardRef<{ playAirframeAudio: () => void }>((props, ref) => {
+export const MediaPlayer = forwardRef<{ playAirframeAudio: () => void }, { onNavigateToProject?: (project: string) => void }>(({ onNavigateToProject }, ref) => {
   const [mediaState, setMediaState] = useState<MediaPlayerState>({
     isPlaying: false,
     currentTime: 0,
@@ -1028,12 +1108,19 @@ const MediaPlayer = forwardRef<{ playAirframeAudio: () => void }>((props, ref) =
   }, [currentProject.audio]);
 
   const togglePlayPause = () => {
+    console.log('Play button clicked, current state:', mediaState.isPlaying);
     if (audioRef.current) {
       if (mediaState.isPlaying) {
+        console.log('Pausing audio');
         audioRef.current.pause();
       } else {
-        audioRef.current.play();
+        console.log('Playing audio');
+        audioRef.current.play().catch(error => {
+          console.error('Error playing audio:', error);
+        });
       }
+    } else {
+      console.error('Audio ref is null');
     }
   };
 
@@ -1191,7 +1278,14 @@ const MediaPlayer = forwardRef<{ playAirframeAudio: () => void }>((props, ref) =
               className="box-border content-stretch flex flex-row gap-2.5 items-center justify-end px-4 py-[6px] relative rounded-[999px] shrink-0 border border-[#e6ff02] border-solid hover:bg-[#e6ff02]/10 transition-colors duration-200"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              onClick={() => toast.info("Opening project details...")}
+              onClick={() => {
+                console.log('MediaPlayer Open Project clicked');
+                if (onNavigateToProject) {
+                  onNavigateToProject('airframe');
+                } else {
+                  toast.info("Opening project details...");
+                }
+              }}
             >
               <div className="font-['Inter:Medium',_sans-serif] font-medium leading-[0] not-italic relative shrink-0 text-[#e6ff02] text-[12px] text-left text-nowrap">
                 <p className="block leading-[22px] whitespace-pre">Open Project</p>
@@ -1236,7 +1330,13 @@ const MediaPlayer = forwardRef<{ playAirframeAudio: () => void }>((props, ref) =
 
 MediaPlayer.displayName = 'MediaPlayer';
 
-export default function InteractiveHome() {
+interface InteractiveHomeProps {
+  onNavigateToProject?: (project: string) => void;
+  openProjects?: { id: string; title: string }[];
+  onCloseProject?: (projectId: string) => void;
+}
+
+export default function InteractiveHome({ onNavigateToProject, openProjects, onCloseProject }: InteractiveHomeProps) {
   const [navigation, setNavigation] = useState<NavigationState>({ activeSection: 'featured' });
   const [isNavigating, setIsNavigating] = useState(false);
   const featuredRef = useRef<HTMLDivElement>(null);
@@ -1246,6 +1346,7 @@ export default function InteractiveHome() {
 
   // Handle scroll to section
   const handleNavigateToSection = (section: 'featured' | 'more' | 'contact') => {
+    console.log('Navigating to section:', section);
     setIsNavigating(true);
     setNavigation({ activeSection: section });
     
@@ -1268,6 +1369,8 @@ export default function InteractiveHome() {
       setIsNavigating(false);
     }, 1000);
   };
+
+
 
   // Update active section based on scroll position
   useEffect(() => {
@@ -1321,22 +1424,35 @@ export default function InteractiveHome() {
 
   return (
     <div
-      className="box-border content-stretch flex flex-col items-start justify-start p-0 relative size-full h-screen overflow-hidden"
+      className="box-border content-stretch flex flex-col items-start justify-start p-0 relative w-full h-screen overflow-hidden"
       data-name="home"
     >
-      <div className="flex-1 bg-neutral-950 min-w-px relative shrink-0 w-full overflow-hidden" data-name="top">
-        <div className="overflow-clip relative size-full">
-          <div className="box-border content-stretch flex flex-row gap-4 items-stretch justify-start p-[12px] relative h-full">
+      <div className="flex-1 bg-neutral-950 min-w-0 relative shrink-0 w-full overflow-hidden" data-name="top">
+        <div className="overflow-clip relative w-full h-full">
+          <div className="box-border content-stretch flex flex-row gap-4 items-stretch justify-start p-[12px] relative h-full w-full min-w-0">
             <div className="w-[200px] flex-shrink-0 h-full">
-              <Sidebar navigation={navigation} onNavigateToSection={handleNavigateToSection} />
+              <Sidebar 
+                navigation={navigation} 
+                onNavigateToSection={handleNavigateToSection}
+                openProjects={openProjects}
+                currentProjectId={undefined}
+                onCloseProject={onCloseProject}
+                onNavigateToProject={onNavigateToProject}
+                isProjectPage={false}
+                onLogoClick={() => {
+                  // This will be handled by the parent component
+                  // For now, just log that it was clicked
+                  console.log('Logo clicked');
+                }}
+              />
             </div>
             
             <div className="bg-[#121212] h-full relative rounded-xl flex-1 min-w-0 overflow-hidden" data-name="middle">
-              <div className="box-border content-stretch flex flex-col gap-6 h-full items-start justify-start overflow-x-clip overflow-y-auto px-4 py-4 relative w-full scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-transparent">
-                <FeaturedSection sectionRef={featuredRef} mediaPlayerRef={mediaPlayerRef} />
-                <MoreProjectsSection sectionRef={moreRef} />
-                <ContactSection sectionRef={contactRef} />
-              </div>
+                              <div className="box-border content-stretch flex flex-col gap-6 h-full items-start justify-start overflow-x-clip overflow-y-auto px-4 py-4 relative w-full scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-transparent">
+                  <FeaturedSection sectionRef={featuredRef} mediaPlayerRef={mediaPlayerRef} onNavigateToProject={onNavigateToProject} />
+                  <MoreProjectsSection sectionRef={moreRef} onNavigateToProject={onNavigateToProject} />
+                  <ContactSection sectionRef={contactRef} />
+                </div>
               <div
                 aria-hidden="true"
                 className="absolute border border-[#252525] border-solid inset-0 pointer-events-none rounded-xl"
@@ -1551,7 +1667,7 @@ export default function InteractiveHome() {
     </div>
       
       <div className="flex-shrink-0 bg-neutral-950 w-full" style={{ height: '74px' }}>
-        <MediaPlayer ref={mediaPlayerRef} />
+        <MediaPlayer ref={mediaPlayerRef} onNavigateToProject={onNavigateToProject} />
       </div>
     </div>
   );
