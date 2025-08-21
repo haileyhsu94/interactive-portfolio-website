@@ -254,12 +254,13 @@ function InteractiveCarousel({ images, bgColor, title, onInteraction }: Carousel
   );
 }
 
-// New GSAP-based carousel with scroll-triggered horizontal animation
+// GSAP-based carousel with scroll-triggered horizontal animation
 function GSAPCarousel({ images, bgColor, title, sets }: GSAPCarouselProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const carouselRef = useRef<HTMLDivElement>(null);
   const [isZoomed, setIsZoomed] = useState(false);
   const [zoomedImage, setZoomedImage] = useState<string>('');
+  const [currentZoomIndex, setCurrentZoomIndex] = useState(0);
 
   useEffect(() => {
     if (!containerRef.current || !carouselRef.current || typeof window === 'undefined') return;
@@ -283,8 +284,7 @@ function GSAPCarousel({ images, bgColor, title, sets }: GSAPCarouselProps) {
         sets, 
         images: images.length,
         carouselWidth: carousel.scrollWidth,
-        containerWidth: container.clientWidth,
-        carouselStyle: carousel.style.width
+        containerWidth: container.clientWidth
       });
       
       // Create the horizontal scroll animation
@@ -296,7 +296,7 @@ function GSAPCarousel({ images, bgColor, title, sets }: GSAPCarouselProps) {
           scrub: 1,
           pin: true,
           anticipatePin: 1,
-          markers: true, // Set to true for debugging
+          markers: false, // Remove markers
         }
       });
 
@@ -304,14 +304,6 @@ function GSAPCarousel({ images, bgColor, title, sets }: GSAPCarouselProps) {
         x: -totalWidth,
         ease: "none",
         duration: 1
-      });
-
-      // Add a visual indicator that GSAP is working
-      gsap.to(container, {
-        backgroundColor: "rgba(255, 255, 0, 0.1)",
-        duration: 0.5,
-        yoyo: true,
-        repeat: 1
       });
     }, 100);
 
@@ -324,7 +316,27 @@ function GSAPCarousel({ images, bgColor, title, sets }: GSAPCarouselProps) {
     };
   }, [images, sets]);
 
+  // Keyboard navigation for zoom modal
+  useEffect(() => {
+    const handleKeyPress = (e: KeyboardEvent) => {
+      if (isZoomed) {
+        if (e.key === 'Escape') {
+          closeZoom();
+        } else if (e.key === 'ArrowLeft') {
+          prevImage();
+        } else if (e.key === 'ArrowRight') {
+          nextImage();
+        }
+      }
+    };
+
+    document.addEventListener('keydown', handleKeyPress);
+    return () => document.removeEventListener('keydown', handleKeyPress);
+  }, [isZoomed, currentZoomIndex]);
+
   const handleImageClick = (image: string) => {
+    const imageIndex = images.indexOf(image);
+    setCurrentZoomIndex(imageIndex);
     setZoomedImage(image);
     setIsZoomed(true);
   };
@@ -334,7 +346,19 @@ function GSAPCarousel({ images, bgColor, title, sets }: GSAPCarouselProps) {
     setZoomedImage('');
   };
 
-  // Group images into sets
+  const nextImage = () => {
+    const nextIndex = (currentZoomIndex + 1) % images.length;
+    setCurrentZoomIndex(nextIndex);
+    setZoomedImage(images[nextIndex]);
+  };
+
+  const prevImage = () => {
+    const prevIndex = (currentZoomIndex - 1 + images.length) % images.length;
+    setCurrentZoomIndex(prevIndex);
+    setZoomedImage(images[prevIndex]);
+  };
+
+  // Group images into sets (3 sets = 3 slides, each with 4 images in 2x2 grid)
   const imageSets = [];
   for (let i = 0; i < sets; i++) {
     const startIndex = i * 4;
@@ -397,11 +421,6 @@ function GSAPCarousel({ images, bgColor, title, sets }: GSAPCarouselProps) {
             />
           ))}
         </div>
-        
-        {/* Debug info */}
-        <div className="absolute top-4 left-4 text-white text-sm bg-black/50 px-2 py-1 rounded">
-          Sets: {sets} | Images: {images.length}
-        </div>
       </div>
 
       {/* Zoom Modal */}
@@ -422,12 +441,44 @@ function GSAPCarousel({ images, bgColor, title, sets }: GSAPCarouselProps) {
                 onClick={(e) => e.stopPropagation()}
               />
               
+              {/* Close button */}
               <button
                 onClick={closeZoom}
                 className="absolute top-4 right-4 bg-white/20 hover:bg-white/30 text-white p-2 rounded-full transition-colors"
               >
                 <X size={24} />
               </button>
+
+              {/* Previous button */}
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  prevImage();
+                }}
+                className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white/20 hover:bg-white/30 text-white p-3 rounded-full transition-colors"
+              >
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M15 18L9 12L15 6" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+              </button>
+
+              {/* Next button */}
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  nextImage();
+                }}
+                className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white/20 hover:bg-white/30 text-white p-3 rounded-full transition-colors"
+              >
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M9 18L15 12L9 6" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+              </button>
+
+              {/* Image counter */}
+              <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-black/50 text-white px-3 py-1 rounded-full text-sm">
+                {currentZoomIndex + 1} / {images.length}
+              </div>
             </div>
           </motion.div>
         )}
