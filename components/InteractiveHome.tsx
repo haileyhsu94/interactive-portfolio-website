@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useEffect, useImperativeHandle, forwardRef } from "react";
+import { useState, useRef, useEffect, useImperativeHandle, forwardRef, RefObject } from "react";
 import { motion } from "framer-motion";
 import svgPaths from "../imports/svg-09p2j473t4";
 import { toast } from "sonner";
@@ -407,7 +407,7 @@ function InteractiveContactForm() {
   );
 }
 
-function FeaturedSection({ sectionRef, mediaPlayerRef, onNavigateToProject }: { sectionRef: React.RefObject<HTMLDivElement>; mediaPlayerRef: React.RefObject<{ playAirframeAudio: () => void }>; onNavigateToProject?: (project: string) => void }) {
+function FeaturedSection({ sectionRef, mediaPlayerRef, onNavigateToProject }: { sectionRef: RefObject<HTMLDivElement>; mediaPlayerRef: RefObject<{ playAirframeAudio: () => void }>; onNavigateToProject?: (project: string) => void }) {
   return (
     <div
       ref={sectionRef}
@@ -609,7 +609,7 @@ function FeaturedSection({ sectionRef, mediaPlayerRef, onNavigateToProject }: { 
   );
 }
 
-function MoreProjectsSection({ sectionRef, onNavigateToProject }: { sectionRef: React.RefObject<HTMLDivElement>; onNavigateToProject?: (project: string) => void }) {
+function MoreProjectsSection({ sectionRef, onNavigateToProject }: { sectionRef: RefObject<HTMLDivElement>; onNavigateToProject?: (project: string) => void }) {
   const projects = [
     { 
       id: "airframe",
@@ -712,7 +712,7 @@ function MoreProjectsSection({ sectionRef, onNavigateToProject }: { sectionRef: 
   );
 }
 
-function ContactSection({ sectionRef }: { sectionRef: React.RefObject<HTMLDivElement> }) {
+function ContactSection({ sectionRef }: { sectionRef: RefObject<HTMLDivElement> }) {
   return (
     <div
       ref={sectionRef}
