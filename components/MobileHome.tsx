@@ -156,14 +156,14 @@ export default function MobileHome({ onNavigateToProject }: { onNavigateToProjec
                   </div>
                   <div className="content-start flex flex-wrap gap-2 items-start justify-start relative shrink-0 w-full" data-name="tags" data-node-id="3000:1737">
                     <div className="bg-[#333333] box-border content-stretch flex gap-2.5 items-center justify-center px-3 py-1 relative rounded-[999px] shrink-0" data-node-id="3000:1738">
-                      <div className="font-didact-gothic leading-[0] not-italic relative shrink-0 text-[15px] text-gray-300 text-nowrap tracking-[0.15px]" data-node-id="3000:1739">
-                        <p className="leading-[22px] whitespace-pre">$4M funding</p>
-                      </div>
+                                          <div className="font-oregano leading-[0] not-italic relative shrink-0 text-[15px] text-gray-300 text-nowrap tracking-[0.15px]" data-node-id="3000:1739">
+                      <p className="leading-[22px] whitespace-pre">$4M funding</p>
+                    </div>
                     </div>
                     <div className="bg-[#333333] box-border content-stretch flex gap-2.5 items-center justify-center px-3 py-1 relative rounded-[999px] shrink-0" data-node-id="3000:1742">
-                      <div className="font-didact-gothic leading-[0] not-italic relative shrink-0 text-[15px] text-gray-300 text-nowrap tracking-[0.15px]" data-node-id="3000:1743">
-                        <p className="leading-[22px] whitespace-pre">AI Prototype</p>
-                      </div>
+                                          <div className="font-oregano leading-[0] not-italic relative shrink-0 text-[15px] text-gray-300 text-nowrap tracking-[0.15px]" data-node-id="3000:1743">
+                      <p className="leading-[22px] whitespace-pre">AI Prototype</p>
+                    </div>
                     </div>
                   </div>
                 </div>
@@ -357,14 +357,28 @@ export default function MobileHome({ onNavigateToProject }: { onNavigateToProjec
                       <p className="leading-[normal]">Follow me</p>
                     </div>
                     <div className="box-border content-stretch flex gap-3 items-center justify-start px-3 py-0 relative shrink-0" data-name="logos" data-node-id="3000:1862">
-                      <div className="relative shrink-0 size-5" data-name="Frame" data-node-id="3000:1863">
+                      <a
+                        href="https://www.linkedin.com/in/yu-hsuan-hsu"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="relative shrink-0 size-5 cursor-pointer hover:opacity-80 transition-opacity duration-200"
+                        data-name="Frame" 
+                        data-node-id="3000:1863"
+                      >
                         <svg width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">
                           <path d="M13.3333 6.8418C14.6593 6.8418 15.9311 7.36858 16.8688 8.30626C17.8065 9.24394 18.3333 10.5157 18.3333 11.8418V17.6751H14.9999V11.8418C14.9999 11.3998 14.8243 10.9758 14.5118 10.6633C14.1992 10.3507 13.7753 10.1751 13.3333 10.1751C12.8912 10.1751 12.4673 10.3507 12.1547 10.6633C11.8422 10.9758 11.6666 11.3998 11.6666 11.8418V17.6751H8.33325V11.8418C8.33325 10.5157 8.86004 9.24394 9.79772 8.30626C10.7354 7.36858 12.0072 6.8418 13.3333 6.8418Z" stroke="#D1D5DB" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
                           <path d="M5.00008 7.6748H1.66675V17.6748H5.00008V7.6748Z" stroke="#D1D5DB" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
                           <path d="M3.33341 5.17513C4.25389 5.17513 5.00008 4.42894 5.00008 3.50846C5.00008 2.58799 4.25389 1.8418 3.33341 1.8418C2.41294 1.8418 1.66675 2.58799 1.66675 3.50846C1.66675 4.42894 2.41294 5.17513 3.33341 5.17513Z" stroke="#D1D5DB" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
                         </svg>
-                      </div>
-                      <div className="h-4 relative shrink-0 w-[104px]" data-name="medium_logo.svg" data-node-id="3000:1867">
+                      </a>
+                      <a
+                        href="https://medium.com/@haileyhsu."
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="h-4 relative shrink-0 w-[104px] cursor-pointer hover:opacity-80 transition-opacity duration-200"
+                        data-name="medium_logo.svg" 
+                        data-node-id="3000:1867"
+                      >
                         <svg width="104" height="17" viewBox="0 0 104 17" fill="none" xmlns="http://www.w3.org/2000/svg">
                           <g clipPath="url(#clip0_3000_1867)">
                             <path d="M15.7 8.25876C15.7 12.5541 12.2197 16.0363 7.92642 16.0363C3.63312 16.0363 0.153076 12.5552 0.153076 8.25876C0.153076 3.96236 3.63338 0.481445 7.92642 0.481445C12.2195 0.481445 15.7 3.96341 15.7 8.25876Z" fill="#D1D5DB"/>
@@ -378,7 +392,7 @@ export default function MobileHome({ onNavigateToProject }: { onNavigateToProjec
                             </clipPath>
                           </defs>
                         </svg>
-                      </div>
+                      </a>
                     </div>
                   </div>
                 </div>

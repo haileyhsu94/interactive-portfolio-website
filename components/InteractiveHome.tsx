@@ -58,10 +58,10 @@ function NameAndTitle() {
       className="box-border content-stretch flex flex-col gap-1 items-start justify-start leading-[0] not-italic p-0 relative shrink-0 text-left w-[132px]"
       data-name="name and title"
     >
-      <div className="font-[.Didact_Gothic,_sans-serif] font-semibold relative shrink-0 text-[#ffffff] text-[17px] w-full">
+      <div className="font-didact-gothic font-semibold relative shrink-0 text-[#ffffff] text-[17px] w-full">
         <p className="block leading-[normal]">Hailey Hsu</p>
       </div>
-      <div className="font-[.Didact_Gothic,_sans-serif] font-normal relative shrink-0 text-[15px] text-gray-400 w-full">
+      <div className="font-didact-gothic font-normal relative shrink-0 text-[15px] text-gray-400 w-full">
         <p className="block leading-[normal]">Product Designer</p>
       </div>
     </div>
@@ -104,7 +104,7 @@ function NavigationItem({
       whileTap={{ scale: 0.98 }}
     >
       {icon}
-      <div className={`font-[.Didact_Gothic,_sans-serif] font-medium leading-[0] not-italic relative shrink-0 text-[15px] text-left text-nowrap ${
+      <div className={`font-didact-gothic font-medium leading-[0] not-italic relative shrink-0 text-[15px] text-left text-nowrap ${
         isActive ? 'text-[#e6ff02]' : 'text-gray-300'
       }`}>
         <p className="block leading-[normal] whitespace-pre">{label}</p>
@@ -645,10 +645,10 @@ function MoreProjectsSection({ sectionRef, onNavigateToProject }: { sectionRef: 
         className="box-border content-stretch flex flex-row items-start justify-between leading-[0] not-italic p-0 relative shrink-0 text-left text-nowrap w-full"
         data-name="title"
       >
-        <div className="font-['Inter:Bold',_sans-serif] font-bold relative shrink-0 text-[#ffffff] text-[20px]">
+        <div className="font-didact-gothic font-bold relative shrink-0 text-[#ffffff] text-[20px]">
           <p className="block leading-[normal] text-nowrap whitespace-pre">More Projects</p>
         </div>
-        <div className="font-['Inter:Regular',_sans-serif] font-normal relative shrink-0 text-[14px] text-gray-300">
+        <div className="font-didact-gothic font-normal relative shrink-0 text-[14px] text-gray-300">
           <p className="block leading-[22px] text-nowrap whitespace-pre">3 more</p>
         </div>
       </div>
@@ -681,12 +681,12 @@ function MoreProjectsSection({ sectionRef, onNavigateToProject }: { sectionRef: 
                   className="box-border content-stretch flex flex-col gap-2 items-start justify-start p-0 relative shrink-0 w-full"
                   data-name="title"
                 >
-                  <div className="font-['Inter:Bold',_sans-serif] font-bold leading-[0] not-italic relative shrink-0 text-[#ffffff] text-[16px] text-left w-full">
+                  <div className="font-didact-gothic font-bold leading-[0] not-italic relative shrink-0 text-[#ffffff] text-[16px] text-left w-full">
                     <p className="block leading-[normal]">{project.title}</p>
                   </div>
                 </div>
                 <div
-                  className="font-['Inter:Regular',_sans-serif] font-normal leading-[0] min-w-full not-italic relative shrink-0 text-[14px] text-gray-300 text-left"
+                  className="font-didact-gothic font-normal leading-[0] min-w-full not-italic relative shrink-0 text-[14px] text-gray-300 text-left"
                   style={{ width: "min-content" }}
                 >
                   <p className="block leading-[22px]">{project.description}</p>
@@ -698,7 +698,7 @@ function MoreProjectsSection({ sectionRef, onNavigateToProject }: { sectionRef: 
                       className="bg-[#1f1f1f] box-border content-stretch flex flex-row gap-2.5 items-center justify-center px-3 py-1 relative rounded-[999px] shrink-0 hover:bg-white/10 transition-colors duration-200"
                       whileHover={{ scale: 1.05 }}
                     >
-                      <div className="font-['Inter:Regular',_sans-serif] font-normal leading-[0] not-italic relative shrink-0 text-[14px] text-gray-300 text-left text-nowrap">
+                      <div className="font-oregano leading-[0] not-italic relative shrink-0 text-[14px] text-gray-300 text-left text-nowrap">
                         <p className="block leading-[22px] whitespace-pre">{tag}</p>
                       </div>
                     </motion.div>
@@ -727,11 +727,11 @@ function ContactSection({ sectionRef }: { sectionRef: RefObject<HTMLDivElement> 
         />
         <div className="relative size-full">
           <div className="box-border content-stretch flex flex-col gap-6 items-start justify-start px-5 py-6 relative w-full">
-            <div className="font-['Inter:Bold',_sans-serif] font-bold leading-[0] not-italic relative shrink-0 text-[#ffffff] text-[20px] text-left text-nowrap">
+            <div className="font-didact-gothic font-bold leading-[0] not-italic relative shrink-0 text-[#ffffff] text-[20px] text-left text-nowrap">
               <p className="block leading-[normal] whitespace-pre">Get in Touch</p>
             </div>
             <div
-              className="font-['Inter:Regular',_sans-serif] font-normal leading-[0] min-w-full not-italic relative shrink-0 text-[14px] text-gray-300 text-left"
+              className="font-didact-gothic font-normal leading-[0] min-w-full not-italic relative shrink-0 text-[14px] text-gray-300 text-left"
               style={{ width: "min-content" }}
             >
               <p className="block leading-[22px]">Let&apos;s discuss your next project or collaboration</p>
@@ -754,9 +754,9 @@ function ContactSection({ sectionRef }: { sectionRef: RefObject<HTMLDivElement> 
                             className="box-border content-stretch flex flex-col gap-3 items-start justify-start p-0 relative shrink-0 w-full"
                             data-name="top"
                           >
-                            <div className="font-['Inter:Medium',_sans-serif] font-medium leading-[0] not-italic relative shrink-0 text-[#ffffff] text-[16px] text-left w-full">
-                              <p className="block leading-[normal]">Contact Information</p>
-                            </div>
+                                              <div className="font-didact-gothic font-medium leading-[0] not-italic relative shrink-0 text-[#ffffff] text-[16px] text-left w-full">
+                    <p className="block leading-[normal]">Contact Information</p>
+                  </div>
                             <div
                               className="box-border content-stretch flex flex-col gap-1 items-start justify-start p-0 relative shrink-0 w-full"
                               data-name="container"
@@ -790,9 +790,9 @@ function ContactSection({ sectionRef }: { sectionRef: RefObject<HTMLDivElement> 
                                         </g>
                                       </svg>
                                     </div>
-                                    <div className="font-['Inter:Regular',_sans-serif] font-normal leading-[0] not-italic relative shrink-0 text-[14px] text-gray-300 text-left text-nowrap">
-                                      <p className="block leading-[normal] whitespace-pre">haileyhsu94@gmail.com</p>
-                                    </div>
+                                                            <div className="font-didact-gothic font-normal leading-[0] not-italic relative shrink-0 text-[14px] text-gray-300 text-left text-nowrap">
+                          <p className="block leading-[normal] whitespace-pre">haileyhsu94@gmail.com</p>
+                        </div>
                                   </div>
                                 </div>
                               </motion.a>
@@ -822,9 +822,9 @@ function ContactSection({ sectionRef }: { sectionRef: RefObject<HTMLDivElement> 
                                         </defs>
                                       </svg>
                                     </div>
-                                    <div className="font-['Inter:Regular',_sans-serif] font-normal leading-[0] not-italic relative shrink-0 text-[14px] text-gray-300 text-left text-nowrap">
-                                      <p className="block leading-[normal] whitespace-pre">+1 (347) 806-1403</p>
-                                    </div>
+                                                            <div className="font-didact-gothic font-normal leading-[0] not-italic relative shrink-0 text-[14px] text-gray-300 text-left text-nowrap">
+                          <p className="block leading-[normal] whitespace-pre">+1 (347) 806-1403</p>
+                        </div>
                                   </div>
                                 </div>
                               </motion.a>
@@ -854,9 +854,9 @@ function ContactSection({ sectionRef }: { sectionRef: RefObject<HTMLDivElement> 
                                     </g>
                                   </svg>
                                 </div>
-                                <div className="font-['Inter:Regular',_sans-serif] font-normal leading-[0] not-italic relative shrink-0 text-[14px] text-gray-300 text-left text-nowrap">
-                                  <p className="block leading-[normal] whitespace-pre">New York, NY</p>
-                                </div>
+                                                        <div className="font-didact-gothic font-normal leading-[0] not-italic relative shrink-0 text-[14px] text-gray-300 text-left text-nowrap">
+                          <p className="block leading-[normal] whitespace-pre">New York, NY</p>
+                        </div>
                               </div>
                             </div>
                           </div>
@@ -865,7 +865,7 @@ function ContactSection({ sectionRef }: { sectionRef: RefObject<HTMLDivElement> 
                             data-name="bottom"
                           >
                             <div
-                              className="font-['Inter:Medium',_sans-serif] font-medium leading-[0] min-w-full not-italic relative shrink-0 text-[#ffffff] text-[14px] text-left"
+                              className="font-didact-gothic font-medium leading-[0] min-w-full not-italic relative shrink-0 text-[#ffffff] text-[14px] text-left"
                               style={{ width: "min-content" }}
                             >
                               <p className="block leading-[normal]">Follow me</p>
@@ -964,9 +964,9 @@ function ContactSection({ sectionRef }: { sectionRef: RefObject<HTMLDivElement> 
                           <circle cx="3" cy="3" fill="var(--fill-0, #16A149)" id="Ellipse 30" r="3" />
                         </svg>
                       </div>
-                      <div className="font-['Inter:Regular',_sans-serif] font-normal leading-[0] not-italic relative shrink-0 text-[14px] text-gray-300 text-left text-nowrap">
-                        <p className="block leading-[22px] whitespace-pre">Available for new projects</p>
-                      </div>
+                                              <div className="font-didact-gothic font-normal leading-[0] not-italic relative shrink-0 text-[14px] text-gray-300 text-left text-nowrap">
+                          <p className="block leading-[22px] whitespace-pre">Available for new projects</p>
+                        </div>
                     </div>
                   </div>
                 </div>
