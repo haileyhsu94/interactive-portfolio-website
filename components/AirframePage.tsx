@@ -76,7 +76,7 @@ interface CarouselProps {
 
 interface GSAPCarouselProps {
   images: string[];
-  bgColor: string;
+  bgColor?: string;
   title?: string;
   sets: number; // Number of sets (3 for carousel1&2, 1 for carousel3&4)
 }
@@ -240,21 +240,8 @@ function InteractiveCarousel({ images, bgColor, title, onInteraction }: Carousel
   );
 }
 
-// Simple, reliable carousel component with scroll-triggered animation
-function GSAPCarousel({ images, bgColor, title, sets }: GSAPCarouselProps) {
-  // Group images into slides
-  const slides = useMemo(() => {
-    const slideArray = [];
-    for (let i = 0; i < sets; i++) {
-      const startIndex = i * 4;
-      const endIndex = startIndex + 4;
-      slideArray.push({
-        images: images.slice(startIndex, endIndex),
-        bg: bgColor,
-      });
-    }
-    return slideArray;
-  }, [images, sets, bgColor]);
+// 3D Carousel Component - Proper implementation
+function Carousel3D({ images, title }: Omit<GSAPCarouselProps, 'sets'>) {
 
   const [currentSlide, setCurrentSlide] = useState(0);
   const [lightboxOpen, setLightboxOpen] = useState(false);
@@ -262,14 +249,14 @@ function GSAPCarousel({ images, bgColor, title, sets }: GSAPCarouselProps) {
   const [isPinned, setIsPinned] = useState(false);
 
   const containerRef = useRef<HTMLDivElement>(null);
-  const trackRef = useRef<HTMLDivElement>(null);
-  const currentSlideRef = useRef(0); // Track current slide in ref for wheel handler
+  const currentSlideRef = useRef(0);
+  const scrollAccumulatorRef = useRef({ x: 0, y: 0 });
+  const lastScrollTimeRef = useRef(0);
 
-  // Scroll-triggered horizontal animation with wheel event
+    // Simple wheel-based navigation (keeping the pinning logic)
   useEffect(() => {
     const container = containerRef.current;
-    const track = trackRef.current;
-    if (!container || !track || slides.length <= 1) return;
+    if (!container || images.length <= 1) return;
 
     let isInCarouselMode = false;
 
@@ -277,97 +264,296 @@ function GSAPCarousel({ images, bgColor, title, sets }: GSAPCarouselProps) {
       const containerRect = container.getBoundingClientRect();
       const windowHeight = window.innerHeight;
       
-      console.log('Scroll check:', {
-        containerTop: containerRect.top,
-        containerBottom: containerRect.bottom,
-        windowHeight: windowHeight,
-        centerPoint: windowHeight * 0.5,
-        isInCarouselMode: isInCarouselMode
-      });
-      
-      // Check if carousel should be active (when it's centered in viewport)
-      const isActive = containerRect.top <= windowHeight * 0.5 && containerRect.bottom >= windowHeight * 0.5;
+      // Carousel must be fully visible (100%) to pin
+      // Top of carousel should be at or above the top of viewport, and bottom should be at or below the bottom
+      const isActive = containerRect.top >= 0 && containerRect.bottom <= windowHeight;
       
       if (isActive !== isInCarouselMode) {
         isInCarouselMode = isActive;
         setIsPinned(isActive);
-        console.log('Carousel mode changed to:', isActive ? 'ACTIVE' : 'INACTIVE');
       }
     };
 
     const handleWheel = (e: WheelEvent) => {
-      // Check carousel position on every wheel event
       const containerRect = container.getBoundingClientRect();
       const windowHeight = window.innerHeight;
       
-      // More lenient detection - carousel is active when it's in the viewport
-      const isActive = containerRect.top < windowHeight * 0.8 && containerRect.bottom > windowHeight * 0.2;
+      // Carousel must be fully visible (100%) to pin
+      // Top of carousel should be at or above the top of viewport, and bottom should be at or below the bottom
+      const isActive = containerRect.top >= 0 && containerRect.bottom <= windowHeight;
       
-      console.log('Wheel event:', {
-        isInCarouselMode,
-        isActive,
-        slidesLength: slides.length,
-        deltaY: e.deltaY,
-        currentSlide: currentSlideRef.current,
-        containerTop: containerRect.top,
-        containerBottom: containerRect.bottom,
-        windowHeight: windowHeight
-      });
-      
-      if (!isActive || slides.length <= 1) {
-        console.log('Wheel ignored - not in carousel mode or single slide');
+      if (!isActive || images.length <= 1) {
         return;
       }
       
-      // Ensure carousel is pinned when active
-      if (!isPinned) {
+      // Only pin if not already pinned
+      if (!isPinned && isActive) {
         setIsPinned(true);
-        console.log('Setting carousel to pinned mode');
+        return; // Don't handle scroll on the first pin
       }
       
-      const deltaY = e.deltaY;
-      const threshold = 20; // Moderate threshold for controlled sliding
+      // Only intercept scroll if carousel is pinned
+      if (!isPinned) {
+        return; // Allow normal page scrolling
+      }
       
-      if (Math.abs(deltaY) > threshold) {
-        if (deltaY > 0 && currentSlideRef.current < slides.length - 1) {
-          // Scroll down - next slide
+      const now = Date.now();
+      const deltaY = e.deltaY;
+      const deltaX = e.deltaX;
+      
+      // Reset accumulator if too much time has passed - shorter window to prevent double slides
+      if (now - lastScrollTimeRef.current > 200) {
+        scrollAccumulatorRef.current = { x: 0, y: 0 };
+      }
+      lastScrollTimeRef.current = now;
+      
+      // Normalize scroll values - less aggressive normalization
+      const normalizedDeltaX = Math.abs(deltaX) > 100 ? Math.sign(deltaX) * 100 : deltaX;
+      const normalizedDeltaY = Math.abs(deltaY) > 100 ? Math.sign(deltaY) * 100 : deltaY;
+      
+      // Accumulate scroll values
+      scrollAccumulatorRef.current.x += normalizedDeltaX;
+      scrollAccumulatorRef.current.y += normalizedDeltaY;
+      
+      // Balanced thresholds - prevent double slides
+      const isAtBoundary = currentSlideRef.current === 0 || currentSlideRef.current === images.length - 1;
+      const horizontalThreshold = isAtBoundary ? 150 : 300; // Higher boundary threshold
+      const verticalThreshold = isAtBoundary ? 200 : 300;   // Balanced thresholds
+      
+      // Debug logging
+      console.log('Wheel event:', { 
+        deltaX, deltaY, 
+        normalizedDeltaX, normalizedDeltaY,
+        accumulatedX: scrollAccumulatorRef.current.x,
+        accumulatedY: scrollAccumulatorRef.current.y,
+        isActive, isPinned: isPinned 
+      });
+      
+      // Check if we've accumulated enough scroll for navigation
+      const hasHorizontalScroll = Math.abs(scrollAccumulatorRef.current.x) >= horizontalThreshold;
+      const hasVerticalScroll = Math.abs(scrollAccumulatorRef.current.y) >= verticalThreshold;
+      
+      if (hasHorizontalScroll || hasVerticalScroll) {
+        // Determine the primary scroll direction based on accumulated values
+        const isHorizontalScroll = Math.abs(scrollAccumulatorRef.current.x) > Math.abs(scrollAccumulatorRef.current.y);
+        const accumulatedDelta = isHorizontalScroll ? scrollAccumulatorRef.current.x : scrollAccumulatorRef.current.y;
+        
+        console.log('Scroll threshold reached:', { 
+          isHorizontalScroll, 
+          accumulatedDelta, 
+          currentSlide: currentSlideRef.current 
+        });
+        
+        // Reset the accumulator for the direction we're using
+        if (isHorizontalScroll) {
+          scrollAccumulatorRef.current.x = 0;
+        } else {
+          scrollAccumulatorRef.current.y = 0;
+        }
+        
+        if (accumulatedDelta > 0 && currentSlideRef.current < images.length - 1) {
+          // Scroll right/down - go to next slide
           const newSlide = currentSlideRef.current + 1;
-          console.log('Wheel down - next slide', currentSlideRef.current, '->', newSlide, 'of', slides.length);
           setCurrentSlide(newSlide);
           currentSlideRef.current = newSlide;
-          e.preventDefault(); // Prevent page scroll, stay pinned
-        } else if (deltaY < 0 && currentSlideRef.current > 0) {
-          // Scroll up - previous slide
+          console.log('Moving to next slide:', newSlide);
+          e.preventDefault();
+        } else if (accumulatedDelta < 0 && currentSlideRef.current > 0) {
+          // Scroll left/up - go to previous slide
           const newSlide = currentSlideRef.current - 1;
-          console.log('Wheel up - previous slide', currentSlideRef.current, '->', newSlide, 'of', slides.length);
           setCurrentSlide(newSlide);
           currentSlideRef.current = newSlide;
-          e.preventDefault(); // Prevent page scroll, stay pinned
-        } else if (deltaY > 0 && currentSlideRef.current === slides.length - 1) {
-          // At last slide, trying to go down - allow normal scrolling to next content
-          console.log('At last slide, allowing normal scroll down to next content');
-          setIsPinned(false); // Unpin to allow page scroll
-        } else if (deltaY < 0 && currentSlideRef.current === 0) {
-          // At first slide, trying to go up - allow normal scrolling to previous content
-          console.log('At first slide, allowing normal scroll up to previous content');
-          setIsPinned(false); // Unpin to allow page scroll
+          console.log('Moving to previous slide:', newSlide);
+          e.preventDefault();
+        } else if (accumulatedDelta > 0 && currentSlideRef.current === images.length - 1) {
+          // At last slide, trying to go further - unpin immediately
+          console.log('Unpinning at last slide');
+          setIsPinned(false);
+          // Don't prevent default - allow the scroll to continue naturally
+        } else if (accumulatedDelta < 0 && currentSlideRef.current === 0) {
+          // At first slide, trying to go further - unpin immediately
+          console.log('Unpinning at first slide');
+          setIsPinned(false);
+          // Don't prevent default - allow the scroll to continue naturally
         }
       } else {
-        console.log('Wheel ignored - below threshold (deltaY:', deltaY, ')');
+        // Check for unpinning at boundaries with a small threshold
+        const isHorizontalScroll = Math.abs(scrollAccumulatorRef.current.x) > Math.abs(scrollAccumulatorRef.current.y);
+        const accumulatedDelta = isHorizontalScroll ? scrollAccumulatorRef.current.x : scrollAccumulatorRef.current.y;
+        
+        // Small threshold for unpinning at boundaries (prevents accidental unpinning)
+        const unpinThreshold = 50; // Small threshold to prevent accidental unpinning
+        
+        if (accumulatedDelta > unpinThreshold && currentSlideRef.current === images.length - 1) {
+          console.log('Unpinning at last slide');
+          setIsPinned(false);
+          // Don't prevent default - allow the scroll to continue naturally
+          return;
+        } else if (accumulatedDelta < -unpinThreshold && currentSlideRef.current === 0) {
+          console.log('Unpinning at first slide');
+          setIsPinned(false);
+          // Don't prevent default - allow the scroll to continue naturally
+          return;
+        }
+        
+        // Still accumulating, prevent default for all scroll events while pinned
+        e.preventDefault();
+      }
+    };
+
+    // Touch/swipe support for mobile
+    let touchStartX = 0;
+    let touchStartY = 0;
+    let touchEndX = 0;
+    let touchEndY = 0;
+
+    // Keyboard support for arrow keys
+    const handleKeyDown = (e: KeyboardEvent) => {
+      const containerRect = container.getBoundingClientRect();
+      const windowHeight = window.innerHeight;
+      
+      // Carousel must be fully visible (100%) to pin
+      // Top of carousel should be at or above the top of viewport, and bottom should be at or below the bottom
+      const isActive = containerRect.top >= 0 && containerRect.bottom <= windowHeight;
+      
+      if (!isActive || images.length <= 1) {
+        return;
+      }
+      
+      // Only pin if not already pinned
+      if (!isPinned && isActive) {
+        setIsPinned(true);
+        return; // Don't handle keys on the first pin
+      }
+      
+      // Only intercept keys if carousel is pinned
+      if (!isPinned) {
+        return; // Allow normal page scrolling
+      }
+      
+      console.log('Key pressed:', e.key, 'isActive:', isActive, 'isPinned:', isPinned);
+      
+      if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+        if (currentSlideRef.current < images.length - 1) {
+          const newSlide = currentSlideRef.current + 1;
+          setCurrentSlide(newSlide);
+          currentSlideRef.current = newSlide;
+          console.log('Moving to next slide:', newSlide);
+          e.preventDefault();
+        } else {
+          console.log('Unpinning at last slide');
+          setIsPinned(false);
+          // Don't prevent default - allow normal page behavior
+        }
+      } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+        if (currentSlideRef.current > 0) {
+          const newSlide = currentSlideRef.current - 1;
+          setCurrentSlide(newSlide);
+          currentSlideRef.current = newSlide;
+          console.log('Moving to previous slide:', newSlide);
+          e.preventDefault();
+        } else {
+          console.log('Unpinning at first slide');
+          setIsPinned(false);
+          // Don't prevent default - allow normal page behavior
+        }
+      }
+    };
+
+    const handleTouchStart = (e: TouchEvent) => {
+      const containerRect = container.getBoundingClientRect();
+      const windowHeight = window.innerHeight;
+      
+      // Carousel must be fully visible (100%) to pin
+      // Top of carousel should be at or above the top of viewport, and bottom should be at or below the bottom
+      const isActive = containerRect.top >= 0 && containerRect.bottom <= windowHeight;
+      
+      if (!isActive || images.length <= 1) {
+        return;
+      }
+      
+      if (!isPinned && isActive) {
+        setIsPinned(true);
+      }
+      
+      touchStartX = e.touches[0].clientX;
+      touchStartY = e.touches[0].clientY;
+    };
+
+    const handleTouchMove = (e: TouchEvent) => {
+      e.preventDefault(); // Prevent default scrolling
+    };
+
+    const handleTouchEnd = (e: TouchEvent) => {
+      const containerRect = container.getBoundingClientRect();
+      const windowHeight = window.innerHeight;
+      
+      // Carousel must be fully visible (100%) to pin
+      // Top of carousel should be at or above the top of viewport, and bottom should be at or below the bottom
+      const isActive = containerRect.top >= 0 && containerRect.bottom <= windowHeight;
+      
+      if (!isActive || images.length <= 1) {
+        return;
+      }
+      
+      touchEndX = e.changedTouches[0].clientX;
+      touchEndY = e.changedTouches[0].clientY;
+      
+      const deltaX = touchEndX - touchStartX;
+      const deltaY = touchEndY - touchStartY;
+      const minSwipeDistance = 50;
+      
+      // Determine if it's a horizontal or vertical swipe
+      if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > minSwipeDistance) {
+        // Horizontal swipe
+        if (deltaX > 0 && currentSlideRef.current > 0) {
+          // Swipe right - go to previous slide
+          const newSlide = currentSlideRef.current - 1;
+          setCurrentSlide(newSlide);
+          currentSlideRef.current = newSlide;
+        } else if (deltaX < 0 && currentSlideRef.current < images.length - 1) {
+          // Swipe left - go to next slide
+          const newSlide = currentSlideRef.current + 1;
+          setCurrentSlide(newSlide);
+          currentSlideRef.current = newSlide;
+        }
+      } else if (Math.abs(deltaY) > Math.abs(deltaX) && Math.abs(deltaY) > minSwipeDistance) {
+        // Vertical swipe
+        if (deltaY > 0 && currentSlideRef.current < images.length - 1) {
+          // Swipe down - go to next slide
+          const newSlide = currentSlideRef.current + 1;
+          setCurrentSlide(newSlide);
+          currentSlideRef.current = newSlide;
+        } else if (deltaY < 0 && currentSlideRef.current > 0) {
+          // Swipe up - go to previous slide
+          const newSlide = currentSlideRef.current - 1;
+          setCurrentSlide(newSlide);
+          currentSlideRef.current = newSlide;
+        }
       }
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
     window.addEventListener('wheel', handleWheel, { passive: false });
-    handleScroll(); // Initial check
+    window.addEventListener('keydown', handleKeyDown, { passive: false });
+    
+    // Add touch event listeners
+    container.addEventListener('touchstart', handleTouchStart, { passive: false });
+    container.addEventListener('touchmove', handleTouchMove, { passive: false });
+    container.addEventListener('touchend', handleTouchEnd, { passive: false });
+    
+    handleScroll();
 
     return () => {
       window.removeEventListener('scroll', handleScroll);
       window.removeEventListener('wheel', handleWheel);
+      window.removeEventListener('keydown', handleKeyDown);
+      container.removeEventListener('touchstart', handleTouchStart);
+      container.removeEventListener('touchmove', handleTouchMove);
+      container.removeEventListener('touchend', handleTouchEnd);
     };
-  }, [slides.length, currentSlide, isPinned]);
+  }, [images.length, currentSlide, isPinned]);
 
-  // Update ref when currentSlide changes
   useEffect(() => {
     currentSlideRef.current = currentSlide;
   }, [currentSlide]);
@@ -378,11 +564,11 @@ function GSAPCarousel({ images, bgColor, title, sets }: GSAPCarouselProps) {
   };
 
   const nextSlide = () => {
-    setCurrentSlide((prev) => (prev + 1) % slides.length);
+    setCurrentSlide((prev) => (prev + 1) % images.length);
   };
 
   const prevSlide = () => {
-    setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
+    setCurrentSlide((prev) => (prev - 1 + images.length) % images.length);
   };
 
   const goToSlide = (index: number) => {
@@ -400,48 +586,93 @@ function GSAPCarousel({ images, bgColor, title, sets }: GSAPCarouselProps) {
           zIndex: isPinned ? 10 : 'auto'
         }}
       >
-        {isPinned && <div className="absolute top-2 left-2 bg-red-500 text-white px-2 py-1 text-xs rounded">PINNED</div>}
-        {/* Slides Container */}
-        <div 
-          ref={trackRef}
-          className="flex h-full transition-transform duration-300 ease-in-out"
-          style={{ transform: `translateX(-${currentSlide * 100}%)` }}
-        >
-          {slides.map((slide, slideIndex) => (
-            <div
-              key={slideIndex}
-              className={`w-full h-full flex-shrink-0 ${slide.bg} flex items-center justify-center p-8`}
-            >
-              <div className="w-full max-w-5xl">
-                <div className="text-center mb-6">
-                  <p className="text-white/60 text-sm">Click any image to zoom</p>
-                </div>
-                <div className="grid grid-cols-2 gap-6 max-w-4xl mx-auto">
-                  {slide.images.map((imageSrc, imageIndex) => (
-                    <div
-                      key={imageIndex}
-                      className="aspect-[3/2] bg-black/20 rounded-lg overflow-hidden border border-white/10 cursor-pointer hover:scale-105 transition-transform duration-300 flex items-center justify-center"
-                      onClick={() => openLightbox(imageSrc)}
-                    >
-                      <img 
-                        src={imageSrc} 
-                        alt={`Image ${imageIndex + 1}`}
-                        className="w-full h-full object-contain"
-                      />
+
+        
+
+        
+        {/* 3D Carousel Container */}
+        <div className="relative w-full h-full flex items-center justify-center" style={{ perspective: '1200px' }}>
+          <div className="relative w-full h-full flex items-center justify-center">
+            {images.map((imageSrc, imageIndex) => {
+              const isActive = imageIndex === currentSlide;
+              const isNext = imageIndex === (currentSlide + 1) % images.length;
+              const isPrev = imageIndex === (currentSlide - 1 + images.length) % images.length;
+              const isNextNext = imageIndex === (currentSlide + 2) % images.length;
+              const isPrevPrev = imageIndex === (currentSlide - 2 + images.length) % images.length;
+              
+              let transform = '';
+              let opacity = 0;
+              let zIndex = 0;
+              
+              if (isActive) {
+                transform = 'translateZ(0px) scale(1) rotateY(0deg)';
+                opacity = 1;
+                zIndex = 10;
+              } else if (isNext) {
+                transform = 'translateZ(-300px) translateX(50%) scale(0.85) rotateY(-20deg)';
+                opacity = 0.8;
+                zIndex = 5;
+              } else if (isPrev) {
+                transform = 'translateZ(-300px) translateX(-50%) scale(0.85) rotateY(20deg)';
+                opacity = 0.8;
+                zIndex = 5;
+              } else if (isNextNext) {
+                transform = 'translateZ(-600px) translateX(100%) scale(0.7) rotateY(-30deg)';
+                opacity = 0.4;
+                zIndex = 2;
+              } else if (isPrevPrev) {
+                transform = 'translateZ(-600px) translateX(-100%) scale(0.7) rotateY(30deg)';
+                opacity = 0.4;
+                zIndex = 2;
+              } else {
+                transform = 'translateZ(-900px) scale(0.5) rotateY(0deg)';
+                opacity = 0.2;
+                zIndex = 1;
+              }
+
+              return (
+                <div
+                  key={imageIndex}
+                  className="absolute w-full h-full transition-all duration-800 ease-out"
+                  style={{
+                    transform,
+                    opacity,
+                    zIndex,
+                    transformStyle: 'preserve-3d',
+                    backfaceVisibility: 'hidden'
+                  }}
+                >
+                  <div className="w-full h-full flex items-center justify-center p-8">
+                    <div className="w-full max-w-4xl">
+                      <div className="text-center mb-4">
+                        <p className="text-white/60 text-sm">Click image to zoom</p>
+                      </div>
+                      <div className="flex items-center justify-center">
+                        <div
+                          className="aspect-[4/3] bg-black/20 rounded-lg overflow-hidden cursor-pointer hover:scale-105 transition-transform duration-300 flex items-center justify-center max-w-3xl"
+                          onClick={() => openLightbox(imageSrc)}
+                        >
+                          <img 
+                            src={imageSrc} 
+                            alt={`Image ${imageIndex + 1}`}
+                            className="w-full h-full object-contain"
+                          />
+                        </div>
+                      </div>
                     </div>
-                  ))}
+                  </div>
                 </div>
-              </div>
-            </div>
-          ))}
+              );
+            })}
+          </div>
         </div>
 
-        {/* Navigation - only show for multiple slides */}
-        {slides.length > 1 && (
+        {/* Navigation - only show for multiple images */}
+        {images.length > 1 && (
           <>
             {/* Dots */}
             <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 flex space-x-3">
-              {slides.map((_, index) => (
+              {images.map((_, index) => (
                 <button
                   key={index}
                   onClick={() => goToSlide(index)}
@@ -464,7 +695,7 @@ function GSAPCarousel({ images, bgColor, title, sets }: GSAPCarouselProps) {
             </button>
             <button
               onClick={nextSlide}
-              disabled={currentSlide === slides.length - 1}
+              disabled={currentSlide === images.length - 1}
               className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-black/30 hover:bg-black/50 text-white p-2 rounded-full transition-colors disabled:opacity-50"
             >
               <ChevronRight className="w-6 h-6" />
@@ -580,30 +811,30 @@ export default function AirframePage({ onBack, openProjects, onCloseProject, onN
                   />
                   <div className="flex-1 pb-3 min-w-0">
                     <div className="flex flex-wrap gap-2 mb-4">
-                      <motion.div
-                        className="bg-[#1f1f1f] box-border content-stretch flex flex-row gap-2.5 items-center justify-center px-3 py-1 relative rounded-[999px] shrink-0 hover:bg-white/10 transition-colors duration-200"
-                        whileHover={{ scale: 1.05 }}
-                      >
-                        <div className="font-['Inter:Regular',_sans-serif] font-normal leading-[0] not-italic relative shrink-0 text-[14px] text-gray-300 text-left text-nowrap">
-                          <p className="block leading-[22px] whitespace-pre">6 months</p>
-                        </div>
-                      </motion.div>
-                      <motion.div
-                        className="bg-[#1f1f1f] box-border content-stretch flex flex-row gap-2.5 items-center justify-center px-3 py-1 relative rounded-[999px] shrink-0 hover:bg-white/10 transition-colors duration-200"
-                        whileHover={{ scale: 1.05 }}
-                      >
-                        <div className="font-['Inter:Regular',_sans-serif] font-normal leading-[0] not-italic relative shrink-0 text-[14px] text-gray-300 text-left text-nowrap">
-                          <p className="block leading-[22px] whitespace-pre">$4M funding</p>
-                        </div>
-                      </motion.div>
-                      <motion.div
-                        className="bg-[#1f1f1f] box-border content-stretch flex flex-row gap-2.5 items-center justify-center px-3 py-1 relative rounded-[999px] shrink-0 hover:bg-white/10 transition-colors duration-200"
-                        whileHover={{ scale: 1.05 }}
-                      >
-                        <div className="font-['Inter:Regular',_sans-serif] font-normal leading-[0] not-italic relative shrink-0 text-[14px] text-gray-300 text-left text-nowrap">
-                          <p className="block leading-[22px] whitespace-pre">Working directly with CEO</p>
-                        </div>
-                      </motion.div>
+                                              <motion.div
+                          className="bg-[#2a2a2a] box-border content-stretch flex flex-row gap-2.5 items-center justify-center px-3 py-1 relative rounded-[999px] shrink-0 hover:bg-white/10 transition-colors duration-200"
+                          whileHover={{ scale: 1.05 }}
+                        >
+                          <div className="font-normal leading-[0] not-italic relative shrink-0 text-[17px] text-gray-300 text-left text-nowrap tracking-wide" style={{ fontFamily: 'var(--font-oregano)' }}>
+                            <p className="block leading-[22px] whitespace-pre">6 months</p>
+                          </div>
+                        </motion.div>
+                        <motion.div
+                          className="bg-[#2a2a2a] box-border content-stretch flex flex-row gap-2.5 items-center justify-center px-3 py-1 relative rounded-[999px] shrink-0 hover:bg-white/10 transition-colors duration-200"
+                          whileHover={{ scale: 1.05 }}
+                        >
+                          <div className="font-normal leading-[0] not-italic relative shrink-0 text-[17px] text-gray-300 text-left text-nowrap tracking-wide" style={{ fontFamily: 'var(--font-oregano)' }}>
+                            <p className="block leading-[22px] whitespace-pre">$4M funding</p>
+                          </div>
+                        </motion.div>
+                        <motion.div
+                          className="bg-[#2a2a2a] box-border content-stretch flex flex-row gap-2.5 items-center justify-center px-3 py-1 relative rounded-[999px] shrink-0 hover:bg-white/10 transition-colors duration-200"
+                          whileHover={{ scale: 1.05 }}
+                        >
+                          <div className="font-normal leading-[0] not-italic relative shrink-0 text-[17px] text-gray-300 text-left text-nowrap tracking-wide" style={{ fontFamily: 'var(--font-oregano)' }}>
+                            <p className="block leading-[22px] whitespace-pre">Working directly with CEO</p>
+                          </div>
+                        </motion.div>
                     </div>
                     <h1 className="text-4xl font-bold mb-3">
                       AI-powered B2B Procurement Platform
@@ -803,10 +1034,8 @@ export default function AirframePage({ onBack, openProjects, onCloseProject, onN
 
             {/* Carousel 1 */}
             <div className="text-center mb-16">
-              <GSAPCarousel
+              <Carousel3D
                 images={airframeImages.carousel1}
-                bgColor="bg-[#105888]"
-                sets={3}
               />
             </div>
 
@@ -831,10 +1060,8 @@ export default function AirframePage({ onBack, openProjects, onCloseProject, onN
 
             {/* Carousel 2 */}
             <div className="text-center mb-16">
-              <GSAPCarousel
+              <Carousel3D
                 images={airframeImages.carousel2}
-                bgColor="bg-[#107e88]"
-                sets={3}
               />
             </div>
 
@@ -858,10 +1085,8 @@ export default function AirframePage({ onBack, openProjects, onCloseProject, onN
 
             {/* Carousel 3 */}
             <div className="text-center mb-20">
-              <GSAPCarousel
+              <Carousel3D
                 images={airframeImages.carousel3}
-                bgColor="bg-[#9678a4]"
-                sets={1}
               />
             </div>
 
@@ -891,10 +1116,8 @@ export default function AirframePage({ onBack, openProjects, onCloseProject, onN
 
             {/* Carousel 4 */}
             <div className="text-center mb-20">
-              <GSAPCarousel
+              <Carousel3D
                 images={airframeImages.carousel4}
-                bgColor="bg-[#bd9d8b]"
-                sets={1}
               />
             </div>
 

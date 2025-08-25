@@ -25,6 +25,14 @@
   }
 }
 
+/* Hide GSAP ScrollTrigger markers */
+.gsap-marker-start,
+.gsap-marker-end,
+.gsap-marker-scroller-start,
+.gsap-marker-scroller-end {
+  display: none !important;
+}
+
 
 
 @custom-variant dark (&:is(.dark *));
@@ -166,4 +174,21 @@ html {
 .scrollbar-thin {
   scrollbar-width: thin;
   scrollbar-color: #4a4a4a transparent;
+}
+
+/* 3D Carousel Styles */
+.perspective-1000 {
+  perspective: 1000px;
+}
+
+/* Ensure 3D transforms work properly */
+.carousel-3d-container {
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+}
+
+.carousel-3d-slide {
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+  will-change: transform, opacity;
 }

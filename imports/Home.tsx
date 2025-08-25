@@ -11,7 +11,7 @@ function Logo() {
       className="bg-[#e6ff02] box-border content-stretch flex flex-row gap-2.5 items-center justify-center px-1.5 py-2 relative rounded-[999px] shrink-0 size-9"
       data-name="logo"
     >
-      <div className="font-['HanziPen_TC:Bold',_sans-serif] leading-[0] not-italic relative shrink-0 text-[16px] text-left text-neutral-950 text-nowrap">
+      <div className="font-['HanziPen_TC:Bold',_sans-serif] leading-[0] not-italic relative shrink-0 text-[17px] text-left text-neutral-950 text-nowrap">
         <p className="block leading-[normal] whitespace-pre">HH</p>
       </div>
     </div>
@@ -24,10 +24,10 @@ function NameAndTitle() {
       className="box-border content-stretch flex flex-col gap-1 items-start justify-start leading-[0] not-italic p-0 relative shrink-0 text-left w-[132px]"
       data-name="name and title"
     >
-      <div className="font-['Inter:Semi_Bold',_sans-serif] font-semibold relative shrink-0 text-[#ffffff] text-[16px] w-full">
+      <div className="font-[.Didact_Gothic,_sans-serif] font-semibold relative shrink-0 text-[#ffffff] text-[17px] w-full">
         <p className="block leading-[normal]">Hailey Hsu</p>
       </div>
-      <div className="font-['Inter:Regular',_sans-serif] font-normal relative shrink-0 text-[14px] text-gray-400 w-full">
+      <div className="font-[.Didact_Gothic,_sans-serif] font-normal relative shrink-0 text-[17px] text-gray-400 w-full">
         <p className="block leading-[normal]">Product Designer</p>
       </div>
     </div>
@@ -71,7 +71,7 @@ function Featured() {
       <div className="flex flex-row items-center relative size-full">
         <div className="box-border content-stretch flex flex-row gap-3 items-center justify-start px-3 py-2 relative w-full">
           <Frame />
-          <div className="font-['Inter:Medium',_sans-serif] font-medium leading-[0] not-italic relative shrink-0 text-[#e6ff02] text-[14px] text-left text-nowrap">
+          <div className="font-[.Didact_Gothic,_sans-serif] font-medium leading-[0] not-italic relative shrink-0 text-[#e6ff02] text-[17px] text-left text-nowrap">
             <p className="block leading-[normal] whitespace-pre">Featured</p>
           </div>
         </div>
@@ -105,7 +105,7 @@ function More() {
       <div className="flex flex-row items-center relative size-full">
         <div className="box-border content-stretch flex flex-row gap-3 items-center justify-start px-3 py-2 relative w-full">
           <Frame1 />
-          <div className="font-['Inter:Medium',_sans-serif] font-medium leading-[0] not-italic relative shrink-0 text-[14px] text-gray-300 text-left text-nowrap">
+          <div className="font-[.Didact_Gothic,_sans-serif] font-medium leading-[0] not-italic relative shrink-0 text-[17px] text-gray-300 text-left text-nowrap">
             <p className="block leading-[normal] whitespace-pre">More Projects</p>
           </div>
         </div>
@@ -148,7 +148,7 @@ function Contact() {
       data-name="contact"
     >
       <Frame2 />
-      <div className="font-['Inter:Medium',_sans-serif] font-medium leading-[0] not-italic relative shrink-0 text-[14px] text-gray-300 text-left text-nowrap">
+      <div className="font-[.Didact_Gothic,_sans-serif] font-medium leading-[0] not-italic relative shrink-0 text-[17px] text-gray-300 text-left text-nowrap">
         <p className="block leading-[normal] whitespace-pre">Contact</p>
       </div>
     </div>
@@ -190,10 +190,10 @@ function Title() {
       className="box-border content-stretch flex flex-row items-start justify-between leading-[0] not-italic p-0 relative shrink-0 text-left text-nowrap w-full"
       data-name="title"
     >
-      <div className="font-['Inter:Bold',_sans-serif] font-bold relative shrink-0 text-[#ffffff] text-[20px]">
+      <div className="font-[.Didact_Gothic,_sans-serif] font-bold relative shrink-0 text-[#ffffff] text-[21px]">
         <p className="block leading-[normal] text-nowrap whitespace-pre">Featured Project</p>
       </div>
-      <div className="font-['Inter:Regular',_sans-serif] font-normal relative shrink-0 text-[14px] text-gray-300">
+      <div className="font-[.Didact_Gothic,_sans-serif] font-normal relative shrink-0 text-[17px] text-gray-300">
         <p className="block leading-[22px] text-nowrap whitespace-pre">1 featured</p>
       </div>
     </div>
@@ -272,11 +272,11 @@ function Title1() {
       className="box-border content-stretch flex flex-col gap-2 items-start justify-start leading-[0] not-italic p-0 relative shrink-0 text-left w-full"
       data-name="title"
     >
-      <div className="font-['Inter:Bold',_sans-serif] font-bold relative shrink-0 text-[#ffffff] text-[20px] text-nowrap">
+      <div className="font-[.Didact_Gothic,_sans-serif] font-bold relative shrink-0 text-[#ffffff] text-[21px] text-nowrap">
         <p className="block leading-[normal] whitespace-pre">{`B2B Procurement AI Agent `}</p>
       </div>
       <div
-        className="font-['Inter:Regular',_sans-serif] font-normal min-w-full relative shrink-0 text-[14px] text-gray-300"
+        className="font-[.Didact_Gothic,_sans-serif] font-normal min-w-full relative shrink-0 text-[17px] text-gray-300"
         style={{ width: "min-content" }}
       >
         <p className="block leading-[22px]">6 months</p>
@@ -288,7 +288,7 @@ function Title1() {
 function Frame224() {
   return (
     <div className="bg-[#1f1f1f] box-border content-stretch flex flex-row gap-2.5 items-center justify-center px-3 py-1 relative rounded-[999px] shrink-0">
-      <div className="font-['Inter:Regular',_sans-serif] font-normal leading-[0] not-italic relative shrink-0 text-[14px] text-gray-300 text-left text-nowrap">
+      <div className="font-[.Didact_Gothic,_sans-serif] font-normal leading-[0] not-italic relative shrink-0 text-[17px] text-gray-300 text-left text-nowrap">
         <p className="block leading-[22px] whitespace-pre">Design Systems</p>
       </div>
     </div>
@@ -298,7 +298,7 @@ function Frame224() {
 function Frame225() {
   return (
     <div className="bg-[#1f1f1f] box-border content-stretch flex flex-row gap-2.5 items-center justify-center px-3 py-1 relative rounded-[999px] shrink-0">
-      <div className="font-['Inter:Regular',_sans-serif] font-normal leading-[0] not-italic relative shrink-0 text-[14px] text-gray-300 text-left text-nowrap">
+      <div className="font-[.Didact_Gothic,_sans-serif] font-normal leading-[0] not-italic relative shrink-0 text-[17px] text-gray-300 text-left text-nowrap">
         <p className="block leading-[22px] whitespace-pre">User Research</p>
       </div>
     </div>
@@ -308,7 +308,7 @@ function Frame225() {
 function Frame230() {
   return (
     <div className="bg-[#1f1f1f] box-border content-stretch flex flex-row gap-2.5 items-center justify-center px-3 py-1 relative rounded-[999px] shrink-0">
-      <div className="font-['Inter:Regular',_sans-serif] font-normal leading-[0] not-italic relative shrink-0 text-[14px] text-gray-300 text-left text-nowrap">
+      <div className="font-[.Didact_Gothic,_sans-serif] font-normal leading-[0] not-italic relative shrink-0 text-[17px] text-gray-300 text-left text-nowrap">
         <p className="block leading-[22px] whitespace-pre">Prototyping</p>
       </div>
     </div>
@@ -318,7 +318,7 @@ function Frame230() {
 function Frame228() {
   return (
     <div className="bg-[#1f1f1f] box-border content-stretch flex flex-row gap-2.5 items-center justify-center px-3 py-1 relative rounded-[999px] shrink-0">
-      <div className="font-['Inter:Regular',_sans-serif] font-normal leading-[0] not-italic relative shrink-0 text-[14px] text-gray-300 text-left text-nowrap">
+      <div className="font-[.Didact_Gothic,_sans-serif] font-normal leading-[0] not-italic relative shrink-0 text-[17px] text-gray-300 text-left text-nowrap">
         <p className="block leading-[22px] whitespace-pre">A/B tesing</p>
       </div>
     </div>
@@ -328,7 +328,7 @@ function Frame228() {
 function Frame227() {
   return (
     <div className="bg-[#1f1f1f] box-border content-stretch flex flex-row gap-2.5 items-center justify-center px-3 py-1 relative rounded-[999px] shrink-0">
-      <div className="font-['Inter:Regular',_sans-serif] font-normal leading-[0] not-italic relative shrink-0 text-[14px] text-gray-300 text-left text-nowrap">
+      <div className="font-[.Didact_Gothic,_sans-serif] font-normal leading-[0] not-italic relative shrink-0 text-[17px] text-gray-300 text-left text-nowrap">
         <p className="block leading-[22px] whitespace-pre">Data Viz</p>
       </div>
     </div>
@@ -359,7 +359,7 @@ function Text() {
           <Icon />
           <Title1 />
           <div
-            className="font-['Inter:Regular',_sans-serif] font-normal leading-[0] min-w-full not-italic relative shrink-0 text-[14px] text-gray-300 text-left"
+            className="font-[.Didact_Gothic,_sans-serif] font-normal leading-[0] min-w-full not-italic relative shrink-0 text-[17px] text-gray-300 text-left"
             style={{ width: "min-content" }}
           >
             <p className="block leading-[22px]">
@@ -415,10 +415,10 @@ function Title2() {
       className="box-border content-stretch flex flex-row items-start justify-between leading-[0] not-italic p-0 relative shrink-0 text-left text-nowrap w-full"
       data-name="title"
     >
-      <div className="font-['Inter:Bold',_sans-serif] font-bold relative shrink-0 text-[#ffffff] text-[20px]">
+      <div className="font-[.Didact_Gothic,_sans-serif] font-bold relative shrink-0 text-[#ffffff] text-[21px]">
         <p className="block leading-[normal] text-nowrap whitespace-pre">More Projects</p>
       </div>
-      <div className="font-['Inter:Regular',_sans-serif] font-normal relative shrink-0 text-[14px] text-gray-300">
+      <div className="font-[.Didact_Gothic,_sans-serif] font-normal relative shrink-0 text-[17px] text-gray-300">
         <p className="block leading-[22px] text-nowrap whitespace-pre">3 more</p>
       </div>
     </div>
@@ -441,11 +441,11 @@ function Title3() {
       className="box-border content-stretch flex flex-col gap-2 items-start justify-start leading-[0] not-italic p-0 relative shrink-0 text-left w-full"
       data-name="title"
     >
-      <div className="font-['Inter:Bold',_sans-serif] font-bold relative shrink-0 text-[#ffffff] text-[16px] text-nowrap">
+      <div className="font-[.Didact_Gothic,_sans-serif] font-bold relative shrink-0 text-[#ffffff] text-[17px] text-nowrap">
         <p className="block leading-[normal] whitespace-pre">Restaurant Reservation</p>
       </div>
       <div
-        className="font-['Inter:Regular',_sans-serif] font-normal min-w-full relative shrink-0 text-[14px] text-gray-300"
+        className="font-[.Didact_Gothic,_sans-serif] font-normal min-w-full relative shrink-0 text-[17px] text-gray-300"
         style={{ width: "min-content" }}
       >
         <p className="block leading-[22px]">7 months</p>
@@ -462,7 +462,7 @@ function Project() {
           <Image />
           <Title3 />
           <div
-            className="font-['Inter:Regular',_sans-serif] font-normal leading-[0] min-w-full not-italic relative shrink-0 text-[14px] text-gray-300 text-left"
+            className="font-[.Didact_Gothic,_sans-serif] font-normal leading-[0] min-w-full not-italic relative shrink-0 text-[17px] text-gray-300 text-left"
             style={{ width: "min-content" }}
           >
             <p className="block leading-[22px]">{`Lorem ipsum dolor sit amet consectetur. Enim orci libero et bibendum elit nibh. Maecenas in in feugiat magna enim aliquet varius. `}</p>
@@ -489,11 +489,11 @@ function Title4() {
       className="box-border content-stretch flex flex-col gap-2 items-start justify-start leading-[0] not-italic p-0 relative shrink-0 text-left w-full"
       data-name="title"
     >
-      <div className="font-['Inter:Bold',_sans-serif] font-bold relative shrink-0 text-[#ffffff] text-[16px] text-nowrap">
+      <div className="font-[.Didact_Gothic,_sans-serif] font-bold relative shrink-0 text-[#ffffff] text-[17px] text-nowrap">
         <p className="block leading-[normal] whitespace-pre">{`AI Tutor For Students `}</p>
       </div>
       <div
-        className="font-['Inter:Regular',_sans-serif] font-normal min-w-full relative shrink-0 text-[14px] text-gray-300"
+        className="font-[.Didact_Gothic,_sans-serif] font-normal min-w-full relative shrink-0 text-[17px] text-gray-300"
         style={{ width: "min-content" }}
       >
         <p className="block leading-[22px]">12 months</p>
@@ -510,7 +510,7 @@ function Project1() {
           <Image1 />
           <Title4 />
           <div
-            className="font-['Inter:Regular',_sans-serif] font-normal leading-[0] min-w-full not-italic relative shrink-0 text-[14px] text-gray-300 text-left"
+            className="font-[.Didact_Gothic,_sans-serif] font-normal leading-[0] min-w-full not-italic relative shrink-0 text-[17px] text-gray-300 text-left"
             style={{ width: "min-content" }}
           >
             <p className="block leading-[22px]">{`Lorem ipsum dolor sit amet consectetur. Enim orci libero et bibendum elit nibh. Maecenas in in feugiat magna enim aliquet varius. `}</p>
@@ -537,11 +537,11 @@ function Title5() {
       className="box-border content-stretch flex flex-col gap-2 items-start justify-start leading-[0] not-italic p-0 relative shrink-0 text-left w-full"
       data-name="title"
     >
-      <div className="font-['Inter:Bold',_sans-serif] font-bold relative shrink-0 text-[#ffffff] text-[16px] text-nowrap">
+      <div className="font-[.Didact_Gothic,_sans-serif] font-bold relative shrink-0 text-[#ffffff] text-[17px] text-nowrap">
         <p className="block leading-[normal] whitespace-pre">Save Food</p>
       </div>
       <div
-        className="font-['Inter:Regular',_sans-serif] font-normal min-w-full relative shrink-0 text-[14px] text-gray-300"
+        className="font-[.Didact_Gothic,_sans-serif] font-normal min-w-full relative shrink-0 text-[17px] text-gray-300"
         style={{ width: "min-content" }}
       >
         <p className="block leading-[22px]">4 months</p>
@@ -558,7 +558,7 @@ function Project2() {
           <Image2 />
           <Title5 />
           <div
-            className="font-['Inter:Regular',_sans-serif] font-normal leading-[0] min-w-full not-italic relative shrink-0 text-[14px] text-gray-300 text-left"
+            className="font-[.Didact_Gothic,_sans-serif] font-normal leading-[0] min-w-full not-italic relative shrink-0 text-[17px] text-gray-300 text-left"
             style={{ width: "min-content" }}
           >
             <p className="block leading-[22px]">{`Lorem ipsum dolor sit amet consectetur. Enim orci libero et bibendum elit nibh. Maecenas in in feugiat magna enim aliquet varius. `}</p>
@@ -627,7 +627,7 @@ function Mail() {
       <div className="flex flex-row items-center relative size-full">
         <div className="box-border content-stretch flex flex-row gap-3 items-center justify-start px-3 py-2 relative w-full">
           <Frame7 />
-          <div className="font-['Inter:Regular',_sans-serif] font-normal leading-[0] not-italic relative shrink-0 text-[14px] text-gray-300 text-left text-nowrap">
+          <div className="font-[.Didact_Gothic,_sans-serif] font-normal leading-[0] not-italic relative shrink-0 text-[17px] text-gray-300 text-left text-nowrap">
             <p className="block leading-[normal] whitespace-pre">haileyhsu94@gmail.com</p>
           </div>
         </div>
@@ -666,7 +666,7 @@ function Phone() {
       <div className="flex flex-row items-center relative size-full">
         <div className="box-border content-stretch flex flex-row gap-3 items-center justify-start px-3 py-2 relative w-full">
           <Frame8 />
-          <div className="font-['Inter:Regular',_sans-serif] font-normal leading-[0] not-italic relative shrink-0 text-[14px] text-gray-300 text-left text-nowrap">
+          <div className="font-[.Didact_Gothic,_sans-serif] font-normal leading-[0] not-italic relative shrink-0 text-[17px] text-gray-300 text-left text-nowrap">
             <p className="block leading-[normal] whitespace-pre">+1 (347) 806-1403</p>
           </div>
         </div>
@@ -709,7 +709,7 @@ function Location() {
       data-name="location"
     >
       <Frame9 />
-      <div className="font-['Inter:Regular',_sans-serif] font-normal leading-[0] not-italic relative shrink-0 text-[14px] text-gray-300 text-left text-nowrap">
+      <div className="font-[.Didact_Gothic,_sans-serif] font-normal leading-[0] not-italic relative shrink-0 text-[17px] text-gray-300 text-left text-nowrap">
         <p className="block leading-[normal] whitespace-pre">New York, NY</p>
       </div>
     </div>
@@ -735,7 +735,7 @@ function Top() {
       className="box-border content-stretch flex flex-col gap-3 items-start justify-start p-0 relative shrink-0 w-full"
       data-name="top"
     >
-      <div className="font-['Inter:Medium',_sans-serif] font-medium leading-[0] not-italic relative shrink-0 text-[#ffffff] text-[16px] text-left w-full">
+      <div className="font-[.Didact_Gothic,_sans-serif] font-medium leading-[0] not-italic relative shrink-0 text-[#ffffff] text-[17px] text-left w-full">
         <p className="block leading-[normal]">Contat Information</p>
       </div>
       <Container2 />
@@ -817,7 +817,7 @@ function Bottom() {
       data-name="bottom"
     >
       <div
-        className="font-['Inter:Medium',_sans-serif] font-medium leading-[0] min-w-full not-italic relative shrink-0 text-[#ffffff] text-[14px] text-left"
+        className="font-[.Didact_Gothic,_sans-serif] font-medium leading-[0] min-w-full not-italic relative shrink-0 text-[#ffffff] text-[17px] text-left"
         style={{ width: "min-content" }}
       >
         <p className="block leading-[normal]">Follow me</p>
@@ -853,7 +853,7 @@ function InputBox() {
       />
       <div className="flex flex-row items-center justify-center relative size-full">
         <div className="box-border content-stretch flex flex-row gap-2.5 items-center justify-center px-3 py-2 relative w-full">
-          <div className="basis-0 font-['Inter:Regular',_sans-serif] font-normal grow leading-[0] min-h-px min-w-px not-italic relative shrink-0 text-[14px] text-gray-600 text-left">
+          <div className="basis-0 font-[.Didact_Gothic,_sans-serif] font-normal grow leading-[0] min-h-px min-w-px not-italic relative shrink-0 text-[17px] text-gray-600 text-left">
             <p className="block leading-[22px]">your@email.com</p>
           </div>
         </div>
@@ -871,7 +871,7 @@ function InputBox1() {
       />
       <div className="flex flex-row items-center justify-center relative size-full">
         <div className="box-border content-stretch flex flex-row gap-2.5 items-center justify-center px-3 py-2 relative w-full">
-          <div className="basis-0 font-['Inter:Regular',_sans-serif] font-normal grow leading-[0] min-h-px min-w-px not-italic relative shrink-0 text-[14px] text-gray-600 text-left">
+          <div className="basis-0 font-[.Didact_Gothic,_sans-serif] font-normal grow leading-[0] min-h-px min-w-px not-italic relative shrink-0 text-[17px] text-gray-600 text-left">
             <p className="block leading-[22px]">Tell me about your project</p>
           </div>
         </div>
@@ -885,7 +885,7 @@ function Button() {
     <div className="bg-[#e6ff02] relative rounded-[999px] shrink-0 w-full" data-name="button">
       <div className="flex flex-row items-center justify-center relative size-full">
         <div className="box-border content-stretch flex flex-row gap-2.5 items-center justify-center px-3 py-2 relative w-full">
-          <div className="font-['Inter:Medium',_sans-serif] font-medium leading-[0] not-italic relative shrink-0 text-[16px] text-left text-neutral-950 text-nowrap">
+          <div className="font-[.Didact_Gothic,_sans-serif] font-medium leading-[0] not-italic relative shrink-0 text-[17px] text-left text-neutral-950 text-nowrap">
             <p className="block leading-[22px] whitespace-pre">Send Message</p>
           </div>
         </div>
@@ -903,14 +903,14 @@ function Right() {
       />
       <div className="relative size-full">
         <div className="box-border content-stretch flex flex-col gap-3 items-start justify-start p-[12px] relative w-full">
-          <div className="font-['Inter:Medium',_sans-serif] font-medium leading-[0] not-italic relative shrink-0 text-[#ffffff] text-[16px] text-left w-full">
+          <div className="font-[.Didact_Gothic,_sans-serif] font-medium leading-[0] not-italic relative shrink-0 text-[#ffffff] text-[17px] text-left w-full">
             <p className="block leading-[normal]">Quick Messages</p>
           </div>
-          <div className="font-['Inter:Regular',_sans-serif] font-normal leading-[0] not-italic relative shrink-0 text-[14px] text-gray-300 text-left w-full">
+          <div className="font-[.Didact_Gothic,_sans-serif] font-normal leading-[0] not-italic relative shrink-0 text-[17px] text-gray-300 text-left w-full">
             <p className="block leading-[22px]">Your email</p>
           </div>
           <InputBox />
-          <div className="font-['Inter:Regular',_sans-serif] font-normal leading-[0] not-italic relative shrink-0 text-[14px] text-gray-300 text-left w-full">
+          <div className="font-[.Didact_Gothic,_sans-serif] font-normal leading-[0] not-italic relative shrink-0 text-[17px] text-gray-300 text-left w-full">
             <p className="block leading-[22px]">Your message</p>
           </div>
           <InputBox1 />
@@ -948,7 +948,7 @@ function Container4() {
           <circle cx="3" cy="3" fill="var(--fill-0, #16A149)" id="Ellipse 30" r="3" />
         </svg>
       </div>
-      <div className="font-['Inter:Regular',_sans-serif] font-normal leading-[0] not-italic relative shrink-0 text-[14px] text-gray-300 text-left text-nowrap">
+      <div className="font-[.Didact_Gothic,_sans-serif] font-normal leading-[0] not-italic relative shrink-0 text-[17px] text-gray-300 text-left text-nowrap">
         <p className="block leading-[22px] whitespace-pre">Available for new projects</p>
       </div>
     </div>
@@ -988,11 +988,11 @@ function Container7() {
       />
       <div className="relative size-full">
         <div className="box-border content-stretch flex flex-col gap-6 items-start justify-start px-5 py-6 relative w-full">
-          <div className="font-['Inter:Bold',_sans-serif] font-bold leading-[0] not-italic relative shrink-0 text-[#ffffff] text-[20px] text-left text-nowrap">
+          <div className="font-[.Didact_Gothic,_sans-serif] font-bold leading-[0] not-italic relative shrink-0 text-[#ffffff] text-[21px] text-left text-nowrap">
             <p className="block leading-[normal] whitespace-pre">Get in Touch</p>
           </div>
           <div
-            className="font-['Inter:Regular',_sans-serif] font-normal leading-[0] min-w-full not-italic relative shrink-0 text-[14px] text-gray-300 text-left"
+            className="font-[.Didact_Gothic,_sans-serif] font-normal leading-[0] min-w-full not-italic relative shrink-0 text-[17px] text-gray-300 text-left"
             style={{ width: "min-content" }}
           >
             <p className="block leading-[22px]">Let’s discuss your next project or collaboration</p>
@@ -1041,12 +1041,12 @@ function Container8() {
         <img className="block max-w-none size-full" height="61" src={imgAvatar.src} width="61" />
       </div>
       <div
-        className="font-['Inter:Regular',_sans-serif] font-normal leading-[0] min-w-full not-italic relative shrink-0 text-[14px] text-gray-300 text-left"
+        className="font-[.Didact_Gothic,_sans-serif] font-normal leading-[0] min-w-full not-italic relative shrink-0 text-[17px] text-gray-300 text-left"
         style={{ width: "min-content" }}
       >
         <p className="leading-[22px]">
           <span>{`Product designer focused on data-dense UX, calm interfaces, and evidence-base workflows. I translate messy `}</span>
-          <span className="font-['Inter:Regular',_sans-serif] font-normal not-italic text-[#ffffff]">
+          <span className="font-[.Didact_Gothic,_sans-serif] font-normal not-italic text-[#ffffff]">
             problems into systems that scale.
           </span>
         </p>
@@ -1064,10 +1064,10 @@ function Experience() {
       />
       <div className="relative size-full">
         <div className="box-border content-stretch flex flex-col gap-3 items-start justify-start leading-[0] not-italic p-[12px] relative text-left w-full">
-          <div className="font-['Inter:Regular',_sans-serif] font-normal relative shrink-0 text-[14px] text-gray-300 w-full">
+          <div className="font-[.Didact_Gothic,_sans-serif] font-normal relative shrink-0 text-[17px] text-gray-300 w-full">
             <p className="block leading-[22px]">Years of experience</p>
           </div>
-          <div className="font-['Inter:Semi_Bold',_sans-serif] font-semibold relative shrink-0 text-[#ffffff] text-[24px] w-full">
+          <div className="font-[.Didact_Gothic,_sans-serif] font-semibold relative shrink-0 text-[#ffffff] text-[25px] w-full">
             <p className="block leading-[normal]">4</p>
           </div>
         </div>
@@ -1085,11 +1085,11 @@ function Client() {
       />
       <div className="relative size-full">
         <div className="box-border content-stretch flex flex-col gap-3 items-start justify-start leading-[0] not-italic p-[12px] relative text-left w-full">
-          <div className="font-['Inter:Regular',_sans-serif] font-normal leading-[22px] relative shrink-0 text-[14px] text-gray-300 w-full">
+          <div className="font-[.Didact_Gothic,_sans-serif] font-normal leading-[22px] relative shrink-0 text-[17px] text-gray-300 w-full">
             <p className="block mb-0">Clients</p>
             <p className="block">shipped</p>
           </div>
-          <div className="font-['Inter:Semi_Bold',_sans-serif] font-semibold relative shrink-0 text-[#ffffff] text-[24px] w-full">
+          <div className="font-[.Didact_Gothic,_sans-serif] font-semibold relative shrink-0 text-[#ffffff] text-[25px] w-full">
             <p className="block leading-[normal]">{`>10`}</p>
           </div>
         </div>
@@ -1118,7 +1118,7 @@ function Industries() {
         className="absolute border border-[#252525] border-solid inset-0 pointer-events-none rounded-[20px]"
       />
       <div className="relative size-full">
-        <div className="box-border content-stretch flex flex-col font-['Inter:Regular',_sans-serif] font-normal gap-3 items-start justify-start leading-[0] not-italic p-[12px] relative text-[14px] text-left w-full">
+        <div className="box-border content-stretch flex flex-col font-[.Didact_Gothic,_sans-serif] font-normal gap-3 items-start justify-start leading-[0] not-italic p-[12px] relative text-[17px] text-left w-full">
           <div className="relative shrink-0 text-gray-300 w-full">
             <p className="block leading-[22px]">Industries</p>
           </div>
@@ -1141,7 +1141,7 @@ function Tooling() {
         className="absolute border border-[#252525] border-solid inset-0 pointer-events-none rounded-[20px]"
       />
       <div className="relative size-full">
-        <div className="box-border content-stretch flex flex-col font-['Inter:Regular',_sans-serif] font-normal gap-3 items-start justify-start leading-[0] not-italic p-[12px] relative text-[14px] text-left w-full">
+        <div className="box-border content-stretch flex flex-col font-[.Didact_Gothic,_sans-serif] font-normal gap-3 items-start justify-start leading-[0] not-italic p-[12px] relative text-[17px] text-left w-full">
           <div className="relative shrink-0 text-gray-300 w-full">
             <p className="block leading-[22px]">Tooling</p>
           </div>
@@ -1184,7 +1184,7 @@ function Container9() {
 function Frame226() {
   return (
     <div className="bg-[#1f1f1f] box-border content-stretch flex flex-row gap-2.5 items-center justify-center px-3 py-1 relative rounded-[999px] shrink-0">
-      <div className="font-['Inter:Regular',_sans-serif] font-normal leading-[0] not-italic relative shrink-0 text-[14px] text-gray-300 text-left text-nowrap">
+      <div className="font-[.Didact_Gothic,_sans-serif] font-normal leading-[0] not-italic relative shrink-0 text-[17px] text-gray-300 text-left text-nowrap">
         <p className="block leading-[22px] whitespace-pre">Design Systems</p>
       </div>
     </div>
@@ -1194,7 +1194,7 @@ function Frame226() {
 function Frame229() {
   return (
     <div className="bg-[#1f1f1f] box-border content-stretch flex flex-row gap-2.5 items-center justify-center px-3 py-1 relative rounded-[999px] shrink-0">
-      <div className="font-['Inter:Regular',_sans-serif] font-normal leading-[0] not-italic relative shrink-0 text-[14px] text-gray-300 text-left text-nowrap">
+      <div className="font-[.Didact_Gothic,_sans-serif] font-normal leading-[0] not-italic relative shrink-0 text-[17px] text-gray-300 text-left text-nowrap">
         <p className="block leading-[22px] whitespace-pre">User Research</p>
       </div>
     </div>
@@ -1204,7 +1204,7 @@ function Frame229() {
 function Frame231() {
   return (
     <div className="bg-[#1f1f1f] box-border content-stretch flex flex-row gap-2.5 items-center justify-center px-3 py-1 relative rounded-[999px] shrink-0">
-      <div className="font-['Inter:Regular',_sans-serif] font-normal leading-[0] not-italic relative shrink-0 text-[14px] text-gray-300 text-left text-nowrap">
+      <div className="font-[.Didact_Gothic,_sans-serif] font-normal leading-[0] not-italic relative shrink-0 text-[17px] text-gray-300 text-left text-nowrap">
         <p className="block leading-[22px] whitespace-pre">Prototyping</p>
       </div>
     </div>
@@ -1214,7 +1214,7 @@ function Frame231() {
 function Frame232() {
   return (
     <div className="bg-[#1f1f1f] box-border content-stretch flex flex-row gap-2.5 items-center justify-center px-3 py-1 relative rounded-[999px] shrink-0">
-      <div className="font-['Inter:Regular',_sans-serif] font-normal leading-[0] not-italic relative shrink-0 text-[14px] text-gray-300 text-left text-nowrap">
+      <div className="font-[.Didact_Gothic,_sans-serif] font-normal leading-[0] not-italic relative shrink-0 text-[17px] text-gray-300 text-left text-nowrap">
         <p className="block leading-[22px] whitespace-pre">A/B tesing</p>
       </div>
     </div>
@@ -1224,7 +1224,7 @@ function Frame232() {
 function Frame233() {
   return (
     <div className="bg-[#1f1f1f] box-border content-stretch flex flex-row gap-2.5 items-center justify-center px-3 py-1 relative rounded-[999px] shrink-0">
-      <div className="font-['Inter:Regular',_sans-serif] font-normal leading-[0] not-italic relative shrink-0 text-[14px] text-gray-300 text-left text-nowrap">
+      <div className="font-[.Didact_Gothic,_sans-serif] font-normal leading-[0] not-italic relative shrink-0 text-[17px] text-gray-300 text-left text-nowrap">
         <p className="block leading-[22px] whitespace-pre">Data Viz</p>
       </div>
     </div>
@@ -1252,7 +1252,7 @@ function Contact2() {
     <div className="bg-[#e6ff02] relative rounded-[999px] shrink-0 w-full" data-name="contact">
       <div className="flex flex-row items-center justify-center relative size-full">
         <div className="box-border content-stretch flex flex-row gap-2.5 items-center justify-center px-3 py-2 relative w-full">
-          <div className="font-['Inter:Medium',_sans-serif] font-medium leading-[0] not-italic relative shrink-0 text-[16px] text-left text-neutral-950 text-nowrap">
+          <div className="font-[.Didact_Gothic,_sans-serif] font-medium leading-[0] not-italic relative shrink-0 text-[17px] text-left text-neutral-950 text-nowrap">
             <p className="block leading-[22px] whitespace-pre">Contact</p>
           </div>
         </div>
@@ -1302,7 +1302,7 @@ function Linkedin() {
       />
       <div className="flex flex-row items-center justify-center relative size-full">
         <div className="box-border content-stretch flex flex-row gap-2.5 items-center justify-center px-3 py-2 relative w-full">
-          <div className="font-['Inter:Medium',_sans-serif] font-medium leading-[0] not-italic relative shrink-0 text-[#ffffff] text-[16px] text-left text-nowrap">
+          <div className="font-[.Didact_Gothic,_sans-serif] font-medium leading-[0] not-italic relative shrink-0 text-[#ffffff] text-[17px] text-left text-nowrap">
             <p className="block leading-[22px] whitespace-pre">LinkedIn</p>
           </div>
           <Logo1 />
@@ -1334,7 +1334,7 @@ function About() {
         aria-hidden="true"
         className="absolute border border-[#252525] border-solid inset-0 pointer-events-none rounded-xl"
       />
-      <div className="font-['Inter:Bold',_sans-serif] font-bold leading-[0] not-italic relative shrink-0 text-[#ffffff] text-[20px] text-left text-nowrap">
+      <div className="font-[.Didact_Gothic,_sans-serif] font-bold leading-[0] not-italic relative shrink-0 text-[#ffffff] text-[21px] text-left text-nowrap">
         <p className="block leading-[normal] whitespace-pre">About Hailey</p>
       </div>
       <Container8 />
@@ -1372,13 +1372,13 @@ function Image3() {
 function Title6() {
   return (
     <div
-      className="box-border content-stretch flex flex-col font-['Inter:Regular',_sans-serif] font-normal items-start justify-start leading-[0] not-italic p-0 relative shrink-0 text-left"
+      className="box-border content-stretch flex flex-col font-[.Didact_Gothic,_sans-serif] font-normal items-start justify-start leading-[0] not-italic p-0 relative shrink-0 text-left"
       data-name="title"
     >
-      <div className="relative shrink-0 text-[#ffffff] text-[16px] text-nowrap">
+      <div className="relative shrink-0 text-[#ffffff] text-[17px] text-nowrap">
         <p className="block leading-[normal] whitespace-pre">{`B2B Procurement AI Agent `}</p>
       </div>
-      <div className="min-w-full relative shrink-0 text-[14px] text-gray-300" style={{ width: "min-content" }}>
+      <div className="min-w-full relative shrink-0 text-[17px] text-gray-300" style={{ width: "min-content" }}>
         <p className="block leading-[22px]">Airframe</p>
       </div>
     </div>
@@ -1481,11 +1481,11 @@ function Progress() {
       className="box-border content-stretch flex flex-row gap-1.5 items-center justify-start leading-[0] p-0 relative shrink-0 w-full"
       data-name="progress"
     >
-      <div className="font-['Inter:Regular',_sans-serif] font-normal not-italic relative shrink-0 text-[#ffffff] text-[14px] text-left text-nowrap">
+      <div className="font-[.Didact_Gothic,_sans-serif] font-normal not-italic relative shrink-0 text-[#ffffff] text-[17px] text-left text-nowrap">
         <p className="block leading-[normal] whitespace-pre">0:00</p>
       </div>
       <Bar />
-      <div className="font-['Inter:Regular',_sans-serif] font-normal not-italic relative shrink-0 text-[#ffffff] text-[14px] text-left text-nowrap">
+      <div className="font-[.Didact_Gothic,_sans-serif] font-normal not-italic relative shrink-0 text-[#ffffff] text-[17px] text-left text-nowrap">
         <p className="block leading-[normal] whitespace-pre">9:34</p>
       </div>
     </div>
@@ -1549,7 +1549,7 @@ function Container11() {
         aria-hidden="true"
         className="absolute border border-[#e6ff02] border-solid inset-0 pointer-events-none rounded-[999px]"
       />
-      <div className="font-['Inter:Medium',_sans-serif] font-medium leading-[0] not-italic relative shrink-0 text-[#e6ff02] text-[14px] text-left text-nowrap">
+      <div className="font-[.Didact_Gothic,_sans-serif] font-medium leading-[0] not-italic relative shrink-0 text-[#e6ff02] text-[17px] text-left text-nowrap">
         <p className="block leading-[22px] whitespace-pre">Open Project</p>
       </div>
       <Icon1 />

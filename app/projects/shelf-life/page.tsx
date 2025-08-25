@@ -40,10 +40,10 @@ function Sidebar({ navigation, onNavigateToSection }: {
           />
         </motion.div>
         <div className="box-border content-stretch flex flex-col gap-1 items-start justify-start leading-[0] not-italic p-0 relative shrink-0 text-left w-[132px]">
-          <div className="font-['Inter:Semi_Bold',_sans-serif] font-semibold relative shrink-0 text-[#ffffff] text-[16px] w-full">
+          <div className="font-[.Didact_Gothic,_sans-serif] font-semibold relative shrink-0 text-[#ffffff] text-[17px] w-full">
             <p className="block leading-[normal]">Hailey Hsu</p>
           </div>
-          <div className="font-['Inter:Regular',_sans-serif] font-normal relative shrink-0 text-[14px] text-gray-400 w-full">
+          <div className="font-[.Didact_Gothic,_sans-serif] font-normal relative shrink-0 text-[17px] text-gray-400 w-full">
             <p className="block leading-[normal]">Product Designer</p>
           </div>
         </div>
@@ -71,7 +71,7 @@ function Sidebar({ navigation, onNavigateToSection }: {
               </g>
             </svg>
           </div>
-          <div className={`font-['Inter:Medium',_sans-serif] font-medium leading-[0] not-italic relative shrink-0 text-[14px] text-left text-nowrap ${
+          <div className={`font-[.Didact_Gothic,_sans-serif] font-medium leading-[0] not-italic relative shrink-0 text-[17px] text-left text-nowrap ${
             navigation.activeSection === 'overview' ? 'text-[#e6ff02]' : 'text-gray-300'
           }`}>
             <p className="block leading-[normal] whitespace-pre">Overview</p>
@@ -99,7 +99,7 @@ function Sidebar({ navigation, onNavigateToSection }: {
               </g>
             </svg>
           </div>
-          <div className={`font-['Inter:Medium',_sans-serif] font-medium leading-[0] not-italic relative shrink-0 text-[14px] text-left text-nowrap ${
+          <div className={`font-[.Didact_Gothic,_sans-serif] font-medium leading-[0] not-italic relative shrink-0 text-[17px] text-left text-nowrap ${
             navigation.activeSection === 'process' ? 'text-[#e6ff02]' : 'text-gray-300'
           }`}>
             <p className="block leading-[normal] whitespace-pre">Process</p>
@@ -127,7 +127,7 @@ function Sidebar({ navigation, onNavigateToSection }: {
               </g>
             </svg>
           </div>
-          <div className={`font-['Inter:Medium',_sans-serif] font-medium leading-[0] not-italic relative shrink-0 text-[14px] text-left text-nowrap ${
+          <div className={`font-[.Didact_Gothic,_sans-serif] font-medium leading-[0] not-italic relative shrink-0 text-[17px] text-left text-nowrap ${
             navigation.activeSection === 'results' ? 'text-[#e6ff02]' : 'text-gray-300'
           }`}>
             <p className="block leading-[normal] whitespace-pre">Results</p>
@@ -136,7 +136,7 @@ function Sidebar({ navigation, onNavigateToSection }: {
       </div>
 
       <div className="box-border content-stretch flex flex-col gap-3 items-start justify-start p-0 relative shrink-0 w-full">
-        <div className="font-['Inter:Medium',_sans-serif] font-medium leading-[0] min-w-full not-italic relative shrink-0 text-[#ffffff] text-[14px] text-left">
+        <div className="font-[.Didact_Gothic,_sans-serif] font-medium leading-[0] min-w-full not-italic relative shrink-0 text-[#ffffff] text-[17px] text-left">
           <p className="block leading-[normal]">Follow me</p>
         </div>
         <div className="flex flex-row gap-3 items-center">
@@ -371,13 +371,13 @@ const MediaPlayer = forwardRef<{ playAirframeAudio: () => void }>((props, ref) =
               style={{ backgroundImage: `url('${currentProject.image}')` }}
             />
             <div
-              className="box-border content-stretch flex flex-col font-['Inter:Regular',_sans-serif] font-normal items-start justify-start leading-[0] not-italic p-0 relative shrink-0 text-left"
+              className="box-border content-stretch flex flex-col font-[.Didact_Gothic,_sans-serif] font-normal items-start justify-start leading-[0] not-italic p-0 relative shrink-0 text-left"
               data-name="title"
             >
-              <div className="relative shrink-0 text-[#ffffff] text-[14px] text-nowrap">
+              <div className="relative shrink-0 text-[#ffffff] text-[17px] text-nowrap">
                 <p className="block leading-[normal] whitespace-pre">{currentProject.title}</p>
               </div>
-              <div className="min-w-full relative shrink-0 text-[12px] text-gray-300" style={{ width: "min-content" }}>
+              <div className="min-w-full relative shrink-0 text-[13px] text-gray-300" style={{ width: "min-content" }}>
                 <p className="block leading-[18px]">{currentProject.subtitle}</p>
               </div>
             </div>
@@ -458,7 +458,7 @@ const MediaPlayer = forwardRef<{ playAirframeAudio: () => void }>((props, ref) =
               className="box-border content-stretch flex flex-row gap-1.5 items-center justify-start p-0 relative shrink-0"
               data-name="progress"
             >
-              <div className="font-['Inter:Regular',_sans-serif] font-normal leading-[0] not-italic relative shrink-0 text-[#ffffff] text-[14px] text-left text-nowrap">
+              <div className="font-[.Didact_Gothic,_sans-serif] font-normal leading-[0] not-italic relative shrink-0 text-[#ffffff] text-[17px] text-left text-nowrap">
                 <p className="block leading-[normal] whitespace-pre">{formatTime(mediaState.currentTime)}</p>
               </div>
               <div
@@ -512,7 +512,7 @@ const MediaPlayer = forwardRef<{ playAirframeAudio: () => void }>((props, ref) =
                   </svg>
                 </div>
               </div>
-              <div className="font-['Inter:Regular',_sans-serif] font-normal leading-[0] not-italic relative shrink-0 text-[#ffffff] text-[14px] text-left text-nowrap">
+              <div className="font-[.Didact_Gothic,_sans-serif] font-normal leading-[0] not-italic relative shrink-0 text-[#ffffff] text-[17px] text-left text-nowrap">
                 <p className="block leading-[normal] whitespace-pre">{formatTime(mediaState.duration)}</p>
               </div>
             </div>
@@ -528,7 +528,7 @@ const MediaPlayer = forwardRef<{ playAirframeAudio: () => void }>((props, ref) =
               whileTap={{ scale: 0.95 }}
               onClick={() => toast.info("Opening project details...")}
             >
-              <div className="font-['Inter:Medium',_sans-serif] font-medium leading-[0] not-italic relative shrink-0 text-[#e6ff02] text-[14px] text-left text-nowrap">
+              <div className="font-[.Didact_Gothic,_sans-serif] font-medium leading-[0] not-italic relative shrink-0 text-[#e6ff02] text-[17px] text-left text-nowrap">
                 <p className="block leading-[22px] whitespace-pre">Open Project</p>
               </div>
               <div className="relative shrink-0 size-[18px]" data-name="icon">
@@ -615,7 +615,7 @@ export default function ShelfLifeProject() {
                   aria-hidden="true"
                   className="absolute border border-[#252525] border-solid inset-0 pointer-events-none rounded-xl"
                 />
-                <div className="font-['Inter:Bold',_sans-serif] font-bold leading-[0] not-italic relative shrink-0 text-[#ffffff] text-[20px] text-left text-nowrap">
+                <div className="font-[.Didact_Gothic,_sans-serif] font-bold leading-[0] not-italic relative shrink-0 text-[#ffffff] text-[21px] text-left text-nowrap">
                   <p className="block leading-[normal] whitespace-pre">About Hailey</p>
                 </div>
                 <div className="box-border content-stretch flex flex-col gap-4 items-start justify-start p-0 relative shrink-0 w-full">
@@ -626,15 +626,15 @@ export default function ShelfLifeProject() {
                       style={{ backgroundImage: `url('${imgAvatar}')` }}
                     />
                     <div className="box-border content-stretch flex flex-col gap-1 items-start justify-start p-0 relative shrink-0 w-full">
-                      <div className="font-['Inter:Semi_Bold',_sans-serif] font-semibold leading-[0] not-italic relative shrink-0 text-[#ffffff] text-[16px] text-left w-full">
+                      <div className="font-[.Didact_Gothic,_sans-serif] font-semibold leading-[0] not-italic relative shrink-0 text-[#ffffff] text-[17px] text-left w-full">
                         <p className="block leading-[normal]">Hailey Hsu</p>
                       </div>
-                      <div className="font-['Inter:Regular',_sans-serif] font-normal leading-[0] not-italic relative shrink-0 text-[14px] text-gray-300 text-left w-full">
+                      <div className="font-[.Didact_Gothic,_sans-serif] font-normal leading-[0] not-italic relative shrink-0 text-[17px] text-gray-300 text-left w-full">
                         <p className="block leading-[normal]">Product Designer</p>
                       </div>
                     </div>
                   </div>
-                  <div className="font-['Inter:Regular',_sans-serif] font-normal leading-[0] min-w-full not-italic relative shrink-0 text-[14px] text-gray-300 text-left">
+                  <div className="font-[.Didact_Gothic,_sans-serif] font-normal leading-[0] min-w-full not-italic relative shrink-0 text-[17px] text-gray-300 text-left">
                     <p className="block leading-[22px]">Passionate about creating user-centered digital experiences that solve real problems.</p>
                   </div>
                 </div>
@@ -656,7 +656,7 @@ export default function ShelfLifeProject() {
                           </g>
                         </svg>
                       </div>
-                      <div className="font-['Inter:Regular',_sans-serif] font-normal leading-[0] not-italic relative shrink-0 text-[14px] text-gray-300 text-left">
+                      <div className="font-[.Didact_Gothic,_sans-serif] font-normal leading-[0] not-italic relative shrink-0 text-[17px] text-gray-300 text-left">
                         <p className="block leading-[normal] whitespace-pre">New York, NY</p>
                       </div>
                     </div>
@@ -672,7 +672,7 @@ export default function ShelfLifeProject() {
                           className="bg-[#1f1f1f] box-border content-stretch flex flex-row gap-2.5 items-center justify-center px-3 py-1 relative rounded-[999px] shrink-0 hover:bg-white/10 transition-colors duration-200"
                           whileHover={{ scale: 1.05 }}
                         >
-                          <div className="font-['Inter:Regular',_sans-serif] font-normal leading-[0] not-italic relative shrink-0 text-[14px] text-gray-300 text-left text-nowrap">
+                          <div className="font-[.Didact_Gothic,_sans-serif] font-normal leading-[0] not-italic relative shrink-0 text-[17px] text-gray-300 text-left text-nowrap">
                             <p className="block leading-[22px] whitespace-pre">{tag}</p>
                           </div>
                         </motion.div>
@@ -694,7 +694,7 @@ export default function ShelfLifeProject() {
                   >
                     <div className="flex flex-row items-center justify-center relative size-full">
                       <div className="box-border content-stretch flex flex-row gap-2.5 items-center justify-center px-3 py-2 relative w-full">
-                        <div className="font-['Inter:Medium',_sans-serif] font-medium leading-[0] not-italic relative shrink-0 text-[16px] text-left text-neutral-950 text-nowrap">
+                        <div className="font-[.Didact_Gothic,_sans-serif] font-medium leading-[0] not-italic relative shrink-0 text-[17px] text-left text-neutral-950 text-nowrap">
                           <p className="block leading-[22px] whitespace-pre">Back to Home</p>
                         </div>
                       </div>
@@ -711,7 +711,7 @@ export default function ShelfLifeProject() {
                   >
                     <div className="flex flex-row items-center justify-center relative size-full">
                       <div className="box-border content-stretch flex flex-row gap-2.5 items-center justify-center px-3 py-2 relative w-full">
-                        <div className="font-['Inter:Medium',_sans-serif] font-medium leading-[0] not-italic relative shrink-0 text-[#ffffff] text-[16px] text-left text-nowrap">
+                        <div className="font-[.Didact_Gothic,_sans-serif] font-medium leading-[0] not-italic relative shrink-0 text-[#ffffff] text-[17px] text-left text-nowrap">
                           <p className="block leading-[22px] whitespace-pre">LinkedIn</p>
                         </div>
                         <div className="relative shrink-0 size-[18px]" data-name="logo">
