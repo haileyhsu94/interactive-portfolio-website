@@ -26,7 +26,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="dark">
-      <body className={`${didactGothic.variable} ${oregano.variable} bg-black`}>{children}</body>
+      <body className={`${didactGothic.variable} ${oregano.variable} ${didactGothic.className} bg-black`}>{children}</body>
     </html>
   )
 } 

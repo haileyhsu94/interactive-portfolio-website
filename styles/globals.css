@@ -39,6 +39,8 @@
 
 :root {
   --font-size: 14px;
+  --font-didact-gothic: 'Didact Gothic', sans-serif;
+  --font-oregano: 'Oregano', cursive;
   --background: hsl(0 0% 100%);
   --foreground: hsl(240 10% 3.9%);
   --card: hsl(0 0% 100%);
@@ -89,7 +91,7 @@
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-didact-gothic;
   }
 }
 

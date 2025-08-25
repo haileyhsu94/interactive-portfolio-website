@@ -18,8 +18,8 @@ module.exports = {
     },
     extend: {
       fontFamily: {
-        'didact-gothic': ['Didact Gothic', 'sans-serif'],
-        'oregano': ['Oregano', 'cursive'],
+        'didact-gothic': ['var(--font-didact-gothic)', 'sans-serif'],
+        'oregano': ['var(--font-oregano)', 'cursive'],
       },
       colors: {
         border: "hsl(var(--border))",
