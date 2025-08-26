@@ -1691,9 +1691,15 @@ export default function InteractiveHome({ onNavigateToProject, openProjects, onC
                   style={{ width: "min-content" }}
                 >
                   <p className="leading-[22px]">
-                    <span>{`Product designer focused on data-dense UX, calm interfaces, and evidence-base workflows. I translate messy `}</span>
-                    <span className="font-didact-gothic font-normal not-italic text-[#ffffff]">
-                      problems into systems that scale.
+                    <span>{`I design products that make complex information `}</span>
+                    <span className="font-didact-gothic font-normal not-italic text-[#F4915C]">
+                      easy to use.
+                    </span>
+                  </p>
+                  <p className="leading-[22px]">
+                    <span>{`I focus on practical workflows and turn messy problems into systems that `}</span>
+                    <span className="font-didact-gothic font-normal not-italic text-[#F4915C]">
+                      grow smoothly.
                     </span>
                   </p>
                 </div>
@@ -1744,24 +1750,6 @@ export default function InteractiveHome({ onNavigateToProject, openProjects, onC
                       className="box-border content-stretch flex flex-row gap-4 items-start justify-start p-0 relative shrink-0 w-full"
                       data-name="bottom"
                     >
-                      <div className="basis-0 grow min-h-px min-w-px relative rounded-[20px] shrink-0" data-name="industries">
-                        <div
-                          aria-hidden="true"
-                          className="absolute border border-[#252525] border-solid inset-0 pointer-events-none rounded-[20px]"
-                        />
-                        <div className="relative size-full">
-                          <div className="box-border content-stretch flex flex-col font-didact-gothic font-normal gap-3 items-start justify-start leading-[0] not-italic p-[12px] relative text-[14px] text-left w-full">
-                            <div className="relative shrink-0 text-gray-300 w-full">
-                              <p className="block leading-[22px]">Industries</p>
-                            </div>
-                            <div className="leading-[22px] relative shrink-0 text-[#ffffff] w-full">
-                              <p className="block mb-0">Procurement,</p>
-                              <p className="block mb-0">Ops,</p>
-                              <p className="block">Edtech</p>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
                       <div className="basis-0 grow min-h-px min-w-px relative rounded-[20px] shrink-0" data-name="tooling">
                         <div
                           aria-hidden="true"
@@ -1773,9 +1761,7 @@ export default function InteractiveHome({ onNavigateToProject, openProjects, onC
                               <p className="block leading-[22px]">Tooling</p>
                             </div>
                             <div className="leading-[22px] relative shrink-0 text-[#ffffff] w-full">
-                              <p className="block mb-0">{`Figma, `}</p>
-                              <p className="block mb-0">{`Framer, `}</p>
-                              <p className="block">Cursor</p>
+                              <p className="block">Figma, Framer, Cursor, html, css, javascript</p>
                             </div>
                           </div>
                         </div>
@@ -1794,7 +1780,7 @@ export default function InteractiveHome({ onNavigateToProject, openProjects, onC
                         className="bg-[#1f1f1f] box-border content-stretch flex flex-row gap-2.5 items-center justify-center px-3 py-1 relative rounded-[999px] shrink-0 hover:bg-white/10 transition-colors duration-200"
                         whileHover={{ scale: 1.05 }}
                       >
-                        <div className="font-didact-gothic font-normal leading-[0] not-italic relative shrink-0 text-[14px] text-gray-300 text-left text-nowrap">
+                        <div className="font-oregano font-normal leading-[0] not-italic relative shrink-0 text-[14px] text-gray-300 text-left text-nowrap">
                           <p className="block leading-[22px] whitespace-pre">{tag}</p>
                         </div>
                       </motion.div>
