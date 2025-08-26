@@ -1015,8 +1015,9 @@ export default function AirframePage({ onBack, openProjects, onCloseProject, onN
             <Separator className="mb-20" />
 
             {/* HMW #1 */}
-            <div className="bg-[#282727] p-16 mb-16">
-              <div className="flex gap-16 items-center">
+            <div className="bg-[#1a1a1a] p-16 mb-16">
+              <div className="flex gap-16 items-center justify-center">
+                
                 <div className="w-96">
                   <h3 className="text-2xl font-bold mb-5">HMW #1</h3>
                   <p className="text-lg text-gray-400 leading-relaxed">
@@ -1028,7 +1029,13 @@ export default function AirframePage({ onBack, openProjects, onCloseProject, onN
                     buyers a variety of RFP templates to help them get started more efficiently.
                   </p>
                 </div>
-                <div className="w-[417px] h-80 bg-white rounded" />
+                <div className="w-[417px] h-80 rounded overflow-hidden">
+                  <img 
+                    src="/images/airframe/HMW1.png" 
+                    alt="HMW1 - Collaborative RFP Tool" 
+                    className="w-full h-full object-cover"
+                  />
+                </div>
               </div>
             </div>
 
@@ -1040,8 +1047,9 @@ export default function AirframePage({ onBack, openProjects, onCloseProject, onN
             </div>
 
             {/* HMW #2 */}
-            <div className="bg-[#282727] p-16 mb-16">
-              <div className="flex gap-16 items-center">
+            <div className="bg-[#1a1a1a] p-16 mb-16">
+              <div className="flex gap-16 items-center justify-center">
+                
                 <div className="w-96">
                   <h3 className="text-2xl font-bold mb-5">HMW #2</h3>
                   <p className="text-lg text-gray-400 leading-relaxed">
@@ -1054,7 +1062,13 @@ export default function AirframePage({ onBack, openProjects, onCloseProject, onN
                     perspectives to provide deeper insights.
                   </p>
                 </div>
-                <div className="w-[417px] h-80 bg-white rounded" />
+                <div className="w-[417px] h-80 rounded overflow-hidden">
+                  <img 
+                    src="/images/airframe/HMW2.png" 
+                    alt="HMW2 - Market Guides and Vendor Evaluation" 
+                    className="w-full h-full object-cover"
+                  />
+                </div>
               </div>
             </div>
 
@@ -1066,8 +1080,9 @@ export default function AirframePage({ onBack, openProjects, onCloseProject, onN
             </div>
 
             {/* HMW #3 */}
-            <div className="bg-[#282727] p-16 mb-16">
-              <div className="flex gap-16 items-center">
+            <div className="bg-[#1a1a1a] p-16 mb-16">
+              <div className="flex gap-16 items-center justify-center">
+                
                 <div className="w-96">
                   <h3 className="text-2xl font-bold mb-5">HMW #3</h3>
                   <p className="text-lg text-gray-400 leading-relaxed">
@@ -1079,7 +1094,13 @@ export default function AirframePage({ onBack, openProjects, onCloseProject, onN
                     unknown. This inspired us to create a network where verified individuals can share their insights based on genuine experiences.
                   </p>
                 </div>
-                <div className="w-[417px] h-80 bg-white rounded" />
+                <div className="w-[417px] h-80 rounded overflow-hidden">
+                  <img 
+                    src="/images/airframe/HMW3.png" 
+                    alt="HMW3 - Trusted Advice Network" 
+                    className="w-full h-full object-cover"
+                  />
+                </div>
               </div>
             </div>
 
