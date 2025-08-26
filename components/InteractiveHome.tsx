@@ -7,6 +7,7 @@ import { toast } from "sonner";
 import WaveformCanvas from "./ui/WaveformCanvas";
 import { generateRealisticWaveform, chunkWaveformData } from "../utils/audioUtils";
 import MobileHome from './MobileHome';
+import MobileAbout from './MobileAbout';
 
 // Image paths - replace with your actual images
 // Add your images to the public/images/ folder and update these paths
@@ -1538,6 +1539,7 @@ export default function InteractiveHome({ onNavigateToProject, openProjects, onC
   const deviceType = useDeviceType();
   const [navigation, setNavigation] = useState<NavigationState>({ activeSection: 'featured' });
   const [isNavigating, setIsNavigating] = useState(false);
+  const [isAboutPage, setIsAboutPage] = useState(false);
   const featuredRef = useRef<HTMLDivElement>(null);
   const moreRef = useRef<HTMLDivElement>(null);
   const contactRef = useRef<HTMLDivElement>(null);
@@ -1570,6 +1572,16 @@ export default function InteractiveHome({ onNavigateToProject, openProjects, onC
     setTimeout(() => {
       setIsNavigating(false);
     }, 1000);
+  };
+
+  // Handle about page navigation
+  const handleNavigateToAbout = () => {
+    setIsAboutPage(true);
+  };
+
+  // Handle back to home
+  const handleBackToHome = () => {
+    setIsAboutPage(false);
   };
 
 
@@ -1627,7 +1639,10 @@ export default function InteractiveHome({ onNavigateToProject, openProjects, onC
   // Render mobile version on mobile devices
   if (deviceType === "mobile") {
     console.log('Rendering MobileHome component');
-    return <MobileHome onNavigateToProject={onNavigateToProject} />;
+    if (isAboutPage) {
+      return <MobileAbout onNavigateToProject={onNavigateToProject} onBackToHome={handleBackToHome} />;
+    }
+    return <MobileHome onNavigateToProject={onNavigateToProject} onNavigateToAbout={handleNavigateToAbout} />;
   }
 
   // Render tablet version on tablet devices

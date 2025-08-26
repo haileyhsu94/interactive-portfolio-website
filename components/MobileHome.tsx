@@ -18,7 +18,13 @@ interface FormData {
   message: string;
 }
 
-export default function MobileHome({ onNavigateToProject }: { onNavigateToProject?: (project: string) => void }) {
+export default function MobileHome({ 
+  onNavigateToProject, 
+  onNavigateToAbout 
+}: { 
+  onNavigateToProject?: (project: string) => void;
+  onNavigateToAbout?: () => void;
+}) {
   const [formData, setFormData] = useState<FormData>({ email: '', message: '' });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -465,6 +471,7 @@ export default function MobileHome({ onNavigateToProject }: { onNavigateToProjec
         isOpen={isMenuOpen} 
         onClose={() => setIsMenuOpen(false)}
         onNavigateToProject={onNavigateToProject}
+        onNavigateToAbout={onNavigateToAbout}
       />
     </div>
   );

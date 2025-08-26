@@ -1,0 +1,373 @@
+"use client";
+
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { toast } from "sonner";
+import MobileMenu from './MobileMenu';
+
+// Image paths - using local images from your project
+const imgAvatar = "/images/avatar.png";
+const imgLogo = "/images/logo.png";
+const imgMenuIcon = "/images/menu-icon.png";
+
+interface FormData {
+  email: string;
+  message: string;
+}
+
+export default function MobileAbout({ 
+  onNavigateToProject, 
+  onBackToHome 
+}: { 
+  onNavigateToProject?: (project: string) => void;
+  onBackToHome?: () => void;
+}) {
+  const [formData, setFormData] = useState<FormData>({ email: '', message: '' });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!formData.email || !formData.message) {
+      toast.error("Please fill in all fields");
+      return;
+    }
+
+    setIsSubmitting(true);
+    
+    try {
+      const formspreeEndpoint = 'https://formspree.io/f/xkgzevdg';
+      
+      const response = await fetch(formspreeEndpoint, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email: formData.email,
+          message: formData.message,
+          subject: 'New Portfolio Contact Form Submission'
+        }),
+      });
+
+      if (response.ok) {
+        toast.success("Message sent successfully!");
+        setFormData({ email: '', message: '' });
+      } else {
+        throw new Error('Failed to send message');
+      }
+    } catch (error) {
+      console.error('Form submission error:', error);
+      toast.error("Failed to send message. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  return (
+    <div className="bg-black relative size-full min-h-screen" data-name="mobile/about">
+      {/* Header */}
+      <div className="absolute bg-black box-border content-stretch flex items-center justify-between left-0 p-[16px] right-0 top-0">
+        <div className="content-stretch flex gap-[7px] items-center justify-start relative shrink-0" data-name="header">
+          <div className="box-border content-stretch flex gap-2.5 items-center justify-center relative shrink-0 size-9" data-name="logo">
+            <img 
+              src={imgLogo} 
+              alt="Hailey Hsu Logo" 
+              className="block max-w-none size-full"
+            />
+          </div>
+          <div className="content-stretch flex flex-col gap-1 items-start justify-start relative shrink-0 w-[132px]" data-name="name and title">
+            <div className="font-didact-gothic leading-[0] not-italic relative shrink-0 text-[#ffffff] text-[17px] text-nowrap">
+              <p className="leading-[normal] whitespace-pre">Hailey Hsu</p>
+            </div>
+          </div>
+        </div>
+        <button 
+          className="bg-[rgba(31,31,31,0.1)] box-border content-stretch cursor-pointer flex gap-2.5 items-center justify-start overflow-visible relative rounded-[6px] shrink-0"
+          onClick={() => setIsMenuOpen(true)}
+        >
+          <div className="relative shrink-0 w-[31.5px] h-[31.5px]" data-name="icon">
+            <img 
+              src={imgMenuIcon} 
+              alt="Menu" 
+              className="block max-w-none w-full h-full"
+            />
+          </div>
+        </button>
+      </div>
+
+      {/* Main Content */}
+      <div className="absolute box-border content-stretch flex flex-col gap-[60px] items-center justify-start left-[9px] pb-0 pt-[60px] px-0 right-2 top-[72px] overflow-y-auto h-[calc(100vh-72px)]">
+        {/* Hero Section */}
+        <div className="box-border content-stretch flex flex-col gap-10 items-center justify-start px-[21px] py-5 relative shrink-0 w-full">
+          {/* Avatar */}
+          <div className="relative shrink-0 size-[61px]" data-name="avatar">
+            <img 
+              src={imgAvatar} 
+              alt="Hailey Hsu" 
+              className="block max-w-none size-full rounded-full"
+              height="61" 
+              width="61" 
+            />
+          </div>
+
+          {/* Hero Text */}
+          <div className="content-stretch flex gap-2.5 items-center justify-center relative shrink-0 w-full">
+            <div className="basis-0 font-didact-gothic grow leading-[0] min-h-px min-w-px not-italic relative shrink-0 text-[20px] text-gray-300">
+              <p className="leading-[28px] mb-0">
+                <span className="">I design products that make complex information </span>
+                <span className="text-[#f4915c]">easy to use</span>
+                <span className="">.</span>
+              </p>
+              <p className="leading-[28px]">
+                <span className="">I focus on practical workflows and turn messy problems into systems that </span>
+                <span className="text-[#f4915c]">grow smoothly</span>
+                <span className="">.</span>
+              </p>
+            </div>
+          </div>
+
+          {/* Tags */}
+          <div className="content-start flex flex-wrap gap-2 items-start justify-start relative shrink-0 w-full" data-name="tags">
+            <div className="bg-[#333333] box-border content-stretch flex gap-2.5 items-center justify-center px-3 py-1 relative rounded-[999px] shrink-0">
+              <div className="font-oregano leading-[0] not-italic relative shrink-0 text-[15px] text-gray-300 text-nowrap tracking-[0.15px]">
+                <p className="leading-[22px] whitespace-pre">Design Systems</p>
+              </div>
+            </div>
+            <div className="bg-[#333333] box-border content-stretch flex gap-2.5 items-center justify-center px-3 py-1 relative rounded-[999px] shrink-0">
+              <div className="font-oregano leading-[0] not-italic relative shrink-0 text-[15px] text-gray-300 text-nowrap tracking-[0.15px]">
+                <p className="leading-[22px] whitespace-pre">User Research</p>
+              </div>
+            </div>
+            <div className="bg-[#333333] box-border content-stretch flex gap-2.5 items-center justify-center px-3 py-1 relative rounded-[999px] shrink-0">
+              <div className="font-oregano leading-[0] not-italic relative shrink-0 text-[15px] text-gray-300 text-nowrap tracking-[0.15px]">
+                <p className="leading-[22px] whitespace-pre">Prototyping</p>
+              </div>
+            </div>
+            <div className="bg-[#333333] box-border content-stretch flex gap-2.5 items-center justify-center px-3 py-1 relative rounded-[999px] shrink-0">
+              <div className="font-oregano leading-[0] not-italic relative shrink-0 text-[15px] text-gray-300 text-nowrap tracking-[0.15px]">
+                <p className="leading-[22px] whitespace-pre">A/B Testing</p>
+              </div>
+            </div>
+            <div className="bg-[#333333] box-border content-stretch flex gap-2.5 items-center justify-center px-3 py-1 relative rounded-[999px] shrink-0">
+              <div className="font-oregano leading-[0] not-italic relative shrink-0 text-[15px] text-gray-300 text-nowrap tracking-[0.15px]">
+                <p className="leading-[22px] whitespace-pre">Data Viz</p>
+              </div>
+            </div>
+          </div>
+
+          {/* Stats Container */}
+          <div className="box-border content-stretch flex flex-col gap-4 items-start justify-start px-1 py-0 relative shrink-0 w-full" data-name="container">
+            <div className="content-stretch flex gap-4 items-stretch justify-start relative shrink-0 w-full" data-name="top">
+              <div className="flex-1 box-border content-stretch flex flex-col gap-3 items-start justify-start min-h-px min-w-px p-[12px] relative rounded-[20px] shrink-0" data-name="experience">
+                <div aria-hidden="true" className="absolute border border-[#252525] border-solid inset-0 pointer-events-none rounded-[20px]" />
+                <div className="font-didact-gothic leading-[18px] not-italic relative shrink-0 text-[15px] text-gray-300 w-full">
+                  <p className="mb-0">Years of</p>
+                  <p className="">experience</p>
+                </div>
+                <div className="font-didact-gothic leading-[0] not-italic relative shrink-0 text-[#ffffff] text-[25px] w-full">
+                  <p className="leading-[normal]">4</p>
+                </div>
+              </div>
+              <div className="flex-1 box-border content-stretch flex flex-col gap-3 items-start justify-start min-h-px min-w-px p-[12px] relative rounded-[20px] shrink-0" data-name="client">
+                <div aria-hidden="true" className="absolute border border-[#252525] border-solid inset-0 pointer-events-none rounded-[20px]" />
+                <div className="font-didact-gothic leading-[18px] not-italic relative shrink-0 text-[16px] text-gray-300 w-full">
+                  <p className="mb-0">Clients</p>
+                  <p className="">shipped</p>
+                </div>
+                <div className="font-didact-gothic leading-[0] not-italic relative shrink-0 text-[#ffffff] text-[25px] w-full">
+                  <p className="leading-[normal]">{`>10`}</p>
+                </div>
+              </div>
+            </div>
+            <div className="content-stretch flex gap-4 items-start justify-start relative shrink-0 w-full" data-name="bottom">
+              <div className="basis-0 box-border content-stretch flex flex-col gap-3 grow items-start justify-start min-h-px min-w-px p-[12px] relative rounded-[20px] shrink-0" data-name="tooling">
+                <div aria-hidden="true" className="absolute border border-[#252525] border-solid inset-0 pointer-events-none rounded-[20px]" />
+                <div className="font-didact-gothic leading-[0] not-italic relative shrink-0 text-[15px] text-gray-300 w-full">
+                  <p className="leading-[18px]">Tooling</p>
+                </div>
+                <div className="font-didact-gothic leading-[0] not-italic relative shrink-0 text-[#ffffff] text-[15px] w-full">
+                  <p className="leading-[22px]">Figma, Framer, Cursor, html, css, javascript</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Contact Section */}
+        <div className="box-border content-stretch flex flex-col gap-4 items-start justify-start pb-8 pt-0 px-4 relative shrink-0 w-full" data-name="contact">
+          <div className="content-stretch flex flex-col gap-4 items-start justify-start relative rounded-[12px] shrink-0 w-full" data-name="container">
+            <div className="content-stretch flex flex-col font-didact-gothic gap-1 items-start justify-start leading-[0] not-italic relative shrink-0 w-full">
+              <div className="relative shrink-0 text-[#ffffff] text-[21px] text-nowrap">
+                <p className="leading-[normal] whitespace-pre">Get in Touch</p>
+              </div>
+              <div className="min-w-full relative shrink-0 text-[16px] text-gray-300" style={{ width: "min-content" }}>
+                <p className="leading-[22px]">Let&apos;s discuss your next project or collaboration</p>
+              </div>
+            </div>
+            <div className="content-stretch flex flex-col gap-6 items-start justify-start relative shrink-0 w-full" data-name="container">
+              <div className="content-stretch flex flex-col gap-4 items-start justify-start relative shrink-0 w-full" data-name="container">
+                <div className="bg-[#121212] box-border content-stretch flex flex-col gap-5 items-start justify-start p-[16px] relative rounded-[16px] shrink-0 w-full" data-name="left">
+                  <div aria-hidden="true" className="absolute border border-[#252525] border-solid inset-0 pointer-events-none rounded-[16px]" />
+                  <div className="content-stretch flex flex-col gap-3 items-start justify-start relative shrink-0 w-full" data-name="top">
+                    <div className="font-didact-gothic leading-[0] not-italic relative shrink-0 text-[#ffffff] text-[16px] w-full">
+                      <p className="leading-[normal]">Contact Information</p>
+                    </div>
+                    <div className="content-stretch flex flex-col gap-1 items-start justify-start relative shrink-0 w-full" data-name="container">
+                      <div className="box-border content-stretch flex gap-3 items-center justify-start px-3 py-2 relative shrink-0 w-full" data-name="mail">
+                        <div className="relative shrink-0 size-[18px]" data-name="Frame">
+                          <svg width="18" height="19" viewBox="0 0 18 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M16.5 5.4248L9.75675 9.72005C9.52792 9.85296 9.268 9.92297 9.00337 9.92297C8.73875 9.92297 8.47883 9.85296 8.25 9.72005L1.5 5.4248" stroke="#E6FF02" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
+                            <path d="M15 3.1748H3C2.17157 3.1748 1.5 3.84638 1.5 4.6748V13.6748C1.5 14.5032 2.17157 15.1748 3 15.1748H15C15.8284 15.1748 16.5 14.5032 16.5 13.6748V4.6748C16.5 3.84638 15.8284 3.1748 15 3.1748Z" stroke="#E6FF02" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
+                          </svg>
+                        </div>
+                        <div className="font-didact-gothic leading-[0] not-italic relative shrink-0 text-[14px] text-gray-300 text-nowrap">
+                          <p className="leading-[normal] whitespace-pre">haileyhsu94@gmail.com</p>
+                        </div>
+                      </div>
+                      <div className="box-border content-stretch flex gap-3 items-center justify-start px-3 py-2 relative shrink-0 w-full" data-name="phone">
+                        <div className="relative shrink-0 size-[18px]" data-name="Frame">
+                          <svg width="18" height="19" viewBox="0 0 18 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M10.374 12.6008C10.5289 12.6719 10.7034 12.6882 10.8688 12.6469C11.0341 12.6056 11.1805 12.5092 11.2838 12.3736L11.55 12.0248C11.6897 11.8385 11.8709 11.6873 12.0792 11.5832C12.2875 11.479 12.5171 11.4248 12.75 11.4248H15C15.3978 11.4248 15.7794 11.5828 16.0607 11.8641C16.342 12.1454 16.5 12.527 16.5 12.9248V15.1748C16.5 15.5726 16.342 15.9542 16.0607 16.2355C15.7794 16.5168 15.3978 16.6748 15 16.6748C11.4196 16.6748 7.9858 15.2525 5.45406 12.7207C2.92232 10.189 1.5 6.75523 1.5 3.1748C1.5 2.77698 1.65804 2.39545 1.93934 2.11414C2.22064 1.83284 2.60218 1.6748 3 1.6748H5.25C5.64782 1.6748 6.02936 1.83284 6.31066 2.11414C6.59196 2.39545 6.75 2.77698 6.75 3.1748V5.4248C6.75 5.65767 6.69578 5.88734 6.59164 6.09563C6.4875 6.30391 6.33629 6.48508 6.15 6.6248L5.799 6.88805C5.66131 6.99319 5.56426 7.14274 5.52434 7.31132C5.48442 7.47989 5.50409 7.65709 5.58 7.8128C6.60501 9.8947 8.29082 11.5784 10.374 12.6008Z" stroke="#E6FF02" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
+                          </svg>
+                        </div>
+                        <div className="font-didact-gothic leading-[0] not-italic relative shrink-0 text-[14px] text-gray-300 text-nowrap">
+                          <p className="leading-[normal] whitespace-pre">+1 (347) 806-1403</p>
+                        </div>
+                      </div>
+                      <div className="box-border content-stretch flex gap-3 items-center justify-start px-3 py-2 relative shrink-0" data-name="location">
+                        <div className="relative shrink-0 size-[18px]" data-name="Frame">
+                          <svg width="18" height="19" viewBox="0 0 18 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M15 7.6748C15 11.4196 10.8457 15.3196 9.45075 16.5241C9.32079 16.6218 9.1626 16.6746 9 16.6746C8.8374 16.6746 8.67921 16.6218 8.54925 16.5241C7.15425 15.3196 3 11.4196 3 7.6748C3 6.08351 3.63214 4.55738 4.75736 3.43216C5.88258 2.30695 7.4087 1.6748 9 1.6748C10.5913 1.6748 12.1174 2.30695 13.2426 3.43216C14.3679 4.55738 15 6.08351 15 7.6748Z" stroke="#E6FF02" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
+                            <path d="M9 9.9248C10.2426 9.9248 11.25 8.91745 11.25 7.6748C11.25 6.43216 10.2426 5.4248 9 5.4248C7.75736 5.4248 6.75 6.43216 6.75 7.6748C6.75 8.91745 7.75736 9.9248 9 9.9248Z" stroke="#E6FF02" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
+                          </svg>
+                        </div>
+                        <div className="font-didact-gothic leading-[0] not-italic relative shrink-0 text-[14px] text-gray-300 text-nowrap">
+                          <p className="leading-[normal] whitespace-pre">New York, NY</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="content-stretch flex flex-col gap-3 items-start justify-start relative shrink-0 w-full" data-name="bottom">
+                    <div className="font-didact-gothic leading-[0] min-w-full not-italic relative shrink-0 text-[#ffffff] text-[16px]" style={{ width: "min-content" }}>
+                      <p className="leading-[normal]">Follow me</p>
+                    </div>
+                    <div className="box-border content-stretch flex gap-3 items-center justify-start px-3 py-0 relative shrink-0" data-name="logos">
+                      <a
+                        href="https://www.linkedin.com/in/yu-hsuan-hsu"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="relative shrink-0 size-5 cursor-pointer hover:opacity-80 transition-opacity duration-200"
+                        data-name="Frame"
+                      >
+                        <svg width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M13.3333 6.8418C14.6593 6.8418 15.9311 7.36858 16.8688 8.30626C17.8065 9.24394 18.3333 10.5157 18.3333 11.8418V17.6751H14.9999V11.8418C14.9999 11.3998 14.8243 10.9758 14.5118 10.6633C14.1992 10.3507 13.7753 10.1751 13.3333 10.1751C12.8912 10.1751 12.4673 10.3507 12.1547 10.6633C11.8422 10.9758 11.6666 11.3998 11.6666 11.8418V17.6751H8.33325V11.8418C8.33325 10.5157 8.86004 9.24394 9.79772 8.30626C10.7354 7.36858 12.0072 6.8418 13.3333 6.8418Z" stroke="#D1D5DB" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
+                          <path d="M5.00008 7.6748H1.66675V17.6748H5.00008V7.6748Z" stroke="#D1D5DB" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
+                          <path d="M3.33341 5.17513C4.25389 5.17513 5.00008 4.42894 5.00008 3.50846C5.00008 2.58799 4.25389 1.8418 3.33341 1.8418C2.41294 1.8418 1.66675 2.58799 1.66675 3.50846C1.66675 4.42894 2.41294 5.17513 3.33341 5.17513Z" stroke="#D1D5DB" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
+                        </svg>
+                      </a>
+                      <a
+                        href="https://medium.com/@haileyhsu."
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="h-4 relative shrink-0 w-[104px] cursor-pointer hover:opacity-80 transition-opacity duration-200"
+                        data-name="medium_logo.svg"
+                      >
+                        <svg width="104" height="17" viewBox="0 0 104 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <g clipPath="url(#clip0_3000_1867)">
+                            <path d="M15.7 8.25876C15.7 12.5541 12.2197 16.0363 7.92642 16.0363C3.63312 16.0363 0.153076 12.5552 0.153076 8.25876C0.153076 3.96236 3.63338 0.481445 7.92642 0.481445C12.2195 0.481445 15.7 3.96341 15.7 8.25876Z" fill="#D1D5DB"/>
+                            <path d="M24.2277 8.25868C24.2277 12.3022 22.4874 15.5799 20.3409 15.5799C18.1944 15.5799 16.4541 12.3012 16.4541 8.25868C16.4541 4.21619 18.1944 0.9375 20.3409 0.9375C22.4874 0.9375 24.2277 4.21619 24.2277 8.25868Z" fill="#D1D5DB"/>
+                            <path d="M27.7158 8.2587C27.7158 11.8815 27.1037 14.8182 26.3487 14.8182C25.5938 14.8182 24.9817 11.8805 24.9817 8.2587C24.9817 4.63692 25.5938 1.69922 26.349 1.69922C27.1042 1.69922 27.7158 4.63614 27.7158 8.2587Z" fill="#D1D5DB"/>
+                            <path d="M49.1695 1.15597L49.1911 1.15125V0.98469H44.7704L40.6655 10.5716L36.5607 0.98469H31.7967V1.15125L31.8181 1.15597C32.6251 1.33695 33.0347 1.60685 33.0347 2.58023V13.9756C33.0347 14.949 32.6235 15.2189 31.8165 15.3999L31.7952 15.4046V15.5717H35.0273V15.4051L35.006 15.4004C34.199 15.2194 33.7894 14.9495 33.7894 13.9762V3.24121L39.0625 15.5717H39.3616L44.7883 2.89735V14.2576C44.7191 15.0264 44.3132 15.2638 43.5825 15.4277L43.5609 15.4327V15.5979H49.1911V15.4327L49.1695 15.4277C48.4381 15.2638 48.0223 15.0264 47.9532 14.2576L47.9495 2.58023H47.9532C47.9532 1.60685 48.3628 1.33695 49.1695 1.15597ZM51.7413 8.70482C51.8334 6.65735 52.5733 5.17957 53.8149 5.15413C54.1979 5.16043 54.5192 5.28528 54.7689 5.52554C55.2994 6.03728 55.5489 7.10666 55.5103 8.70482H51.7413ZM51.6856 9.28187H58.2845V9.25433C58.2658 7.68869 57.8094 6.47085 56.9294 5.63466C56.1686 4.91203 55.0423 4.51439 53.8593 4.51439H53.8329C53.2189 4.51439 52.4658 4.66233 51.93 4.93039C51.32 5.21105 50.782 5.63072 50.3344 6.18154C49.6137 7.06889 49.1772 8.2681 49.071 9.61577C49.0676 9.65617 49.0647 9.69656 49.0618 9.73695C49.0589 9.77734 49.0571 9.81354 49.0552 9.8521C49.0515 9.92423 49.0486 9.99662 49.047 10.0693C49.0444 10.1857 49.0436 10.303 49.0457 10.421C49.1172 13.4733 50.7765 15.9127 53.7236 15.9127C56.3104 15.9127 57.8168 14.0336 58.1924 11.5114L58.0026 11.445C57.3427 12.8006 56.1576 13.6221 54.8087 13.5219C52.9673 13.385 51.5567 11.5297 51.6848 9.28239M65.7456 13.4183C65.5292 13.9284 65.0775 14.2091 64.4723 14.2091C63.867 14.2091 63.3138 13.7962 62.9207 13.0461C62.4984 12.2408 62.2761 11.1025 62.2761 9.754C62.2761 6.94744 63.1546 5.1321 64.5143 5.1321C65.0836 5.1321 65.5318 5.41276 65.7456 5.90246V13.4183ZM70.1231 15.419C69.3162 15.2294 68.9065 14.9469 68.9065 13.924V0.313477L64.004 1.74876V1.92449L64.0341 1.92213C64.7104 1.86784 65.1691 1.96069 65.4355 2.20515C65.644 2.39662 65.7456 2.69039 65.7456 3.10377V4.96974C65.2623 4.66312 64.6874 4.51387 63.9898 4.51387C62.5749 4.51387 61.2818 5.10587 60.3492 6.18102C59.3771 7.30154 58.8631 8.83282 58.8631 10.6088C58.8629 13.7808 60.4342 15.9127 62.7729 15.9127C64.141 15.9127 65.2417 15.1678 65.7456 13.9114V15.5979H70.1445V15.4232L70.1231 15.419ZM74.3277 2.16449C74.3277 1.17407 73.5762 0.42705 72.5793 0.42705C71.587 0.42705 70.8107 1.19033 70.8107 2.16449C70.8107 3.13866 71.5878 3.90194 72.5793 3.90194C73.5762 3.90194 74.3277 3.15492 74.3277 2.16449ZM75.4849 15.419C74.678 15.2294 74.2683 14.9469 74.2683 13.924H74.2649V4.54613L69.8658 5.80121V5.97171L69.8922 5.97407C70.844 6.05826 71.1045 6.38403 71.1045 7.48935V15.5979H75.5074V15.4232L75.4849 15.419ZM86.7573 15.419C85.9504 15.2294 85.5407 14.9469 85.5407 13.924V4.54613L81.3522 5.75977V5.93079L81.377 5.93341C82.1552 6.01472 82.3801 6.35912 82.3801 7.46941V13.3973C82.1206 13.9074 81.6339 14.2104 81.0442 14.2309C80.0879 14.2309 79.5613 13.589 79.5613 12.4236V4.54639L75.1621 5.80148V5.97171L75.1885 5.97407C76.1403 6.058 76.4011 6.38377 76.4011 7.48935V12.5063C76.3989 12.8565 76.4295 13.2062 76.4927 13.5507L76.5719 13.893C76.9444 15.2192 77.9202 15.9127 79.4491 15.9127C80.7441 15.9127 81.8791 15.1161 82.379 13.8697V15.6008H86.7782V15.4261L86.7573 15.419ZM103.847 15.5979V15.423L103.825 15.418C102.95 15.2173 102.609 14.8391 102.609 14.069V7.69C102.609 5.70102 101.485 4.51387 99.6016 4.51387C98.229 4.51387 97.0715 5.30207 96.626 6.52987C96.272 5.22889 95.2534 4.51387 93.7472 4.51387C92.4243 4.51387 91.3874 5.20764 90.9427 6.37958V4.54692L86.5435 5.75059V5.92213L86.5699 5.92449C87.5104 6.00738 87.7823 6.34259 87.7823 7.41958V15.5979H91.8868V15.4232L91.8652 15.418C91.1668 15.2549 90.9413 14.9574 90.9413 14.1941V6.88239C91.1261 6.45354 91.4986 5.94548 92.2347 5.94548C93.1491 5.94548 93.6126 6.57499 93.6126 7.81512V15.5979H97.7182V15.4232L97.6966 15.418C96.9981 15.2549 96.7727 14.9574 96.7727 14.1941V7.68921C96.7745 7.44599 96.7551 7.20307 96.7147 6.96318C96.9105 6.49708 97.3043 5.94548 98.0706 5.94548C98.9979 5.94548 99.4485 6.55689 99.4485 7.81512V15.5979H103.847Z" fill="#D1D5DB"/>
+                          </g>
+                          <defs>
+                            <clipPath id="clip0_3000_1867">
+                              <rect width="104" height="16" fill="white" transform="translate(0 0.174805)"/>
+                            </clipPath>
+                          </defs>
+                        </svg>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+                <div className="bg-[#121212] box-border content-stretch flex flex-col gap-3 items-start justify-start p-[16px] relative rounded-[16px] shrink-0 w-full" data-name="right">
+                  <div aria-hidden="true" className="absolute border border-[#252525] border-solid inset-0 pointer-events-none rounded-[16px]" />
+                  <div className="font-didact-gothic leading-[0] not-italic relative shrink-0 text-[#ffffff] text-[16px] w-full">
+                    <p className="leading-[normal]">Quick Messages</p>
+                  </div>
+                  <form onSubmit={handleSubmit} className="content-stretch flex flex-col gap-1 items-start justify-start relative shrink-0 w-full">
+                    <div className="font-didact-gothic leading-[0] not-italic relative shrink-0 text-[14px] text-gray-300 w-full">
+                      <p className="leading-[22px]">Your email</p>
+                    </div>
+                    <div className="bg-[#1f1f1f] box-border content-stretch flex gap-2.5 items-center justify-center px-3 py-2 relative rounded-[12px] shrink-0 w-full" data-name="input box">
+                      <div aria-hidden="true" className="absolute border border-gray-600 border-solid inset-0 pointer-events-none rounded-[12px]" />
+                      <input
+                        type="email"
+                        value={formData.email}
+                        onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                        placeholder="your@email.com"
+                        className="basis-0 font-didact-gothic grow leading-[0] min-h-px min-w-px not-italic relative shrink-0 text-[14px] text-gray-300 bg-transparent border-none outline-none placeholder-gray-600"
+                        required
+                      />
+                    </div>
+                    <div className="content-stretch flex flex-col gap-1 items-start justify-start relative shrink-0 w-full">
+                      <div className="font-didact-gothic leading-[0] not-italic relative shrink-0 text-[14px] text-gray-300 w-full">
+                        <p className="leading-[22px]">Message</p>
+                      </div>
+                      <div className="bg-[#1f1f1f] box-border content-stretch flex gap-2.5 h-[60px] items-start justify-center px-3 py-2 relative rounded-[12px] shrink-0 w-full" data-name="input box">
+                        <div aria-hidden="true" className="absolute border border-gray-600 border-solid inset-0 pointer-events-none rounded-[12px]" />
+                        <textarea
+                          value={formData.message}
+                          onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                          placeholder="Tell me about your project"
+                          rows={3}
+                          className="basis-0 font-didact-gothic grow min-h-px min-w-px not-italic relative shrink-0 text-[14px] text-gray-300 bg-transparent border-none outline-none placeholder-gray-600 resize-none leading-relaxed"
+                          required
+                        />
+                      </div>
+                    </div>
+                    <button
+                      type="submit"
+                      disabled={isSubmitting}
+                      className="bg-[#e6ff02] box-border content-stretch flex gap-2.5 items-center justify-center px-3 py-2 relative rounded-[999px] shrink-0 w-full mt-2"
+                      data-name="button"
+                    >
+                      <div className="font-didact-gothic leading-[0] not-italic relative shrink-0 text-[16px] text-neutral-950 text-nowrap">
+                        <p className="leading-[22px] whitespace-pre">
+                          {isSubmitting ? 'Sending...' : 'Send Message'}
+                        </p>
+                      </div>
+                    </button>
+                  </form>
+                </div>
+              </div>
+              <div className="content-stretch flex gap-4 items-center justify-center relative shrink-0 w-full" data-name="container">
+                <div className="bg-[#252525] box-border content-stretch flex gap-2 items-center justify-center px-4 py-2 relative rounded-[99px] shrink-0" data-name="container">
+                  <div aria-hidden="true" className="absolute border border-[#252525] border-solid inset-0 pointer-events-none rounded-[99px]" />
+                  <div className="relative shrink-0 size-1.5">
+                    <div className="w-1.5 h-1.5 bg-green-500 rounded-full"></div>
+                  </div>
+                  <div className="font-didact-gothic font-normal leading-[0] not-italic relative shrink-0 text-[14px] text-gray-300 text-nowrap">
+                    <p className="leading-[22px] whitespace-pre">Available for new projects</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Mobile Menu Overlay */}
+      <AnimatePresence>
+        {isMenuOpen && (
+          <MobileMenu 
+            isOpen={isMenuOpen} 
+            onClose={() => setIsMenuOpen(false)}
+            onNavigateToProject={onNavigateToProject}
+            onBackToHome={onBackToHome}
+          />
+        )}
+      </AnimatePresence>
+    </div>
+  );
+}

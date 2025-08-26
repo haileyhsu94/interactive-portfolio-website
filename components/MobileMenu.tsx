@@ -6,9 +6,11 @@ interface MobileMenuProps {
   isOpen: boolean;
   onClose: () => void;
   onNavigateToProject?: (project: string) => void;
+  onBackToHome?: () => void;
+  onNavigateToAbout?: () => void;
 }
 
-export default function MobileMenu({ isOpen, onClose, onNavigateToProject }: MobileMenuProps) {
+export default function MobileMenu({ isOpen, onClose, onNavigateToProject, onBackToHome, onNavigateToAbout }: MobileMenuProps) {
   return (
     <motion.div
       initial={{ x: "100%" }}
@@ -42,11 +44,26 @@ export default function MobileMenu({ isOpen, onClose, onNavigateToProject }: Mob
             <button 
               onClick={() => {
                 onClose();
-                // Navigate to projects section
-                const projectsSection = document.querySelector('[data-name="more"]');
-                if (projectsSection) {
-                  projectsSection.scrollIntoView({ behavior: 'smooth' });
-                }
+                // Add delay to allow slide-out animation to complete
+                setTimeout(() => {
+                  if (onBackToHome) {
+                    // If we're on about page, go back to home and scroll to featured
+                    onBackToHome();
+                    // Scroll to featured section after a short delay to ensure navigation completes
+                    setTimeout(() => {
+                      const featuredSection = document.querySelector('[data-name="featured"]');
+                      if (featuredSection) {
+                        featuredSection.scrollIntoView({ behavior: 'smooth' });
+                      }
+                    }, 100);
+                  } else {
+                    // Navigate to featured projects section (for mobile home page)
+                    const featuredSection = document.querySelector('[data-name="featured"]');
+                    if (featuredSection) {
+                      featuredSection.scrollIntoView({ behavior: 'smooth' });
+                    }
+                  }
+                }, 300); // Wait for slide-out animation to complete
               }}
               className="box-border content-stretch flex gap-2.5 items-center justify-center px-2.5 py-3 relative shrink-0 w-full hover:bg-gray-100 transition-colors duration-200" 
               data-name="button" 
@@ -59,13 +76,25 @@ export default function MobileMenu({ isOpen, onClose, onNavigateToProject }: Mob
             <button 
               onClick={() => {
                 onClose();
-                // Navigate to contact section
-                const contactSection = document.querySelector('[data-name="contact"]');
-                if (contactSection) {
-                  contactSection.scrollIntoView({ behavior: 'smooth' });
-                }
+                // Add delay to allow slide-out animation to complete
+                setTimeout(() => {
+                  if (onBackToHome) {
+                    // If we're on about page, clicking "About" does nothing (we're already here)
+                    return;
+                  } else if (onNavigateToAbout) {
+                    onNavigateToAbout();
+                  } else {
+                    // Navigate to contact section (fallback for desktop)
+                    const contactSection = document.querySelector('[data-name="contact"]');
+                    if (contactSection) {
+                      contactSection.scrollIntoView({ behavior: 'smooth' });
+                    }
+                  }
+                }, 300); // Wait for slide-out animation to complete
               }}
-              className="box-border content-stretch flex gap-2.5 items-center justify-center px-2.5 py-3 relative shrink-0 w-full hover:bg-gray-100 transition-colors duration-200" 
+              className={`box-border content-stretch flex gap-2.5 items-center justify-center px-2.5 py-3 relative shrink-0 w-full transition-colors duration-200 ${
+                onBackToHome ? 'opacity-50 cursor-default' : 'hover:bg-gray-100 cursor-pointer'
+              }`}
               data-name="button" 
               data-node-id="3005:2105"
             >
