@@ -615,21 +615,21 @@ function FeaturedSection({ sectionRef, mediaPlayerRef, onNavigateToProject }: { 
 function MoreProjectsSection({ sectionRef, onNavigateToProject }: { sectionRef: RefObject<HTMLDivElement>; onNavigateToProject?: (project: string) => void }) {
   const projects = [
     { 
-      id: "airframe",
-      title: "AI-powered B2B Procurement Platform", 
-      description: "Streamlining B2B software procurement with AI & collaboration tools. Led user flow analysis and designed 250+ screens.",
-      tags: ["AI", "B2B", "Procurement"],
+      id: "eatsy",
+      title: "Customizable Reservation Platform", 
+      description: "Reduced booking setup steps by 40% in prototype testing. Designed fully customizable workflows, giving small restaurants control over reservations and payments.",
+      tags: ["Cost Reduction", "Prototype Testing"],
       image: imgImage 
     },
     { 
-      id: "sat-prep",
+      id: "brainbox",
       title: "AI-Powered SAT Preparation Platform", 
       description: "Conducted heatmap analysis and A/B testing to refine practice setup flow and dashboard layout. Led 4 designers to deliver 100+ screens, integrating AI tutor and performance reports.",
       tags: ["Heatmap Analysis", "A/B Testing"],
       image: imgImage1 
     },
     { 
-      id: "food-waste",
+      id: "shelf-life",
       title: "Dual-Interface Platform to Reduce Food Waste", 
       description: "Expected to help restaurants clear surplus food faster by streamlining listing to under 2 minutes. Delivered mobile B2C app & tablet B2B dashboard with 50+ unique screens.",
       tags: ["Dual Interface", "Sustainability"],
