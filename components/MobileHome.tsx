@@ -88,7 +88,7 @@ export default function MobileHome({ onNavigateToProject }: { onNavigateToProjec
       {/* Main Content */}
       <div className="absolute box-border content-stretch flex flex-col gap-8 items-center justify-start left-0 pb-0 pt-[80px] px-4 right-0 top-[72px] overflow-y-auto h-[calc(100vh-72px)]" data-node-id="3000:1756">
         {/* Hero Section */}
-        <div className="box-border content-stretch flex flex-col gap-10 items-center justify-start px-8 py-5 relative shrink-0 w-full" data-node-id="3000:1755">
+        <div className="box-border content-stretch flex flex-col gap-10 items-center justify-start px-8 py-5 relative shrink-0 w-full mb-20" data-node-id="3000:1755">
           <div className="content-stretch flex gap-2.5 items-center justify-center relative shrink-0 w-full" data-node-id="3000:1704">
             <div className="basis-0 font-didact-gothic font-normal grow leading-[0] min-h-px min-w-px not-italic relative shrink-0 text-[20px] text-gray-300" data-node-id="2997:1688">
               <p className="font-didact-gothic leading-[28px] mb-0">
@@ -103,29 +103,29 @@ export default function MobileHome({ onNavigateToProject }: { onNavigateToProjec
           </div>
           <div className="content-start flex flex-wrap gap-2 items-start justify-start relative shrink-0 w-full" data-name="tags" data-node-id="3000:1705">
             <div className="bg-[#333333] box-border content-stretch flex gap-2.5 items-center justify-center px-3 py-1 relative rounded-[999px] shrink-0" data-node-id="3000:1706">
-              <div className="font-oregano leading-[0] not-italic relative shrink-0 text-[15px] text-gray-300 text-nowrap tracking-[0.15px]" data-node-id="3000:1707">
-                <p className="leading-[22px] whitespace-pre">Design Systems</p>
-              </div>
+                              <div className="font-oregano leading-[0] not-italic relative shrink-0 text-[15px] text-gray-300 text-nowrap" style={{ letterSpacing: '0.01em' }} data-node-id="3000:1707">
+                  <p className="leading-[22px] whitespace-pre">Design Systems</p>
+                </div>
             </div>
             <div className="bg-[#333333] box-border content-stretch flex gap-2.5 items-center justify-center px-3 py-1 relative rounded-[999px] shrink-0" data-node-id="3000:1708">
-              <div className="font-oregano leading-[0] not-italic relative shrink-0 text-[15px] text-gray-300 text-nowrap tracking-[0.15px]" data-node-id="3000:1709">
-                <p className="leading-[22px] whitespace-pre">User Research</p>
-              </div>
+                              <div className="font-oregano leading-[0] not-italic relative shrink-0 text-[15px] text-gray-300 text-nowrap" style={{ letterSpacing: '0.01em' }} data-node-id="3000:1709">
+                  <p className="leading-[22px] whitespace-pre">User Research</p>
+                </div>
             </div>
             <div className="bg-[#333333] box-border content-stretch flex gap-2.5 items-center justify-center px-3 py-1 relative rounded-[999px] shrink-0" data-node-id="3000:1710">
-              <div className="font-oregano leading-[0] not-italic relative shrink-0 text-[15px] text-gray-300 text-nowrap tracking-[0.15px]" data-node-id="3000:1711">
-                <p className="leading-[22px] whitespace-pre">Prototyping</p>
-              </div>
+                              <div className="font-oregano leading-[0] not-italic relative shrink-0 text-[15px] text-gray-300 text-nowrap" style={{ letterSpacing: '0.01em' }} data-node-id="3000:1711">
+                  <p className="leading-[22px] whitespace-pre">Prototyping</p>
+                </div>
             </div>
             <div className="bg-[#333333] box-border content-stretch flex gap-2.5 items-center justify-center px-3 py-1 relative rounded-[999px] shrink-0" data-node-id="3000:1712">
-              <div className="font-oregano leading-[0] not-italic relative shrink-0 text-[15px] text-gray-300 text-nowrap tracking-[0.15px]" data-node-id="3000:1713">
-                <p className="leading-[22px] whitespace-pre">A/B Testing</p>
-              </div>
+                              <div className="font-oregano leading-[0] not-italic relative shrink-0 text-[15px] text-gray-300 text-nowrap" style={{ letterSpacing: '0.01em' }} data-node-id="3000:1713">
+                  <p className="leading-[22px] whitespace-pre">A/B Testing</p>
+                </div>
             </div>
             <div className="bg-[#333333] box-border content-stretch flex gap-2.5 items-center justify-center px-3 py-1 relative rounded-[999px] shrink-0" data-node-id="3000:1714">
-              <div className="font-oregano leading-[0] not-italic relative shrink-0 text-[15px] text-gray-300 text-nowrap tracking-[0.15px]" data-node-id="3000:1715">
-                <p className="leading-[22px] whitespace-pre">Data Viz</p>
-              </div>
+                              <div className="font-oregano leading-[0] not-italic relative shrink-0 text-[15px] text-gray-300 text-nowrap" style={{ letterSpacing: '0.01em' }} data-node-id="3000:1715">
+                  <p className="leading-[22px] whitespace-pre">Data Viz</p>
+                </div>
             </div>
           </div>
         </div>
@@ -156,12 +156,12 @@ export default function MobileHome({ onNavigateToProject }: { onNavigateToProjec
                   </div>
                   <div className="content-start flex flex-wrap gap-2 items-start justify-start relative shrink-0 w-full" data-name="tags" data-node-id="3000:1737">
                     <div className="bg-[#333333] box-border content-stretch flex gap-2.5 items-center justify-center px-3 py-1 relative rounded-[999px] shrink-0" data-node-id="3000:1738">
-                                          <div className="font-oregano leading-[0] not-italic relative shrink-0 text-[15px] text-gray-300 text-nowrap tracking-[0.15px]" data-node-id="3000:1739">
+                                          <div className="font-oregano leading-[0] not-italic relative shrink-0 text-[15px] text-gray-300 text-nowrap" style={{ letterSpacing: '0.01em' }} data-node-id="3000:1739">
                       <p className="leading-[22px] whitespace-pre">$4M funding</p>
                     </div>
                     </div>
                     <div className="bg-[#333333] box-border content-stretch flex gap-2.5 items-center justify-center px-3 py-1 relative rounded-[999px] shrink-0" data-node-id="3000:1742">
-                                          <div className="font-oregano leading-[0] not-italic relative shrink-0 text-[15px] text-gray-300 text-nowrap tracking-[0.15px]" data-node-id="3000:1743">
+                                          <div className="font-oregano leading-[0] not-italic relative shrink-0 text-[15px] text-gray-300 text-nowrap" style={{ letterSpacing: '0.01em' }} data-node-id="3000:1743">
                       <p className="leading-[22px] whitespace-pre">AI Prototype</p>
                     </div>
                     </div>
@@ -218,12 +218,12 @@ export default function MobileHome({ onNavigateToProject }: { onNavigateToProjec
               </div>
               <div className="box-border content-start flex flex-wrap gap-2 items-start justify-start pb-0 pt-1 px-0 relative shrink-0 w-full" data-node-id="3000:1775">
                 <div className="bg-[#333333] box-border content-stretch flex gap-2.5 items-center justify-center px-3 py-1 relative rounded-[999px] shrink-0" data-node-id="3000:1776">
-                  <div className="font-oregano leading-[0] not-italic relative shrink-0 text-[15px] text-gray-300 text-nowrap tracking-[0.15px]" data-node-id="3000:1777">
+                  <div className="font-oregano leading-[0] not-italic relative shrink-0 text-[15px] text-gray-300 text-nowrap" style={{ letterSpacing: '0.01em' }} data-node-id="3000:1777">
                     <p className="leading-[22px] whitespace-pre">Cost Reduction</p>
                   </div>
                 </div>
                 <div className="bg-[#333333] box-border content-stretch flex gap-2.5 items-center justify-center px-3 py-1 relative rounded-[999px] shrink-0" data-node-id="3000:1778">
-                  <div className="font-oregano leading-[0] not-italic relative shrink-0 text-[15px] text-gray-300 text-nowrap tracking-[0.15px]" data-node-id="3000:1779">
+                  <div className="font-oregano leading-[0] not-italic relative shrink-0 text-[15px] text-gray-300 text-nowrap" style={{ letterSpacing: '0.01em' }} data-node-id="3000:1779">
                     <p className="leading-[22px] whitespace-pre">Prototype Testing</p>
                   </div>
                 </div>
@@ -251,12 +251,12 @@ export default function MobileHome({ onNavigateToProject }: { onNavigateToProjec
               </div>
               <div className="box-border content-start flex flex-wrap gap-2 items-start justify-start pb-0 pt-1 px-0 relative shrink-0 w-full" data-node-id="3000:1801">
                 <div className="bg-[#333333] box-border content-stretch flex gap-2.5 items-center justify-center px-3 py-1 relative rounded-[999px] shrink-0" data-node-id="3000:1802">
-                  <div className="font-oregano leading-[0] not-italic relative shrink-0 text-[15px] text-gray-300 text-nowrap tracking-[0.15px]" data-node-id="3000:1803">
+                  <div className="font-oregano leading-[0] not-italic relative shrink-0 text-[15px] text-gray-300 text-nowrap" style={{ letterSpacing: '0.01em' }} data-node-id="3000:1803">
                     <p className="leading-[22px] whitespace-pre">Heatmap Analysis</p>
                   </div>
                 </div>
                 <div className="bg-[#333333] box-border content-stretch flex gap-2.5 items-center justify-center px-3 py-1 relative rounded-[999px] shrink-0" data-node-id="3000:1804">
-                  <div className="font-oregano leading-[0] not-italic relative shrink-0 text-[15px] text-gray-300 text-nowrap tracking-[0.15px]" data-node-id="3000:1805">
+                  <div className="font-oregano leading-[0] not-italic relative shrink-0 text-[15px] text-gray-300 text-nowrap" style={{ letterSpacing: '0.01em' }} data-node-id="3000:1805">
                     <p className="leading-[22px] whitespace-pre">A/B Testing</p>
                   </div>
                 </div>
@@ -284,12 +284,12 @@ export default function MobileHome({ onNavigateToProject }: { onNavigateToProjec
               </div>
               <div className="box-border content-start flex flex-wrap gap-2 items-start justify-start pb-0 pt-1 px-0 relative shrink-0 w-full" data-node-id="3000:1825">
                 <div className="bg-[#333333] box-border content-stretch flex gap-2.5 items-center justify-center px-3 py-1 relative rounded-[999px] shrink-0" data-node-id="3000:1826">
-                  <div className="font-oregano leading-[0] not-italic relative shrink-0 text-[15px] text-gray-300 text-nowrap tracking-[0.15px]" data-node-id="3000:1827">
+                  <div className="font-oregano leading-[0] not-italic relative shrink-0 text-[15px] text-gray-300 text-nowrap" style={{ letterSpacing: '0.01em' }} data-node-id="3000:1827">
                     <p className="leading-[22px] whitespace-pre">Dual Interface</p>
                   </div>
                 </div>
                 <div className="bg-[#333333] box-border content-stretch flex gap-2.5 items-center justify-center px-3 py-1 relative rounded-[999px] shrink-0" data-node-id="3000:1828">
-                  <div className="font-oregano leading-[0] not-italic relative shrink-0 text-[15px] text-gray-300 text-nowrap tracking-[0.15px]" data-node-id="3000:1829">
+                  <div className="font-oregano leading-[0] not-italic relative shrink-0 text-[15px] text-gray-300 text-nowrap" style={{ letterSpacing: '0.01em' }} data-node-id="3000:1829">
                     <p className="leading-[22px] whitespace-pre">Sustainability</p>
                   </div>
                 </div>

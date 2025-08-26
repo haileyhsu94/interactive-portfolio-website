@@ -76,7 +76,7 @@ export default function MobileMenu({ isOpen, onClose, onNavigateToProject }: Mob
           </div>
 
           {/* Separator */}
-          <div className="h-[404px] relative shrink-0 w-5" data-name="separator" data-node-id="3005:2108">
+          <div className="h-[404px] relative shrink-0 w-5 flex justify-center" data-name="separator" data-node-id="3005:2108">
             <div className="w-px h-full bg-[#0A0A0A] opacity-100"></div>
           </div>
 
