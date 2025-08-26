@@ -1519,13 +1519,16 @@ function useDeviceType() {
       } else {
         deviceType = "desktop";
       }
-      console.log('Window width:', window.innerWidth, 'deviceType:', deviceType);
+      console.log('Device detection - Window width:', window.innerWidth, 'deviceType:', deviceType);
       setDeviceType(deviceType);
     };
 
-    checkDeviceType();
-    window.addEventListener('resize', checkDeviceType);
-    return () => window.removeEventListener('resize', checkDeviceType);
+    // Only run on client side
+    if (typeof window !== 'undefined') {
+      checkDeviceType();
+      window.addEventListener('resize', checkDeviceType);
+      return () => window.removeEventListener('resize', checkDeviceType);
+    }
   }, []);
 
   return deviceType;
@@ -1539,6 +1542,9 @@ export default function InteractiveHome({ onNavigateToProject, openProjects, onC
   const moreRef = useRef<HTMLDivElement>(null);
   const contactRef = useRef<HTMLDivElement>(null);
   const mediaPlayerRef = useRef<{ playAirframeAudio: () => void }>(null);
+
+  // Debug logging
+  console.log('InteractiveHome render - deviceType:', deviceType, 'window.innerWidth:', typeof window !== 'undefined' ? window.innerWidth : 'N/A');
 
   // Handle scroll to section
   const handleNavigateToSection = (section: 'featured' | 'more' | 'contact') => {
@@ -1620,15 +1626,18 @@ export default function InteractiveHome({ onNavigateToProject, openProjects, onC
 
   // Render mobile version on mobile devices
   if (deviceType === "mobile") {
+    console.log('Rendering MobileHome component');
     return <MobileHome onNavigateToProject={onNavigateToProject} />;
   }
 
   // Render tablet version on tablet devices
   if (deviceType === "tablet") {
+    console.log('Rendering TabletHome component');
     return <TabletHome onNavigateToProject={onNavigateToProject} />;
   }
 
   // Desktop version
+  console.log('Rendering Desktop version');
   return (
     <div
       className="box-border content-stretch flex flex-col items-start justify-start p-0 relative w-full h-screen overflow-hidden"
