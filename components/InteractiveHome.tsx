@@ -8,6 +8,7 @@ import WaveformCanvas from "./ui/WaveformCanvas";
 import { generateRealisticWaveform, chunkWaveformData } from "../utils/audioUtils";
 import MobileHome from './MobileHome';
 import MobileAbout from './MobileAbout';
+import MobileMenu from './MobileMenu';
 
 // Image paths - replace with your actual images
 // Add your images to the public/images/ folder and update these paths
@@ -241,7 +242,7 @@ export function Sidebar({
       {/* Recent Section */}
       {openProjects && openProjects.length > 0 && (
         <div className="box-border content-stretch flex flex-col gap-2 items-start justify-start p-0 relative shrink-0 w-full">
-          <div className="font-[.Didact_Gothic,_sans-serif] font-medium leading-[0] not-italic relative shrink-0 text-[#515151] text-[14px] text-nowrap">
+          <div className="font-didact-gothic font-medium leading-[0] not-italic relative shrink-0 text-[#515151] text-[14px] text-nowrap">
             <p className="block leading-[normal] whitespace-pre">Recent</p>
           </div>
           <div className="box-border content-stretch flex flex-col gap-1 items-start justify-start p-0 relative shrink-0">
@@ -258,7 +259,7 @@ export function Sidebar({
                      }
                    }}
                  >
-                <div className="basis-0 font-[.Didact_Gothic,_sans-serif] font-medium grow leading-[1.2] min-h-px min-w-px not-italic overflow-hidden relative shrink-0 text-[14px] text-gray-300" style={{ 
+                <div className="basis-0 font-didact-gothic font-medium grow leading-[1.2] min-h-px min-w-px not-italic overflow-hidden relative shrink-0 text-[14px] text-gray-300" style={{ 
                   display: '-webkit-box',
                   WebkitLineClamp: 2,
                   WebkitBoxOrient: 'vertical',
@@ -344,10 +345,10 @@ function InteractiveContactForm() {
 
   return (
     <form onSubmit={handleSubmit} className="box-border content-stretch flex flex-col gap-3 items-start justify-start p-[12px] relative w-full">
-      <div className="font-[.Didact_Gothic,_sans-serif] font-medium leading-[0] not-italic relative shrink-0 text-[#ffffff] text-[17px] text-left w-full">
+      <div className="font-didact-gothic font-medium leading-[0] not-italic relative shrink-0 text-[#ffffff] text-[17px] text-left w-full">
         <p className="block leading-[normal]">Quick Messages</p>
       </div>
-      <div className="font-[.Didact_Gothic,_sans-serif] font-normal leading-[0] not-italic relative shrink-0 text-[15px] text-gray-300 text-left w-full">
+      <div className="font-didact-gothic font-normal leading-[0] not-italic relative shrink-0 text-[15px] text-gray-300 text-left w-full">
         <p className="block leading-[22px]">Your email</p>
       </div>
       <div className="bg-[#1f1f1f] relative rounded-xl shrink-0 w-full" data-name="input box">
@@ -362,12 +363,12 @@ function InteractiveContactForm() {
               value={formData.email}
               onChange={(e) => setFormData({ ...formData, email: e.target.value })}
               placeholder="your@email.com"
-              className="basis-0 font-[.Didact_Gothic,_sans-serif] font-normal grow leading-[0] min-h-px min-w-px not-italic relative shrink-0 text-[15px] text-gray-300 text-left bg-transparent border-none outline-none placeholder-gray-600"
+              className="basis-0 font-didact-gothic font-normal grow leading-[0] min-h-px min-w-px not-italic relative shrink-0 text-[15px] text-gray-300 text-left bg-transparent border-none outline-none placeholder-gray-600"
             />
           </div>
         </div>
       </div>
-      <div className="font-[.Didact_Gothic,_sans-serif] font-normal leading-[0] not-italic relative shrink-0 text-[15px] text-gray-300 text-left w-full">
+      <div className="font-didact-gothic font-normal leading-[0] not-italic relative shrink-0 text-[15px] text-gray-300 text-left w-full">
         <p className="block leading-[22px]">Your message</p>
       </div>
       <div className="bg-[#1f1f1f] relative rounded-xl shrink-0 w-full" data-name="input box">
@@ -382,7 +383,7 @@ function InteractiveContactForm() {
               onChange={(e) => setFormData({ ...formData, message: e.target.value })}
               placeholder="Share your ideas..."
               rows={3}
-              className="basis-0 font-[.Didact_Gothic,_sans-serif] font-normal grow min-h-px min-w-px not-italic relative shrink-0 text-[16px] text-gray-300 text-left bg-transparent border-none outline-none placeholder-gray-600 resize-none leading-relaxed"
+              className="basis-0 font-didact-gothic font-normal grow min-h-px min-w-px not-italic relative shrink-0 text-[16px] text-gray-300 text-left bg-transparent border-none outline-none placeholder-gray-600 resize-none leading-relaxed"
             />
           </div>
         </div>
@@ -397,7 +398,7 @@ function InteractiveContactForm() {
       >
         <div className="flex flex-row items-center justify-center relative size-full">
           <div className="box-border content-stretch flex flex-row gap-2.5 items-center justify-center px-3 py-2 relative w-full">
-                          <div className="font-[.Didact_Gothic,_sans-serif] font-medium leading-[0] not-italic relative shrink-0 text-[17px] text-left text-neutral-950 text-nowrap">
+                          <div className="font-didact-gothic font-medium leading-[0] not-italic relative shrink-0 text-[17px] text-left text-neutral-950 text-nowrap">
                 <p className="block leading-[22px] whitespace-pre">
                   {isSubmitting ? 'Sending...' : 'Send Message'}
                 </p>
@@ -420,10 +421,10 @@ function FeaturedSection({ sectionRef, mediaPlayerRef, onNavigateToProject }: { 
         className="box-border content-stretch flex flex-row items-start justify-between leading-[0] not-italic p-0 relative shrink-0 text-left text-nowrap w-full"
         data-name="title"
       >
-        <div className="font-[.Didact_Gothic,_sans-serif] font-bold relative shrink-0 text-[#ffffff] text-[21px]">
+        <div className="font-didact-gothic font-bold relative shrink-0 text-[#ffffff] text-[21px]">
           <p className="block leading-[normal] text-nowrap whitespace-pre">Featured Project</p>
         </div>
-        <div className="font-[.Didact_Gothic,_sans-serif] font-normal relative shrink-0 text-[15px] text-gray-300">
+        <div className="font-didact-gothic font-normal relative shrink-0 text-[15px] text-gray-300">
           <p className="block leading-[22px] text-nowrap whitespace-pre">1 featured</p>
         </div>
       </div>
@@ -503,14 +504,14 @@ function FeaturedSection({ sectionRef, mediaPlayerRef, onNavigateToProject }: { 
                     className="box-border content-stretch flex flex-col gap-2 items-start justify-start leading-[0] not-italic p-0 relative shrink-0 text-[20px] text-left w-full"
                     data-name="title"
                   >
-                    <div className="font-[.Didact_Gothic,_sans-serif] font-bold relative shrink-0 text-[#ffffff] w-full">
+                    <div className="font-didact-gothic font-bold relative shrink-0 text-[#ffffff] w-full">
                       <p className="block leading-[normal]">AI-powered B2B Procurement Platform</p>
                     </div>
-                    <div className="font-[.Didact_Gothic,_sans-serif] font-medium relative shrink-0 text-[#f4915c] w-full">
+                    <div className="font-didact-gothic font-medium relative shrink-0 text-[#f4915c] w-full">
                       <p className="block leading-[normal]">Projected to cut vendor sourcing time by 40%</p>
                     </div>
                   </div>
-                  <div className="font-[.Didact_Gothic,_sans-serif] font-normal leading-[0] not-italic relative shrink-0 text-[15px] text-gray-300 text-left w-full">
+                  <div className="font-didact-gothic font-normal leading-[0] not-italic relative shrink-0 text-[15px] text-gray-300 text-left w-full">
                     <p className="block leading-[22px]">{`Delivered 100+ high-fidelity screens for buyer & vendor flows.`}</p>
                   </div>
                   <div
@@ -554,7 +555,7 @@ function FeaturedSection({ sectionRef, mediaPlayerRef, onNavigateToProject }: { 
                 >
                   <div className="flex flex-row items-center justify-center relative size-full">
                     <div className="box-border content-stretch flex flex-row gap-2.5 items-center justify-center px-3 py-2 relative w-full">
-                      <div className="font-[.Didact_Gothic,_sans-serif] font-medium leading-[0] not-italic relative shrink-0 text-[17px] text-left text-neutral-950 text-nowrap">
+                      <div className="font-didact-gothic font-medium leading-[0] not-italic relative shrink-0 text-[17px] text-left text-neutral-950 text-nowrap">
                         <p className="block leading-[22px] whitespace-pre text-[15px]">See Work</p>
                       </div>
                     </div>
@@ -590,7 +591,7 @@ function FeaturedSection({ sectionRef, mediaPlayerRef, onNavigateToProject }: { 
                           </g>
                         </svg>
                       </div>
-                      <div className="font-[.Didact_Gothic,_sans-serif] font-medium leading-[0] not-italic relative shrink-0 text-[#ffffff] text-[17px] text-left text-nowrap">
+                      <div className="font-didact-gothic font-medium leading-[0] not-italic relative shrink-0 text-[#ffffff] text-[17px] text-left text-nowrap">
                         <p className="block leading-[22px] whitespace-pre text-[15px]">Listen</p>
                       </div>
                     </div>
@@ -674,9 +675,12 @@ function MoreProjectsSection({ sectionRef, onNavigateToProject }: { sectionRef: 
             <div className="relative size-full">
               <div className="box-border content-stretch flex flex-col gap-4 items-start justify-start p-[12px] relative w-full">
                 <div
-                  className="bg-center bg-cover bg-no-repeat h-36 rounded-xl shrink-0 w-full"
+                  className="bg-center bg-cover bg-no-repeat rounded-xl shrink-0 w-full"
+                  style={{ 
+                    backgroundImage: `url('${project.image}')`,
+                    aspectRatio: '16/10'
+                  }}
                   data-name="image"
-                  style={{ backgroundImage: `url('${project.image}')` }}
                 />
                 <div
                   className="box-border content-stretch flex flex-col gap-2 items-start justify-start p-0 relative shrink-0 w-full"
@@ -1163,7 +1167,7 @@ export const MediaPlayer = forwardRef<{ playAirframeAudio: () => void }, { onNav
               style={{ backgroundImage: `url('${currentProject.image}')` }}
             />
             <div
-              className="box-border content-stretch flex flex-col font-['Inter:Regular',_sans-serif] font-normal items-start justify-start leading-[0] not-italic p-0 relative shrink-0 text-left"
+              className="box-border content-stretch flex flex-col font-didact-gothic font-normal items-start justify-start leading-[0] not-italic p-0 relative shrink-0 text-left"
               data-name="title"
             >
               <div className="relative shrink-0 text-[#ffffff] text-[14px] text-nowrap">
@@ -1252,7 +1256,7 @@ export const MediaPlayer = forwardRef<{ playAirframeAudio: () => void }, { onNav
               className="box-border content-stretch flex flex-row gap-1.5 items-center justify-start p-0 relative shrink-0"
               data-name="progress"
             >
-              <div className="font-['Inter:Regular',_sans-serif] font-normal leading-[0] not-italic relative shrink-0 text-[#D1D5DB] text-[12px] text-left text-nowrap">
+              <div className="font-didact-gothic font-normal leading-[0] not-italic relative shrink-0 text-[#D1D5DB] text-[12px] text-left text-nowrap">
                 <p className="block leading-[normal] whitespace-pre">{formatTime(mediaState.currentTime)}</p>
               </div>
               <div className="h-[10px] relative shrink-0 w-[285px] overflow-hidden">
@@ -1266,7 +1270,7 @@ export const MediaPlayer = forwardRef<{ playAirframeAudio: () => void }, { onNav
                   className="rounded-sm"
                 />
               </div>
-              <div className="font-['Inter:Regular',_sans-serif] font-normal leading-[0] not-italic relative shrink-0 text-[#D1D5DB] text-[12px] text-left text-nowrap">
+              <div className="font-didact-gothic font-normal leading-[0] not-italic relative shrink-0 text-[#D1D5DB] text-[12px] text-left text-nowrap">
                 <p className="block leading-[normal] whitespace-pre">{formatTime(mediaState.duration)}</p>
               </div>
             </div>
@@ -1289,7 +1293,7 @@ export const MediaPlayer = forwardRef<{ playAirframeAudio: () => void }, { onNav
                 }
               }}
             >
-              <div className="font-['Inter:Medium',_sans-serif] font-medium leading-[0] not-italic relative shrink-0 text-[#e6ff02] text-[12px] text-left text-nowrap">
+              <div className="font-didact-gothic font-medium leading-[0] not-italic relative shrink-0 text-[#e6ff02] text-[12px] text-left text-nowrap">
                 <p className="block leading-[22px] whitespace-pre">Open Project</p>
               </div>
               <div className="relative shrink-0 size-[16px]" data-name="icon">
@@ -1341,7 +1345,7 @@ interface InteractiveHomeProps {
 
 
 // Tablet Home Component
-function TabletHome({ onNavigateToProject }: { onNavigateToProject?: (project: string) => void }) {
+function TabletHome({ onNavigateToProject, onNavigateToAbout }: { onNavigateToProject?: (project: string) => void; onNavigateToAbout?: () => void }) {
   const [formData, setFormData] = useState<FormData>({ email: '', message: '' });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -1397,75 +1401,44 @@ function TabletHome({ onNavigateToProject }: { onNavigateToProject?: (project: s
             <img alt="Hailey Hsu Logo" className="block max-w-none size-full" src="/images/logo.png" />
           </div>
           <div className="content-stretch flex flex-col gap-1 items-start justify-start relative shrink-0 w-[132px]">
-            <div className="font-[.Didact_Gothic,_sans-serif] font-semibold leading-[0] not-italic relative shrink-0 text-[#ffffff] text-[17px] w-full">
+            <div className="font-didact-gothic font-semibold leading-[0] not-italic relative shrink-0 text-[#ffffff] text-[17px] w-full">
               <p className="leading-[normal]">Hailey Hsu</p>
             </div>
           </div>
         </div>
         <button 
-          className="bg-[rgba(31,31,31,0.1)] box-border content-stretch cursor-pointer flex gap-2.5 items-center justify-start overflow-visible p-[8px] relative rounded-md shrink-0 hover:bg-[rgba(31,31,31,0.2)] transition-colors duration-200 text-white"
+          className="bg-[rgba(31,31,31,0.1)] box-border content-stretch cursor-pointer flex gap-2.5 items-center justify-start overflow-visible relative rounded-md shrink-0 hover:bg-[rgba(31,31,31,0.2)] transition-colors duration-200"
           onClick={() => setIsMenuOpen(!isMenuOpen)}
         >
-          <div className="relative shrink-0 size-6">
-            <svg className="block size-full text-white" fill="none" preserveAspectRatio="none" viewBox="0 0 24 24">
-              <path d="M3 12h18M3 6h18M3 18h18" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" />
-            </svg>
+          <div className="relative shrink-0 w-[31.5px] h-[31.5px]">
+            <img 
+              src="/images/menu-icon.png" 
+              alt="Menu" 
+              className="block max-w-none w-full h-full"
+            />
           </div>
         </button>
       </div>
 
-      {/* Mobile Menu Overlay */}
-      <AnimatePresence>
-        {isMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="absolute bg-black/80 backdrop-blur-sm inset-0 z-40"
-            onClick={() => setIsMenuOpen(false)}
-          >
-            <motion.div
-              initial={{ x: "100%" }}
-              animate={{ x: 0 }}
-              exit={{ x: "100%" }}
-              transition={{ type: "spring", damping: 25, stiffness: 200 }}
-              className="absolute bg-[#121212] border-l border-[#252525] right-0 top-0 h-full w-80 p-6"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <div className="flex flex-col gap-8 h-full">
-                <div className="flex items-center justify-between">
-                  <h2 className="font-[.Didact_Gothic,_sans-serif] font-bold text-[#ffffff] text-[21px]">Menu</h2>
-                  <button
-                    onClick={() => setIsMenuOpen(false)}
-                    className="text-gray-400 hover:text-white transition-colors"
-                  >
-                    <svg className="size-6" fill="none" viewBox="0 0 24 24">
-                      <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" />
-                    </svg>
-                  </button>
-                </div>
-                <nav className="flex flex-col gap-4">
-                  <a href="#featured" className="font-[.Didact_Gothic,_sans-serif] text-[#ffffff] text-[17px] hover:text-[#e6ff02] transition-colors">Featured</a>
-                  <a href="#more" className="font-[.Didact_Gothic,_sans-serif] text-[#ffffff] text-[17px] hover:text-[#e6ff02] transition-colors">More Projects</a>
-                  <a href="#contact" className="font-[.Didact_Gothic,_sans-serif] text-[#ffffff] text-[17px] hover:text-[#e6ff02] transition-colors">Contact</a>
-                </nav>
-              </div>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      {/* Mobile Menu */}
+      <MobileMenu 
+        isOpen={isMenuOpen} 
+        onClose={() => setIsMenuOpen(false)}
+        onNavigateToProject={onNavigateToProject}
+        onNavigateToAbout={onNavigateToAbout}
+      />
 
       {/* Main Content - Tablet Layout */}
       <div className="bg-neutral-950 box-border content-stretch flex flex-col gap-4 items-start justify-start p-[16px] relative w-full pt-20 flex-1">
         {/* Hero Section - Mobile style */}
         <div className="box-border content-stretch flex flex-col gap-10 items-center justify-start px-8 py-[100px] relative shrink-0 w-full">
           <div className="content-stretch flex gap-2.5 items-center justify-center relative shrink-0 w-full">
-            <div className="basis-0 font-[.Didact_Gothic,_sans-serif] font-normal grow leading-[0] min-h-px min-w-px not-italic relative shrink-0 text-[20px] text-center text-gray-300">
-              <p className="font-[.Didact_Gothic,_sans-serif] leading-[28px] mb-0">
+            <div className="basis-0 font-didact-gothic font-normal grow leading-[0] min-h-px min-w-px not-italic relative shrink-0 text-[20px] text-center text-gray-300">
+              <p className="font-didact-gothic leading-[28px] mb-0">
                 <span>{`I design products that make complex information `}</span>
                 <span className="text-[#f4915c]">easy to use.</span>
               </p>
-              <p className="font-[.Didact_Gothic,_sans-serif] leading-[28px]">
+              <p className="font-didact-gothic leading-[28px]">
                 <span>{`I focus on practical workflows and turn messy problems into systems that `}</span>
                 <span className="text-[#f4915c]">grow smoothly.</span>
               </p>
@@ -1474,7 +1447,7 @@ function TabletHome({ onNavigateToProject }: { onNavigateToProject?: (project: s
           <div className="content-start flex flex-wrap gap-2 items-start justify-center relative shrink-0 w-full">
             {["Design Systems", "User Research", "Prototyping", "A/B Testing", "Data Viz"].map((tag) => (
               <div key={tag} className="bg-[#333333] box-border content-stretch flex gap-2.5 items-center justify-center px-3 py-1 relative rounded-[999px] shrink-0">
-                <div className="font-[.Didact_Gothic,_sans-serif] font-normal leading-[0] not-italic relative shrink-0 text-[14px] text-gray-300 text-nowrap">
+                <div className="font-didact-gothic font-normal leading-[0] not-italic relative shrink-0 text-[14px] text-gray-300 text-nowrap">
                   <p className="leading-[22px] whitespace-pre">{tag}</p>
                 </div>
               </div>
@@ -1648,7 +1621,10 @@ export default function InteractiveHome({ onNavigateToProject, openProjects, onC
   // Render tablet version on tablet devices
   if (deviceType === "tablet") {
     console.log('Rendering TabletHome component');
-    return <TabletHome onNavigateToProject={onNavigateToProject} />;
+    if (isAboutPage) {
+      return <MobileAbout onNavigateToProject={onNavigateToProject} onBackToHome={handleBackToHome} />;
+    }
+    return <TabletHome onNavigateToProject={onNavigateToProject} onNavigateToAbout={handleNavigateToAbout} />;
   }
 
   // Desktop version
@@ -1699,7 +1675,7 @@ export default function InteractiveHome({ onNavigateToProject, openProjects, onC
                 aria-hidden="true"
                 className="absolute border border-[#252525] border-solid inset-0 pointer-events-none rounded-xl"
               />
-              <div className="font-['Inter:Bold',_sans-serif] font-bold leading-[0] not-italic relative shrink-0 text-[#ffffff] text-[20px] text-left text-nowrap">
+              <div className="font-didact-gothic font-bold leading-[0] not-italic relative shrink-0 text-[#ffffff] text-[20px] text-left text-nowrap">
                 <p className="block leading-[normal] whitespace-pre">About Hailey</p>
               </div>
               
@@ -1711,12 +1687,12 @@ export default function InteractiveHome({ onNavigateToProject, openProjects, onC
                   <img className="block max-w-none size-full" height="61" src={imgAvatar} width="61" />
                 </div>
                 <div
-                  className="font-['Inter:Regular',_sans-serif] font-normal leading-[0] min-w-full not-italic relative shrink-0 text-[14px] text-gray-300 text-left"
+                  className="font-didact-gothic font-normal leading-[0] min-w-full not-italic relative shrink-0 text-[14px] text-gray-300 text-left"
                   style={{ width: "min-content" }}
                 >
                   <p className="leading-[22px]">
                     <span>{`Product designer focused on data-dense UX, calm interfaces, and evidence-base workflows. I translate messy `}</span>
-                    <span className="font-['Inter:Regular',_sans-serif] font-normal not-italic text-[#ffffff]">
+                    <span className="font-didact-gothic font-normal not-italic text-[#ffffff]">
                       problems into systems that scale.
                     </span>
                   </p>
@@ -1737,10 +1713,10 @@ export default function InteractiveHome({ onNavigateToProject, openProjects, onC
                         />
                         <div className="relative size-full">
                           <div className="box-border content-stretch flex flex-col gap-3 items-start justify-start leading-[0] not-italic p-[12px] relative text-left w-full">
-                            <div className="font-['Inter:Regular',_sans-serif] font-normal relative shrink-0 text-[14px] text-gray-300 w-full">
+                            <div className="font-didact-gothic font-normal relative shrink-0 text-[14px] text-gray-300 w-full">
                               <p className="block leading-[22px]">Years of experience</p>
                             </div>
-                            <div className="font-['Inter:Semi_Bold',_sans-serif] font-semibold relative shrink-0 text-[#ffffff] text-[24px] w-full">
+                            <div className="font-didact-gothic font-semibold relative shrink-0 text-[#ffffff] text-[24px] w-full">
                               <p className="block leading-[normal]">4</p>
                             </div>
                           </div>
@@ -1753,11 +1729,11 @@ export default function InteractiveHome({ onNavigateToProject, openProjects, onC
                         />
                         <div className="relative size-full">
                           <div className="box-border content-stretch flex flex-col gap-3 items-start justify-start leading-[0] not-italic p-[12px] relative text-left w-full">
-                            <div className="font-['Inter:Regular',_sans-serif] font-normal leading-[22px] relative shrink-0 text-[14px] text-gray-300 w-full">
+                            <div className="font-didact-gothic font-normal leading-[22px] relative shrink-0 text-[14px] text-gray-300 w-full">
                               <p className="block mb-0">Clients</p>
                               <p className="block">shipped</p>
                             </div>
-                            <div className="font-['Inter:Semi_Bold',_sans-serif] font-semibold relative shrink-0 text-[#ffffff] text-[24px] w-full">
+                            <div className="font-didact-gothic font-semibold relative shrink-0 text-[#ffffff] text-[24px] w-full">
                               <p className="block leading-[normal]">{`>10`}</p>
                             </div>
                           </div>
@@ -1774,7 +1750,7 @@ export default function InteractiveHome({ onNavigateToProject, openProjects, onC
                           className="absolute border border-[#252525] border-solid inset-0 pointer-events-none rounded-[20px]"
                         />
                         <div className="relative size-full">
-                          <div className="box-border content-stretch flex flex-col font-['Inter:Regular',_sans-serif] font-normal gap-3 items-start justify-start leading-[0] not-italic p-[12px] relative text-[14px] text-left w-full">
+                          <div className="box-border content-stretch flex flex-col font-didact-gothic font-normal gap-3 items-start justify-start leading-[0] not-italic p-[12px] relative text-[14px] text-left w-full">
                             <div className="relative shrink-0 text-gray-300 w-full">
                               <p className="block leading-[22px]">Industries</p>
                             </div>
@@ -1792,7 +1768,7 @@ export default function InteractiveHome({ onNavigateToProject, openProjects, onC
                           className="absolute border border-[#252525] border-solid inset-0 pointer-events-none rounded-[20px]"
                         />
                         <div className="relative size-full">
-                          <div className="box-border content-stretch flex flex-col font-['Inter:Regular',_sans-serif] font-normal gap-3 items-start justify-start leading-[0] not-italic p-[12px] relative text-[14px] text-left w-full">
+                          <div className="box-border content-stretch flex flex-col font-didact-gothic font-normal gap-3 items-start justify-start leading-[0] not-italic p-[12px] relative text-[14px] text-left w-full">
                             <div className="relative shrink-0 text-gray-300 w-full">
                               <p className="block leading-[22px]">Tooling</p>
                             </div>
@@ -1818,7 +1794,7 @@ export default function InteractiveHome({ onNavigateToProject, openProjects, onC
                         className="bg-[#1f1f1f] box-border content-stretch flex flex-row gap-2.5 items-center justify-center px-3 py-1 relative rounded-[999px] shrink-0 hover:bg-white/10 transition-colors duration-200"
                         whileHover={{ scale: 1.05 }}
                       >
-                        <div className="font-['Inter:Regular',_sans-serif] font-normal leading-[0] not-italic relative shrink-0 text-[14px] text-gray-300 text-left text-nowrap">
+                        <div className="font-didact-gothic font-normal leading-[0] not-italic relative shrink-0 text-[14px] text-gray-300 text-left text-nowrap">
                           <p className="block leading-[22px] whitespace-pre">{tag}</p>
                         </div>
                       </motion.div>
@@ -1840,7 +1816,7 @@ export default function InteractiveHome({ onNavigateToProject, openProjects, onC
                 >
                   <div className="flex flex-row items-center justify-center relative size-full">
                     <div className="box-border content-stretch flex flex-row gap-2.5 items-center justify-center px-3 py-2 relative w-full">
-                      <div className="font-['Inter:Medium',_sans-serif] font-medium leading-[0] not-italic relative shrink-0 text-[16px] text-left text-neutral-950 text-nowrap">
+                      <div className="font-didact-gothic font-medium leading-[0] not-italic relative shrink-0 text-[16px] text-left text-neutral-950 text-nowrap">
                         <p className="block leading-[22px] whitespace-pre">Contact</p>
                       </div>
                     </div>
@@ -1857,7 +1833,7 @@ export default function InteractiveHome({ onNavigateToProject, openProjects, onC
                 >
                   <div className="flex flex-row items-center justify-center relative size-full">
                     <div className="box-border content-stretch flex flex-row gap-2.5 items-center justify-center px-3 py-2 relative w-full">
-                      <div className="font-['Inter:Medium',_sans-serif] font-medium leading-[0] not-italic relative shrink-0 text-[#ffffff] text-[16px] text-left text-nowrap">
+                      <div className="font-didact-gothic font-medium leading-[0] not-italic relative shrink-0 text-[#ffffff] text-[16px] text-left text-nowrap">
                         <p className="block leading-[22px] whitespace-pre">LinkedIn</p>
                       </div>
                       <div className="relative shrink-0 size-[18px]" data-name="logo">
