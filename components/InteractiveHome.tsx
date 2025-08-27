@@ -760,8 +760,8 @@ function ContactSection({ sectionRef }: { sectionRef: RefObject<HTMLDivElement> 
                             data-name="top"
                           >
                                               <div className="font-didact-gothic font-medium leading-[0] not-italic relative shrink-0 text-[#ffffff] text-[16px] text-left w-full">
-                    <p className="block leading-[normal]">Contact Information</p>
-                  </div>
+                              <p className="block leading-[normal]">Contact Information</p>
+                            </div>
                             <div
                               className="box-border content-stretch flex flex-col gap-1 items-start justify-start p-0 relative shrink-0 w-full"
                               data-name="container"
@@ -796,8 +796,8 @@ function ContactSection({ sectionRef }: { sectionRef: RefObject<HTMLDivElement> 
                                       </svg>
                                     </div>
                                                             <div className="font-didact-gothic font-normal leading-[0] not-italic relative shrink-0 text-[14px] text-gray-300 text-left text-nowrap">
-                          <p className="block leading-[normal] whitespace-pre">haileyhsu94@gmail.com</p>
-                        </div>
+                                      <p className="block leading-[normal] whitespace-pre">haileyhsu94@gmail.com</p>
+                                    </div>
                                   </div>
                                 </div>
                               </motion.a>
@@ -828,8 +828,8 @@ function ContactSection({ sectionRef }: { sectionRef: RefObject<HTMLDivElement> 
                                       </svg>
                                     </div>
                                                             <div className="font-didact-gothic font-normal leading-[0] not-italic relative shrink-0 text-[14px] text-gray-300 text-left text-nowrap">
-                          <p className="block leading-[normal] whitespace-pre">+1 (347) 806-1403</p>
-                        </div>
+                                      <p className="block leading-[normal] whitespace-pre">+1 (347) 806-1403</p>
+                                    </div>
                                   </div>
                                 </div>
                               </motion.a>
@@ -860,8 +860,8 @@ function ContactSection({ sectionRef }: { sectionRef: RefObject<HTMLDivElement> 
                                   </svg>
                                 </div>
                                                         <div className="font-didact-gothic font-normal leading-[0] not-italic relative shrink-0 text-[14px] text-gray-300 text-left text-nowrap">
-                          <p className="block leading-[normal] whitespace-pre">New York, NY</p>
-                        </div>
+                                  <p className="block leading-[normal] whitespace-pre">New York, NY</p>
+                                </div>
                               </div>
                             </div>
                           </div>
@@ -883,36 +883,11 @@ function ContactSection({ sectionRef }: { sectionRef: RefObject<HTMLDivElement> 
                                 className="box-border content-stretch flex flex-row gap-3 items-center justify-start p-0 relative shrink-0 hover:bg-white/5 rounded-lg px-2 py-1 transition-colors duration-200"
                                 whileHover={{ scale: 1.05 }}
                               >
-                                <div className="relative shrink-0 size-5" data-name="Frame">
-                                  <svg className="block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 20 20">
-                                    <g id="Frame">
-                                      <path
-                                        d={svgPaths.p1bcdee00}
-                                        id="Vector"
-                                        stroke="var(--stroke-0, #D1D5DB)"
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                        strokeWidth="1.2"
-                                      />
-                                      <path
-                                        d="M5 7.5H1.66667V17.5H5V7.5Z"
-                                        id="Vector_2"
-                                        stroke="var(--stroke-0, #D1D5DB)"
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                        strokeWidth="1.2"
-                                      />
-                                      <path
-                                        d={svgPaths.p25677470}
-                                        id="Vector_3"
-                                        stroke="var(--stroke-0, #D1D5DB)"
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                        strokeWidth="1.2"
-                                      />
-                                    </g>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                  <path d="M13.3333 6.66699C14.6593 6.66699 15.9311 7.19378 16.8688 8.13146C17.8065 9.06914 18.3333 10.3409 18.3333 11.667V17.5003H14.9999V11.667C14.9999 11.225 14.8243 10.801 14.5118 10.4885C14.1992 10.1759 13.7753 10.0003 13.3333 10.0003C12.8912 10.0003 12.4673 10.1759 12.1547 10.4885C11.8422 10.801 11.6666 11.225 11.6666 11.667V17.5003H8.33325V11.667C8.33325 10.3409 8.86004 9.06914 9.79772 8.13146C10.7354 7.19378 12.0072 6.66699 13.3333 6.66699Z" stroke="#D1D5DB" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
+                                  <path d="M5.00008 7.5H1.66675V17.5H5.00008V7.5Z" stroke="#D1D5DB" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
+                                  <path d="M3.33341 5.00033C4.25389 5.00033 5.00008 4.25413 5.00008 3.33366C5.00008 2.41318 4.25389 1.66699 3.33341 1.66699C2.41294 1.66699 1.66675 2.41318 1.66675 3.33366C1.66675 4.25413 2.41294 5.00033 3.33341 5.00033Z" stroke="#D1D5DB" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
                                   </svg>
-                                </div>
                               </motion.a>
                               <motion.a
                                 href="https://medium.com/@haileyhsu."
@@ -921,21 +896,19 @@ function ContactSection({ sectionRef }: { sectionRef: RefObject<HTMLDivElement> 
                                 className="box-border content-stretch flex flex-row gap-3 items-center justify-start p-0 relative shrink-0 hover:bg-white/5 rounded-lg px-2 py-1 transition-colors duration-200"
                                 whileHover={{ scale: 1.05 }}
                               >
-                                <div className="h-4 relative shrink-0 w-[104px]" data-name="medium_logo.svg">
-                                  <svg className="block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 104 16">
-                                    <g clipPath="url(#clip0_3_533)" id="medium_logo.svg">
-                                      <path d={svgPaths.p20834100} fill="var(--fill-0, #D1D5DB)" id="Vector" />
-                                      <path d={svgPaths.p1e573e00} fill="var(--fill-0, #D1D5DB)" id="Vector_2" />
-                                      <path d={svgPaths.p2f962600} fill="var(--fill-0, #D1D5DB)" id="Vector_3" />
-                                      <path d={svgPaths.p80d3780} fill="var(--fill-0, #D1D5DB)" id="Vector_4" />
+                                <svg width="104" height="16" viewBox="0 0 104 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                  <g clipPath="url(#clip0_3005_2287)">
+                                    <path d="M15.7 8.08395C15.7 12.3793 12.2197 15.8615 7.92642 15.8615C3.63312 15.8615 0.153076 12.3803 0.153076 8.08395C0.153076 3.78756 3.63338 0.306641 7.92642 0.306641C12.2195 0.306641 15.7 3.78861 15.7 8.08395Z" fill="#D1D5DB"/>
+                                    <path d="M24.2277 8.08388C24.2277 12.1274 22.4874 15.4051 20.3409 15.4051C18.1944 15.4051 16.4541 12.1264 16.4541 8.08388C16.4541 4.04138 18.1944 0.762695 20.3409 0.762695C22.4874 0.762695 24.2277 4.04138 24.2277 8.08388Z" fill="#D1D5DB"/>
+                                    <path d="M27.7158 8.08389C27.7158 11.7067 27.1037 14.6434 26.3487 14.6434C25.5938 14.6434 24.9817 11.7057 24.9817 8.08389C24.9817 4.46212 25.5938 1.52441 26.349 1.52441C27.1042 1.52441 27.7158 4.46133 27.7158 8.08389Z" fill="#D1D5DB"/>
+                                    <path d="M49.1695 0.981164L49.1911 0.976442V0.809885H44.7704L40.6655 10.3968L36.5607 0.809885H31.7967V0.976442L31.8181 0.981164C32.6251 1.16215 33.0347 1.43205 33.0347 2.40543V13.8008C33.0347 14.7742 32.6235 15.0441 31.8165 15.2251L31.7952 15.2298V15.3969H35.0273V15.2303L35.006 15.2256C34.199 15.0446 33.7894 14.7747 33.7894 13.8014V3.06641L39.0625 15.3969H39.3616L44.7883 2.72254V14.0828C44.7191 14.8516 44.3132 15.089 43.5825 15.2529L43.5609 15.2579V15.4231H49.1911V15.2579L49.1695 15.2529C48.4381 15.089 48.0223 14.8516 47.9532 14.0828L47.9495 2.40543H47.9532C47.9532 1.43205 48.3628 1.16215 49.1695 0.981164ZM51.7413 8.53002C51.8334 6.48254 52.5733 5.00477 53.8149 4.97933C54.1979 4.98562 54.5192 5.11048 54.7689 5.35074C55.2994 5.86248 55.5489 6.93185 55.5103 8.53002H51.7413ZM51.6856 9.10707H58.2845V9.07952C58.2658 7.51389 57.8094 6.29605 56.9294 5.45985C56.1686 4.73723 55.0423 4.33959 53.8593 4.33959H53.8329C53.2189 4.33959 52.4658 4.48752 51.93 4.75559C51.32 5.03625 50.782 5.45592 50.3344 6.00674C49.6137 6.89408 49.1772 8.09329 49.071 9.44097C49.0676 9.48136 49.0647 9.52175 49.0618 9.56215C49.0589 9.60254 49.0571 9.63874 49.0552 9.67729C49.0515 9.74943 49.0486 9.82182 49.047 9.89447C49.0444 10.0109 49.0436 10.1282 49.0457 10.2462C49.1172 13.2985 50.7765 15.7379 53.7236 15.7379C56.3104 15.7379 57.8168 13.8588 58.1924 11.3366L58.0026 11.2702C57.3427 12.6258 56.1576 13.4473 54.8087 13.3471C52.9673 13.2101 51.5567 11.3549 51.6848 9.10759M65.7456 13.2435C65.5292 13.7536 65.0775 14.0343 64.4723 14.0343C63.867 14.0343 63.3138 13.6214 62.9207 12.8713C62.4984 12.066 62.2761 10.9277 62.2761 9.5792C62.2761 6.77264 63.1546 4.95729 64.5143 4.95729C65.0836 4.95729 65.5318 5.23795 65.7456 5.72766V13.2435ZM70.1231 15.2442C69.3162 15.0546 68.9065 14.7721 68.9065 13.7492V0.138672L64.004 1.57395V1.74969L64.0341 1.74733C64.7104 1.69303 65.1691 1.78589 65.4355 2.03034C65.644 2.22182 65.7456 2.51559 65.7456 2.92897V4.79493C65.2623 4.48831 64.6874 4.33907 63.9898 4.33907C62.5749 4.33907 61.2818 4.93107 60.3492 6.00621C59.3771 7.12674 58.8631 8.65802 58.8631 10.434C58.8629 13.606 60.4342 15.7379 62.7729 15.7379C64.141 15.7379 65.2417 14.993 65.7456 13.7366V15.4231H70.1445V15.2484L70.1231 15.2442ZM74.3277 1.98969C74.3277 0.999262 73.5762 0.252246 72.5793 0.252246C71.587 0.252246 70.8107 1.01552 70.8107 1.98969C70.8107 2.96385 71.5878 3.72713 72.5793 3.72713C73.5762 3.72713 74.3277 2.98011 74.3277 1.98969ZM75.4849 15.2442C74.678 15.0546 74.2683 14.7721 74.2683 13.7492H74.2649V4.37133L69.8658 5.62641V5.7969L69.8922 5.79926C70.844 5.88346 71.1045 6.20923 71.1045 7.31454V15.4231H75.5074V15.2484L75.4849 15.2442ZM86.7573 15.2442C85.9504 15.0546 85.5407 14.7721 85.5407 13.7492V4.37133L81.3522 5.58497V5.75598L81.377 5.75861C82.1552 5.83992 82.3801 6.18431 82.3801 7.29461V13.2225C82.1206 13.7326 81.6339 14.0356 81.0442 14.056C80.0879 14.056 79.5613 13.4142 79.5613 12.2488V4.37159L75.1621 5.62667V5.7969L75.1885 5.79926C76.1403 5.8832 76.4011 6.20897 76.4011 7.31454V12.3315C76.3989 12.6817 76.4295 13.0314 76.4927 13.3759L76.5719 13.7182C76.9444 15.0444 77.9202 15.7379 79.4491 15.7379C80.7441 15.7379 81.8791 14.9413 82.379 13.6949V15.426H86.7782V15.2513L86.7573 15.2442ZM103.847 15.4231V15.2482L103.825 15.2432C102.95 15.0425 102.609 14.6643 102.609 13.8942V7.5152C102.609 5.52621 101.485 4.33907 99.6016 4.33907C98.229 4.33907 97.0715 5.12726 96.626 6.35507C96.272 5.05408 95.2534 4.33907 93.7472 4.33907C92.4243 4.33907 91.3874 5.03284 90.9427 6.20477V4.37211L86.5435 5.57579V5.74733L86.5699 5.74969C87.5104 5.83257 87.7823 6.16779 87.7823 7.24477V15.4231H91.8868V15.2484L91.8652 15.2432C91.1668 15.08 90.9413 14.7826 90.9413 14.0193V6.70759C91.1261 6.27874 91.4986 5.77067 92.2347 5.77067C93.1491 5.77067 93.6126 6.40018 93.6126 7.64031V15.4231H97.7182V15.2484L97.6966 15.2432C96.9981 15.08 96.7727 14.7826 96.7727 14.0193V7.51441C96.7745 7.27119 96.7551 7.02826 96.7147 6.78838C96.9105 6.32228 97.3043 5.77067 98.0706 5.77067C98.9979 5.77067 99.4485 6.38208 99.4485 7.64031V15.4231H103.847Z" fill="#D1D5DB"/>
                                     </g>
                                     <defs>
-                                      <clipPath id="clip0_3_533">
-                                        <rect fill="white" height="16" width="104" />
+                                    <clipPath id="clip0_3005_2287">
+                                      <rect width="104" height="16" fill="white"/>
                                       </clipPath>
                                     </defs>
                                   </svg>
-                                </div>
                               </motion.a>
                             </div>
                           </div>
@@ -970,8 +943,8 @@ function ContactSection({ sectionRef }: { sectionRef: RefObject<HTMLDivElement> 
                         </svg>
                       </div>
                                               <div className="font-didact-gothic font-normal leading-[0] not-italic relative shrink-0 text-[14px] text-gray-300 text-left text-nowrap">
-                          <p className="block leading-[22px] whitespace-pre">Available for new projects</p>
-                        </div>
+                        <p className="block leading-[22px] whitespace-pre">Available for new projects</p>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -984,7 +957,7 @@ function ContactSection({ sectionRef }: { sectionRef: RefObject<HTMLDivElement> 
   );
 }
 
-export const MediaPlayer = forwardRef<{ playAirframeAudio: () => void }, { onNavigateToProject?: (project: string) => void }>(({ onNavigateToProject }, ref) => {
+export const MediaPlayer = forwardRef<{ playAirframeAudio: () => void; playEatsyAudio: () => void; pauseAudio: () => void }, { onNavigateToProject?: (project: string) => void }>(({ onNavigateToProject }, ref) => {
   const [mediaState, setMediaState] = useState<MediaPlayerState>({
     isPlaying: false,
     currentTime: 0,
@@ -994,7 +967,7 @@ export const MediaPlayer = forwardRef<{ playAirframeAudio: () => void }, { onNav
 
   const audioRef = useRef<HTMLAudioElement>(null);
 
-  // Expose play function for external use
+  // Expose play and pause functions for external use
   const playAirframeAudio = () => {
     if (audioRef.current) {
       // Set to Airframe project (index 0)
@@ -1008,9 +981,30 @@ export const MediaPlayer = forwardRef<{ playAirframeAudio: () => void }, { onNav
     }
   };
 
-  // Expose the play function via ref
+  const playEatsyAudio = () => {
+    if (audioRef.current) {
+      // Set to Eatsy project (index 1)
+      setMediaState(prev => ({ ...prev, currentProjectIndex: 1, currentTime: 0 }));
+      // Play the audio
+      setTimeout(() => {
+        if (audioRef.current) {
+          audioRef.current.play();
+        }
+      }, 100);
+    }
+  };
+
+  const pauseAudio = () => {
+    if (audioRef.current) {
+      audioRef.current.pause();
+    }
+  };
+
+  // Expose the play and pause functions via ref
   useImperativeHandle(ref, () => ({
-    playAirframeAudio
+    playAirframeAudio,
+    playEatsyAudio,
+    pauseAudio
   }));
 
   // Audio event listeners
@@ -1352,7 +1346,7 @@ function TabletHome({ onNavigateToProject, onNavigateToAbout }: { onNavigateToPr
   const featuredRef = useRef<HTMLDivElement>(null);
   const moreRef = useRef<HTMLDivElement>(null);
   const contactRef = useRef<HTMLDivElement>(null);
-  const mediaPlayerRef = useRef<{ playAirframeAudio: () => void }>(null);
+  const mediaPlayerRef = useRef<{ playAirframeAudio: () => void; playEatsyAudio: () => void; pauseAudio: () => void }>(null);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -1499,9 +1493,9 @@ function useDeviceType() {
 
     // Only run on client side
     if (typeof window !== 'undefined') {
-      checkDeviceType();
-      window.addEventListener('resize', checkDeviceType);
-      return () => window.removeEventListener('resize', checkDeviceType);
+    checkDeviceType();
+    window.addEventListener('resize', checkDeviceType);
+    return () => window.removeEventListener('resize', checkDeviceType);
     }
   }, []);
 
@@ -1516,7 +1510,7 @@ export default function InteractiveHome({ onNavigateToProject, openProjects, onC
   const featuredRef = useRef<HTMLDivElement>(null);
   const moreRef = useRef<HTMLDivElement>(null);
   const contactRef = useRef<HTMLDivElement>(null);
-  const mediaPlayerRef = useRef<{ playAirframeAudio: () => void }>(null);
+  const mediaPlayerRef = useRef<{ playAirframeAudio: () => void; playEatsyAudio: () => void; pauseAudio: () => void }>(null);
 
   // Debug logging
   console.log('InteractiveHome render - deviceType:', deviceType, 'window.innerWidth:', typeof window !== 'undefined' ? window.innerWidth : 'N/A');
@@ -1822,33 +1816,11 @@ export default function InteractiveHome({ onNavigateToProject, openProjects, onC
                       <div className="font-didact-gothic font-medium leading-[0] not-italic relative shrink-0 text-[#ffffff] text-[16px] text-left text-nowrap">
                         <p className="block leading-[22px] whitespace-pre">LinkedIn</p>
                       </div>
-                      <div className="relative shrink-0 size-[18px]" data-name="logo">
-                        <svg className="block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 18 18">
-                          <g id="logo">
-                            <path
-                              d={svgPaths.p204bd7c0}
-                              id="Vector"
-                              stroke="var(--stroke-0, white)"
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                            />
-                            <path
-                              d={svgPaths.pad25e80}
-                              id="Vector_2"
-                              stroke="var(--stroke-0, white)"
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                            />
-                            <path
-                              d={svgPaths.p127a4d00}
-                              id="Vector_3"
-                              stroke="var(--stroke-0, white)"
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                            />
-                          </g>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 20 20" fill="none">
+                        <path d="M13.3333 6.66699C14.6593 6.66699 15.9311 7.19378 16.8688 8.13146C17.8065 9.06914 18.3333 10.3409 18.3333 11.667V17.5003H14.9999V11.667C14.9999 11.225 14.8243 10.801 14.5118 10.4885C14.1992 10.1759 13.7753 10.0003 13.3333 10.0003C12.8912 10.0003 12.4673 10.1759 12.1547 10.4885C11.8422 10.801 11.6666 11.225 11.6666 11.667V17.5003H8.33325V11.667C8.33325 10.3409 8.86004 9.06914 9.79772 8.13146C10.7354 7.19378 12.0072 6.66699 13.3333 6.66699Z" stroke="#D1D5DB" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
+                        <path d="M5.00008 7.5H1.66675V17.5H5.00008V7.5Z" stroke="#D1D5DB" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
+                        <path d="M3.33341 5.00033C4.25389 5.00033 5.00008 4.25413 5.00008 3.33366C5.00008 2.41318 4.25389 1.66699 3.33341 1.66699C2.41294 1.66699 1.66675 2.41318 1.66675 3.33366C1.66675 4.25413 2.41294 5.00033 3.33341 5.00033Z" stroke="#D1D5DB" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
                         </svg>
-                      </div>
                     </div>
                   </div>
                 </motion.a>

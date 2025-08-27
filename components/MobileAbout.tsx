@@ -260,10 +260,10 @@ export default function MobileAbout({
                         className="relative shrink-0 size-5 cursor-pointer hover:opacity-80 transition-opacity duration-200"
                         data-name="Frame"
                       >
-                        <svg width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M13.3333 6.8418C14.6593 6.8418 15.9311 7.36858 16.8688 8.30626C17.8065 9.24394 18.3333 10.5157 18.3333 11.8418V17.6751H14.9999V11.8418C14.9999 11.3998 14.8243 10.9758 14.5118 10.6633C14.1992 10.3507 13.7753 10.1751 13.3333 10.1751C12.8912 10.1751 12.4673 10.3507 12.1547 10.6633C11.8422 10.9758 11.6666 11.3998 11.6666 11.8418V17.6751H8.33325V11.8418C8.33325 10.5157 8.86004 9.24394 9.79772 8.30626C10.7354 7.36858 12.0072 6.8418 13.3333 6.8418Z" stroke="#D1D5DB" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
-                          <path d="M5.00008 7.6748H1.66675V17.6748H5.00008V7.6748Z" stroke="#D1D5DB" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
-                          <path d="M3.33341 5.17513C4.25389 5.17513 5.00008 4.42894 5.00008 3.50846C5.00008 2.58799 4.25389 1.8418 3.33341 1.8418C2.41294 1.8418 1.66675 2.58799 1.66675 3.50846C1.66675 4.42894 2.41294 5.17513 3.33341 5.17513Z" stroke="#D1D5DB" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                          <path d="M13.3333 6.66699C14.6593 6.66699 15.9311 7.19378 16.8688 8.13146C17.8065 9.06914 18.3333 10.3409 18.3333 11.667V17.5003H14.9999V11.667C14.9999 11.225 14.8243 10.801 14.5118 10.4885C14.1992 10.1759 13.7753 10.0003 13.3333 10.0003C12.8912 10.0003 12.4673 10.1759 12.1547 10.4885C11.8422 10.801 11.6666 11.225 11.6666 11.667V17.5003H8.33325V11.667C8.33325 10.3409 8.86004 9.06914 9.79772 8.13146C10.7354 7.19378 12.0072 6.66699 13.3333 6.66699Z" stroke="#D1D5DB" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
+                          <path d="M5.00008 7.5H1.66675V17.5H5.00008V7.5Z" stroke="#D1D5DB" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
+                          <path d="M3.33341 5.00033C4.25389 5.00033 5.00008 4.25413 5.00008 3.33366C5.00008 2.41318 4.25389 1.66699 3.33341 1.66699C2.41294 1.66699 1.66675 2.41318 1.66675 3.33366C1.66675 4.25413 2.41294 5.00033 3.33341 5.00033Z" stroke="#D1D5DB" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
                         </svg>
                       </a>
                       <a

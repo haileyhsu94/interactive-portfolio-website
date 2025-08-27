@@ -189,10 +189,10 @@ function InteractiveCarousel({ images, bgColor, title, onInteraction }: Carousel
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4"
+            className="fixed inset-0 bg-black bg-opacity-90 z-50 flex items-center justify-center p-4 overflow-auto"
             onClick={closeZoom}
           >
-            <div className="relative max-w-7xl max-h-full">
+            <div className="relative w-[85vw] h-[85vh] flex items-center justify-center">
               <img
                 src={zoomedImage}
                 alt="Zoomed view"
@@ -206,7 +206,7 @@ function InteractiveCarousel({ images, bgColor, title, onInteraction }: Carousel
                   e.stopPropagation();
                   prevImage();
                 }}
-                className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white/20 hover:bg-white/30 text-white p-2 rounded-full transition-colors"
+                className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 hover:bg-opacity-70 text-white p-3 rounded-full transition-all duration-200"
               >
                 <ChevronLeft size={24} />
               </button>
@@ -216,20 +216,20 @@ function InteractiveCarousel({ images, bgColor, title, onInteraction }: Carousel
                   e.stopPropagation();
                   nextImage();
                 }}
-                className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white/20 hover:bg-white/30 text-white p-2 rounded-full transition-colors"
+                className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 hover:bg-opacity-70 text-white p-3 rounded-full transition-all duration-200"
               >
                 <ChevronRight size={24} />
               </button>
               
               <button
                 onClick={closeZoom}
-                className="absolute top-4 right-4 bg-white/20 hover:bg-white/30 text-white p-2 rounded-full transition-colors"
+                className="absolute top-4 right-4 text-white text-4xl font-bold hover:text-gray-300 z-10 bg-black bg-opacity-50 rounded-full w-12 h-12 flex items-center justify-center hover:bg-opacity-70 transition-all duration-200"
               >
-                <X size={24} />
+                ×
               </button>
               
               {/* Image counter */}
-              <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-white/20 text-white px-3 py-1 rounded-full">
+              <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-black bg-opacity-50 text-white px-4 py-2 rounded-full text-sm">
                 {currentIndex + 1} / {images.length}
               </div>
             </div>
@@ -710,9 +710,9 @@ function Carousel3D({ images, title }: Omit<GSAPCarouselProps, 'sets'>) {
           <div className="relative max-w-5xl max-h-[90vh]">
             <button
               onClick={() => setLightboxOpen(false)}
-              className="absolute top-4 right-4 bg-white/10 hover:bg-white/20 text-white px-3 py-1 rounded-full text-sm"
+              className="absolute top-4 right-4 text-white text-4xl font-bold hover:text-gray-300 z-10 bg-black bg-opacity-50 rounded-full w-12 h-12 flex items-center justify-center hover:bg-opacity-70 transition-all duration-200"
             >
-              Close
+              ×
             </button>
             <img 
               src={lightboxImage} 
@@ -740,11 +740,28 @@ interface AirframePageProps {
 
 export default function AirframePage({ onBack, openProjects, onCloseProject, onNavigateToProject, onLogoClick }: AirframePageProps) {
   const [navigation, setNavigation] = useState<NavigationState>({ activeSection: 'more' });
-  const mediaPlayerRef = useRef<{ playAirframeAudio: () => void }>(null);
+  const mediaPlayerRef = useRef<{ playAirframeAudio: () => void; playEatsyAudio: () => void; pauseAudio: () => void }>(null);
+  const [isPlaying, setIsPlaying] = useState(false);
 
 
   const handleNavigateToSection = (section: 'featured' | 'more' | 'contact') => {
     setNavigation({ activeSection: section });
+  };
+
+  const toggleAudio = () => {
+    if (isPlaying) {
+      setIsPlaying(false);
+      // Pause the MediaPlayer
+      if (mediaPlayerRef.current) {
+        mediaPlayerRef.current.pauseAudio();
+      }
+    } else {
+      setIsPlaying(true);
+      // Play the MediaPlayer
+      if (mediaPlayerRef.current) {
+        mediaPlayerRef.current.playAirframeAudio();
+      }
+    }
   };
 
   return (
@@ -849,7 +866,27 @@ export default function AirframePage({ onBack, openProjects, onCloseProject, onN
 
             {/* Project Details */}
             <div className="p-7">
-              <div className="flex flex-col sm:flex-row gap-5">
+              <div className="flex flex-col sm:flex-row gap-5 items-center">
+                {/* Audio Player Button */}
+                <button
+                  onClick={toggleAudio}
+                  className="transition-transform duration-200 hover:scale-105 mb-4 sm:mb-0 sm:mr-4"
+                  aria-label={isPlaying ? "Pause audio" : "Play audio"}
+                >
+                  {isPlaying ? (
+                    <svg width="52" height="52" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <rect width="52" height="52" rx="26" fill="white"/>
+                      <path d="M31.5002 17.75H28.7502C28.2439 17.75 27.8335 18.1604 27.8335 18.6667V33.3333C27.8335 33.8396 28.2439 34.25 28.7502 34.25H31.5002C32.0064 34.25 32.4168 33.8396 32.4168 33.3333V18.6667C32.4168 18.1604 32.0064 17.75 31.5002 17.75Z" fill="#121212"/>
+                      <path d="M23.2502 17.75H20.5002C19.9939 17.75 19.5835 18.1604 19.5835 18.6667V33.3333C19.5835 33.8396 19.9939 34.25 20.5002 34.25H23.2502C23.7564 34.25 24.1668 33.8396 24.1668 33.3333V18.6667C24.1668 18.1604 23.7564 17.75 23.2502 17.75Z" fill="#121212"/>
+                    </svg>
+                  ) : (
+                    <svg width="52" height="52" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <rect width="52" height="52" rx="26" fill="white"/>
+                      <path d="M19.8887 19.7782C19.8886 19.4654 19.971 19.1581 20.1277 18.8874C20.2843 18.6167 20.5096 18.392 20.7808 18.2362C21.0521 18.0804 21.3596 17.9989 21.6724 18C21.9852 18.0011 22.2921 18.0846 22.5623 18.2423L33.2256 24.4623C33.4947 24.6185 33.7181 24.8425 33.8735 25.1121C34.0289 25.3816 34.1108 25.6872 34.1111 25.9983C34.1113 26.3095 34.0299 26.6152 33.875 26.885C33.7201 27.1549 33.4971 27.3793 33.2282 27.5359L22.5623 33.7577C22.2921 33.9154 21.9852 33.9989 21.6724 34C21.3596 34.0011 21.0521 33.9196 20.7808 33.7638C20.5096 33.608 20.2843 33.3833 20.1277 33.1126C19.971 32.8419 19.8886 32.5346 19.8887 32.2218V19.7782Z" fill="#0A0A0A"/>
+                    </svg>
+                  )}
+                </button>
+                
                 <div>
                   <div className="text-[#f4915c] text-sm mb-1">Duration</div>
                   <div className="text-gray-300">Dec 2024 - May 2025</div>
@@ -1186,6 +1223,8 @@ export default function AirframePage({ onBack, openProjects, onCloseProject, onN
       <div className="absolute bottom-0 left-0 right-0 flex-shrink-0 bg-neutral-950 w-full" style={{ height: '74px' }}>
         <MediaPlayer ref={mediaPlayerRef} onNavigateToProject={onNavigateToProject} />
       </div>
+
+
     </div>
   );
 } 
