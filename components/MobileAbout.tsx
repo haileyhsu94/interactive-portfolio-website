@@ -104,7 +104,7 @@ export default function MobileAbout({
       </div>
 
       {/* Main Content */}
-      <div className="absolute box-border content-stretch flex flex-col gap-[60px] items-center justify-start left-[9px] pb-0 pt-[60px] px-0 right-2 top-[72px] overflow-y-auto h-[calc(100vh-72px)]">
+      <div className="absolute box-border content-stretch flex flex-col gap-[60px] items-center justify-start left-[9px] pb-0 pt-[60px] px-0 right-2 top-[72px] overflow-y-auto scrollbar-thin h-[calc(100vh-72px)]">
         {/* Hero Section */}
         <div className="box-border content-stretch flex flex-col gap-10 items-center justify-start px-[21px] py-5 relative shrink-0 w-full">
           {/* Avatar */}
