@@ -1288,7 +1288,7 @@ export default function AirframePage({ onBack, openProjects, onCloseProject, onN
       </div>
       
       {/* Footer Attribution - Bottom of page */}
-      <div className="bg-neutral-950 px-4 py-2 mb-[74px]">
+      <div className="hidden lg:block bg-neutral-950 px-4 py-2 mb-[74px]">
         <Footer />
       </div>
 
