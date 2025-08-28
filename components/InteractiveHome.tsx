@@ -9,6 +9,7 @@ import { generateRealisticWaveform, chunkWaveformData } from "../utils/audioUtil
 import MobileHome from './MobileHome';
 import MobileAbout from './MobileAbout';
 import MobileMenu from './MobileMenu';
+import Footer from './Footer';
 
 // Image paths - replace with your actual images
 // Add your images to the public/images/ folder and update these paths
@@ -1616,8 +1617,13 @@ function TabletHome({ onNavigateToProject, onNavigateToAbout }: { onNavigateToPr
         </div>
       </div>
 
-      {/* Audio Player - Bottom */}
-      <div className="bg-neutral-950 box-border content-stretch flex items-center justify-between pb-4 pt-0 px-4 relative w-full mt-auto">
+      {/* Footer Attribution - Fixed at bottom but above audio */}
+      <div className="bg-neutral-950 px-4 py-2">
+        <Footer />
+      </div>
+
+      {/* Audio Player - Bottom (Hidden on tablet) */}
+      <div className="hidden bg-neutral-950 box-border content-stretch flex items-center justify-between pb-4 pt-0 px-4 relative w-full">
         <MediaPlayer onNavigateToProject={onNavigateToProject} />
       </div>
     </div>
@@ -1975,6 +1981,11 @@ export default function InteractiveHome({ onNavigateToProject, openProjects, onC
                     </div>
                   </div>
                 </motion.a>
+              </div>
+              
+              {/* Footer Attribution */}
+              <div className="mt-auto pt-4 w-full flex justify-center">
+                <Footer />
               </div>
             </div>
           </div>

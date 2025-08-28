@@ -4,6 +4,7 @@ import { useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { toast } from "sonner";
 import MobileMenu from './MobileMenu';
+import Footer from './Footer';
 
 // Image paths - replace with your actual images
 const imgHeroImage1 = "/images/airframe/thumbnail.png"; // Featured project hero image
@@ -460,6 +461,11 @@ export default function MobileHome({
                     <p className="leading-[22px] whitespace-pre">Available for new projects</p>
                   </div>
                 </div>
+              </div>
+              
+              {/* Footer Attribution */}
+              <div className="w-full flex justify-center">
+                <Footer />
               </div>
             </div>
           </div>

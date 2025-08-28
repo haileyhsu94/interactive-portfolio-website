@@ -4,6 +4,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { toast } from "sonner";
 import MobileMenu from './MobileMenu';
+import Footer from './Footer';
 
 // Image paths - using local images from your project
 const imgAvatar = "/images/avatar.png";
@@ -357,6 +358,11 @@ export default function MobileAbout({
                     <p className="leading-[22px] whitespace-pre">Available for new projects</p>
                   </div>
                 </div>
+              </div>
+              
+              {/* Footer Attribution */}
+              <div className="w-full flex justify-center">
+                <Footer />
               </div>
             </div>
           </div>

@@ -6,6 +6,7 @@ import { ChevronLeft, ChevronRight, X } from 'lucide-react';
 import { Sidebar, MediaPlayer } from './InteractiveHome';
 import { Card } from './ui/card';
 import { Separator } from './ui/separator';
+import Footer from './Footer';
 
 // Image imports - you'll need to add these images to public/images/airframe/
 const airframeImages = {
@@ -1276,6 +1277,11 @@ export default function AirframePage({ onBack, openProjects, onCloseProject, onN
         </div>
       </div>
       
+      {/* Footer Attribution - Bottom of page */}
+      <div className="bg-neutral-950 px-4 py-2 mb-[74px]">
+        <Footer />
+      </div>
+
       {/* Audio Player - Sticky to bottom */}
       <div className="absolute bottom-0 left-0 right-0 flex-shrink-0 bg-neutral-950 w-full" style={{ height: '74px' }}>
         <MediaPlayer ref={mediaPlayerRef} onNavigateToProject={onNavigateToProject} />
