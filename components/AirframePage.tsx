@@ -740,7 +740,7 @@ interface AirframePageProps {
 
 export default function AirframePage({ onBack, openProjects, onCloseProject, onNavigateToProject, onLogoClick }: AirframePageProps) {
   const [navigation, setNavigation] = useState<NavigationState>({ activeSection: 'more' });
-  const mediaPlayerRef = useRef<{ playAirframeAudio: () => void; playEatsyAudio: () => void; pauseAudio: () => void }>(null);
+  const mediaPlayerRef = useRef<{ playAirframeAudio: () => void; playEatsyAudio: () => void; playBrainBoxAudio: () => void; pauseAudio: () => void }>(null);
   const [isPlaying, setIsPlaying] = useState(false);
 
 

@@ -410,7 +410,7 @@ function InteractiveContactForm() {
   );
 }
 
-function FeaturedSection({ sectionRef, mediaPlayerRef, onNavigateToProject }: { sectionRef: RefObject<HTMLDivElement>; mediaPlayerRef: RefObject<{ playAirframeAudio: () => void }>; onNavigateToProject?: (project: string) => void }) {
+function FeaturedSection({ sectionRef, mediaPlayerRef, onNavigateToProject }: { sectionRef: RefObject<HTMLDivElement>; mediaPlayerRef: RefObject<{ playAirframeAudio: () => void; playEatsyAudio: () => void; playBrainBoxAudio: () => void; pauseAudio: () => void }>; onNavigateToProject?: (project: string) => void }) {
   return (
     <div
       ref={sectionRef}
@@ -512,7 +512,7 @@ function FeaturedSection({ sectionRef, mediaPlayerRef, onNavigateToProject }: { 
                     </div>
                   </div>
                   <div className="font-didact-gothic font-normal leading-[0] not-italic relative shrink-0 text-[15px] text-gray-300 text-left w-full">
-                    <p className="block leading-[22px]">{`Delivered 100+ high-fidelity screens for buyer & vendor flows.`}</p>
+                    <p className="block leading-[22px]">{`Delivered 250+ high-fidelity screens for buyer & vendor flows.`}</p>
                   </div>
                   <div
                     className="[flex-flow:wrap] box-border content-start flex gap-2 items-start justify-start p-0 relative shrink-0 w-full"
@@ -624,7 +624,7 @@ function MoreProjectsSection({ sectionRef, onNavigateToProject }: { sectionRef: 
     { 
       id: "brainbox",
       title: "AI-Powered SAT Preparation Platform", 
-      description: "Conducted heatmap analysis and A/B testing to refine practice setup flow and dashboard layout. Led 4 designers to deliver 100+ screens, integrating AI tutor and performance reports.",
+      description: "Conducted heatmap analysis and A/B testing to refine practice setup flow and dashboard layout. Led 4 designers to deliver 200+ screens, integrating AI tutor and performance reports.",
       tags: ["Heatmap Analysis", "A/B Testing"],
       image: imgImage1 
     },
@@ -957,7 +957,7 @@ function ContactSection({ sectionRef }: { sectionRef: RefObject<HTMLDivElement> 
   );
 }
 
-export const MediaPlayer = forwardRef<{ playAirframeAudio: () => void; playEatsyAudio: () => void; pauseAudio: () => void }, { onNavigateToProject?: (project: string) => void }>(({ onNavigateToProject }, ref) => {
+export const MediaPlayer = forwardRef<{ playAirframeAudio: () => void; playEatsyAudio: () => void; playBrainBoxAudio: () => void; pauseAudio: () => void }, { onNavigateToProject?: (project: string) => void }>(({ onNavigateToProject }, ref) => {
   const [mediaState, setMediaState] = useState<MediaPlayerState>({
     isPlaying: false,
     currentTime: 0,
@@ -994,6 +994,19 @@ export const MediaPlayer = forwardRef<{ playAirframeAudio: () => void; playEatsy
     }
   };
 
+  const playBrainBoxAudio = () => {
+    if (audioRef.current) {
+      // Set to BrainBox project (index 2)
+      setMediaState(prev => ({ ...prev, currentProjectIndex: 2, currentTime: 0 }));
+      // Play the audio
+      setTimeout(() => {
+        if (audioRef.current) {
+          audioRef.current.play();
+        }
+      }, 100);
+    }
+  };
+
   const pauseAudio = () => {
     if (audioRef.current) {
       audioRef.current.pause();
@@ -1004,6 +1017,7 @@ export const MediaPlayer = forwardRef<{ playAirframeAudio: () => void; playEatsy
   useImperativeHandle(ref, () => ({
     playAirframeAudio,
     playEatsyAudio,
+    playBrainBoxAudio,
     pauseAudio
   }));
 
@@ -1281,7 +1295,9 @@ export const MediaPlayer = forwardRef<{ playAirframeAudio: () => void; playEatsy
               onClick={() => {
                 console.log('MediaPlayer Open Project clicked');
                 if (onNavigateToProject) {
-                  onNavigateToProject('airframe');
+                  const projectMap = ['airframe', 'eatsy', 'brainbox', 'shelf-life'];
+                  const currentProject = projectMap[mediaState.currentProjectIndex];
+                  onNavigateToProject(currentProject);
                 } else {
                   toast.info("Opening project details...");
                 }
@@ -1346,7 +1362,7 @@ function TabletHome({ onNavigateToProject, onNavigateToAbout }: { onNavigateToPr
   const featuredRef = useRef<HTMLDivElement>(null);
   const moreRef = useRef<HTMLDivElement>(null);
   const contactRef = useRef<HTMLDivElement>(null);
-  const mediaPlayerRef = useRef<{ playAirframeAudio: () => void; playEatsyAudio: () => void; pauseAudio: () => void }>(null);
+  const mediaPlayerRef = useRef<{ playAirframeAudio: () => void; playEatsyAudio: () => void; playBrainBoxAudio: () => void; pauseAudio: () => void }>(null);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -1423,7 +1439,7 @@ function TabletHome({ onNavigateToProject, onNavigateToAbout }: { onNavigateToPr
       />
 
       {/* Main Content - Tablet Layout */}
-      <div className="bg-neutral-950 box-border content-stretch flex flex-col gap-4 items-start justify-start p-[16px] relative w-full pt-20 flex-1">
+      <div className="bg-neutral-950 box-border content-stretch flex flex-col gap-4 items-start justify-start p-[16px] relative w-full pt-20 flex-1 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-transparent">
         {/* Hero Section - Mobile style */}
         <div className="box-border content-stretch flex flex-col gap-10 items-center justify-start px-8 py-[100px] relative shrink-0 w-full">
           <div className="content-stretch flex gap-2.5 items-center justify-center relative shrink-0 w-full">
@@ -1510,7 +1526,7 @@ export default function InteractiveHome({ onNavigateToProject, openProjects, onC
   const featuredRef = useRef<HTMLDivElement>(null);
   const moreRef = useRef<HTMLDivElement>(null);
   const contactRef = useRef<HTMLDivElement>(null);
-  const mediaPlayerRef = useRef<{ playAirframeAudio: () => void; playEatsyAudio: () => void; pauseAudio: () => void }>(null);
+  const mediaPlayerRef = useRef<{ playAirframeAudio: () => void; playEatsyAudio: () => void; playBrainBoxAudio: () => void; pauseAudio: () => void }>(null);
 
   // Debug logging
   console.log('InteractiveHome render - deviceType:', deviceType, 'window.innerWidth:', typeof window !== 'undefined' ? window.innerWidth : 'N/A');

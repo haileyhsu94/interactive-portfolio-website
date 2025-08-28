@@ -92,7 +92,7 @@ export default function MobileHome({
       </div>
 
       {/* Main Content */}
-      <div className="absolute box-border content-stretch flex flex-col gap-8 items-center justify-start left-0 pb-0 pt-[80px] px-4 right-0 top-[72px] overflow-y-auto h-[calc(100vh-72px)]" data-node-id="3000:1756">
+      <div className="absolute box-border content-stretch flex flex-col gap-8 items-center justify-start left-0 pb-0 pt-[80px] px-4 right-0 top-[72px] overflow-y-auto h-[calc(100vh-72px)] scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-transparent" data-node-id="3000:1756">
         {/* Hero Section */}
         <div className="box-border content-stretch flex flex-col gap-10 items-center justify-start px-8 py-5 relative shrink-0 w-full mb-20" data-node-id="3000:1755">
           <div className="content-stretch flex gap-2.5 items-center justify-center relative shrink-0 w-full" data-node-id="3000:1704">
@@ -158,7 +158,7 @@ export default function MobileHome({
                     </div>
                   </div>
                   <div className="font-didact-gothic leading-[0] not-italic relative shrink-0 text-[16px] text-gray-300 w-full" data-node-id="3000:1736">
-                    <p className="leading-[22px]">{`Delivered 100+ high-fidelity screens for buyer & vendor flows.`}</p>
+                    <p className="leading-[22px]">{`Delivered 250+ high-fidelity screens for buyer & vendor flows.`}</p>
                   </div>
                   <div className="content-start flex flex-wrap gap-2 items-start justify-start relative shrink-0 w-full" data-name="tags" data-node-id="3000:1737">
                     <div className="bg-[#333333] box-border content-stretch flex gap-2.5 items-center justify-center px-3 py-1 relative rounded-[999px] shrink-0" data-node-id="3000:1738">
@@ -253,7 +253,7 @@ export default function MobileHome({
                 </div>
               </div>
               <div className="font-didact-gothic leading-[0] min-w-full not-italic relative shrink-0 text-[16px] text-gray-300" data-node-id="3000:1800" style={{ width: "min-content" }}>
-                <p className="leading-[22px]">Conducted heatmap analysis and A/B testing to refine practice setup flow and dashboard layout. Led 4 designers to deliver 100+ screens, integrating AI tutor and performance reports.</p>
+                <p className="leading-[22px]">Conducted heatmap analysis and A/B testing to refine practice setup flow and dashboard layout. Led 4 designers to deliver 200+ screens, integrating AI tutor and performance reports.</p>
               </div>
               <div className="box-border content-start flex flex-wrap gap-2 items-start justify-start pb-0 pt-1 px-0 relative shrink-0 w-full" data-node-id="3000:1801">
                 <div className="bg-[#333333] box-border content-stretch flex gap-2.5 items-center justify-center px-3 py-1 relative rounded-[999px] shrink-0" data-node-id="3000:1802">

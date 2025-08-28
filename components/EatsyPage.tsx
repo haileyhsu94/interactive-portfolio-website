@@ -7,23 +7,23 @@ import { Sidebar, MediaPlayer } from './InteractiveHome';
 import { Card } from './ui/card';
 import { Separator } from './ui/separator';
 
-// Image assets from Figma
-const imgAirframeThumbnail1 = "http://localhost:3845/assets/9e88f57f74aa86590627a682f5d048b7e3de6a19.png";
-const imgImage38 = "http://localhost:3845/assets/ef248765b067a3fbc9513d754c33a459c4bb71fe.png";
-const imgImage39 = "http://localhost:3845/assets/8a50a14cd01774dd310482963e1f9ddfc14ddcb4.png";
-const imgImage40 = "http://localhost:3845/assets/3be4053c8f12d2cfeb3bf656425f9b4668cd85b3.png";
-const imgImage41 = "http://localhost:3845/assets/3d514c74d4ddfd945fd7b361fb63ef77ca0832f4.png";
-const imgImage43 = "http://localhost:3845/assets/80c9a78385920af65f217bea5369d1850e10388c.png";
-const imgImage47 = "http://localhost:3845/assets/b295abc057b7185faf2d28710f6e6bd701342590.png";
-const imgImage46 = "http://localhost:3845/assets/f2d2680189566750b7534ed6dc570059ffecc07b.png";
-const imgImage48 = "http://localhost:3845/assets/03509389b9fbad1d7150cd90e676cd7870a04506.png";
-const imgImage49 = "http://localhost:3845/assets/652c7b0cc6a049c70e93e8ac999f9f47c35c6ab0.png";
-const imgImage53 = "http://localhost:3845/assets/c711a1e2a8fa95048211c1bdb1e1a9ca49a3ba52.png";
-const imgImage52 = "http://localhost:3845/assets/91227c39842f610cb613cef432cac13adbbb190d.png";
-const imgImage51 = "http://localhost:3845/assets/2fe490454f4d095f011e849bd40ca43b239f3934.png";
-const imgEllipse44 = "http://localhost:3845/assets/30dc41d365bffe7653c865f46e4216d4ab6227c5.png";
-const imgEllipse45 = "http://localhost:3845/assets/4f1540076712b0e8c7c9598d8167782d5c190366.png";
-const imgEllipse46 = "http://localhost:3845/assets/31febe0d828f7d779ef70c9b4871d228f0aa2939.png";
+// Image assets from Figma - Now using proper local paths
+const imgAirframeThumbnail1 = "/images/eatsy/hero/hero-thumbnail.png";
+const imgImage38 = "/images/eatsy/look-and-feel/before-after-1.png";
+const imgImage39 = "/images/eatsy/look-and-feel/before-after-2.png";
+const imgImage40 = "/images/eatsy/look-and-feel/before-after-1.png"; // Not used, but keeping for consistency
+const imgImage41 = "/images/eatsy/reservation-features/reservation-features.png";
+const imgImage43 = "/images/eatsy/reservation-features/customization-1.png";
+const imgImage47 = "/images/eatsy/reservation-features/customization-2.png";
+const imgImage46 = "/images/eatsy/reservation-features/customization-3.png";
+const imgImage48 = "/images/eatsy/reservation-features/customization-4.png";
+const imgImage49 = "/images/eatsy/reservation-features/customization-5.png";
+const imgImage53 = "/images/eatsy/mobile-mockups/mobile-mockup-1.png";
+const imgImage52 = "/images/eatsy/mobile-mockups/mobile-mockup-2.png";
+const imgImage51 = "/images/eatsy/mobile-mockups/mobile-mockup-3.png";
+const imgEllipse44 = "/images/eatsy/user-feedback/wakatake-avatar.png";
+const imgEllipse45 = "/images/eatsy/user-feedback/yang-er-lou-avatar.png";
+const imgEllipse46 = "/images/eatsy/user-feedback/wagyu-mania-avatar.png";
 
 interface NavigationState {
   activeSection: 'featured' | 'more' | 'contact';
@@ -39,7 +39,7 @@ interface EatsyPageProps {
 
 export default function EatsyPage({ onBack, openProjects, onCloseProject, onNavigateToProject, onLogoClick }: EatsyPageProps) {
   const [navigation, setNavigation] = useState<NavigationState>({ activeSection: 'more' });
-  const mediaPlayerRef = useRef<{ playAirframeAudio: () => void; playEatsyAudio: () => void; pauseAudio: () => void }>(null);
+  const mediaPlayerRef = useRef<{ playAirframeAudio: () => void; playEatsyAudio: () => void; playBrainBoxAudio: () => void; pauseAudio: () => void }>(null);
   const [zoomedImage, setZoomedImage] = useState<string>('');
   const [isZoomed, setIsZoomed] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
