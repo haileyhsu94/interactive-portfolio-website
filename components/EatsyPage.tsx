@@ -651,8 +651,8 @@ export default function EatsyPage({ onBack, openProjects, onCloseProject, onNavi
         <Footer />
       </div>
 
-      {/* Audio Player */}
-      <div className="flex-shrink-0 bg-neutral-950 w-full" style={{ height: '74px' }}>
+      {/* Audio Player - Sticky to bottom */}
+      <div className="absolute bottom-0 left-0 right-0 flex-shrink-0 bg-neutral-950 w-full" style={{ height: '74px' }}>
         <MediaPlayer ref={mediaPlayerRef} onNavigateToProject={onNavigateToProject} />
       </div>
 

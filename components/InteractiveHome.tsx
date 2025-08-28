@@ -1411,7 +1411,7 @@ export const MediaPlayer = forwardRef<{ playAirframeAudio: () => void; playEatsy
 
       {/* Tablet/Mobile Layout */}
       <div className="lg:hidden bg-neutral-950 p-1 relative">
-        <div className="bg-[#121212] rounded-md p-2 flex flex-col gap-2.5">
+        <div className="bg-[#121212] rounded-md pt-0.5 px-3 pb-2 flex flex-col gap-2.5">
           <div className="flex items-center justify-between">
             <div className="flex gap-2 items-center flex-1">
               <div 

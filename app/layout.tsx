@@ -15,8 +15,13 @@ const oregano = Oregano({
 })
 
 export const metadata: Metadata = {
-  title: 'Hailey Hsu - Interactive Portfolio',
-  description: 'Interactive portfolio website showcasing Hailey Hsu\'s work',
+  title: 'Hailey Hsu | Product Designer',
+  description: 'I focus on practical workflows and turn messy problems into systems that grow smoothly.',
+  icons: {
+    icon: '/images/logo.png',
+    shortcut: '/images/logo.png',
+    apple: '/images/logo.png',
+  },
 }
 
 export default function RootLayout({

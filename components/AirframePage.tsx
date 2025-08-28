@@ -743,6 +743,18 @@ export default function AirframePage({ onBack, openProjects, onCloseProject, onN
   const [navigation, setNavigation] = useState<NavigationState>({ activeSection: 'more' });
   const mediaPlayerRef = useRef<{ playAirframeAudio: () => void; playEatsyAudio: () => void; playBrainBoxAudio: () => void; pauseAudio: () => void }>(null);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [isZoomed, setIsZoomed] = useState(false);
+  const [zoomedImage, setZoomedImage] = useState<string>('');
+
+  const handleImageClick = (image: string) => {
+    setZoomedImage(image);
+    setIsZoomed(true);
+  };
+
+  const closeZoom = () => {
+    setIsZoomed(false);
+    setZoomedImage('');
+  };
 
   // Listen for MediaPlayer state changes
   useEffect(() => {
@@ -809,7 +821,7 @@ export default function AirframePage({ onBack, openProjects, onCloseProject, onN
 
 
           {/* Scrollable Content Section */}
-          <div className="flex-1 overflow-y-auto">
+          <div className="flex-1 overflow-y-auto scrollbar-thin">
             {/* Gradient Section - Now scrolls with content */}
             <div style={{ background: 'linear-gradient(179deg, #7A96C4 -37.41%, #3C4A61 41.39%)' }}>
               <div className="p-7">
@@ -1261,17 +1273,15 @@ export default function AirframePage({ onBack, openProjects, onCloseProject, onN
             <Separator className="mb-20" />
 
             {/* Design System */}
-            <div className="px-6 md:px-12 lg:px-24">
-              <h2 className="text-2xl font-bold mb-3">Design System</h2>
-              <ul className="text-lg text-gray-300 leading-relaxed space-y-2 ml-6">
-                <li>• Lead user flow and pain point analysis</li>
-                <li>• Define core users and primary scenarios</li>
-                <li>• Organize and maintain the Design System</li>
-                <li>• Design the RFP collaboration tool to replace Excel, supporting real-time editing and requirement tracking for multiple users</li>
-                <li>• Establish a complete user process from requirement collection → vendor selection → evaluation → Proof of Concept</li>
-                <li>• Design an expert network system</li>
-                <li>• Design an AI assistant to support natural language search, recommendations, and process guidance</li>
-              </ul>
+            <div className="px-6 md:px-12 lg:px-24 mb-20">
+              <div className="flex flex-col gap-6">
+                <h2 className="text-2xl font-bold">Components at a Glance</h2>
+                <div 
+                  className="aspect-[1656/1408] bg-center bg-cover bg-no-repeat rounded-3xl w-full cursor-pointer hover:opacity-90 transition-opacity duration-200"
+                  style={{ backgroundImage: `url('/images/airframe/design-system.png')` }}
+                  onClick={() => handleImageClick('/images/airframe/design-system.png')}
+                />
+              </div>
             </div>
           </div>
         </div>
@@ -1287,6 +1297,34 @@ export default function AirframePage({ onBack, openProjects, onCloseProject, onN
         <MediaPlayer ref={mediaPlayerRef} onNavigateToProject={onNavigateToProject} />
       </div>
 
+      {/* Zoom Modal */}
+      <AnimatePresence>
+        {isZoomed && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-black bg-opacity-90 z-50 flex items-center justify-center p-4 overflow-auto"
+            onClick={closeZoom}
+          >
+            <div className="relative w-[85vw] h-[85vh] flex items-center justify-center">
+              <img
+                src={zoomedImage}
+                alt="Zoomed view"
+                className="max-w-full max-h-full object-contain"
+                onClick={(e) => e.stopPropagation()}
+              />
+              
+              <button
+                onClick={closeZoom}
+                className="absolute top-4 right-4 text-white text-4xl font-bold hover:text-gray-300 z-10 bg-black bg-opacity-50 rounded-full w-12 h-12 flex items-center justify-center hover:bg-opacity-70 transition-all duration-200"
+              >
+                ×
+              </button>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
     </div>
   );
