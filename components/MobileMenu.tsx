@@ -51,14 +51,14 @@ export default function MobileMenu({ isOpen, onClose, onNavigateToProject, onBac
                     onBackToHome();
                     // Scroll to featured section after a short delay to ensure navigation completes
                     setTimeout(() => {
-                      const featuredSection = document.querySelector('[data-name="featured"]');
+                      const featuredSection = document.querySelector('[data-name="feature"]');
                       if (featuredSection) {
                         featuredSection.scrollIntoView({ behavior: 'smooth' });
                       }
                     }, 100);
                   } else {
                     // Navigate to featured projects section (for mobile home page)
-                    const featuredSection = document.querySelector('[data-name="featured"]');
+                    const featuredSection = document.querySelector('[data-name="feature"]');
                     if (featuredSection) {
                       featuredSection.scrollIntoView({ behavior: 'smooth' });
                     }

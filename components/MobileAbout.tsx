@@ -69,15 +69,21 @@ export default function MobileAbout({
       {/* Header */}
       <div className="absolute bg-black box-border content-stretch flex items-center justify-between left-0 p-[16px] right-0 top-0">
         <div className="content-stretch flex gap-[7px] items-center justify-start relative shrink-0" data-name="header">
-          <div className="box-border content-stretch flex gap-2.5 items-center justify-center relative shrink-0 size-9" data-name="logo">
+          <motion.div 
+            className="box-border content-stretch flex gap-2.5 items-center justify-center relative shrink-0 size-9 cursor-pointer" 
+            data-name="logo"
+            onClick={onBackToHome}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
             <img 
               src={imgLogo} 
               alt="Hailey Hsu Logo" 
               className="block max-w-none size-full"
             />
-          </div>
+          </motion.div>
           <div className="content-stretch flex flex-col gap-1 items-start justify-start relative shrink-0 w-[132px]" data-name="name and title">
-            <div className="font-didact-gothic leading-[0] not-italic relative shrink-0 text-[#ffffff] text-[17px] text-nowrap">
+            <div className="font-didact-gothic leading-[0] not-italic relative shrink-0 text-[#ffffff] text-[16px] text-nowrap">
               <p className="leading-[normal] whitespace-pre">Hailey Hsu</p>
             </div>
           </div>

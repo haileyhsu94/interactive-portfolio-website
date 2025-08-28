@@ -1420,12 +1420,12 @@ export const MediaPlayer = forwardRef<{ playAirframeAudio: () => void; playEatsy
               <div className="flex flex-col flex-1 min-w-0">
                 <div className="text-white text-sm font-normal truncate">
                   {currentProject.title}
-                </div>
+          </div>
                 <div className="text-gray-400 text-xs">
                   {currentProject.subtitle}
-                </div>
-              </div>
             </div>
+          </div>
+        </div>
             <div className="flex items-center">
               <motion.button
                 onClick={togglePlayPause}
@@ -1439,17 +1439,17 @@ export const MediaPlayer = forwardRef<{ playAirframeAudio: () => void; playEatsy
                     <rect y="0.5" width="24" height="24" rx="12" fill="white"/>
                     <path d="M15 8H13.5C13.2239 8 13 8.22386 13 8.5V16.5C13 16.7761 13.2239 17 13.5 17H15C15.2761 17 15.5 16.7761 15.5 16.5V8.5C15.5 8.22386 15.2761 8 15 8Z" fill="#0A0A0A"/>
                     <path d="M10.5 8H9C8.72386 8 8.5 8.22386 8.5 8.5V16.5C8.5 16.7761 8.72386 17 9 17H10.5C10.7761 17 11 16.7761 11 16.5V8.5C11 8.22386 10.7761 8 10.5 8Z" fill="#0A0A0A"/>
-                  </svg>
+            </svg>
                 ) : (
                   // Play button
                   <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <rect y="0.5" width="24" height="24" rx="12" fill="white"/>
                     <path d="M8 8.2225C7.99993 8.00746 8.0579 7.79621 8.16804 7.61008C8.27818 7.42395 8.4366 7.26953 8.6273 7.16242C8.81799 7.0553 9.03422 6.99928 9.25415 7.00001C9.47407 7.00074 9.6899 7.05819 9.87985 7.16657L17.3774 11.4428C17.5666 11.5502 17.7237 11.7042 17.833 11.8895C17.9422 12.0749 17.9998 12.285 18 12.4989C18.0002 12.7128 17.943 12.923 17.834 13.1085C17.7251 13.294 17.5683 13.4483 17.3793 13.5559L9.87985 17.8334C9.6899 17.9418 9.47407 17.9993 9.25415 18C9.03422 18.0007 8.81799 17.9447 8.6273 17.8376C8.4366 17.7305 8.27818 17.576 8.16804 17.3899C8.0579 17.2038 7.99993 16.9925 8 16.7775V8.2225Z" fill="#0A0A0A"/>
-                  </svg>
+                    </svg>
                 )}
               </motion.button>
-            </div>
-          </div>
+                </div>
+              </div>
           {/* Progress bars */}
           <div 
             className="relative h-0.5 cursor-pointer"
@@ -1472,10 +1472,10 @@ export const MediaPlayer = forwardRef<{ playAirframeAudio: () => void; playEatsy
                 style={{ left: `${hoverProgress * 100}%` }}
               />
             )}
+            </div>
           </div>
-        </div>
-      </div>
-    </div>
+                </div>
+              </div>
   );
 });
 
