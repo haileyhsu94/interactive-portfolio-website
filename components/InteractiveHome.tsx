@@ -965,6 +965,9 @@ export const MediaPlayer = forwardRef<{ playAirframeAudio: () => void; playEatsy
     currentProjectIndex: 0
   });
 
+  const [isDragging, setIsDragging] = useState(false);
+  const [hoverProgress, setHoverProgress] = useState<number | null>(null);
+  const progressRef = useRef<HTMLDivElement>(null);
   const audioRef = useRef<HTMLAudioElement>(null);
 
   // Expose play and pause functions for external use
@@ -1036,10 +1039,18 @@ export const MediaPlayer = forwardRef<{ playAirframeAudio: () => void; playEatsy
 
     const handlePlay = () => {
       setMediaState(prev => ({ ...prev, isPlaying: true }));
+      // Dispatch custom event for project pages to listen to
+      window.dispatchEvent(new CustomEvent('mediaStateChange', { 
+        detail: { isPlaying: true } 
+      }));
     };
 
     const handlePause = () => {
       setMediaState(prev => ({ ...prev, isPlaying: false }));
+      // Dispatch custom event for project pages to listen to
+      window.dispatchEvent(new CustomEvent('mediaStateChange', { 
+        detail: { isPlaying: false } 
+      }));
     };
 
     const handleEnded = () => {
@@ -1112,6 +1123,46 @@ export const MediaPlayer = forwardRef<{ playAirframeAudio: () => void; playEatsy
     }
   };
 
+  // Handle progress bar interactions
+  const handleProgressMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
+    setIsDragging(true);
+    const rect = e.currentTarget.getBoundingClientRect();
+    const progress = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
+    handleSeek(progress);
+  };
+
+  const handleProgressMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (isDragging) {
+      const rect = e.currentTarget.getBoundingClientRect();
+      const progress = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
+      handleSeek(progress);
+    } else {
+      const rect = e.currentTarget.getBoundingClientRect();
+      const progress = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
+      setHoverProgress(progress);
+    }
+  };
+
+  const handleProgressMouseLeave = () => {
+    setHoverProgress(null);
+  };
+
+  const handleProgressMouseUp = () => {
+    setIsDragging(false);
+  };
+
+  // Global mouse up listener for dragging
+  useEffect(() => {
+    const handleGlobalMouseUp = () => {
+      setIsDragging(false);
+    };
+
+    if (isDragging) {
+      document.addEventListener('mouseup', handleGlobalMouseUp);
+      return () => document.removeEventListener('mouseup', handleGlobalMouseUp);
+    }
+  }, [isDragging]);
+
   // Update audio source when project changes
   useEffect(() => {
     if (audioRef.current) {
@@ -1163,7 +1214,9 @@ export const MediaPlayer = forwardRef<{ playAirframeAudio: () => void; playEatsy
   return (
     <div className="bg-neutral-950 relative shrink-0 w-full" data-name="play section">
       <audio ref={audioRef} preload="metadata" />
-      <div className="flex flex-row items-center overflow-clip relative size-full">
+      
+      {/* Desktop Layout */}
+      <div className="hidden lg:flex flex-row items-center overflow-clip relative size-full">
         <div className="box-border content-stretch flex flex-row items-center justify-between pb-4 pt-0 px-4 relative w-full">
           <div
             className="box-border content-stretch flex flex-row gap-[13px] items-center justify-start px-3 py-0 relative shrink-0 w-[299px]"
@@ -1267,7 +1320,14 @@ export const MediaPlayer = forwardRef<{ playAirframeAudio: () => void; playEatsy
               <div className="font-didact-gothic font-normal leading-[0] not-italic relative shrink-0 text-[#D1D5DB] text-[12px] text-left text-nowrap">
                 <p className="block leading-[normal] whitespace-pre">{formatTime(mediaState.currentTime)}</p>
               </div>
-              <div className="h-[10px] relative shrink-0 w-[285px] overflow-hidden">
+              <div 
+                ref={progressRef}
+                className="h-[10px] relative shrink-0 w-[285px] overflow-hidden cursor-pointer"
+                onMouseDown={handleProgressMouseDown}
+                onMouseMove={handleProgressMouseMove}
+                onMouseLeave={handleProgressMouseLeave}
+                onMouseUp={handleProgressMouseUp}
+              >
                 <WaveformCanvas
                   width={285}
                   height={10}
@@ -1277,6 +1337,13 @@ export const MediaPlayer = forwardRef<{ playAirframeAudio: () => void; playEatsy
                   onSeek={handleSeek}
                   className="rounded-sm"
                 />
+                {/* Hover indicator */}
+                {hoverProgress !== null && !isDragging && (
+                  <div 
+                    className="absolute top-0 bottom-0 w-0.5 bg-white opacity-60 pointer-events-none"
+                    style={{ left: `${hoverProgress * 100}%` }}
+                  />
+                )}
               </div>
               <div className="font-didact-gothic font-normal leading-[0] not-italic relative shrink-0 text-[#D1D5DB] text-[12px] text-left text-nowrap">
                 <p className="block leading-[normal] whitespace-pre">{formatTime(mediaState.duration)}</p>
@@ -1337,6 +1404,74 @@ export const MediaPlayer = forwardRef<{ playAirframeAudio: () => void; playEatsy
                 </svg>
               </div>
             </motion.button>
+          </div>
+        </div>
+      </div>
+
+      {/* Tablet/Mobile Layout */}
+      <div className="lg:hidden bg-neutral-950 p-1 relative">
+        <div className="bg-[#121212] rounded-md p-2 flex flex-col gap-2.5">
+          <div className="flex items-center justify-between">
+            <div className="flex gap-2 items-center flex-1">
+              <div 
+                className="w-10 h-10 bg-cover bg-center bg-no-repeat rounded-md"
+                style={{ backgroundImage: `url('${currentProject.image}')` }}
+              />
+              <div className="flex flex-col flex-1 min-w-0">
+                <div className="text-white text-sm font-normal truncate">
+                  {currentProject.title}
+                </div>
+                <div className="text-gray-400 text-xs">
+                  {currentProject.subtitle}
+                </div>
+              </div>
+            </div>
+            <div className="flex items-center">
+              <motion.button
+                onClick={togglePlayPause}
+                className="h-[25px] relative shrink-0 w-[24px]"
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
+              >
+                {mediaState.isPlaying ? (
+                  // Pause button
+                  <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect y="0.5" width="24" height="24" rx="12" fill="white"/>
+                    <path d="M15 8H13.5C13.2239 8 13 8.22386 13 8.5V16.5C13 16.7761 13.2239 17 13.5 17H15C15.2761 17 15.5 16.7761 15.5 16.5V8.5C15.5 8.22386 15.2761 8 15 8Z" fill="#0A0A0A"/>
+                    <path d="M10.5 8H9C8.72386 8 8.5 8.22386 8.5 8.5V16.5C8.5 16.7761 8.72386 17 9 17H10.5C10.7761 17 11 16.7761 11 16.5V8.5C11 8.22386 10.7761 8 10.5 8Z" fill="#0A0A0A"/>
+                  </svg>
+                ) : (
+                  // Play button
+                  <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect y="0.5" width="24" height="24" rx="12" fill="white"/>
+                    <path d="M8 8.2225C7.99993 8.00746 8.0579 7.79621 8.16804 7.61008C8.27818 7.42395 8.4366 7.26953 8.6273 7.16242C8.81799 7.0553 9.03422 6.99928 9.25415 7.00001C9.47407 7.00074 9.6899 7.05819 9.87985 7.16657L17.3774 11.4428C17.5666 11.5502 17.7237 11.7042 17.833 11.8895C17.9422 12.0749 17.9998 12.285 18 12.4989C18.0002 12.7128 17.943 12.923 17.834 13.1085C17.7251 13.294 17.5683 13.4483 17.3793 13.5559L9.87985 17.8334C9.6899 17.9418 9.47407 17.9993 9.25415 18C9.03422 18.0007 8.81799 17.9447 8.6273 17.8376C8.4366 17.7305 8.27818 17.576 8.16804 17.3899C8.0579 17.2038 7.99993 16.9925 8 16.7775V8.2225Z" fill="#0A0A0A"/>
+                  </svg>
+                )}
+              </motion.button>
+            </div>
+          </div>
+          {/* Progress bars */}
+          <div 
+            className="relative h-0.5 cursor-pointer"
+            onMouseDown={handleProgressMouseDown}
+            onMouseMove={handleProgressMouseMove}
+            onMouseLeave={handleProgressMouseLeave}
+            onMouseUp={handleProgressMouseUp}
+          >
+            <div className="absolute inset-0 bg-[#e6ff02] w-full"></div>
+            <div className="absolute inset-0 bg-[#f4915c]" style={{ width: `${(mediaState.currentTime / mediaState.duration) * 100}%` }}></div>
+            {/* Progress indicator dot */}
+            <div 
+              className="absolute top-1/2 transform -translate-y-1/2 w-2 h-2 bg-white rounded-full shadow-sm"
+              style={{ left: `${(mediaState.currentTime / mediaState.duration) * 100}%` }}
+            />
+            {/* Hover indicator for mobile/tablet */}
+            {hoverProgress !== null && !isDragging && (
+              <div 
+                className="absolute top-0 bottom-0 w-0.5 bg-white opacity-60 pointer-events-none"
+                style={{ left: `${hoverProgress * 100}%` }}
+              />
+            )}
           </div>
         </div>
       </div>

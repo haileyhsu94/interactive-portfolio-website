@@ -28,6 +28,24 @@ export default function BrainBoxPage({ onBack, openProjects, onCloseProject, onN
   const [isZoomed, setIsZoomed] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
 
+  // Listen for MediaPlayer state changes
+  useEffect(() => {
+    const checkMediaPlayerState = () => {
+      // We'll use a custom event to sync with MediaPlayer state
+      const handleMediaStateChange = (event: CustomEvent) => {
+        setIsPlaying(event.detail.isPlaying);
+      };
+      
+      window.addEventListener('mediaStateChange', handleMediaStateChange as EventListener);
+      
+      return () => {
+        window.removeEventListener('mediaStateChange', handleMediaStateChange as EventListener);
+      };
+    };
+    
+    return checkMediaPlayerState();
+  }, []);
+
 
   const handleNavigateToSection = (section: 'featured' | 'more' | 'contact') => {
     setNavigation({ activeSection: section });
@@ -63,7 +81,7 @@ export default function BrainBoxPage({ onBack, openProjects, onCloseProject, onN
     <div className="h-screen bg-neutral-950 text-white w-full overflow-hidden">
       <div className="box-border content-stretch flex flex-row gap-4 items-stretch justify-start p-[12px] relative w-full min-w-0" style={{ height: 'calc(100vh - 74px)' }}>
         {/* Sidebar */}
-        <div className="w-[200px] flex-shrink-0 h-full">
+        <div className="hidden lg:block w-[200px] flex-shrink-0 h-full">
           <Sidebar 
             navigation={navigation} 
             onNavigateToSection={handleNavigateToSection}
@@ -114,9 +132,9 @@ export default function BrainBoxPage({ onBack, openProjects, onCloseProject, onN
                 </div>
 
                 {/* Project Header */}
-                <div className="flex flex-col lg:flex-row gap-5 items-start lg:items-end">
+                <div className="flex flex-col lg:flex-row gap-5 items-start">
                   <div
-                    className="w-full lg:w-60 h-60 bg-cover bg-center rounded-lg flex-shrink-0 cursor-pointer hover:opacity-90 transition-opacity duration-200"
+                    className="w-60 h-60 bg-cover bg-center rounded-lg flex-shrink-0 cursor-pointer hover:opacity-90 transition-opacity duration-200"
                     style={{ backgroundImage: `url('/images/project-2.png')` }}
                     onClick={() => handleImageClick('/images/project-2.png')}
                   />
@@ -160,7 +178,8 @@ export default function BrainBoxPage({ onBack, openProjects, onCloseProject, onN
 
             {/* Project Details */}
             <div className="p-7">
-              <div className="flex flex-col sm:flex-row gap-5 items-center">
+              {/* Desktop Layout */}
+              <div className="hidden lg:flex flex-col sm:flex-row gap-5 items-center">
                 {/* Audio Player Button */}
                 <button
                   onClick={toggleAudio}
@@ -196,6 +215,45 @@ export default function BrainBoxPage({ onBack, openProjects, onCloseProject, onN
                   <div className="text-gray-300">CEO, CTO, 4 Designer & 5 Engineers</div>
                 </div>
               </div>
+
+              {/* Mobile Layout */}
+              <div className="lg:hidden flex flex-col gap-6 items-center">
+                <div className="flex items-start justify-between w-full">
+                  <div className="flex flex-col gap-5 items-start justify-center">
+                    <div className="leading-[22px] text-[15px] text-gray-300">
+                      <p className="mb-0 text-[#f4915c]">Duration</p>
+                      <p>Jan 2023 - Dec 2023</p>
+                    </div>
+                    <div className="leading-[22px] text-[15px] text-white">
+                      <p className="mb-0 text-[#f4915c]">Role</p>
+                      <p className="text-gray-300">Lead Product Designer</p>
+                    </div>
+                    <div className="leading-[22px] text-[15px] text-white">
+                      <p className="mb-0 text-[#f4915c]">Collaborators</p>
+                      <p className="text-gray-300">CEO, CTO, 4 Designer & 5 Engineers</p>
+                    </div>
+                  </div>
+                  <motion.button
+                    onClick={toggleAudio}
+                    className="transition-transform duration-200 hover:scale-105"
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.9 }}
+                  >
+                    {isPlaying ? (
+                      <svg width="52" height="52" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="52" height="52" rx="26" fill="white"/>
+                        <path d="M31.5002 17.75H28.7502C28.2439 17.75 27.8335 18.1604 27.8335 18.6667V33.3333C27.8335 33.8396 28.2439 34.25 28.7502 34.25H31.5002C32.0064 34.25 32.4168 33.8396 32.4168 33.3333V18.6667C32.4168 18.1604 32.0064 17.75 31.5002 17.75Z" fill="#121212"/>
+                        <path d="M23.2502 17.75H20.5002C19.9939 17.75 19.5835 18.1604 19.5835 18.6667V33.3333C19.5835 33.8396 19.9939 34.25 20.5002 34.25H23.2502C23.7564 34.25 24.1668 33.8396 24.1668 33.3333V18.6667C24.1668 18.1604 23.7564 17.75 23.2502 17.75Z" fill="#121212"/>
+                      </svg>
+                    ) : (
+                      <svg width="52" height="52" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="52" height="52" rx="26" fill="white"/>
+                        <path d="M19.8887 19.7782C19.8886 19.4654 19.971 19.1581 20.1277 18.8874C20.2843 18.6167 20.5096 18.392 20.7808 18.2362C21.0521 18.0804 21.3596 17.9989 21.6724 18C21.9852 18.0011 22.2921 18.0846 22.5623 18.2423L33.2256 24.4623C33.4947 24.6185 33.7181 24.8425 33.8735 25.1121C34.0289 25.3816 34.1108 25.6872 34.1111 25.9983C34.1113 26.3095 34.0299 26.6152 33.875 26.885C33.7201 27.1549 33.4971 27.3793 33.2282 27.5359L22.5623 33.7577C22.2921 33.9154 21.9852 33.9989 21.6724 34C21.3596 34.0011 21.0521 33.9196 20.7808 33.7638C20.5096 33.608 20.2843 33.3833 20.1277 33.1126C19.971 32.8419 19.8886 32.5346 19.8887 32.2218V19.7782Z" fill="#0A0A0A"/>
+                      </svg>
+                    )}
+                  </motion.button>
+                </div>
+              </div>
             </div>
 
             {/* Separator */}
@@ -212,7 +270,7 @@ export default function BrainBoxPage({ onBack, openProjects, onCloseProject, onN
                 </h2>
                 <div className="text-lg text-gray-300 leading-[1.5] max-w-none">
                   <p className="mb-4">
-                    The SAT shifted to an adaptive testing format, where question difficulty adjusts based on a student's performance. In Taiwan, students currently lack effective ways to prepare for this new system. Unlike in the U.S., local schools do not teach SAT-specific test-taking strategies, leaving students to rely on self-study or private SAT prep schools.
+                    The SAT shifted to an adaptive testing format, where question difficulty adjusts based on a student&apos;s performance. In Taiwan, students currently lack effective ways to prepare for this new system. Unlike in the U.S., local schools do not teach SAT-specific test-taking strategies, leaving students to rely on self-study or private SAT prep schools.
                   </p>
                   <p>
                     Even in prep schools, however, students often face imbalanced teacher-to-student ratios, making it difficult to receive personalized guidance. This gap in preparation resources highlights the need for a solution that can help students adapt to the new exam format while providing tailored support at scale.
@@ -286,7 +344,7 @@ export default function BrainBoxPage({ onBack, openProjects, onCloseProject, onN
 
                 <div className="text-lg text-gray-300 leading-[1.5]">
                   <p>
-                    I gathered valuable insights directly from the client, who owns a test prep institution. Through interviews, we explored students' perspectives on what would enhance their study effectiveness before initiating the design phase.
+                    I gathered valuable insights directly from the client, who owns a test prep institution. Through interviews, we explored students&apos; perspectives on what would enhance their study effectiveness before initiating the design phase.
                   </p>
                 </div>
               </div>
@@ -343,7 +401,7 @@ export default function BrainBoxPage({ onBack, openProjects, onCloseProject, onN
                       <li className="list-disc ml-6">
                         <span className="font-semibold">Initial Assessment:</span>
                         <ul className="ml-6 mt-1">
-                          <li className="text-gray-400">Start with a short assessment to gauge the user's current performance level.</li>
+                          <li className="text-gray-400">Start with a short assessment to gauge the user&apos;s current performance level.</li>
                         </ul>
                       </li>
                       <li className="list-disc ml-6">
@@ -357,7 +415,7 @@ export default function BrainBoxPage({ onBack, openProjects, onCloseProject, onN
                         <span className="font-semibold">Detailed Reports:</span>
                         <ul className="ml-6 mt-1">
                           <li className="text-gray-400">After quizzes or mock tests, receive comprehensive reports highlighting weak areas.</li>
-                          <li className="text-gray-400">Practice targeted areas based on the report's feedback.</li>
+                          <li className="text-gray-400">Practice targeted areas based on the report&apos;s feedback.</li>
                         </ul>
                       </li>
                       <li className="list-disc ml-6">
@@ -481,13 +539,13 @@ export default function BrainBoxPage({ onBack, openProjects, onCloseProject, onN
 
                 <div className="text-lg text-gray-300 leading-[1.5] mb-8">
                   <p>
-                    After finalizing the design, we handed over our design assets to the frontend and backend engineers for implementation. Additionally, we collaborated with a prompt engineer to ensure that the AI tutor's interactions were seamlessly integrated into the overall user experience. Throughout this phase, we maintained close communication with the engineering teams to address any issues and ensure the product met our design specifications and quality standards.
+                    After finalizing the design, we handed over our design assets to the frontend and backend engineers for implementation. Additionally, we collaborated with a prompt engineer to ensure that the AI tutor&apos;s interactions were seamlessly integrated into the overall user experience. Throughout this phase, we maintained close communication with the engineering teams to address any issues and ensure the product met our design specifications and quality standards.
                   </p>
                 </div>
 
                 <div className="text-center mb-16">
                   <p className="text-lg text-[#f4915c] tracking-wide" style={{ fontFamily: 'var(--font-oregano)' }}>
-                    Now, let's take a look at some of the design and development results of our work.
+                    Now, let&apos;s take a look at some of the design and development results of our work.
                   </p>
                 </div>
                 
