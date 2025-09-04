@@ -44,44 +44,18 @@ export default function EatsyPage({ onBack, openProjects, onCloseProject, onNavi
   const [zoomedImage, setZoomedImage] = useState<string>('');
   const [isZoomed, setIsZoomed] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [audio] = useState(new Audio('/audio/reservation-audio.mp3'));
 
-  // Listen for MediaPlayer state changes
-  useEffect(() => {
-    const checkMediaPlayerState = () => {
-      // We'll use a custom event to sync with MediaPlayer state
-      const handleMediaStateChange = (event: CustomEvent) => {
-        setIsPlaying(event.detail.isPlaying);
-      };
-      
-      window.addEventListener('mediaStateChange', handleMediaStateChange as EventListener);
-      
-      return () => {
-        window.removeEventListener('mediaStateChange', handleMediaStateChange as EventListener);
-      };
-    };
-    
-    return checkMediaPlayerState();
-  }, []);
+
+
+
+
 
   const handleNavigateToSection = (section: 'featured' | 'more' | 'contact') => {
     setNavigation({ activeSection: section });
   };
 
-  const toggleAudio = () => {
-    if (isPlaying) {
-      setIsPlaying(false);
-      // Pause the MediaPlayer
-      if (mediaPlayerRef.current) {
-        mediaPlayerRef.current.pauseAudio();
-      }
-    } else {
-      setIsPlaying(true);
-      // Play the Eatsy audio in MediaPlayer
-      if (mediaPlayerRef.current) {
-        mediaPlayerRef.current.playEatsyAudio();
-      }
-    }
-  };
+
 
   const handleImageClick = (image: string) => {
     setZoomedImage(image);
@@ -93,9 +67,26 @@ export default function EatsyPage({ onBack, openProjects, onCloseProject, onNavi
     setZoomedImage('');
   };
 
+  const toggleAudio = () => {
+    if (isPlaying) {
+      audio.pause();
+      setIsPlaying(false);
+    } else {
+      audio.play();
+      setIsPlaying(true);
+    }
+  };
+
+  useEffect(() => {
+    audio.addEventListener('ended', () => setIsPlaying(false));
+    return () => {
+      audio.removeEventListener('ended', () => setIsPlaying(false));
+    };
+  }, [audio]);
+
   return (
     <div className="h-screen bg-neutral-950 text-white w-full overflow-hidden">
-      <div className="box-border content-stretch flex flex-row gap-4 items-stretch justify-start p-[12px] relative w-full min-w-0" style={{ height: 'calc(100vh - 74px)' }}>
+      <div className="box-border content-stretch flex flex-row gap-4 items-stretch justify-start p-[12px] relative w-full min-w-0 overflow-hidden" style={{ height: 'calc(100vh - 74px)', maxHeight: 'calc(100vh - 74px)' }}>
         {/* Sidebar */}
         <div className="hidden lg:block w-[200px] flex-shrink-0 h-full">
           <Sidebar 
@@ -111,21 +102,21 @@ export default function EatsyPage({ onBack, openProjects, onCloseProject, onNavi
         </div>
 
         {/* Main Content */}
-        <div className="flex-1 min-w-0 flex flex-col relative rounded-xl overflow-hidden">
+        <div className="flex-1 min-w-0 flex flex-col relative rounded-xl overflow-hidden h-full">
           <div
             aria-hidden="true"
             className="absolute border border-[#252525] border-solid inset-0 pointer-events-none rounded-xl"
           />
 
           {/* Scrollable Content Section */}
-          <div className="flex-1 overflow-y-auto scrollbar-thin">
+          <div className="flex-1 overflow-y-auto scrollbar-thin h-full" style={{ maxHeight: 'calc(100vh - 74px - 24px)' }}>
             {/* Gradient Section - Hero */}
             <div style={{ background: 'linear-gradient(179deg, #E26C6A -37.41%, #613C3D 41.39%)' }}>
               <div className="p-7">
                 {/* Header */}
                 <div className="flex items-center justify-between mb-5">
-                  <button 
-                    onClick={onBack}
+                  <a 
+                    href="/"
                     className="w-12 h-12 flex items-center justify-center"
                   >
                     <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -133,7 +124,7 @@ export default function EatsyPage({ onBack, openProjects, onCloseProject, onNavi
                       <path d="M18 20L14 24L18 28" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                       <path d="M14 24H34" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                     </svg>
-                  </button>
+                  </a>
                   <a href="https://partners.eatsy.tech/" target="_blank" rel="noopener noreferrer">
                     <svg width="118" height="40" viewBox="0 0 118 40" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <rect width="118" height="40" rx="20" fill="#D1D5DB"/>
@@ -525,25 +516,26 @@ export default function EatsyPage({ onBack, openProjects, onCloseProject, onNavi
 
             {/* User Feedback Section */}
             <div className="px-6 md:px-12 lg:px-24 mb-16">
-              <div className="text-center mb-16">
-                <h2 className="text-2xl font-bold text-[#e6ff02]">
-                  Positive User Feedback
-                </h2>
-              </div>
-
-              {/* Feedback 1 */}
-              <div className="mb-16">
-                <div className="flex gap-6">
-                  <div className="w-32 h-32 rounded-full overflow-hidden cursor-pointer hover:opacity-90 transition-opacity duration-200">
-                    <img src={imgEllipse44} alt="Wakatake" className="w-full h-full object-cover" onClick={() => handleImageClick(imgEllipse44)} />
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="text-xl font-oregano text-white mb-3">
+              {/* Mobile Design (Figma Style) */}
+              <div className="md:hidden">
+                <div className="text-center mb-10">
+                  <h2 className="text-[28px] font-bold text-[#e6ff02]">
+                    Positive User Feedback
+                  </h2>
+                </div>
+                
+                {/* Feedback 1 - Mobile */}
+                <div className="mb-16">
+                  <div className="flex flex-col gap-3">
+                    <div className="text-[20px] font-oregano text-white">
                       A reservation system that truly fits the rhythm of a small business
-                    </h3>
-                    <div className="flex items-center gap-3 mb-3">
-                      <h4 className="text-4xl font-oregano text-white">Wakatake</h4>
-                      <a href="https://www.instagram.com/wakatake.tw/" target="_blank" rel="noopener noreferrer" className="hover:opacity-80 transition-opacity duration-200">
+                    </div>
+                    <div className="flex gap-3 items-center">
+                      <div className="w-10 h-10 rounded-full overflow-hidden">
+                        <img src={imgEllipse44} alt="Wakatake" className="w-full h-full object-cover" />
+                      </div>
+                      <div className="text-[40px] font-oregano text-white">Wakatake</div>
+                      <a href="https://www.instagram.com/wakatake.tw/" target="_blank" rel="noopener noreferrer" className="w-7 h-7">
                         <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 28 28" fill="none">
                           <path d="M19.833 2.33301H8.16634C4.94468 2.33301 2.33301 4.94468 2.33301 8.16634V19.833C2.33301 23.0547 4.94468 25.6663 8.16634 25.6663H19.833C23.0547 25.6663 25.6663 23.0547 25.6663 19.833V8.16634C25.6663 4.94468 23.0547 2.33301 19.833 2.33301Z" stroke="#D1D5DB" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                           <path d="M18.6667 13.2654C18.8106 14.2363 18.6448 15.2279 18.1927 16.0992C17.7406 16.9705 17.0253 17.677 16.1485 18.1183C15.2718 18.5596 14.2782 18.7132 13.3091 18.5573C12.34 18.4013 11.4447 17.9438 10.7506 17.2497C10.0566 16.5556 9.599 15.6604 9.44306 14.6913C9.28712 13.7222 9.44073 12.7286 9.88203 11.8518C10.3233 10.975 11.0299 10.2597 11.9011 9.80763C12.7724 9.35555 13.764 9.1897 14.735 9.33369C15.7254 9.48055 16.6423 9.94206 17.3503 10.65C18.0583 11.358 18.5198 12.2749 18.6667 13.2654Z" stroke="#D1D5DB" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
@@ -551,30 +543,28 @@ export default function EatsyPage({ onBack, openProjects, onCloseProject, onNavi
                         </svg>
                       </a>
                     </div>
-                    <div className="text-lg text-gray-400 leading-[1.5]">
-                      <p className="mb-2">&ldquo;We used to work with a reservation system, but the fixed monthly fees were just too heavy.</p>
-                      <p className="mb-2">For a small shop like ours—where guest volume is low and quality matters most—it simply wasn&apos;t a good fit.</p>
-                      <p className="mb-2">Eatsy offers flexible pricing that aligns with our operating rhythm. We have full control over when and how reservations open, depending on our needs.</p>
-                      <p className="mb-2">More importantly, it turns the booking process into part of the customer experience—visually appealing, easy to use, and refined in design.</p>
+                    <div className="text-[18px] text-gray-400 leading-[1.5]">
+                      <p className="mb-0">&ldquo;We used to work with a reservation system, but the fixed monthly fees were just too heavy.</p>
+                      <p className="mb-0">For a small shop like ours—where guest volume is low and quality matters most—it simply wasn&apos;t a good fit.</p>
+                      <p className="mb-0">Eatsy offers flexible pricing that aligns with our operating rhythm. We have full control over when and how reservations open, depending on our needs.</p>
+                      <p className="mb-0">More importantly, it turns the booking process into part of the customer experience—visually appealing, easy to use, and refined in design.</p>
                       <p>We also feel that the team behind Eatsy genuinely wants to grow with small businesses. Even if you&apos;re not a big client, you won&apos;t be overlooked.&rdquo;</p>
                     </div>
                   </div>
                 </div>
-              </div>
 
-              {/* Feedback 2 */}
-              <div className="mb-16">
-                <div className="flex gap-6">
-                  <div className="w-32 h-32 rounded-full overflow-hidden cursor-pointer hover:opacity-90 transition-opacity duration-200">
-                    <img src={imgEllipse45} alt="Yang Er Lou" className="w-full h-full object-cover" onClick={() => handleImageClick(imgEllipse45)} />
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="text-xl font-oregano text-white mb-3">
+                {/* Feedback 2 - Mobile */}
+                <div className="mb-16">
+                  <div className="flex flex-col gap-3">
+                    <div className="text-[20px] font-oregano text-white">
                       Private kitchens without a reception area can smoothly welcome guests
-                    </h3>
-                    <div className="flex items-center gap-3 mb-3">
-                      <h4 className="text-4xl font-oregano text-white">Yang Er Lou</h4>
-                      <a href="https://www.instagram.com/yangerlou/" target="_blank" rel="noopener noreferrer" className="hover:opacity-80 transition-opacity duration-200">
+                    </div>
+                    <div className="flex gap-3 items-center">
+                      <div className="w-10 h-10 rounded-full overflow-hidden">
+                        <img src={imgEllipse45} alt="Yang Er Lou" className="w-full h-full object-cover" />
+                      </div>
+                      <div className="text-[40px] font-oregano text-white">Yang Er Lou</div>
+                      <a href="https://www.instagram.com/yangerlou/" target="_blank" rel="noopener noreferrer" className="w-7 h-7">
                         <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 28 28" fill="none">
                           <path d="M19.833 2.33301H8.16634C4.94468 2.33301 2.33301 4.94468 2.33301 8.16634V19.833C2.33301 23.0547 4.94468 25.6663 8.16634 25.6663H19.833C23.0547 25.6663 25.6663 23.0547 25.6663 19.833V8.16634C25.6663 4.94468 23.0547 2.33301 19.833 2.33301Z" stroke="#D1D5DB" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                           <path d="M18.6667 13.2654C18.8106 14.2363 18.6448 15.2279 18.1927 16.0992C17.7406 16.9705 17.0253 17.677 16.1485 18.1183C15.2718 18.5596 14.2782 18.7132 13.3091 18.5573C12.34 18.4013 11.4447 17.9438 10.7506 17.2497C10.0566 16.5556 9.599 15.6604 9.44306 14.6913C9.28712 13.7222 9.44073 12.7286 9.88203 11.8518C10.3233 10.975 11.0299 10.2597 11.9011 9.80763C12.7724 9.35555 13.764 9.1897 14.735 9.33369C15.7254 9.48055 16.6423 9.94206 17.3503 10.65C18.0583 11.358 18.5198 12.2749 18.6667 13.2654Z" stroke="#D1D5DB" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
@@ -582,28 +572,26 @@ export default function EatsyPage({ onBack, openProjects, onCloseProject, onNavi
                         </svg>
                       </a>
                     </div>
-                    <div className="text-lg text-gray-400 leading-[1.5]">
-                      <p className="mb-2">&ldquo;We run a reservation-only private kitchen with a small space and a limited team.</p>
-                      <p className="mb-2">I used to handle all the messages myself, and when things got busy, I would sometimes miss bookings.</p>
+                    <div className="text-[18px] text-gray-400 leading-[1.5]">
+                      <p className="mb-0">&ldquo;We run a reservation-only private kitchen with a small space and a limited team.</p>
+                      <p className="mb-0">I used to handle all the messages myself, and when things got busy, I would sometimes miss bookings.</p>
                       <p>After switching to Eatsy, guests can make reservations on their own. It gives me peace of mind to focus on prep work—and even on my days off, I can truly rest.&rdquo;</p>
                     </div>
                   </div>
                 </div>
-              </div>
 
-              {/* Feedback 3 */}
-              <div className="mb-16">
-                <div className="flex gap-6">
-                  <div className="w-32 h-32 rounded-full overflow-hidden cursor-pointer hover:opacity-90 transition-opacity duration-200">
-                    <img src={imgEllipse46} alt="WAGYU MANIA" className="w-full h-full object-cover" onClick={() => handleImageClick(imgEllipse46)} />
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="text-xl font-oregano text-white mb-3">
+                {/* Feedback 3 - Mobile */}
+                <div className="mb-16">
+                  <div className="flex flex-col gap-3">
+                    <div className="text-[20px] font-oregano text-white">
                       Free restaurants from the order-taking pressure of high-end barbecue operations.
-                    </h3>
-                    <div className="flex items-center gap-3 mb-3">
-                      <h4 className="text-4xl font-oregano text-white">WAGYU MANIA</h4>
-                      <a href="https://www.instagram.com/wagyumania_taipei/" target="_blank" rel="noopener noreferrer" className="hover:opacity-80 transition-opacity duration-200">
+                    </div>
+                    <div className="flex gap-3 items-center">
+                      <div className="w-10 h-10 rounded-full overflow-hidden">
+                        <img src={imgEllipse46} alt="WAGYU MANIA" className="w-full h-full object-cover" />
+                      </div>
+                      <div className="text-[40px] font-oregano text-white">WAGYUMANI</div>
+                      <a href="https://www.instagram.com/wagyumania_taipei/" target="_blank" rel="noopener noreferrer" className="w-7 h-7">
                         <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 28 28" fill="none">
                           <path d="M19.833 2.33301H8.16634C4.94468 2.33301 2.33301 4.94468 2.33301 8.16634V19.833C2.33301 23.0547 4.94468 25.6663 8.16634 25.6663H19.833C23.0547 25.6663 25.6663 23.0547 25.6663 19.833V8.16634C25.6663 4.94468 23.0547 2.33301 19.833 2.33301Z" stroke="#D1D5DB" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                           <path d="M18.6667 13.2654C18.8106 14.2363 18.6448 15.2279 18.1927 16.0992C17.7406 16.9705 17.0253 17.677 16.1485 18.1183C15.2718 18.5596 14.2782 18.7132 13.3091 18.5573C12.34 18.4013 11.4447 17.9438 10.7506 17.2497C10.0566 16.5556 9.599 15.6604 9.44306 14.6913C9.28712 13.7222 9.44073 12.7286 9.88203 11.8518C10.3233 10.975 11.0299 10.2597 11.9011 9.80763C12.7724 9.35555 13.764 9.1897 14.735 9.33369C15.7254 9.48055 16.6423 9.94206 17.3503 10.65C18.0583 11.358 18.5198 12.2749 18.6667 13.2654Z" stroke="#D1D5DB" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
@@ -611,14 +599,112 @@ export default function EatsyPage({ onBack, openProjects, onCloseProject, onNavi
                         </svg>
                       </a>
                     </div>
-                    <div className="text-lg text-gray-400 leading-[1.5]">
+                    <div className="text-[18px] text-gray-400 leading-[1.5]">
                       <p>&ldquo;High-value restaurants risk big losses from booking errors or no-shows. Eatsy&apos;s reminders and workflow help secure every genuine reservation.&rdquo;</p>
+                    </div>
+                  </div>
+                </div>
+
+
+              </div>
+
+              {/* Desktop Design (Original Style) */}
+              <div className="hidden md:block">
+                <div className="text-center mb-16">
+                  <h2 className="text-2xl font-bold text-[#e6ff02]">
+                    Positive User Feedback
+                  </h2>
+                </div>
+
+                {/* Feedback 1 */}
+                <div className="mb-16">
+                  <div className="flex gap-6">
+                    <div className="w-32 h-32 rounded-full overflow-hidden cursor-pointer hover:opacity-90 transition-opacity duration-200">
+                      <img src={imgEllipse44} alt="Wakatake" className="w-full h-full object-cover" onClick={() => handleImageClick(imgEllipse44)} />
+                    </div>
+                    <div className="flex-1">
+                      <h3 className="text-xl font-oregano text-white mb-3">
+                        A reservation system that truly fits the rhythm of a small business
+                      </h3>
+                      <div className="flex items-center gap-3 mb-3">
+                        <h4 className="text-4xl font-oregano text-white">Wakatake</h4>
+                        <a href="https://www.instagram.com/wakatake.tw/" target="_blank" rel="noopener noreferrer" className="hover:opacity-80 transition-opacity duration-200">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 28 28" fill="none">
+                            <path d="M19.833 2.33301H8.16634C4.94468 2.33301 2.33301 4.94468 2.33301 8.16634V19.833C2.33301 23.0547 4.94468 25.6663 8.16634 25.6663H19.833C23.0547 25.6663 25.6663 23.0547 25.6663 19.833V8.16634C25.6663 4.94468 23.0547 2.33301 19.833 2.33301Z" stroke="#D1D5DB" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                            <path d="M18.6667 13.2654C18.8106 14.2363 18.6448 15.2279 18.1927 16.0992C17.7406 16.9705 17.0253 17.677 16.1485 18.1183C15.2718 18.5596 14.2782 18.7132 13.3091 18.5573C12.34 18.4013 11.4447 17.9438 10.7506 17.2497C10.0566 16.5556 9.599 15.6604 9.44306 14.6913C9.28712 13.7222 9.44073 12.7286 9.88203 11.8518C10.3233 10.975 11.0299 10.2597 11.9011 9.80763C12.7724 9.35555 13.764 9.1897 14.735 9.33369C15.7254 9.48055 16.6423 9.94206 17.3503 10.65C18.0583 11.358 18.5198 12.2749 18.6667 13.2654Z" stroke="#D1D5DB" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                            <path d="M20.417 7.58301H20.4287" stroke="#D1D5DB" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                          </svg>
+                        </a>
+                      </div>
+                      <div className="text-lg text-gray-400 leading-[1.5]">
+                        <p className="mb-2">&ldquo;We used to work with a reservation system, but the fixed monthly fees were just too heavy.</p>
+                        <p className="mb-2">For a small shop like ours—where guest volume is low and quality matters most—it simply wasn&apos;t a good fit.</p>
+                        <p className="mb-2">Eatsy offers flexible pricing that aligns with our operating rhythm. We have full control over when and how reservations open, depending on our needs.</p>
+                        <p className="mb-2">More importantly, it turns the booking process into part of the customer experience—visually appealing, easy to use, and refined in design.</p>
+                        <p>We also feel that the team behind Eatsy genuinely wants to grow with small businesses. Even if you&apos;re not a big client, you won&apos;t be overlooked.&rdquo;</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Feedback 2 */}
+                <div className="mb-16">
+                  <div className="flex gap-6">
+                    <div className="w-32 h-32 rounded-full overflow-hidden cursor-pointer hover:opacity-90 transition-opacity duration-200">
+                      <img src={imgEllipse45} alt="Yang Er Lou" className="w-full h-full object-cover" onClick={() => handleImageClick(imgEllipse45)} />
+                    </div>
+                    <div className="flex-1">
+                      <h3 className="text-xl font-oregano text-white mb-3">
+                        Private kitchens without a reception area can smoothly welcome guests
+                      </h3>
+                      <div className="flex items-center gap-3 mb-3">
+                        <h4 className="text-4xl font-oregano text-white">Yang Er Lou</h4>
+                        <a href="https://www.instagram.com/yangerlou/" target="_blank" rel="noopener noreferrer" className="hover:opacity-80 transition-opacity duration-200">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 28 28" fill="none">
+                            <path d="M19.833 2.33301H8.16634C4.94468 2.33301 2.33301 4.94468 2.33301 8.16634V19.833C2.33301 23.0547 4.94468 25.6663 8.16634 25.6663H19.833C23.0547 25.6663 25.6663 23.0547 25.6663 19.833V8.16634C25.6663 4.94468 23.0547 2.33301 19.833 2.33301Z" stroke="#D1D5DB" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                            <path d="M18.6667 13.2654C18.8106 14.2363 18.6448 15.2279 18.1927 16.0992C17.7406 16.9705 17.0253 17.677 16.1485 18.1183C15.2718 18.5596 14.2782 18.7132 13.3091 18.5573C12.34 18.4013 11.4447 17.9438 10.7506 17.2497C10.0566 16.5556 9.599 15.6604 9.44306 14.6913C9.28712 13.7222 9.44073 12.7286 9.88203 11.8518C10.3233 10.975 11.0299 10.2597 11.9011 9.80763C12.7724 9.35555 13.764 9.1897 14.735 9.33369C15.7254 9.48055 16.6423 9.94206 17.3503 10.65C18.0583 11.358 18.5198 12.2749 18.6667 13.2654Z" stroke="#D1D5DB" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                            <path d="M20.417 7.58301H20.4287" stroke="#D1D5DB" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                          </svg>
+                        </a>
+                      </div>
+                      <div className="text-lg text-gray-400 leading-[1.5]">
+                        <p className="mb-2">&ldquo;We run a reservation-only private kitchen with a small space and a limited team.</p>
+                        <p className="mb-2">I used to handle all the messages myself, and when things got busy, I would sometimes miss bookings.</p>
+                        <p>After switching to Eatsy, guests can make reservations on their own. It gives me peace of mind to focus on prep work—and even on my days off, I can truly rest.&rdquo;</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Feedback 3 */}
+                <div className="mb-16">
+                  <div className="flex gap-6">
+                    <div className="w-32 h-32 rounded-full overflow-hidden cursor-pointer hover:opacity-90 transition-opacity duration-200">
+                      <img src={imgEllipse46} alt="WAGYU MANIA" className="w-full h-full object-cover" onClick={() => handleImageClick(imgEllipse46)} />
+                    </div>
+                    <div className="flex-1">
+                      <h3 className="text-xl font-oregano text-white mb-3">
+                        Free restaurants from the order-taking pressure of high-end barbecue operations.
+                      </h3>
+                      <div className="flex items-center gap-3 mb-3">
+                        <h4 className="text-4xl font-oregano text-white">WAGYU MANIA</h4>
+                        <a href="https://www.instagram.com/wagyumania_taipei/" target="_blank" rel="noopener noreferrer" className="hover:opacity-80 transition-opacity duration-200">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 28 28" fill="none">
+                            <path d="M19.833 2.33301H8.16634C4.94468 2.33301 2.33301 4.94468 2.33301 8.16634V19.833C2.33301 23.0547 4.94468 25.6663 8.16634 25.6663H19.833C23.0547 25.6663 25.6663 23.0547 25.6663 19.833V8.16634C25.6663 4.94468 23.0547 2.33301 19.833 2.33301Z" stroke="#D1D5DB" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                            <path d="M18.6667 13.2654C18.8106 14.2363 18.6448 15.2279 18.1927 16.0992C17.7406 16.9705 17.0253 17.677 16.1485 18.1183C15.2718 18.5596 14.2782 18.7132 13.3091 18.5573C12.34 18.4013 11.4447 17.9438 10.7506 17.2497C10.0566 16.5556 9.599 15.6604 9.44306 14.6913C9.28712 13.7222 9.44073 12.7286 9.88203 11.8518C10.3233 10.975 11.0299 10.2597 11.9011 9.80763C12.7724 9.35555 13.764 9.1897 14.735 9.33369C15.7254 9.48055 16.6423 9.94206 17.3503 10.65C18.0583 11.358 18.5198 12.2749 18.6667 13.2654Z" stroke="#D1D5DB" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                            <path d="M20.417 7.58301H20.4287" stroke="#D1D5DB" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                          </svg>
+                        </a>
+                      </div>
+                      <div className="text-lg text-gray-400 leading-[1.5]">
+                        <p>&ldquo;High-value restaurants risk big losses from booking errors or no-shows. Eatsy&apos;s reminders and workflow help secure every genuine reservation.&rdquo;</p>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
 
-              <div className="text-center mb-16">
+              <div className="text-center mb-8">
                 <a 
                   href="https://partners.eatsy.tech/cases" 
                   target="_blank" 
@@ -636,7 +722,7 @@ export default function EatsyPage({ onBack, openProjects, onCloseProject, onNavi
             </div>
 
             {/* Personal Growth */}
-            <div className="px-6 md:px-12 lg:px-24 text-center" style={{ paddingBottom: '100px' }}>
+            <div className="px-6 md:px-12 lg:px-24 text-center pb-16">
               <p className="text-xl text-gray-400 mb-2">Personal growth</p>
               <h2 className="text-3xl font-bold leading-[1.5]">
                 Even in a saturated market, truly understanding user pain points and delivering solutions aligned with business goals is what makes design genuinely valuable.
@@ -653,6 +739,7 @@ export default function EatsyPage({ onBack, openProjects, onCloseProject, onNavi
 
       {/* Audio Player - Sticky to bottom */}
       <div className="absolute bottom-0 left-0 right-0 flex-shrink-0 bg-neutral-950 w-full" style={{ height: '74px' }}>
+        {/* Audio Player - Same component for both desktop and mobile */}
         <MediaPlayer ref={mediaPlayerRef} onNavigateToProject={onNavigateToProject} />
       </div>
 

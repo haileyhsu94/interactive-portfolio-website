@@ -1,4 +1,4 @@
-import type { Metadata } from 'next'
+import type { Metadata, Viewport } from 'next'
 import { Didact_Gothic, Oregano } from 'next/font/google'
 import '../styles/globals.css'
 
@@ -24,6 +24,16 @@ export const metadata: Metadata = {
   },
 }
 
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
+  viewportFit: 'cover',
+  // Prevent address bar from hiding
+  interactiveWidget: 'resizes-content',
+}
+
 export default function RootLayout({
   children,
 }: {
@@ -31,7 +41,26 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="dark">
-      <body className={`${didactGothic.variable} ${oregano.variable} ${didactGothic.className} bg-black`}>{children}</body>
+      <body className={`${didactGothic.variable} ${oregano.variable} ${didactGothic.className} bg-black`}>
+        {children}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              // Simple mobile viewport handling
+              if (typeof window !== 'undefined' && window.innerWidth <= 480) {
+                function updateViewport() {
+                  const vh = window.innerHeight * 0.01;
+                  document.documentElement.style.setProperty('--vh', \`\${vh}px\`);
+                }
+                
+                updateViewport();
+                window.addEventListener('resize', updateViewport);
+                window.addEventListener('orientationchange', updateViewport);
+              }
+            `,
+          }}
+        />
+      </body>
     </html>
   )
 } 

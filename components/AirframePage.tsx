@@ -580,7 +580,7 @@ function Carousel3D({ images, title }: Omit<GSAPCarouselProps, 'sets'>) {
     <>
       <div 
         ref={containerRef}
-        className="relative w-full h-[600px] rounded-xl overflow-hidden"
+        className="relative w-full min-h-[300px] rounded-xl overflow-hidden"
         style={{
           position: isPinned ? 'sticky' : 'relative',
           top: isPinned ? '0' : 'auto',
@@ -591,8 +591,60 @@ function Carousel3D({ images, title }: Omit<GSAPCarouselProps, 'sets'>) {
         
 
         
-        {/* 3D Carousel Container */}
-        <div className="relative w-full h-full flex items-center justify-center" style={{ perspective: '1200px' }}>
+        {/* Mobile Simple Carousel */}
+        <div className="md:hidden w-full p-4">
+          <div className="text-center mb-4">
+            <p className="text-white/60 text-sm">Click image to zoom</p>
+          </div>
+          <div className="relative">
+            <div className="flex items-center justify-center">
+              <div
+                className="w-full max-w-sm aspect-[4/3] bg-black/20 rounded-lg overflow-hidden cursor-pointer hover:scale-105 transition-transform duration-300"
+                onClick={() => openLightbox(images[currentSlide])}
+              >
+                <img 
+                  src={images[currentSlide]} 
+                  alt={`Image ${currentSlide + 1}`}
+                  className="w-full h-full object-contain"
+                />
+              </div>
+            </div>
+            
+            {/* Mobile Navigation Arrows */}
+            <button
+              onClick={prevSlide}
+              disabled={currentSlide === 0}
+              className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-black/30 hover:bg-black/50 text-white p-2 rounded-full transition-colors disabled:opacity-50 z-10"
+            >
+              <ChevronLeft className="w-6 h-6" />
+            </button>
+            <button
+              onClick={nextSlide}
+              disabled={currentSlide === images.length - 1}
+              className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-black/30 hover:bg-black/50 text-white p-2 rounded-full transition-colors disabled:opacity-50 z-10"
+            >
+              <ChevronRight className="w-6 h-6" />
+            </button>
+            
+            {/* Mobile Dots */}
+            <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 flex space-x-2">
+              {images.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => goToSlide(index)}
+                  className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                    index === currentSlide 
+                      ? 'bg-white' 
+                      : 'bg-white/50 hover:bg-white/75'
+                  }`}
+                />
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Desktop 3D Carousel */}
+        <div className="hidden md:block relative w-full h-full flex items-center justify-center" style={{ perspective: '1200px' }}>
           <div className="relative w-full h-full flex items-center justify-center">
             {images.map((imageSrc, imageIndex) => {
               const isActive = imageIndex === currentSlide;
@@ -643,7 +695,7 @@ function Carousel3D({ images, title }: Omit<GSAPCarouselProps, 'sets'>) {
                     backfaceVisibility: 'hidden'
                   }}
                 >
-                  <div className="w-full h-full flex items-center justify-center p-8">
+                  <div className="w-full flex items-center justify-center p-8">
                     <div className="w-full max-w-4xl">
                       <div className="text-center mb-4">
                         <p className="text-white/60 text-sm">Click image to zoom</p>
@@ -668,11 +720,11 @@ function Carousel3D({ images, title }: Omit<GSAPCarouselProps, 'sets'>) {
           </div>
         </div>
 
-        {/* Navigation - only show for multiple images */}
+        {/* Desktop Navigation - only show for multiple images */}
         {images.length > 1 && (
           <>
             {/* Dots */}
-            <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 flex space-x-3">
+            <div className="hidden md:flex absolute bottom-6 left-1/2 transform -translate-x-1/2 space-x-3">
               {images.map((_, index) => (
                 <button
                   key={index}
@@ -686,18 +738,18 @@ function Carousel3D({ images, title }: Omit<GSAPCarouselProps, 'sets'>) {
               ))}
             </div>
 
-            {/* Arrow buttons */}
+            {/* Desktop Arrow buttons */}
             <button
               onClick={prevSlide}
               disabled={currentSlide === 0}
-              className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-black/30 hover:bg-black/50 text-white p-2 rounded-full transition-colors disabled:opacity-50"
+              className="hidden md:block absolute left-4 top-1/2 transform -translate-y-1/2 bg-black/30 hover:bg-black/50 text-white p-2 rounded-full transition-colors disabled:opacity-50"
             >
               <ChevronLeft className="w-6 h-6" />
             </button>
             <button
               onClick={nextSlide}
               disabled={currentSlide === images.length - 1}
-              className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-black/30 hover:bg-black/50 text-white p-2 rounded-full transition-colors disabled:opacity-50"
+              className="hidden md:block absolute right-4 top-1/2 transform -translate-y-1/2 bg-black/30 hover:bg-black/50 text-white p-2 rounded-full transition-colors disabled:opacity-50"
             >
               <ChevronRight className="w-6 h-6" />
             </button>
@@ -1006,7 +1058,7 @@ export default function AirframePage({ onBack, openProjects, onCloseProject, onN
             {/* Goal */}
             <div className="text-center px-6 md:px-12 lg:px-24 mb-20">
               <div className="text-gray-400 text-xl mb-2">GOAL</div>
-              <h2 className="text-3xl font-semibold leading-relaxed">
+              <h2 className="text-xl md:text-3xl font-semibold leading-relaxed">
                 Buyer-first process for fast,<br />
                 confident decisions across teams
               </h2>
@@ -1060,7 +1112,7 @@ export default function AirframePage({ onBack, openProjects, onCloseProject, onN
 
             {/* Process */}
             <div className="px-6 md:px-12 lg:px-24 mb-20">
-              <div className="grid grid-cols-3 gap-16">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-16">
                 <div>
                   <div className="flex items-center gap-2 mb-3">
                     <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40" fill="none">
@@ -1114,15 +1166,15 @@ export default function AirframePage({ onBack, openProjects, onCloseProject, onN
             {/* Solution */}
             <div className="text-center px-6 md:px-12 lg:px-24 mb-20">
               <div className="text-gray-400 text-xl mb-2">Solution</div>
-              <h2 className="text-3xl font-semibold leading-relaxed">
+              <h2 className="text-xl md:text-3xl font-semibold leading-relaxed">
                 One platform for research, communication, and decisions.
               </h2>
             </div>
 
-            <Separator className="mb-20" />
+            <Separator className="hidden md:block mb-20" />
 
             {/* HMW #1 */}
-            <div className="bg-[#1a1a1a] p-16 mb-16">
+            <div className="bg-[#1a1a1a] px-[21px] py-16 md:p-16 mb-16">
               <div className="flex gap-16 items-center justify-center">
                 
                 <div className="w-96">
@@ -1136,7 +1188,7 @@ export default function AirframePage({ onBack, openProjects, onCloseProject, onN
                     buyers a variety of RFP templates to help them get started more efficiently.
                   </p>
                 </div>
-                <div className="w-[417px] h-80 rounded overflow-hidden">
+                <div className="hidden md:block w-[417px] h-80 rounded overflow-hidden">
                   <img 
                     src="/images/airframe/HMW1.png" 
                     alt="HMW1 - Collaborative RFP Tool" 
@@ -1154,7 +1206,7 @@ export default function AirframePage({ onBack, openProjects, onCloseProject, onN
             </div>
 
             {/* HMW #2 */}
-            <div className="bg-[#1a1a1a] p-16 mb-16">
+            <div className="bg-[#1a1a1a] px-[21px] py-16 md:p-16 mb-16">
               <div className="flex gap-16 items-center justify-center">
                 
                 <div className="w-96">
@@ -1169,7 +1221,7 @@ export default function AirframePage({ onBack, openProjects, onCloseProject, onN
                     perspectives to provide deeper insights.
                   </p>
                 </div>
-                <div className="w-[417px] h-80 rounded overflow-hidden">
+                <div className="hidden md:block w-[417px] h-80 rounded overflow-hidden">
                   <img 
                     src="/images/airframe/HMW2.png" 
                     alt="HMW2 - Market Guides and Vendor Evaluation" 
@@ -1187,7 +1239,7 @@ export default function AirframePage({ onBack, openProjects, onCloseProject, onN
             </div>
 
             {/* HMW #3 */}
-            <div className="bg-[#1a1a1a] p-16 mb-16">
+            <div className="bg-[#1a1a1a] px-[21px] py-16 md:p-16 mb-16">
               <div className="flex gap-16 items-center justify-center">
                 
                 <div className="w-96">
@@ -1201,7 +1253,7 @@ export default function AirframePage({ onBack, openProjects, onCloseProject, onN
                     unknown. This inspired us to create a network where verified individuals can share their insights based on genuine experiences.
                   </p>
                 </div>
-                <div className="w-[417px] h-80 rounded overflow-hidden">
+                <div className="hidden md:block w-[417px] h-80 rounded overflow-hidden">
                   <img 
                     src="/images/airframe/HMW3.png" 
                     alt="HMW3 - Trusted Advice Network" 
@@ -1251,18 +1303,18 @@ export default function AirframePage({ onBack, openProjects, onCloseProject, onN
 
             {/* Impact */}
             <div className="px-6 md:px-12 lg:px-24 mb-20">
-              <div className="text-center mb-16">
+              <div className="text-center mb-3">
                 <div className="text-gray-400 text-xl mb-2">Impact</div>
               </div>
-              <div className="grid grid-cols-2 gap-10">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10">
                 <div className="bg-[#282727] p-4 text-center rounded-lg">
-                  <p className="text-3xl font-semibold">
+                  <p className="text-xl md:text-2xl font-semibold">
                     <span className="text-[#e6ff02]">Confident</span> decisions,<br />
                     even with limited data.
                   </p>
                 </div>
                 <div className="bg-[#282727] p-4 text-center rounded-lg">
-                  <p className="text-3xl font-semibold">
+                  <p className="text-xl md:text-2xl font-semibold">
                     <span className="text-[#e6ff02]">$4 million</span> secured in the<br />
                     seed funding round
                   </p>
@@ -1270,7 +1322,7 @@ export default function AirframePage({ onBack, openProjects, onCloseProject, onN
               </div>
             </div>
 
-            <Separator className="mb-20" />
+            <Separator className="hidden md:block mb-20" />
 
             {/* Design System */}
             <div className="px-6 md:px-12 lg:px-24 mb-20">

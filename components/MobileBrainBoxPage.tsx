@@ -22,7 +22,7 @@ interface BrainBoxPageProps {
   onLogoClick?: () => void;
 }
 
-export default function BrainBoxPage({ onBack, openProjects, onCloseProject, onNavigateToProject, onLogoClick }: BrainBoxPageProps) {
+export default function MobileBrainBoxPage({ onBack, openProjects, onCloseProject, onNavigateToProject, onLogoClick }: BrainBoxPageProps) {
   const [navigation, setNavigation] = useState<NavigationState>({ activeSection: 'more' });
   const mediaPlayerRef = useRef<{ playAirframeAudio: () => void; playEatsyAudio: () => void; playBrainBoxAudio: () => void; pauseAudio: () => void }>(null);
   const [zoomedImage, setZoomedImage] = useState<string>('');
@@ -81,8 +81,8 @@ export default function BrainBoxPage({ onBack, openProjects, onCloseProject, onN
   return (
     <div className="h-screen bg-neutral-950 text-white w-full overflow-hidden">
       <div className="box-border content-stretch flex flex-row gap-4 items-stretch justify-start p-[12px] relative w-full min-w-0" style={{ height: 'calc(100vh - 74px)' }}>
-        {/* Sidebar */}
-        <div className="hidden lg:block w-[200px] flex-shrink-0 h-full">
+        {/* Sidebar - Hidden on mobile */}
+        <div className="hidden w-[200px] flex-shrink-0 h-full">
           <Sidebar 
             navigation={navigation} 
             onNavigateToSection={handleNavigateToSection}
@@ -133,7 +133,7 @@ export default function BrainBoxPage({ onBack, openProjects, onCloseProject, onN
                 </div>
 
                 {/* Project Header */}
-                <div className="flex flex-col lg:flex-row gap-5 items-end">
+                <div className="flex flex-col lg:flex-row gap-5 items-start">
                   <div
                     className="w-60 h-60 bg-cover bg-center rounded-lg flex-shrink-0 cursor-pointer hover:opacity-90 transition-opacity duration-200"
                     style={{ backgroundImage: `url('/images/project-2.png')` }}
@@ -693,7 +693,7 @@ export default function BrainBoxPage({ onBack, openProjects, onCloseProject, onN
       </div>
       
       {/* Footer Attribution - Bottom of page */}
-      <div className="hidden lg:block bg-neutral-950 px-4 py-2 mb-[74px]">
+      <div className="hidden bg-neutral-950 px-4 py-2 mb-[74px]">
         <Footer />
       </div>
 

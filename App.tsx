@@ -1,49 +1,40 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Toaster } from "./components/ui/sonner";
 import InteractiveHome from "./components/InteractiveHome";
 import AirframePage from "./components/AirframePage";
+import MobileAirframePage from "./components/MobileAirframePage";
 import EatsyPage from "./components/EatsyPage";
+import MobileEatsyPage from "./components/MobileEatsyPage";
 import BrainBoxPage from "./components/BrainBoxPage";
+import MobileBrainBoxPage from "./components/MobileBrainBoxPage";
 
 export default function App() {
   const [currentPage, setCurrentPage] = useState<'home' | 'airframe' | 'eatsy' | 'brainbox'>('home');
   const [openProjects, setOpenProjects] = useState<{ id: string; title: string }[]>([]);
+  const [isMobile, setIsMobile] = useState(false);
+  
+  useEffect(() => {
+    const checkDeviceType = () => {
+      const mobile = window.innerWidth <= 768;
+      console.log('App - Window width:', window.innerWidth, 'isMobile:', mobile);
+      setIsMobile(mobile);
+    };
+    
+    checkDeviceType();
+    window.addEventListener('resize', checkDeviceType);
+    
+    return () => window.removeEventListener('resize', checkDeviceType);
+  }, []);
 
   const navigateToPage = (page: 'home' | 'airframe' | 'eatsy' | 'brainbox') => {
     setCurrentPage(page);
   };
 
   const openProject = (projectId: string) => {
-    // Define project metadata
-    const projectMetadata: Record<string, { id: string; title: string }> = {
-      airframe: { id: 'airframe', title: 'AI-powered B2B Procurement Platform' },
-      eatsy: { id: 'eatsy', title: 'Customizable Reservation Platform' },
-      brainbox: { id: 'brainbox', title: 'AI-Powered SAT Preparation Platform' },
-      // Add more projects here as needed
-    };
-
-    const project = projectMetadata[projectId];
-    if (project) {
-      // Add to open projects if not already there
-      setOpenProjects(prev => {
-        const exists = prev.some(p => p.id === project.id);
-        if (!exists) {
-          return [...prev, project];
-        }
-        return prev;
-      });
-
-      // Navigate to the project page
-      if (projectId === 'airframe') {
-        navigateToPage('airframe');
-      } else if (projectId === 'eatsy') {
-        navigateToPage('eatsy');
-      } else if (projectId === 'brainbox') {
-        navigateToPage('brainbox');
-      }
-    }
+    // Navigate directly to the project URL
+    window.location.href = `/project/${projectId}/`;
   };
 
   const handleCloseProject = (projectId: string) => {

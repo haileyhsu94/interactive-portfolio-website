@@ -66,9 +66,9 @@ export default function MobileAbout({
   };
 
   return (
-    <div className="bg-black relative size-full min-h-screen" data-name="mobile/about">
+    <div className="bg-black relative size-full min-h-screen mobile-container" data-name="mobile/about">
       {/* Header */}
-      <div className="absolute bg-black box-border content-stretch flex items-center justify-between left-0 p-[16px] right-0 top-0">
+      <div className="fixed bg-black box-border content-stretch flex items-center justify-between left-0 p-[16px] right-0 top-0 z-50 mobile-header">
         <div className="content-stretch flex gap-[7px] items-center justify-start relative shrink-0" data-name="header">
           <motion.div 
             className="box-border content-stretch flex gap-2.5 items-center justify-center relative shrink-0 size-9 cursor-pointer" 
@@ -104,7 +104,7 @@ export default function MobileAbout({
       </div>
 
       {/* Main Content */}
-      <div className="absolute box-border content-stretch flex flex-col gap-[60px] items-center justify-start left-[9px] pb-0 pt-[60px] px-0 right-2 top-[72px] overflow-y-auto scrollbar-thin h-[calc(100vh-72px)]">
+      <div className="absolute box-border content-stretch flex flex-col gap-[60px] items-center justify-start left-[9px] pb-20 pt-[60px] px-0 right-2 top-[72px] overflow-y-auto scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-transparent min-h-[calc(100vh-72px)] mobile-content">
         {/* Hero Section */}
         <div className="box-border content-stretch flex flex-col gap-10 items-center justify-start px-[21px] py-5 relative shrink-0 w-full">
           {/* Avatar */}

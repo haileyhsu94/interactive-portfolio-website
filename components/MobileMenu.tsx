@@ -16,11 +16,11 @@ export default function MobileMenu({ isOpen, onClose, onNavigateToProject, onBac
       initial={{ x: "100%" }}
       animate={{ x: isOpen ? 0 : "100%" }}
       transition={{ type: "spring", damping: 25, stiffness: 200 }}
-      className="fixed inset-0 z-50 bg-[#ffffff]"
+      className="fixed inset-0 z-50 bg-[#ffffff] h-screen"
       data-name="menu" 
       data-node-id="3002:2084"
     >
-      <div className="basis-0 content-stretch flex flex-col gap-11 grow items-center justify-start min-h-px min-w-px relative shrink-0 h-full" data-node-id="3005:2110">
+      <div className="basis-0 content-stretch flex flex-col gap-11 grow items-center justify-start min-h-px min-w-px relative shrink-0 h-full overflow-hidden" data-node-id="3005:2110">
         {/* Header with back button */}
         <div className="box-border content-stretch flex gap-[154px] items-center justify-start p-[16px] relative shrink-0 w-full" data-node-id="3002:2085">
           <button 
@@ -105,7 +105,7 @@ export default function MobileMenu({ isOpen, onClose, onNavigateToProject, onBac
           </div>
 
           {/* Separator */}
-          <div className="h-[404px] relative shrink-0 w-5 flex justify-center" data-name="separator" data-node-id="3005:2108">
+          <div className="h-[300px] relative shrink-0 w-5 flex justify-center" data-name="separator" data-node-id="3005:2108">
             <div className="w-px h-full bg-[#0A0A0A] opacity-100"></div>
           </div>
 

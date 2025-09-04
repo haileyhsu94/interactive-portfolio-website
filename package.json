@@ -21,7 +21,9 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "export": "next build",
     "start": "next start",
+    "serve": "npx serve out",
     "lint": "next lint",
     "lint:fix": "next lint --fix",
     "type-check": "tsc --noEmit",
@@ -74,6 +76,7 @@
     "recharts": "^3.1.2",
     "sonner": "^1.2.0",
     "tailwind-merge": "^2.0.0",
+    "tailwind-scrollbar": "^3.0.5",
     "vaul": "^1.1.2"
   },
   "devDependencies": {

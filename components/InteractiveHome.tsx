@@ -255,9 +255,7 @@ export function Sidebar({
                    }`}
                    data-name="item"
                    onClick={() => {
-                     if (onNavigateToProject && project.id) {
-                       onNavigateToProject(project.id);
-                     }
+                     window.location.href = `/project/${project.id}/`;
                    }}
                  >
                 <div className="basis-0 font-didact-gothic font-medium grow leading-[1.2] min-h-px min-w-px not-italic overflow-hidden relative shrink-0 text-[14px] text-gray-300" style={{ 
@@ -430,15 +428,12 @@ function FeaturedSection({ sectionRef, mediaPlayerRef, onNavigateToProject }: { 
         </div>
       </div>
       
-      <div
+      <motion.a
+                          href="/project/airframe/"
         className="box-border content-stretch flex flex-row gap-5 items-center justify-start p-0 relative rounded-3xl shrink-0 w-full hover:bg-white/5 transition-colors duration-300 cursor-pointer"
         data-name="container"
-        onClick={() => {
-          console.log('Featured project clicked');
-          if (onNavigateToProject) {
-            onNavigateToProject('airframe');
-          }
-        }}
+        whileHover={{ scale: 1.01 }}
+        whileTap={{ scale: 0.99 }}
       >
         <div className="flex-1 min-w-0 relative" data-name="text" style={{ minWidth: '40%' }}>
           <div className="relative size-full">
@@ -540,18 +535,13 @@ function FeaturedSection({ sectionRef, mediaPlayerRef, onNavigateToProject }: { 
               </div>
               
               <div className="box-border content-stretch flex flex-row gap-4 items-start justify-start p-0 relative shrink-0 w-full">
-                <motion.button
+                <motion.div
                   className="basis-0 bg-[#e6ff02] grow min-h-px min-w-px relative rounded-[999px] shrink-0 hover:bg-[#d9f00c] transition-colors duration-200"
                   data-name="contact"
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                   onClick={(e) => {
                     e.stopPropagation();
-                    if (onNavigateToProject) {
-                      onNavigateToProject('airframe');
-                    } else {
-                      toast.info("Opening case study...");
-                    }
                   }}
                 >
                   <div className="flex flex-row items-center justify-center relative size-full">
@@ -561,7 +551,7 @@ function FeaturedSection({ sectionRef, mediaPlayerRef, onNavigateToProject }: { 
                       </div>
                     </div>
                   </div>
-                </motion.button>
+                </motion.div>
                 
                 <motion.button
                   className="basis-0 grow min-h-px min-w-px relative rounded-[999px] shrink-0 border border-gray-600 border-solid hover:bg-white/5 transition-colors duration-200"
@@ -608,7 +598,7 @@ function FeaturedSection({ sectionRef, mediaPlayerRef, onNavigateToProject }: { 
           data-name="hero image"
           style={{ backgroundImage: `url('${imgHeroImage}')` }}
         />
-      </div>
+      </motion.a>
     </div>
   );
 }
@@ -660,18 +650,13 @@ function MoreProjectsSection({ sectionRef, onNavigateToProject }: { sectionRef: 
         data-name="container"
       >
         {projects.map((project, index) => (
-          <div 
+          <motion.a 
             key={project.title}
+                              href={`/project/${project.id}/`}
             className="basis-0 grow min-h-px min-w-px relative shrink-0 hover:bg-white/5 rounded-xl transition-colors duration-300 cursor-pointer" 
             data-name="project"
-            onClick={() => {
-              console.log('Project clicked:', project.title);
-              if (onNavigateToProject && project.id) {
-                onNavigateToProject(project.id);
-              } else {
-                toast.info(`Opening ${project.title}...`);
-              }
-            }}
+            whileHover={{ scale: 1.01 }}
+            whileTap={{ scale: 0.99 }}
           >
             <div className="relative size-full">
               <div className="box-border content-stretch flex flex-col gap-4 items-start justify-start p-[12px] relative w-full">
@@ -712,7 +697,7 @@ function MoreProjectsSection({ sectionRef, onNavigateToProject }: { sectionRef: 
                 </div>
               </div>
             </div>
-          </div>
+          </motion.a>
         ))}
       </div>
     </div>
@@ -1036,13 +1021,31 @@ export const MediaPlayer = forwardRef<{ playAirframeAudio: () => void; playEatsy
         currentTime: audio.currentTime,
         duration: audio.duration || prev.duration
       }));
+      
+      // Dispatch time update event for project pages to sync progress bars
+      // Use the updated state values, not the old mediaState
+      const currentTime = audio.currentTime;
+      const duration = audio.duration || mediaState.duration;
+      const isPlaying = mediaState.isPlaying;
+      
+      window.dispatchEvent(new CustomEvent('mediaStateChange', { 
+        detail: { 
+          isPlaying,
+          currentTime,
+          duration
+        } 
+      }));
     };
 
     const handlePlay = () => {
       setMediaState(prev => ({ ...prev, isPlaying: true }));
       // Dispatch custom event for project pages to listen to
       window.dispatchEvent(new CustomEvent('mediaStateChange', { 
-        detail: { isPlaying: true } 
+        detail: { 
+          isPlaying: true,
+          currentTime: audio.currentTime,
+          duration: audio.duration || mediaState.duration
+        } 
       }));
     };
 
@@ -1050,12 +1053,25 @@ export const MediaPlayer = forwardRef<{ playAirframeAudio: () => void; playEatsy
       setMediaState(prev => ({ ...prev, isPlaying: false }));
       // Dispatch custom event for project pages to listen to
       window.dispatchEvent(new CustomEvent('mediaStateChange', { 
-        detail: { isPlaying: false } 
+        detail: { 
+          isPlaying: false,
+          currentTime: audio.currentTime,
+          duration: audio.duration || mediaState.duration
+        } 
       }));
     };
 
     const handleEnded = () => {
       setMediaState(prev => ({ ...prev, isPlaying: false, currentTime: 0 }));
+      
+      // Dispatch ended event for project pages to reset progress bars
+      window.dispatchEvent(new CustomEvent('mediaStateChange', { 
+        detail: { 
+          isPlaying: false,
+          currentTime: 0,
+          duration: mediaState.duration
+        } 
+      }));
     };
 
     audio.addEventListener('timeupdate', handleTimeUpdate);
@@ -1356,20 +1372,11 @@ export const MediaPlayer = forwardRef<{ playAirframeAudio: () => void; playEatsy
             className="box-border content-stretch flex flex-col gap-2.5 items-end justify-center px-5 py-0 relative shrink-0 w-[299px]"
             data-name="action"
           >
-            <motion.button
+            <motion.a
+                                href={`/project/${['airframe', 'eatsy', 'brainbox', 'shelf-life'][mediaState.currentProjectIndex]}/`}
               className="box-border content-stretch flex flex-row gap-2.5 items-center justify-end px-4 py-[6px] relative rounded-[999px] shrink-0 border border-[#e6ff02] border-solid hover:bg-[#e6ff02]/10 transition-colors duration-200"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              onClick={() => {
-                console.log('MediaPlayer Open Project clicked');
-                if (onNavigateToProject) {
-                  const projectMap = ['airframe', 'eatsy', 'brainbox', 'shelf-life'];
-                  const currentProject = projectMap[mediaState.currentProjectIndex];
-                  onNavigateToProject(currentProject);
-                } else {
-                  toast.info("Opening project details...");
-                }
-              }}
             >
               <div className="font-didact-gothic font-medium leading-[0] not-italic relative shrink-0 text-[#e6ff02] text-[12px] text-left text-nowrap">
                 <p className="block leading-[22px] whitespace-pre">Open Project</p>
@@ -1404,7 +1411,7 @@ export const MediaPlayer = forwardRef<{ playAirframeAudio: () => void; playEatsy
                   </g>
                 </svg>
               </div>
-            </motion.button>
+            </motion.a>
           </div>
         </div>
       </div>
@@ -1419,7 +1426,7 @@ export const MediaPlayer = forwardRef<{ playAirframeAudio: () => void; playEatsy
                 style={{ backgroundImage: `url('${currentProject.image}')` }}
               />
               <div className="flex flex-col flex-1 min-w-0">
-                <div className="text-white text-sm font-normal truncate">
+                <div className="text-white text-[14px] font-normal truncate">
                   {currentProject.title}
           </div>
                 <div className="text-gray-400 text-xs">
@@ -1539,7 +1546,7 @@ function TabletHome({ onNavigateToProject, onNavigateToAbout }: { onNavigateToPr
   };
 
   return (
-    <div className="bg-[#0a0a0a] relative min-h-screen flex flex-col" data-name="tablet/home">
+    <div className="bg-[#0a0a0a] relative min-h-screen flex flex-col overflow-x-hidden mobile-container" data-name="tablet/home">
       {/* Header - Mobile style */}
       <div className="absolute bg-neutral-950 box-border content-stretch flex items-center justify-between left-0 p-[16px] right-0 top-0 z-50">
         <div className="content-stretch flex gap-[7px] items-center justify-start relative shrink-0">
@@ -1575,9 +1582,9 @@ function TabletHome({ onNavigateToProject, onNavigateToAbout }: { onNavigateToPr
       />
 
       {/* Main Content - Tablet Layout */}
-      <div className="bg-neutral-950 box-border content-stretch flex flex-col gap-4 items-start justify-start p-[16px] relative w-full pt-20 flex-1 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-transparent">
+      <div className="bg-neutral-950 box-border content-stretch flex flex-col gap-4 items-start justify-start p-[16px] relative w-full pt-20 flex-1 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-transparent pb-20 mobile-content">
         {/* Hero Section - Mobile style */}
-        <div className="box-border content-stretch flex flex-col gap-10 items-center justify-start px-8 py-[100px] relative shrink-0 w-full">
+        <div className="box-border content-stretch flex flex-col gap-10 items-center justify-start px-2.5 py-[100px] relative shrink-0 w-full">
           <div className="content-stretch flex gap-2.5 items-center justify-center relative shrink-0 w-full">
             <div className="basis-0 font-didact-gothic font-normal grow leading-[0] min-h-px min-w-px not-italic relative shrink-0 text-[20px] text-center text-gray-300">
               <p className="font-didact-gothic leading-[28px] mb-0">
@@ -1603,7 +1610,7 @@ function TabletHome({ onNavigateToProject, onNavigateToAbout }: { onNavigateToPr
 
         {/* Content Sections - Desktop style but in tablet layout */}
         <div className="bg-[#121212] relative rounded-[12px] w-full">
-          <div className="box-border content-stretch flex flex-col gap-8 items-start justify-start px-5 py-6 relative w-full">
+          <div className="box-border content-stretch flex flex-col gap-8 items-start justify-start px-2.5 py-6 relative w-full">
             {/* Featured Section */}
             <FeaturedSection sectionRef={featuredRef} mediaPlayerRef={mediaPlayerRef} onNavigateToProject={onNavigateToProject} />
             
@@ -1618,7 +1625,7 @@ function TabletHome({ onNavigateToProject, onNavigateToAbout }: { onNavigateToPr
       </div>
 
       {/* Footer Attribution - Fixed at bottom but above audio */}
-      <div className="bg-neutral-950 px-4 py-2">
+      <div className="bg-neutral-950 px-4 py-2 mt-auto">
         <Footer />
       </div>
 
@@ -1782,7 +1789,7 @@ export default function InteractiveHome({ onNavigateToProject, openProjects, onC
   console.log('Rendering Desktop version');
   return (
     <div
-      className="box-border content-stretch flex flex-col items-start justify-start p-0 relative w-full h-screen overflow-hidden"
+      className="box-border content-stretch flex flex-col items-start justify-start p-0 relative w-full h-screen"
       data-name="home"
     >
       <div className="flex-1 bg-neutral-950 min-w-0 relative shrink-0 w-full overflow-hidden" data-name="top">

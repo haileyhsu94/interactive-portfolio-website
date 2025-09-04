@@ -69,9 +69,9 @@ export default function MobileHome({
   };
 
   return (
-    <div className="bg-black !bg-black relative size-full min-h-screen" data-name="mobile/home" data-node-id="2997:1646">
+    <div className="bg-black !bg-black relative w-full h-full min-h-screen mobile-container" data-name="mobile/home" data-node-id="2997:1646">
       {/* Header */}
-      <div className="absolute bg-black box-border content-stretch flex items-center justify-between left-0 p-[16px] right-0 top-0" data-node-id="3000:1702">
+      <div className="fixed bg-black box-border content-stretch flex items-center justify-between left-0 p-[16px] right-0 top-0 z-50 mobile-header" data-node-id="3000:1702">
         <div className="content-stretch flex gap-[7px] items-center justify-start relative shrink-0" data-name="header" data-node-id="2997:1690">
           <img 
             src={imgLogo} 
@@ -93,9 +93,9 @@ export default function MobileHome({
       </div>
 
       {/* Main Content */}
-      <div className="absolute box-border content-stretch flex flex-col gap-8 items-center justify-start left-0 pb-0 pt-[80px] px-4 right-0 top-[72px] overflow-y-auto h-[calc(100vh-72px)] scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-transparent" data-node-id="3000:1756">
+      <div className="absolute box-border content-stretch flex flex-col gap-8 items-center justify-start left-0 pb-24 pt-[80px] px-4 right-0 top-[72px] overflow-y-auto mobile-content scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-transparent" data-node-id="3000:1756">
         {/* Hero Section */}
-        <div className="box-border content-stretch flex flex-col gap-10 items-center justify-start px-8 py-5 relative shrink-0 w-full mb-20" data-node-id="3000:1755">
+        <div className="box-border content-stretch flex flex-col gap-10 items-center justify-start px-2.5 py-5 relative shrink-0 w-full mb-20" data-node-id="3000:1755">
           <div className="content-stretch flex gap-2.5 items-center justify-center relative shrink-0 w-full" data-node-id="3000:1704">
             <div className="basis-0 font-didact-gothic font-normal grow leading-[0] min-h-px min-w-px not-italic relative shrink-0 text-[20px] text-gray-300" data-node-id="2997:1688">
               <p className="font-didact-gothic leading-[28px] mb-0">
@@ -138,7 +138,7 @@ export default function MobileHome({
         </div>
 
         {/* Featured Project Section */}
-        <div className="box-border content-stretch flex flex-col gap-4 items-start justify-start px-4 py-0 relative shrink-0 w-full" data-name="feature" data-node-id="3000:1717">
+        <div className="box-border content-stretch flex flex-col gap-4 items-start justify-start px-2.5 py-0 relative shrink-0 w-full" data-name="feature" data-node-id="3000:1717">
           <div className="content-stretch flex gap-6 items-start justify-start relative shrink-0 w-full" data-name="title" data-node-id="3000:1718">
             <div className="font-didact-gothic leading-[0] not-italic relative shrink-0 text-[#ffffff] text-[21px] text-nowrap" data-node-id="3000:1719">
               <p className="leading-[normal] whitespace-pre">Featured Project</p>
@@ -196,7 +196,7 @@ export default function MobileHome({
         </div>
 
         {/* More Projects Section */}
-        <div className="box-border content-stretch flex flex-col gap-4 items-start justify-start px-4 py-0 relative shrink-0 w-full" data-name="more" data-node-id="3000:1757">
+        <div className="box-border content-stretch flex flex-col gap-4 items-start justify-start px-2.5 py-0 relative shrink-0 w-full" data-name="more" data-node-id="3000:1757">
           <div className="content-stretch flex gap-6 items-start justify-start relative shrink-0 w-full" data-name="title" data-node-id="3000:1758">
             <div className="font-didact-gothic leading-[0] not-italic relative shrink-0 text-[#ffffff] text-[21px] text-nowrap" data-node-id="3000:1759">
               <p className="leading-[normal] whitespace-pre">More Projects</p>
@@ -306,7 +306,7 @@ export default function MobileHome({
         </div>
 
         {/* Contact Section */}
-        <div className="box-border content-stretch flex flex-col gap-4 items-start justify-start pb-8 pt-0 px-4 relative shrink-0 w-full" data-name="contact" data-node-id="3000:1836">
+        <div className="box-border content-stretch flex flex-col gap-4 items-start justify-start pb-8 pt-0 px-2.5 relative shrink-0 w-full" data-name="contact" data-node-id="3000:1836">
           <div className="content-stretch flex flex-col gap-4 items-start justify-start relative rounded-[12px] shrink-0 w-full" data-name="container" data-node-id="3000:1837">
             <div className="content-stretch flex flex-col font-didact-gothic gap-1 items-start justify-start leading-[0] not-italic relative shrink-0 w-full" data-node-id="3000:1889">
               <div className="relative shrink-0 text-[#ffffff] text-[21px] text-nowrap" data-node-id="3000:1838">
