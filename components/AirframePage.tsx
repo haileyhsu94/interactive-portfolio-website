@@ -695,14 +695,14 @@ function Carousel3D({ images, title }: Omit<GSAPCarouselProps, 'sets'>) {
                     backfaceVisibility: 'hidden'
                   }}
                 >
-                  <div className="w-full flex items-center justify-center p-8">
-                    <div className="w-full max-w-4xl">
+                  <div className="w-full flex items-center justify-center p-4">
+                    <div className="w-full max-w-7xl">
                       <div className="text-center mb-4">
                         <p className="text-white/60 text-sm">Click image to zoom</p>
                       </div>
                       <div className="flex items-center justify-center">
                         <div
-                          className="aspect-[4/3] bg-black/20 rounded-lg overflow-hidden cursor-pointer hover:scale-105 transition-transform duration-300 flex items-center justify-center max-w-3xl"
+                          className="aspect-[4/3] bg-black/20 rounded-lg overflow-hidden cursor-pointer hover:scale-105 transition-transform duration-300 flex items-center justify-center max-w-6xl"
                           onClick={() => openLightbox(imageSrc)}
                         >
                           <img 
