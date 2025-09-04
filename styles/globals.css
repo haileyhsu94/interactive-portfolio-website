@@ -117,11 +117,18 @@
     html {
       height: 100vh;
       height: 100dvh;
+      /* Prevent browser address bar from hiding */
+      position: fixed;
+      width: 100%;
     }
     
     body {
       height: 100vh;
       height: 100dvh;
+      /* Prevent browser address bar from hiding */
+      position: fixed;
+      width: 100%;
+      overflow: hidden;
     }
     
     /* Standard mobile scrolling container */
@@ -153,6 +160,11 @@
       overflow-x: hidden;
       width: 100%;
       max-width: 100vw;
+      /* Prevent browser address bar from hiding/showing */
+      position: relative;
+      height: 100vh;
+      height: 100dvh;
+      overflow-y: auto;
     }
 
 

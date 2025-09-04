@@ -80,7 +80,7 @@ export default function MobileBrainBoxPage({ onBack, openProjects, onCloseProjec
 
   return (
     <div className="bg-black relative size-full min-h-screen mobile-container" data-name="mobile/brainbox">
-      <div className="box-border content-stretch flex flex-row gap-4 items-stretch justify-start p-[12px] relative w-full min-w-0" style={{ height: 'calc(100vh - 74px)' }}>
+      <div className="box-border content-stretch flex flex-row gap-4 items-stretch justify-start p-[12px] relative w-full min-w-0 mobile-content">
         {/* Sidebar - Hidden on mobile */}
         <div className="hidden w-[200px] flex-shrink-0 h-full">
           <Sidebar 
