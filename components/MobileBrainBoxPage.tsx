@@ -79,7 +79,7 @@ export default function MobileBrainBoxPage({ onBack, openProjects, onCloseProjec
   };
 
   return (
-    <div className="h-screen bg-neutral-950 text-white w-full overflow-hidden">
+    <div className="bg-black relative size-full min-h-screen mobile-container" data-name="mobile/brainbox">
       <div className="box-border content-stretch flex flex-row gap-4 items-stretch justify-start p-[12px] relative w-full min-w-0" style={{ height: 'calc(100vh - 74px)' }}>
         {/* Sidebar - Hidden on mobile */}
         <div className="hidden w-[200px] flex-shrink-0 h-full">
@@ -102,8 +102,8 @@ export default function MobileBrainBoxPage({ onBack, openProjects, onCloseProjec
             className="absolute border border-[#252525] border-solid inset-0 pointer-events-none rounded-xl"
           />
 
-          {/* Scrollable Content Section */}
-          <div className="flex-1 overflow-y-auto scrollbar-thin">
+                  {/* Scrollable Content Section */}
+        <div className="flex-1 overflow-y-auto scrollbar-thin text-white">
             {/* Gradient Section - Hero */}
             <div style={{ background: 'linear-gradient(179deg, #957DCA -37.41%, #4B3F66 41.39%)' }}>
               <div className="p-7">
@@ -690,22 +690,15 @@ export default function MobileBrainBoxPage({ onBack, openProjects, onCloseProjec
               </div>
           </div>
         </div>
-      </div>
-      
-      {/* Footer Attribution - Bottom of page */}
-      <div className="hidden bg-neutral-950 px-4 py-2 mb-[74px]">
-        <Footer />
-      </div>
 
-      {/* Audio Player - Sticky to bottom */}
-      <div className="absolute bottom-0 left-0 right-0 flex-shrink-0 bg-neutral-950 w-full" style={{ height: '74px' }}>
-        <MediaPlayer ref={mediaPlayerRef} onNavigateToProject={onNavigateToProject} />
+        {/* Footer */}
+        <div className="box-border content-stretch flex flex-col gap-4 items-start justify-start pb-8 pt-0 px-2.5 relative shrink-0 w-full">
+          <Footer />
+        </div>
       </div>
-
-
 
       {/* Zoom Modal */}
-               {isZoomed && (
+      {isZoomed && (
            <div
              className="fixed inset-0 bg-black bg-opacity-90 z-50 flex items-center justify-center p-4 overflow-auto"
              onClick={closeZoom}
