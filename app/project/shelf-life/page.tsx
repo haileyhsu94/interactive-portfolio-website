@@ -4,12 +4,11 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import ShelfLifePage from '@/components/ShelfLifePage';
 import MobileShelfLifePage from '@/components/MobileShelfLifePage';
+import { useOpenProjects } from '@/contexts/OpenProjectsContext';
 
 export default function ShelfLifeProject() {
   const router = useRouter();
-  const [openProjects, setOpenProjects] = useState<{ id: string; title: string }[]>([
-    { id: 'shelf-life', title: 'Dual-Interface Platform to Reduce Food Waste' }
-  ]);
+  const { openProjects, addProject, removeProject } = useOpenProjects();
   const [isMobile, setIsMobile] = useState(false);
   
   useEffect(() => {
@@ -23,12 +22,17 @@ export default function ShelfLifeProject() {
     return () => window.removeEventListener('resize', checkDeviceType);
   }, []);
 
+  // Add current project to open projects when component mounts
+  useEffect(() => {
+    addProject({ id: 'shelf-life', title: 'Dual-Interface Platform to Reduce Food Waste' });
+  }, []);
+
   const handleBack = () => {
     window.location.href = '/';
   };
 
   const handleCloseProject = (projectId: string) => {
-    setOpenProjects(prev => prev.filter(p => p.id !== projectId));
+    removeProject(projectId);
     if (projectId === 'shelf-life') {
       window.location.href = '/';
     }

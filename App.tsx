@@ -9,10 +9,11 @@ import EatsyPage from "./components/EatsyPage";
 import MobileEatsyPage from "./components/MobileEatsyPage";
 import BrainBoxPage from "./components/BrainBoxPage";
 import MobileBrainBoxPage from "./components/MobileBrainBoxPage";
+import { useOpenProjects } from "./contexts/OpenProjectsContext";
 
 export default function App() {
   const [currentPage, setCurrentPage] = useState<'home' | 'airframe' | 'eatsy' | 'brainbox'>('home');
-  const [openProjects, setOpenProjects] = useState<{ id: string; title: string }[]>([]);
+  const { openProjects, removeProject } = useOpenProjects();
   const [isMobile, setIsMobile] = useState(false);
   
   useEffect(() => {
@@ -38,16 +39,12 @@ export default function App() {
   };
 
   const handleCloseProject = (projectId: string) => {
-    setOpenProjects(prev => {
-      const newProjects = prev.filter(project => project.id !== projectId);
-      
-      // If we're on the project page that was closed, navigate back to home
-      if (currentPage === projectId) {
-        setCurrentPage('home');
-      }
-      
-      return newProjects;
-    });
+    removeProject(projectId);
+    
+    // If we're on the project page that was closed, navigate back to home
+    if (currentPage === projectId) {
+      setCurrentPage('home');
+    }
   };
 
   return (

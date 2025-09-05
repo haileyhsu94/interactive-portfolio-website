@@ -44,7 +44,7 @@ export default function EatsyPage({ onBack, openProjects, onCloseProject, onNavi
   const [zoomedImage, setZoomedImage] = useState<string>('');
   const [isZoomed, setIsZoomed] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
-  const [audio] = useState(new Audio('/audio/reservation-audio.mp3'));
+  const [audio] = useState(() => typeof window !== 'undefined' ? new Audio('/audio/reservation-audio.mp3') : null);
 
 
 
@@ -68,6 +68,8 @@ export default function EatsyPage({ onBack, openProjects, onCloseProject, onNavi
   };
 
   const toggleAudio = () => {
+    if (!audio) return;
+    
     if (isPlaying) {
       audio.pause();
       setIsPlaying(false);
@@ -78,6 +80,8 @@ export default function EatsyPage({ onBack, openProjects, onCloseProject, onNavi
   };
 
   useEffect(() => {
+    if (!audio) return;
+    
     audio.addEventListener('ended', () => setIsPlaying(false));
     return () => {
       audio.removeEventListener('ended', () => setIsPlaying(false));
@@ -138,14 +142,14 @@ export default function EatsyPage({ onBack, openProjects, onCloseProject, onNavi
                   </a>
                 </div>
 
-                {/* Project Header */}
-                <div className="flex flex-col lg:flex-row gap-5 items-start">
+                                    {/* Project Header */}
+                    <div className="flex flex-col lg:flex-row gap-5 items-start h-full">
                   <div
                     className="w-60 h-60 bg-cover bg-center rounded-lg flex-shrink-0 cursor-pointer hover:opacity-90 transition-opacity duration-200"
                     style={{ backgroundImage: `url('${imgAirframeThumbnail1}')` }}
                     onClick={() => handleImageClick(imgAirframeThumbnail1)}
                   />
-                  <div className="flex-1 pb-3 min-w-0">
+                  <div className="flex-1 pb-3 min-w-0 flex flex-col justify-start">
                     <div className="flex flex-wrap gap-2 mb-4">
                       <motion.div
                         className="bg-[#2a2a2a] box-border content-stretch flex flex-row gap-2.5 items-center justify-center px-3 py-1 relative rounded-[999px] shrink-0 hover:bg-white/10 transition-colors duration-200"

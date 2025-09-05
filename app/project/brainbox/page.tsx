@@ -4,12 +4,11 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import BrainBoxPage from "@/components/BrainBoxPage";
 import MobileBrainBoxPage from "@/components/MobileBrainBoxPage";
+import { useOpenProjects } from '@/contexts/OpenProjectsContext';
 
 export default function BrainBoxProject() {
   const router = useRouter();
-  const [openProjects, setOpenProjects] = useState<{ id: string; title: string }[]>([
-    { id: 'brainbox', title: 'AI-Powered SAT Preparation Platform' }
-  ]);
+  const { openProjects, addProject, removeProject } = useOpenProjects();
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
@@ -23,12 +22,17 @@ export default function BrainBoxProject() {
     return () => window.removeEventListener('resize', checkDeviceType);
   }, []);
 
+  // Add current project to open projects when component mounts
+  useEffect(() => {
+    addProject({ id: 'brainbox', title: 'AI-Powered SAT Preparation Platform' });
+  }, []);
+
   const handleBack = () => {
     window.location.href = '/';
   };
 
   const handleCloseProject = (projectId: string) => {
-    setOpenProjects(prev => prev.filter(p => p.id !== projectId));
+    removeProject(projectId);
     if (projectId === 'brainbox') {
       window.location.href = '/';
     }

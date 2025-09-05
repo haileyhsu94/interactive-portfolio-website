@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from 'next'
 import { Didact_Gothic, Oregano } from 'next/font/google'
 import '../styles/globals.css'
+import { OpenProjectsProvider } from '../contexts/OpenProjectsContext'
 
 const didactGothic = Didact_Gothic({ 
   subsets: ['latin'],
@@ -42,7 +43,9 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <body className={`${didactGothic.variable} ${oregano.variable} ${didactGothic.className} bg-black`}>
-        {children}
+        <OpenProjectsProvider>
+          {children}
+        </OpenProjectsProvider>
         <script
           dangerouslySetInnerHTML={{
             __html: `
