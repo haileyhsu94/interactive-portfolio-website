@@ -1,6 +1,6 @@
 {
   "name": "interactive-portfolio-website",
-  "version": "1.4.0",
+  "version": "1.5.0",
   "private": true,
   "description": "A modern, interactive portfolio website with Canvas-based audio waveform player",
   "author": "Hailey Hsu <haileyhsu94@gmail.com>",
