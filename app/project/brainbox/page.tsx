@@ -25,7 +25,7 @@ export default function BrainBoxProject() {
   // Add current project to open projects when component mounts
   useEffect(() => {
     addProject({ id: 'brainbox', title: 'AI-Powered SAT Preparation Platform' });
-  }, []);
+  }, [addProject]);
 
   const handleBack = () => {
     window.location.href = '/';

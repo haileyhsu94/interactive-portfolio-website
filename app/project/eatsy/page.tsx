@@ -14,7 +14,7 @@ export default function EatsyProject() {
   useEffect(() => {
     console.log('EatsyProject: useEffect running, calling addProject');
     addProject({ id: 'eatsy', title: 'Customizable Reservation Platform' });
-  }, []);
+  }, [addProject]);
 
   const handleBack = () => window.location.href = '/';
   const handleLogoClick = () => window.location.href = '/';

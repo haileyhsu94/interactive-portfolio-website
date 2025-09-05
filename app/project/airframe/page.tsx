@@ -27,7 +27,7 @@ export default function AirframeProject() {
   // Add current project to open projects when component mounts
   useEffect(() => {
     addProject({ id: 'airframe', title: 'AI-powered B2B Procurement Platform' });
-  }, []);
+  }, [addProject]);
 
   const handleBack = () => {
     window.location.href = '/';
