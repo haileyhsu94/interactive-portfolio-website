@@ -55,6 +55,19 @@ export default function AirframeProject() {
   console.log('Airframe Project - Rendering component, isMobile:', isMobile);
   console.log('Airframe Project - Component loaded successfully');
   
+  if (isMobile) {
+    console.log('Airframe Project - Rendering MobileAirframePage');
+    return (
+      <MobileAirframePage 
+        onBack={handleBack}
+        openProjects={openProjects}
+        onCloseProject={handleCloseProject}
+        onNavigateToProject={handleNavigateToProject}
+        onLogoClick={handleLogoClick}
+      />
+    );
+  }
+  
   console.log('Airframe Project - Rendering AirframePage (desktop/tablet)');
   return (
     <AirframePage 

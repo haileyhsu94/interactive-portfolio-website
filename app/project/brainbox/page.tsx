@@ -51,7 +51,15 @@ export default function BrainBoxProject() {
   };
 
   if (isMobile) {
-    return <MobileBrainBoxPage onBack={handleBack} />;
+    return (
+      <MobileBrainBoxPage 
+        onBack={handleBack}
+        openProjects={openProjects}
+        onCloseProject={handleCloseProject}
+        onNavigateToProject={handleNavigateToProject}
+        onLogoClick={handleLogoClick}
+      />
+    );
   }
 
   return (
