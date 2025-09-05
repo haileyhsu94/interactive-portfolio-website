@@ -27,7 +27,7 @@ export default function AirframeProject() {
   // Add current project to open projects when component mounts
   useEffect(() => {
     addProject({ id: 'airframe', title: 'AI-powered B2B Procurement Platform' });
-  }, []);
+  }, [addProject]);
 
   const handleBack = () => {
     window.location.href = '/';
@@ -54,6 +54,19 @@ export default function AirframeProject() {
 
   console.log('Airframe Project - Rendering component, isMobile:', isMobile);
   console.log('Airframe Project - Component loaded successfully');
+  
+  if (isMobile) {
+    console.log('Airframe Project - Rendering MobileAirframePage');
+    return (
+      <MobileAirframePage 
+        onBack={handleBack}
+        openProjects={openProjects}
+        onCloseProject={handleCloseProject}
+        onNavigateToProject={handleNavigateToProject}
+        onLogoClick={handleLogoClick}
+      />
+    );
+  }
   
   console.log('Airframe Project - Rendering AirframePage (desktop/tablet)');
   return (

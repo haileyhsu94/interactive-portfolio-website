@@ -63,6 +63,10 @@ const airframeImages = {
 
 interface MobileAirframePageProps {
   onBack?: () => void;
+  openProjects?: any[];
+  onCloseProject?: (projectId: string) => void;
+  onNavigateToProject?: (projectId: string) => void;
+  onLogoClick?: () => void;
 }
 
 function InteractiveCarousel({ images, bgColor, title }: { images: string[]; bgColor: string; title?: string }) {

@@ -1895,7 +1895,7 @@ export default function InteractiveHome({ onNavigateToProject, openProjects, onC
                           <div className="box-border content-stretch flex flex-col gap-3 items-start justify-start leading-[0] not-italic p-[12px] relative text-left w-full">
                             <div className="font-didact-gothic font-normal leading-[22px] relative shrink-0 text-[14px] text-gray-300 w-full">
                               <p className="block mb-0">Clients</p>
-                              <p className="block">shipped</p>
+                              <p className="block">partnered with</p>
                             </div>
                             <div className="font-didact-gothic font-semibold relative shrink-0 text-[#ffffff] text-[24px] w-full">
                               <p className="block leading-[normal]">{`>10`}</p>

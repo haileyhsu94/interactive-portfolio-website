@@ -25,7 +25,7 @@ export default function ShelfLifeProject() {
   // Add current project to open projects when component mounts
   useEffect(() => {
     addProject({ id: 'shelf-life', title: 'Dual-Interface Platform to Reduce Food Waste' });
-  }, []);
+  }, [addProject]);
 
   const handleBack = () => {
     window.location.href = '/';
