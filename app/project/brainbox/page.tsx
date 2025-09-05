@@ -10,8 +10,10 @@ export default function BrainBoxProject() {
   const router = useRouter();
   const { openProjects, addProject, removeProject } = useOpenProjects();
   const [isMobile, setIsMobile] = useState(false);
+  const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
+    setIsClient(true);
     const checkDeviceType = () => {
       setIsMobile(window.innerWidth <= 768);
     };
@@ -25,7 +27,7 @@ export default function BrainBoxProject() {
   // Add current project to open projects when component mounts
   useEffect(() => {
     addProject({ id: 'brainbox', title: 'AI-Powered SAT Preparation Platform' });
-  }, []);
+  }, [addProject]);
 
   const handleBack = () => {
     window.location.href = '/';
@@ -50,8 +52,25 @@ export default function BrainBoxProject() {
     window.location.href = '/';
   };
 
+  // Don't render until client-side hydration is complete
+  if (!isClient) {
+    return (
+      <div className="min-h-screen bg-black flex items-center justify-center">
+        <div className="text-white">Loading...</div>
+      </div>
+    );
+  }
+
   if (isMobile) {
-    return <MobileBrainBoxPage onBack={handleBack} />;
+    return (
+      <MobileBrainBoxPage 
+        onBack={handleBack}
+        openProjects={openProjects}
+        onCloseProject={handleCloseProject}
+        onNavigateToProject={handleNavigateToProject}
+        onLogoClick={handleLogoClick}
+      />
+    );
   }
 
   return (

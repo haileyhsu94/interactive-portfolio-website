@@ -79,10 +79,10 @@ export default function MobileBrainBoxPage({ onBack, openProjects, onCloseProjec
   };
 
   return (
-    <div className="bg-black relative size-full min-h-screen mobile-container" data-name="mobile/brainbox">
-      <div className="box-border content-stretch flex flex-row gap-4 items-stretch justify-start p-[12px] relative w-full min-w-0 mobile-content">
-        {/* Sidebar - Hidden on mobile */}
-        <div className="hidden w-[200px] flex-shrink-0 h-full">
+    <div className="h-screen bg-neutral-950 text-white w-full overflow-hidden">
+      <div className="box-border content-stretch flex flex-row gap-4 items-stretch justify-start p-[12px] relative w-full min-w-0" style={{ height: 'calc(100vh - 74px)' }}>
+        {/* Sidebar */}
+        <div className="hidden lg:block w-[200px] flex-shrink-0 h-full">
           <Sidebar 
             navigation={navigation} 
             onNavigateToSection={handleNavigateToSection}
@@ -102,8 +102,8 @@ export default function MobileBrainBoxPage({ onBack, openProjects, onCloseProjec
             className="absolute border border-[#252525] border-solid inset-0 pointer-events-none rounded-xl"
           />
 
-                  {/* Scrollable Content Section */}
-        <div className="flex-1 overflow-y-auto scrollbar-thin text-white">
+          {/* Scrollable Content Section */}
+          <div className="flex-1 overflow-y-auto scrollbar-thin">
             {/* Gradient Section - Hero */}
             <div style={{ background: 'linear-gradient(179deg, #957DCA -37.41%, #4B3F66 41.39%)' }}>
               <div className="p-7">
@@ -132,14 +132,14 @@ export default function MobileBrainBoxPage({ onBack, openProjects, onCloseProjec
                   </a>
                 </div>
 
-                {/* Project Header */}
-                <div className="flex flex-col lg:flex-row gap-5 items-start">
+                                    {/* Project Header */}
+                    <div className="flex flex-col lg:flex-row gap-5 items-start">
                   <div
                     className="w-60 h-60 bg-cover bg-center rounded-lg flex-shrink-0 cursor-pointer hover:opacity-90 transition-opacity duration-200"
                     style={{ backgroundImage: `url('/images/project-2.png')` }}
                     onClick={() => handleImageClick('/images/project-2.png')}
                   />
-                  <div className="flex-1 pb-3 min-w-0">
+                  <div className="flex-1 pb-3 min-w-0 flex flex-col justify-start">
                     <div className="flex flex-wrap gap-2 mb-4">
                       <motion.div
                         className="bg-[#2a2a2a] box-border content-stretch flex flex-row gap-2.5 items-center justify-center px-3 py-1 relative rounded-[999px] shrink-0 hover:bg-white/10 transition-colors duration-200"
@@ -690,15 +690,22 @@ export default function MobileBrainBoxPage({ onBack, openProjects, onCloseProjec
               </div>
           </div>
         </div>
-
-        {/* Footer */}
-        <div className="box-border content-stretch flex flex-col gap-4 items-start justify-start pb-8 pt-0 px-2.5 relative shrink-0 w-full">
-          <Footer />
-        </div>
+      </div>
+      
+      {/* Footer Attribution - Bottom of page */}
+      <div className="hidden lg:block bg-neutral-950 px-4 py-2 mb-[74px]">
+        <Footer />
       </div>
 
+      {/* Audio Player - Sticky to bottom */}
+      <div className="absolute bottom-0 left-0 right-0 flex-shrink-0 bg-neutral-950 w-full" style={{ height: '74px' }}>
+        <MediaPlayer ref={mediaPlayerRef} onNavigateToProject={onNavigateToProject} />
+      </div>
+
+
+
       {/* Zoom Modal */}
-      {isZoomed && (
+               {isZoomed && (
            <div
              className="fixed inset-0 bg-black bg-opacity-90 z-50 flex items-center justify-center p-4 overflow-auto"
              onClick={closeZoom}
