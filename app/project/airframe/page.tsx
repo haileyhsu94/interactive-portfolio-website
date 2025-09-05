@@ -10,8 +10,10 @@ export default function AirframeProject() {
   const router = useRouter();
   const { openProjects, addProject, removeProject } = useOpenProjects();
   const [isMobile, setIsMobile] = useState(false);
+  const [isClient, setIsClient] = useState(false);
   
   useEffect(() => {
+    setIsClient(true);
     const checkDeviceType = () => {
       const mobile = window.innerWidth <= 768;
       console.log('Airframe Project - Window width:', window.innerWidth, 'isMobile:', mobile);
@@ -54,6 +56,15 @@ export default function AirframeProject() {
 
   console.log('Airframe Project - Rendering component, isMobile:', isMobile);
   console.log('Airframe Project - Component loaded successfully');
+  
+  // Don't render until client-side hydration is complete
+  if (!isClient) {
+    return (
+      <div className="min-h-screen bg-black flex items-center justify-center">
+        <div className="text-white">Loading...</div>
+      </div>
+    );
+  }
   
   if (isMobile) {
     console.log('Airframe Project - Rendering MobileAirframePage');
