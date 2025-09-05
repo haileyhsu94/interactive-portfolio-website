@@ -107,10 +107,10 @@ export default function MobileBrainBoxPage({ onBack, openProjects, onCloseProjec
             {/* Gradient Section - Hero */}
             <div style={{ background: 'linear-gradient(179deg, #957DCA -37.41%, #4B3F66 41.39%)' }}>
               <div className="p-7">
-                {/* Header */}
+      {/* Header */}
                 <div className="flex items-center justify-between mb-5">
-                  <button 
-                    onClick={onBack}
+          <button 
+            onClick={onBack}
                     className="w-12 h-12 flex items-center justify-center"
                   >
                     <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -118,7 +118,7 @@ export default function MobileBrainBoxPage({ onBack, openProjects, onCloseProjec
                       <path d="M18 20L14 24L18 28" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                       <path d="M14 24H34" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                     </svg>
-                  </button>
+          </button>
                   <a href="https://www.brainboxai.app/" target="_blank" rel="noopener noreferrer">
                     <svg width="118" height="40" viewBox="0 0 118 40" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <rect width="118" height="40" rx="20" fill="#D1D5DB"/>
@@ -165,17 +165,17 @@ export default function MobileBrainBoxPage({ onBack, openProjects, onCloseProjec
                           <p className="block leading-[22px] whitespace-pre">A/B Testing</p>
                         </div>
                       </motion.div>
-                    </div>
+            </div>
                     <h1 className="text-4xl font-bold mb-3">
                       AI-Powered SAT Preparation Platform
                     </h1>
                     <p className="text-xl text-gray-300">
                       AI-powered SAT prep that personalizes learning for students and simplifies progress tracking for teachers.
                     </p>
-                  </div>
-                </div>
-              </div>
             </div>
+          </div>
+        </div>
+      </div>
 
             {/* Project Details */}
             <div className="p-7">
@@ -204,18 +204,18 @@ export default function MobileBrainBoxPage({ onBack, openProjects, onCloseProjec
                 <div>
                   <div className="text-[#f4915c] text-sm mb-1">Duration</div>
                   <div className="text-gray-300">Jan 2023 - Dec 2023</div>
-                </div>
+            </div>
                 <Separator orientation="vertical" className="h-6 hidden sm:block" />
                 <div>
                   <div className="text-[#f4915c] text-sm mb-1">Role</div>
                   <div className="text-gray-300">Lead Product Designer</div>
-                </div>
+          </div>
                 <Separator orientation="vertical" className="h-6 hidden sm:block" />
                 <div>
                   <div className="text-[#f4915c] text-sm mb-1">Collaborators</div>
                   <div className="text-gray-300">CEO, CTO, 4 Designer & 5 Engineers</div>
                 </div>
-              </div>
+                  </div>
 
               {/* Mobile Layout */}
               <div className="lg:hidden flex flex-col gap-6 items-center">
@@ -298,8 +298,8 @@ export default function MobileBrainBoxPage({ onBack, openProjects, onCloseProjec
                 <h2 className="text-3xl font-bold leading-[1.5]">
                   Leverage AI tutoring to give every student a personalized learning experience, whether they are studying independently or attending a prep school.
                 </h2>
-              </div>
-            </div>
+          </div>
+        </div>
 
             {/* Separator */}
             <div className="px-6 md:px-12 lg:px-24">
@@ -330,15 +330,15 @@ export default function MobileBrainBoxPage({ onBack, openProjects, onCloseProjec
                 </div>
                 <div className="text-center text-lg text-gray-400 mb-8">
                   Part of the market survey
-                </div>
+          </div>
 
                 <div className="flex justify-center mb-1">
                   <div 
                     className="w-full max-w-4xl aspect-[1211/451] bg-cover bg-center bg-no-repeat cursor-pointer hover:opacity-90 transition-opacity duration-200 rounded-xl"
                     style={{ backgroundImage: `url('/images/brainbox/research/market-survey-2.png')` }}
                     onClick={() => handleImageClick('/images/brainbox/research/market-survey-2.png')}
-                  />
-                </div>
+          />
+        </div>
                 <div className="text-center text-lg text-gray-400 mb-8">
                   Part of the market survey
                 </div>
@@ -373,8 +373,8 @@ export default function MobileBrainBoxPage({ onBack, openProjects, onCloseProjec
                 </div>
                 <div className="text-center text-lg text-gray-400 mb-8">
                   Part of the group feature ideation session - using FigJam
-                </div>
-              </div>
+            </div>
+          </div>
 
               {/* Features Section */}
               <div className="mb-24">
@@ -434,7 +434,7 @@ export default function MobileBrainBoxPage({ onBack, openProjects, onCloseProjec
                         onClick={() => handleImageClick('/images/brainbox/features/individual-user-mockup.png')}
                       />
                   </div>
-                </div>
+        </div>
 
                 {/* For Group Users */}
                 <div className="flex flex-col lg:flex-row gap-6 items-start lg:items-end">
@@ -479,8 +479,8 @@ export default function MobileBrainBoxPage({ onBack, openProjects, onCloseProjec
                         onClick={() => handleImageClick('/images/brainbox/features/group-user-mockup.png')}
                       />
                   </div>
-                </div>
-              </div>
+            </div>
+          </div>
 
               {/* Design, Testing and Feedback Section */}
               <div className="mb-24">
@@ -512,8 +512,8 @@ export default function MobileBrainBoxPage({ onBack, openProjects, onCloseProjec
                     className="w-full max-w-4xl aspect-[2398/1483] bg-cover bg-center bg-no-repeat cursor-pointer hover:opacity-90 transition-opacity duration-200 rounded-xl"
                     style={{ backgroundImage: `url('/images/brainbox/design/ab-test.png')` }}
                     onClick={() => handleImageClick('/images/brainbox/design/ab-test.png')}
-                  />
-                </div>
+          />
+        </div>
                 <div className="text-center text-lg text-gray-400 mb-8">
                   One of the A/B test - using UseBerry
                 </div>
@@ -527,8 +527,8 @@ export default function MobileBrainBoxPage({ onBack, openProjects, onCloseProjec
                 </div>
                 <div className="text-center text-lg text-gray-400 mb-8">
                   Part of the collected design feedback - using UseBerry
-                </div>
-              </div>
+            </div>
+          </div>
 
               {/* Develop and Launch Section */}
               <div className="mb-24">
@@ -688,14 +688,14 @@ export default function MobileBrainBoxPage({ onBack, openProjects, onCloseProjec
                   From this project, I learned the importance of clear communication when leading a large design team and collaborating with stakeholders. Keeping everyone aligned with the product vision was key to building a cohesive platform. The experience also gave me the opportunity to oversee the entire product, which helped me identify design blind spots and improve overall quality.
                 </p>
               </div>
+            </div>
           </div>
         </div>
-      </div>
-      
+
       {/* Footer Attribution - Bottom of page */}
       <div className="hidden lg:block bg-neutral-950 px-4 py-2 mb-[74px]">
-        <Footer />
-      </div>
+          <Footer />
+        </div>
 
       {/* Audio Player - Sticky to bottom */}
       <div className="absolute bottom-0 left-0 right-0 flex-shrink-0 bg-neutral-950 w-full" style={{ height: '74px' }}>
@@ -705,27 +705,27 @@ export default function MobileBrainBoxPage({ onBack, openProjects, onCloseProjec
 
 
       {/* Zoom Modal */}
-               {isZoomed && (
+        {isZoomed && (
            <div
-             className="fixed inset-0 bg-black bg-opacity-90 z-50 flex items-center justify-center p-4 overflow-auto"
-             onClick={closeZoom}
-           >
-             <div className="relative w-[85vw] h-[85vh] flex items-center justify-center">
+            className="fixed inset-0 bg-black bg-opacity-90 z-50 flex items-center justify-center p-4 overflow-auto"
+            onClick={closeZoom}
+          >
+            <div className="relative w-[85vw] h-[85vh] flex items-center justify-center">
                <button
                  onClick={closeZoom}
                  className="absolute top-4 right-4 text-white text-4xl font-bold hover:text-gray-300 z-10 bg-black bg-opacity-50 rounded-full w-12 h-12 flex items-center justify-center hover:bg-opacity-70 transition-all duration-200"
                >
                  ×
                </button>
-               <img
-                 src={zoomedImage}
-                 alt="Zoomed view"
-                 className="max-w-full max-h-full object-contain"
-                 onClick={(e) => e.stopPropagation()}
-               />
+              <img
+                src={zoomedImage}
+                alt="Zoomed view"
+                className="max-w-full max-h-full object-contain"
+                onClick={(e) => e.stopPropagation()}
+              />
              </div>
-           </div>
-         )}
+            </div>
+        )}
     </div>
   );
 }

@@ -6,7 +6,7 @@ import MobileShelfLifePage from '@/components/MobileShelfLifePage';
 
 export default function ShelfLifeProject() {
   const [isMobile, setIsMobile] = useState(false);
-
+  
   useEffect(() => {
     const checkDeviceType = () => {
       setIsMobile(window.innerWidth <= 768);

@@ -172,7 +172,7 @@ function InteractiveCarousel({ images, bgColor, title, onInteraction }: Carousel
         {/* Navigation dots */}
         <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-2">
           {images.map((_, index) => (
-            <button
+        <button
               key={index}
               className={`w-3 h-3 rounded-full transition-colors ${
                 index === currentIndex ? 'bg-white' : 'bg-white/30'
@@ -210,9 +210,9 @@ function InteractiveCarousel({ images, bgColor, title, onInteraction }: Carousel
                 className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 hover:bg-opacity-70 text-white p-3 rounded-full transition-all duration-200"
               >
                 <ChevronLeft size={24} />
-              </button>
-              
-              <button
+        </button>
+        
+        <button
                 onClick={(e) => {
                   e.stopPropagation();
                   nextImage();
@@ -220,7 +220,7 @@ function InteractiveCarousel({ images, bgColor, title, onInteraction }: Carousel
                 className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 hover:bg-opacity-70 text-white p-3 rounded-full transition-all duration-200"
               >
                 <ChevronRight size={24} />
-              </button>
+        </button>
               
               <button
                 onClick={closeZoom}
@@ -232,7 +232,7 @@ function InteractiveCarousel({ images, bgColor, title, onInteraction }: Carousel
               {/* Image counter */}
               <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-black bg-opacity-50 text-white px-4 py-2 rounded-full text-sm">
                 {currentIndex + 1} / {images.length}
-              </div>
+      </div>
             </div>
           </motion.div>
         )}
@@ -595,7 +595,7 @@ function Carousel3D({ images, title }: Omit<GSAPCarouselProps, 'sets'>) {
         <div className="md:hidden w-full p-4">
           <div className="text-center mb-4">
             <p className="text-white/60 text-sm">Click image to zoom</p>
-          </div>
+        </div>
           <div className="relative">
             <div className="flex items-center justify-center">
               <div
@@ -754,8 +754,8 @@ function Carousel3D({ images, title }: Omit<GSAPCarouselProps, 'sets'>) {
               <ChevronRight className="w-6 h-6" />
             </button>
           </>
-        )}
-      </div>
+      )}
+    </div>
 
       {/* Lightbox */}
       {lightboxOpen && (
@@ -877,10 +877,10 @@ export default function MobileAirframePage({ onBack, openProjects, onCloseProjec
             {/* Gradient Section - Now scrolls with content */}
             <div style={{ background: 'linear-gradient(179deg, #7A96C4 -37.41%, #3C4A61 41.39%)' }}>
               <div className="p-7">
-                {/* Header */}
+      {/* Header */}
                 <div className="flex items-center justify-between mb-5">
-                  <button 
-                    onClick={onBack}
+          <button 
+            onClick={onBack}
                     className="w-12 h-12 flex items-center justify-center"
                   >
                     <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -888,7 +888,7 @@ export default function MobileAirframePage({ onBack, openProjects, onCloseProjec
                       <path d="M18 20L14 24L18 28" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                       <path d="M14 24H34" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                     </svg>
-                  </button>
+          </button>
                   <a href="https://www.airframe.ai/" target="_blank" rel="noopener noreferrer">
                     <svg width="118" height="40" viewBox="0 0 118 40" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <rect width="118" height="40" rx="20" fill="#D1D5DB"/>
@@ -900,7 +900,7 @@ export default function MobileAirframePage({ onBack, openProjects, onCloseProjec
                       <rect fill="black" fillOpacity="0" y="2.52841" width="53.2159" height="16.9432"/>
                     </svg>
                   </a>
-                </div>
+            </div>
 
                                     {/* Project Header */}
                     <div className="flex flex-col lg:flex-row gap-5 items-start h-full">
@@ -916,7 +916,7 @@ export default function MobileAirframePage({ onBack, openProjects, onCloseProjec
                         >
                           <div className="font-normal leading-[0] not-italic relative shrink-0 text-[17px] text-gray-300 text-left text-nowrap tracking-wide" style={{ fontFamily: 'var(--font-oregano)' }}>
                             <p className="block leading-[22px] whitespace-pre">6 months</p>
-                          </div>
+            </div>
                         </motion.div>
                         <motion.div
                           className="bg-[#2a2a2a] box-border content-stretch flex flex-row gap-2.5 items-center justify-center px-3 py-1 relative rounded-[999px] shrink-0 hover:bg-white/10 transition-colors duration-200"
@@ -924,7 +924,7 @@ export default function MobileAirframePage({ onBack, openProjects, onCloseProjec
                         >
                           <div className="font-normal leading-[0] not-italic relative shrink-0 text-[17px] text-gray-300 text-left text-nowrap tracking-wide" style={{ fontFamily: 'var(--font-oregano)' }}>
                             <p className="block leading-[22px] whitespace-pre">$4M funding</p>
-                          </div>
+          </div>
                         </motion.div>
                         <motion.div
                           className="bg-[#2a2a2a] box-border content-stretch flex flex-row gap-2.5 items-center justify-center px-3 py-1 relative rounded-[999px] shrink-0 hover:bg-white/10 transition-colors duration-200"
@@ -932,9 +932,9 @@ export default function MobileAirframePage({ onBack, openProjects, onCloseProjec
                         >
                           <div className="font-normal leading-[0] not-italic relative shrink-0 text-[17px] text-gray-300 text-left text-nowrap tracking-wide" style={{ fontFamily: 'var(--font-oregano)' }}>
                             <p className="block leading-[22px] whitespace-pre">Working directly with CEO</p>
-                          </div>
+        </div>
                         </motion.div>
-                    </div>
+      </div>
                     <h1 className="text-4xl font-bold mb-3">
                       AI-powered B2B Procurement Platform
                     </h1>
@@ -942,9 +942,9 @@ export default function MobileAirframePage({ onBack, openProjects, onCloseProjec
                       Streamlining B2B software procurement with AI & collaboration tools
                     </p>
                   </div>
-                </div>
-              </div>
             </div>
+          </div>
+        </div>
 
             {/* Project Details */}
             <div className="p-7">
@@ -978,13 +978,13 @@ export default function MobileAirframePage({ onBack, openProjects, onCloseProjec
                 <div>
                   <div className="text-[#f4915c] text-sm mb-1">Role</div>
                   <div className="text-gray-300">Founding Product Designer</div>
-                </div>
+                  </div>
                 <Separator orientation="vertical" className="h-6 hidden sm:block" />
                 <div>
                   <div className="text-[#f4915c] text-sm mb-1">Collaborators</div>
                   <div className="text-gray-300">CEO, CTO, Consultant & 3 Engineers</div>
-                </div>
-              </div>
+                      </div>
+                    </div>
 
                            {/* Mobile Layout */}
              <div className="lg:hidden flex flex-col gap-6 items-center">
@@ -993,7 +993,7 @@ export default function MobileAirframePage({ onBack, openProjects, onCloseProjec
                     <div className="leading-[22px] text-[15px] text-gray-300">
                       <p className="mb-0 text-[#f4915c]">Duration</p>
                       <p>Dec 2024 - May 2025</p>
-                    </div>
+                      </div>
                     <div className="leading-[22px] text-[15px] text-white">
                       <p className="mb-0 text-[#f4915c]">Role</p>
                       <p className="text-gray-300">Founding Product Designer</p>
@@ -1001,8 +1001,8 @@ export default function MobileAirframePage({ onBack, openProjects, onCloseProjec
                     <div className="leading-[22px] text-[15px] text-white">
                       <p className="mb-0 text-[#f4915c]">Collaborators</p>
                       <p className="text-gray-300">CEO, CTO, Consultant & 3 Engineers</p>
+                      </div>
                     </div>
-                  </div>
                   <motion.button
                     onClick={toggleAudio}
                     className="transition-transform duration-200 hover:scale-105"
@@ -1022,9 +1022,9 @@ export default function MobileAirframePage({ onBack, openProjects, onCloseProjec
                       </svg>
                     )}
                   </motion.button>
+                  </div>
                 </div>
               </div>
-            </div>
 
             {/* Separator */}
             <div className="p-7">
@@ -1039,7 +1039,7 @@ export default function MobileAirframePage({ onBack, openProjects, onCloseProjec
                 products and suppliers, integrating market research, expert advice, user reviews, case studies,
                 and procurement process tools.
               </p>
-            </div>
+          </div>
 
             {/* Background & Challenges */}
             <div className="px-6 md:px-12 lg:px-24 mb-20">
@@ -1053,7 +1053,7 @@ export default function MobileAirframePage({ onBack, openProjects, onCloseProjec
                 <li>2. A lack of benchmarks in unfamiliar areas, leading to hesitant and time-consuming evaluation processes.</li>
                 <li>3. Difficulty in obtaining reliable peer advice or sharing of real experiences.</li>
               </ol>
-            </div>
+        </div>
 
             {/* Goal */}
             <div className="text-center px-6 md:px-12 lg:px-24 mb-20">
@@ -1078,7 +1078,7 @@ export default function MobileAirframePage({ onBack, openProjects, onCloseProjec
                       alt={`Platform overview ${index + 1}`}
                       className="w-auto h-80 object-contain"
                     />
-                  </div>
+          </div>
                 ))}
                 {/* Second set of images (duplicate for seamless loop) */}
                 {[airframeImages.ai, airframeImages.market, airframeImages.rfp, airframeImages.expert, airframeImages.guide].map((image, index) => (
@@ -1113,55 +1113,55 @@ export default function MobileAirframePage({ onBack, openProjects, onCloseProjec
             {/* Process */}
             <div className="px-6 md:px-12 lg:px-24 mb-20">
               <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-16">
-                <div>
-                  <div className="flex items-center gap-2 mb-3">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40" fill="none">
-                      <path d="M20.0002 36.6663C29.2049 36.6663 36.6668 29.2044 36.6668 19.9997C36.6668 10.7949 29.2049 3.33301 20.0002 3.33301C10.7954 3.33301 3.3335 10.7949 3.3335 19.9997C3.3335 29.2044 10.7954 36.6663 20.0002 36.6663Z" stroke="#E6FF02" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                      <path d="M36.6667 20H30" stroke="#E6FF02" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                      <path d="M10.0002 20H3.3335" stroke="#E6FF02" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                      <path d="M20 9.99967V3.33301" stroke="#E6FF02" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                      <path d="M20 36.6667V30" stroke="#E6FF02" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                    </svg>
-                    <h3 className="text-2xl font-bold">Understand</h3>
-                  </div>
-                  <p className="text-lg text-gray-300">
-                    Based on feedback from 20+ user interviews conducted by the CEO, I identified 3 key pain points
-                  </p>
-                </div>
-                
-                <div>
-                  <div className="flex items-center gap-2 mb-3">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="41" height="40" viewBox="0 0 41 40" fill="none">
-                      <path d="M25.6665 23.333C25.9998 21.6663 26.8332 20.4997 28.1665 19.1663C29.8332 17.6663 30.6665 15.4997 30.6665 13.333C30.6665 10.6808 29.6129 8.1373 27.7376 6.26194C25.8622 4.38658 23.3187 3.33301 20.6665 3.33301C18.0143 3.33301 15.4708 4.38658 13.5954 6.26194C11.7201 8.1373 10.6665 10.6808 10.6665 13.333C10.6665 14.9997 10.9998 16.9997 13.1665 19.1663C14.3332 20.333 15.3332 21.6663 15.6665 23.333" stroke="#F4915C" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                      <path d="M15.6665 30H25.6665" stroke="#F4915C" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                      <path d="M17.333 36.667H23.9997" stroke="#F4915C" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                    </svg>
-                    <h3 className="text-2xl font-bold">Hypothesize</h3>
-                  </div>
-                  <ul className="text-lg text-gray-300 space-y-1">
-                    <li>• Define 3 core HMW questions</li>
-                    <li>• Generated 7 concept ideas</li>
-                  </ul>
-                </div>
-                
-                <div>
-                  <div className="flex items-center gap-2 mb-3">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="41" height="40" viewBox="0 0 41 40" fill="none">
-                      <path d="M20.3337 36.6663C15.9134 36.6663 11.6742 34.9104 8.54855 31.7848C5.42294 28.6592 3.66699 24.4199 3.66699 19.9997C3.66699 15.5794 5.42294 11.3402 8.54855 8.21456C11.6742 5.08896 15.9134 3.33301 20.3337 3.33301C24.7539 3.33301 28.9932 4.91336 32.1188 7.72641C35.2444 10.5395 37.0003 14.3548 37.0003 18.333C37.0003 20.5431 36.1224 22.6628 34.5595 24.2256C32.9967 25.7884 30.8771 26.6663 28.667 26.6663H24.917C24.3753 26.6663 23.8444 26.8172 23.3836 27.1019C22.9228 27.3867 22.5505 27.7942 22.3082 28.2786C22.066 28.7631 21.9635 29.3055 22.0121 29.8449C22.0608 30.3844 22.2587 30.8997 22.5837 31.333L23.0837 31.9997C23.4087 32.433 23.6066 32.9483 23.6552 33.4877C23.7038 34.0272 23.6013 34.5696 23.3591 35.054C23.1168 35.5385 22.7445 35.946 22.2837 36.2307C21.8229 36.5155 21.292 36.6663 20.7503 36.6663H20.3337Z" stroke="#E6FF02" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                      <path d="M22.8333 11.6667C23.2936 11.6667 23.6667 11.2936 23.6667 10.8333C23.6667 10.3731 23.2936 10 22.8333 10C22.3731 10 22 10.3731 22 10.8333C22 11.2936 22.3731 11.6667 22.8333 11.6667Z" fill="#E6FF02" stroke="#E6FF02" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                      <path d="M29.5003 18.3337C29.9606 18.3337 30.3337 17.9606 30.3337 17.5003C30.3337 17.0401 29.9606 16.667 29.5003 16.667C29.0401 16.667 28.667 17.0401 28.667 17.5003C28.667 17.9606 29.0401 18.3337 29.5003 18.3337Z" fill="#E6FF02" stroke="#E6FF02" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                      <path d="M11.1668 21.6667C11.6271 21.6667 12.0002 21.2936 12.0002 20.8333C12.0002 20.3731 11.6271 20 11.1668 20C10.7066 20 10.3335 20.3731 10.3335 20.8333C10.3335 21.2936 10.7066 21.6667 11.1668 21.6667Z" fill="#E6FF02" stroke="#E6FF02" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                      <path d="M14.5003 13.3337C14.9606 13.3337 15.3337 12.9606 15.3337 12.5003C15.3337 12.0401 14.9606 11.667 14.5003 11.667C14.0401 11.667 13.667 12.0401 13.667 12.5003C13.667 12.9606 14.0401 13.3337 14.5003 13.3337Z" fill="#E6FF02" stroke="#E6FF02" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                    </svg>
-                    <h3 className="text-2xl font-bold">Create</h3>
-                  </div>
-                  <ul className="text-lg text-gray-300 space-y-1">
-                    <li>• Handoff & maintain design system</li>
-                    <li>• Delivered 250+ hi-fi screens</li>
-                  </ul>
-                </div>
+            <div>
+              <div className="flex items-center gap-2 mb-3">
+                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40" fill="none">
+                  <path d="M20.0002 36.6663C29.2049 36.6663 36.6668 29.2044 36.6668 19.9997C36.6668 10.7949 29.2049 3.33301 20.0002 3.33301C10.7954 3.33301 3.3335 10.7949 3.3335 19.9997C3.3335 29.2044 10.7954 36.6663 20.0002 36.6663Z" stroke="#E6FF02" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  <path d="M36.6667 20H30" stroke="#E6FF02" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  <path d="M10.0002 20H3.3335" stroke="#E6FF02" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  <path d="M20 9.99967V3.33301" stroke="#E6FF02" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  <path d="M20 36.6667V30" stroke="#E6FF02" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+                <h3 className="text-2xl font-bold">Understand</h3>
               </div>
+              <p className="text-lg text-gray-300">
+                Based on feedback from 20+ user interviews conducted by the CEO, I identified 3 key pain points
+              </p>
             </div>
+            
+            <div>
+              <div className="flex items-center gap-2 mb-3">
+                <svg xmlns="http://www.w3.org/2000/svg" width="41" height="40" viewBox="0 0 41 40" fill="none">
+                  <path d="M25.6665 23.333C25.9998 21.6663 26.8332 20.4997 28.1665 19.1663C29.8332 17.6663 30.6665 15.4997 30.6665 13.333C30.6665 10.6808 29.6129 8.1373 27.7376 6.26194C25.8622 4.38658 23.3187 3.33301 20.6665 3.33301C18.0143 3.33301 15.4708 4.38658 13.5954 6.26194C11.7201 8.1373 10.6665 10.6808 10.6665 13.333C10.6665 14.9997 10.9998 16.9997 13.1665 19.1663C14.3332 20.333 15.3332 21.6663 15.6665 23.333" stroke="#F4915C" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  <path d="M15.6665 30H25.6665" stroke="#F4915C" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  <path d="M17.333 36.667H23.9997" stroke="#F4915C" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+                <h3 className="text-2xl font-bold">Hypothesize</h3>
+              </div>
+              <ul className="text-lg text-gray-300 space-y-1">
+                <li>• Define 3 core HMW questions</li>
+                <li>• Generated 7 concept ideas</li>
+              </ul>
+            </div>
+            
+            <div>
+              <div className="flex items-center gap-2 mb-3">
+                <svg xmlns="http://www.w3.org/2000/svg" width="41" height="40" viewBox="0 0 41 40" fill="none">
+                  <path d="M20.3337 36.6663C15.9134 36.6663 11.6742 34.9104 8.54855 31.7848C5.42294 28.6592 3.66699 24.4199 3.66699 19.9997C3.66699 15.5794 5.42294 11.3402 8.54855 8.21456C11.6742 5.08896 15.9134 3.33301 20.3337 3.33301C24.7539 3.33301 28.9932 4.91336 32.1188 7.72641C35.2444 10.5395 37.0003 14.3548 37.0003 18.333C37.0003 20.5431 36.1224 22.6628 34.5595 24.2256C32.9967 25.7884 30.8771 26.6663 28.667 26.6663H24.917C24.3753 26.6663 23.8444 26.8172 23.3836 27.1019C22.9228 27.3867 22.5505 27.7942 22.3082 28.2786C22.066 28.7631 21.9635 29.3055 22.0121 29.8449C22.0608 30.3844 22.2587 30.8997 22.5837 31.333L23.0837 31.9997C23.4087 32.433 23.6066 32.9483 23.6552 33.4877C23.7038 34.0272 23.6013 34.5696 23.3591 35.054C23.1168 35.5385 22.7445 35.946 22.2837 36.2307C21.8229 36.5155 21.292 36.6663 20.7503 36.6663H20.3337Z" stroke="#E6FF02" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  <path d="M22.8333 11.6667C23.2936 11.6667 23.6667 11.2936 23.6667 10.8333C23.6667 10.3731 23.2936 10 22.8333 10C22.3731 10 22 10.3731 22 10.8333C22 11.2936 22.3731 11.6667 22.8333 11.6667Z" fill="#E6FF02" stroke="#E6FF02" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  <path d="M29.5003 18.3337C29.9606 18.3337 30.3337 17.9606 30.3337 17.5003C30.3337 17.0401 29.9606 16.667 29.5003 16.667C29.0401 16.667 28.667 17.0401 28.667 17.5003C28.667 17.9606 29.0401 18.3337 29.5003 18.3337Z" fill="#E6FF02" stroke="#E6FF02" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  <path d="M11.1668 21.6667C11.6271 21.6667 12.0002 21.2936 12.0002 20.8333C12.0002 20.3731 11.6271 20 11.1668 20C10.7066 20 10.3335 20.3731 10.3335 20.8333C10.3335 21.2936 10.7066 21.6667 11.1668 21.6667Z" fill="#E6FF02" stroke="#E6FF02" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  <path d="M14.5003 13.3337C14.9606 13.3337 15.3337 12.9606 15.3337 12.5003C15.3337 12.0401 14.9606 11.667 14.5003 11.667C14.0401 11.667 13.667 12.0401 13.667 12.5003C13.667 12.9606 14.0401 13.3337 14.5003 13.3337Z" fill="#E6FF02" stroke="#E6FF02" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+                <h3 className="text-2xl font-bold">Create</h3>
+              </div>
+              <ul className="text-lg text-gray-300 space-y-1">
+                <li>• Handoff & maintain design system</li>
+                <li>• Delivered 250+ hi-fi screens</li>
+              </ul>
+            </div>
+          </div>
+        </div>
 
             {/* Solution */}
             <div className="text-center px-6 md:px-12 lg:px-24 mb-20">
@@ -1187,7 +1187,7 @@ export default function MobileAirframePage({ onBack, openProjects, onCloseProjec
                     We created a collaborative RFP tool tailored for both buyers and vendors. Additionally, we offer
                     buyers a variety of RFP templates to help them get started more efficiently.
                   </p>
-                </div>
+          </div>
                 <div className="hidden md:block w-[417px] h-80 rounded overflow-hidden">
                   <img 
                     src="/images/airframe/HMW1.png" 
@@ -1196,7 +1196,7 @@ export default function MobileAirframePage({ onBack, openProjects, onCloseProjec
                   />
                 </div>
               </div>
-            </div>
+        </div>
 
             {/* Carousel 1 */}
             <div className="text-center mb-16">
@@ -1220,7 +1220,7 @@ export default function MobileAirframePage({ onBack, openProjects, onCloseProjec
                     examine the details of each product, analyzing the advantages and disadvantages from multiple
                     perspectives to provide deeper insights.
                   </p>
-                </div>
+          </div>
                 <div className="hidden md:block w-[417px] h-80 rounded overflow-hidden">
                   <img 
                     src="/images/airframe/HMW2.png" 
@@ -1229,7 +1229,7 @@ export default function MobileAirframePage({ onBack, openProjects, onCloseProjec
                   />
                 </div>
               </div>
-            </div>
+        </div>
 
             {/* Carousel 2 */}
             <div className="text-center mb-16">
@@ -1252,7 +1252,7 @@ export default function MobileAirframePage({ onBack, openProjects, onCloseProjec
                     We all share the experience of seeking out others with similar uncertainties when faced with the
                     unknown. This inspired us to create a network where verified individuals can share their insights based on genuine experiences.
                   </p>
-                </div>
+          </div>
                 <div className="hidden md:block w-[417px] h-80 rounded overflow-hidden">
                   <img 
                     src="/images/airframe/HMW3.png" 
@@ -1261,7 +1261,7 @@ export default function MobileAirframePage({ onBack, openProjects, onCloseProjec
                   />
                 </div>
               </div>
-            </div>
+        </div>
 
             {/* Carousel 3 */}
             <div className="text-center mb-20">
@@ -1279,7 +1279,7 @@ export default function MobileAirframePage({ onBack, openProjects, onCloseProjec
                   Turning Complexity <br />
                   into <span className="text-[#e6ff02]">Clarity</span>
                 </h2>
-              </div>
+          </div>
               <div className="flex-1">
                 <p className="text-lg text-gray-300 leading-relaxed">
                   The landscape has shifted since the AI industry surged, leading to changes in how people search
@@ -1292,7 +1292,7 @@ export default function MobileAirframePage({ onBack, openProjects, onCloseProjec
                   locate what they need and guide them on their journey.
                 </p>
               </div>
-            </div>
+        </div>
 
             {/* Carousel 4 */}
             <div className="text-center mb-20">
@@ -1305,7 +1305,7 @@ export default function MobileAirframePage({ onBack, openProjects, onCloseProjec
             <div className="px-6 md:px-12 lg:px-24 mb-20">
               <div className="text-center mb-3">
                 <div className="text-gray-400 text-xl mb-2">Impact</div>
-              </div>
+          </div>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10">
                 <div className="bg-[#282727] p-4 text-center rounded-lg">
                   <p className="text-xl md:text-2xl font-semibold">
@@ -1318,31 +1318,31 @@ export default function MobileAirframePage({ onBack, openProjects, onCloseProjec
                     <span className="text-[#e6ff02]">$4 million</span> secured in the<br />
                     seed funding round
                   </p>
-                </div>
-              </div>
             </div>
+          </div>
+        </div>
 
             <Separator className="hidden md:block mb-20" />
 
-            {/* Design System */}
+        {/* Design System */}
             <div className="px-6 md:px-12 lg:px-24 mb-20">
               <div className="flex flex-col gap-6">
                 <h2 className="text-2xl font-bold">Components at a Glance</h2>
-                <div 
-                  className="aspect-[1656/1408] bg-center bg-cover bg-no-repeat rounded-3xl w-full cursor-pointer hover:opacity-90 transition-opacity duration-200"
-                  style={{ backgroundImage: `url('/images/airframe/design-system.png')` }}
-                  onClick={() => handleImageClick('/images/airframe/design-system.png')}
-                />
+          <div 
+            className="aspect-[1656/1408] bg-center bg-cover bg-no-repeat rounded-3xl w-full cursor-pointer hover:opacity-90 transition-opacity duration-200"
+            style={{ backgroundImage: `url('/images/airframe/design-system.png')` }}
+            onClick={() => handleImageClick('/images/airframe/design-system.png')}
+          />
               </div>
             </div>
           </div>
         </div>
-      </div>
-      
+        </div>
+
       {/* Footer Attribution - Bottom of page */}
       <div className="hidden lg:block bg-neutral-950 px-4 py-2 mb-[74px]">
-        <Footer />
-      </div>
+          <Footer />
+        </div>
 
       {/* Audio Player - Sticky to bottom */}
       <div className="absolute bottom-0 left-0 right-0 flex-shrink-0 bg-neutral-950 w-full" style={{ height: '74px' }}>
@@ -1380,4 +1380,4 @@ export default function MobileAirframePage({ onBack, openProjects, onCloseProjec
 
     </div>
   );
-} 
+}

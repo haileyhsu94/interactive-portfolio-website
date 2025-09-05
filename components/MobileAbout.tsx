@@ -180,7 +180,7 @@ export default function MobileAbout({
                 <div aria-hidden="true" className="absolute border border-[#252525] border-solid inset-0 pointer-events-none rounded-[20px]" />
                 <div className="font-didact-gothic leading-[18px] not-italic relative shrink-0 text-[16px] text-gray-300 w-full">
                   <p className="mb-0">Clients</p>
-                  <p className="">shipped</p>
+                  <p className="">partnered with</p>
                 </div>
                 <div className="font-didact-gothic leading-[0] not-italic relative shrink-0 text-[#ffffff] text-[25px] w-full">
                   <p className="leading-[normal]">{`>10`}</p>
