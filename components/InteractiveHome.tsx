@@ -428,12 +428,9 @@ function FeaturedSection({ sectionRef, mediaPlayerRef, onNavigateToProject }: { 
         </div>
       </div>
       
-      <motion.a
-                          href="/project/airframe/"
-        className="box-border content-stretch flex flex-row gap-5 items-center justify-start p-0 relative rounded-3xl shrink-0 w-full hover:bg-white/5 transition-colors duration-300 cursor-pointer"
+      <div
+        className="box-border content-stretch flex flex-row gap-5 items-center justify-start p-0 relative rounded-3xl shrink-0 w-full hover:bg-white/5 transition-colors duration-300"
         data-name="container"
-        whileHover={{ scale: 1.01 }}
-        whileTap={{ scale: 0.99 }}
       >
         <div className="flex-1 min-w-0 relative" data-name="text" style={{ minWidth: '40%' }}>
           <div className="relative size-full">
@@ -598,7 +595,7 @@ function FeaturedSection({ sectionRef, mediaPlayerRef, onNavigateToProject }: { 
           data-name="hero image"
           style={{ backgroundImage: `url('${imgHeroImage}')` }}
         />
-      </motion.a>
+      </div>
     </div>
   );
 }
