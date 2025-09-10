@@ -1184,7 +1184,7 @@ export default function AirframePage({ onBack, openProjects, onCloseProject, onN
                     and decision-makers so that they can work more efficiently with cross-functional teams?
                   </p>
                   <p className="text-lg text-gray-400 leading-relaxed mt-4">
-                    We created a collaborative RFP tool tailored for both buyers and vendors. Additionally, we offer
+                    I created a collaborative RFP tool tailored for both buyers and vendors. Additionally, we offer
                     buyers a variety of RFP templates to help them get started more efficiently.
                   </p>
                 </div>
@@ -1216,7 +1216,7 @@ export default function AirframePage({ onBack, openProjects, onCloseProject, onN
                     despite limited domain knowledge?
                   </p>
                   <p className="text-lg text-gray-400 leading-relaxed mt-4">
-                    We developed a comprehensive set of market guides tailored to various industries. We also
+                    We developed a comprehensive set of market guides tailored to various industries. I
                     examine the details of each product, analyzing the advantages and disadvantages from multiple
                     perspectives to provide deeper insights.
                   </p>
@@ -1288,7 +1288,7 @@ export default function AirframePage({ onBack, openProjects, onCloseProject, onN
                   what they are seeking.
                 </p>
                 <p className="text-lg text-gray-300 leading-relaxed mt-4">
-                  To address this, we developed the Airframe AI assistant, designed to help users effortlessly
+                  To address this, I designed the Airframe AI assistant, aiming to help users effortlessly
                   locate what they need and guide them on their journey.
                 </p>
               </div>
