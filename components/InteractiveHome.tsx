@@ -409,7 +409,7 @@ function InteractiveContactForm() {
   );
 }
 
-function FeaturedSection({ sectionRef, mediaPlayerRef, onNavigateToProject }: { sectionRef: RefObject<HTMLDivElement>; mediaPlayerRef: RefObject<{ playAirframeAudio: () => void; playEatsyAudio: () => void; playBrainBoxAudio: () => void; pauseAudio: () => void }>; onNavigateToProject?: (project: string) => void }) {
+function FeaturedSection({ sectionRef, mediaPlayerRef, onNavigateToProject }: { sectionRef: RefObject<HTMLDivElement>; mediaPlayerRef: RefObject<{ playAirframeAudio: () => void; playEatsyAudio: () => void; playBrainBoxAudio: () => void; playShelfLifeAudio: () => void; pauseAudio: () => void }>; onNavigateToProject?: (project: string) => void }) {
   return (
     <div
       ref={sectionRef}
@@ -943,7 +943,7 @@ function ContactSection({ sectionRef }: { sectionRef: RefObject<HTMLDivElement> 
   );
 }
 
-export const MediaPlayer = forwardRef<{ playAirframeAudio: () => void; playEatsyAudio: () => void; playBrainBoxAudio: () => void; pauseAudio: () => void }, { onNavigateToProject?: (project: string) => void }>(({ onNavigateToProject }, ref) => {
+export const MediaPlayer = forwardRef<{ playAirframeAudio: () => void; playEatsyAudio: () => void; playBrainBoxAudio: () => void; playShelfLifeAudio: () => void; pauseAudio: () => void }, { onNavigateToProject?: (project: string) => void }>(({ onNavigateToProject }, ref) => {
   const [mediaState, setMediaState] = useState<MediaPlayerState>({
     isPlaying: false,
     currentTime: 0,
@@ -996,6 +996,19 @@ export const MediaPlayer = forwardRef<{ playAirframeAudio: () => void; playEatsy
     }
   };
 
+  const playShelfLifeAudio = () => {
+    if (audioRef.current) {
+      // Set to Shelf-Life project (index 3)
+      setMediaState(prev => ({ ...prev, currentProjectIndex: 3, currentTime: 0 }));
+      // Play the audio
+      setTimeout(() => {
+        if (audioRef.current) {
+          audioRef.current.play();
+        }
+      }, 100);
+    }
+  };
+
   const pauseAudio = () => {
     if (audioRef.current) {
       audioRef.current.pause();
@@ -1007,6 +1020,7 @@ export const MediaPlayer = forwardRef<{ playAirframeAudio: () => void; playEatsy
     playAirframeAudio,
     playEatsyAudio,
     playBrainBoxAudio,
+    playShelfLifeAudio,
     pauseAudio
   }));
 
@@ -1505,7 +1519,7 @@ function TabletHome({ onNavigateToProject, onNavigateToAbout }: { onNavigateToPr
   const featuredRef = useRef<HTMLDivElement>(null);
   const moreRef = useRef<HTMLDivElement>(null);
   const contactRef = useRef<HTMLDivElement>(null);
-  const mediaPlayerRef = useRef<{ playAirframeAudio: () => void; playEatsyAudio: () => void; playBrainBoxAudio: () => void; pauseAudio: () => void }>(null);
+  const mediaPlayerRef = useRef<{ playAirframeAudio: () => void; playEatsyAudio: () => void; playBrainBoxAudio: () => void; playShelfLifeAudio: () => void; pauseAudio: () => void }>(null);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -1674,7 +1688,7 @@ export default function InteractiveHome({ onNavigateToProject, openProjects, onC
   const featuredRef = useRef<HTMLDivElement>(null);
   const moreRef = useRef<HTMLDivElement>(null);
   const contactRef = useRef<HTMLDivElement>(null);
-  const mediaPlayerRef = useRef<{ playAirframeAudio: () => void; playEatsyAudio: () => void; playBrainBoxAudio: () => void; pauseAudio: () => void }>(null);
+  const mediaPlayerRef = useRef<{ playAirframeAudio: () => void; playEatsyAudio: () => void; playBrainBoxAudio: () => void; playShelfLifeAudio: () => void; pauseAudio: () => void }>(null);
 
   // Debug logging
   console.log('InteractiveHome render - deviceType:', deviceType, 'window.innerWidth:', typeof window !== 'undefined' ? window.innerWidth : 'N/A');

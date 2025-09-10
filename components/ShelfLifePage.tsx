@@ -40,22 +40,37 @@ interface ShelfLifePageProps {
 
 export default function ShelfLifePage({ onBack, openProjects, onCloseProject, onNavigateToProject, onLogoClick }: ShelfLifePageProps) {
   const [navigation, setNavigation] = useState<NavigationState>({ activeSection: 'more' });
-  const mediaPlayerRef = useRef<{ playAirframeAudio: () => void; playEatsyAudio: () => void; playBrainBoxAudio: () => void; pauseAudio: () => void }>(null);
+  const mediaPlayerRef = useRef<{ playAirframeAudio: () => void; playEatsyAudio: () => void; playBrainBoxAudio: () => void; playShelfLifeAudio: () => void; pauseAudio: () => void }>(null);
   const [zoomedImage, setZoomedImage] = useState<string>('');
   const [isZoomed, setIsZoomed] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
-  const [audio] = useState(() => typeof window !== 'undefined' ? new Audio('/audio/food-waste-audio.mp3') : null);
 
 
 
 
 
+
+  // Listen for MediaPlayer state changes
+  useEffect(() => {
+    const checkMediaPlayerState = () => {
+      // We'll use a custom event to sync with MediaPlayer state
+      const handleMediaStateChange = (event: CustomEvent) => {
+        setIsPlaying(event.detail.isPlaying);
+      };
+      
+      window.addEventListener('mediaStateChange', handleMediaStateChange as EventListener);
+      
+      return () => {
+        window.removeEventListener('mediaStateChange', handleMediaStateChange as EventListener);
+      };
+    };
+    
+    return checkMediaPlayerState();
+  }, []);
 
   const handleNavigateToSection = (section: 'featured' | 'more' | 'contact') => {
     setNavigation({ activeSection: section });
   };
-
-
 
   const handleImageClick = (image: string) => {
     setZoomedImage(image);
@@ -68,25 +83,20 @@ export default function ShelfLifePage({ onBack, openProjects, onCloseProject, on
   };
 
   const toggleAudio = () => {
-    if (!audio) return;
-    
     if (isPlaying) {
-      audio.pause();
       setIsPlaying(false);
+      // Pause the MediaPlayer
+      if (mediaPlayerRef.current) {
+        mediaPlayerRef.current.pauseAudio();
+      }
     } else {
-      audio.play();
       setIsPlaying(true);
+      // Play the Shelf-Life audio in MediaPlayer
+      if (mediaPlayerRef.current) {
+        mediaPlayerRef.current.playShelfLifeAudio();
+      }
     }
   };
-
-  useEffect(() => {
-    if (!audio) return;
-    
-    audio.addEventListener('ended', () => setIsPlaying(false));
-    return () => {
-      audio.removeEventListener('ended', () => setIsPlaying(false));
-    };
-  }, [audio]);
 
   return (
     <div className="h-screen bg-neutral-950 text-white w-full overflow-hidden">

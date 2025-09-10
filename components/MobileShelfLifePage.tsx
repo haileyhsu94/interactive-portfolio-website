@@ -40,22 +40,37 @@ interface MobileShelfLifePageProps {
 
 export default function MobileShelfLifePage({ onBack, openProjects, onCloseProject, onNavigateToProject, onLogoClick }: MobileShelfLifePageProps) {
   const [navigation, setNavigation] = useState<NavigationState>({ activeSection: 'more' });
-  const mediaPlayerRef = useRef<{ playAirframeAudio: () => void; playEatsyAudio: () => void; playBrainBoxAudio: () => void; pauseAudio: () => void }>(null);
+  const mediaPlayerRef = useRef<{ playAirframeAudio: () => void; playEatsyAudio: () => void; playBrainBoxAudio: () => void; playShelfLifeAudio: () => void; pauseAudio: () => void }>(null);
   const [zoomedImage, setZoomedImage] = useState<string>('');
   const [isZoomed, setIsZoomed] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
-  const [audio] = useState(() => typeof window !== 'undefined' ? new Audio('/audio/food-waste-audio.mp3') : null);
 
 
 
 
 
+
+  // Listen for MediaPlayer state changes
+  useEffect(() => {
+    const checkMediaPlayerState = () => {
+      // We'll use a custom event to sync with MediaPlayer state
+      const handleMediaStateChange = (event: CustomEvent) => {
+        setIsPlaying(event.detail.isPlaying);
+      };
+      
+      window.addEventListener('mediaStateChange', handleMediaStateChange as EventListener);
+      
+      return () => {
+        window.removeEventListener('mediaStateChange', handleMediaStateChange as EventListener);
+      };
+    };
+    
+    return checkMediaPlayerState();
+  }, []);
 
   const handleNavigateToSection = (section: 'featured' | 'more' | 'contact') => {
     setNavigation({ activeSection: section });
   };
-
-
 
   const handleImageClick = (image: string) => {
     setZoomedImage(image);
@@ -68,25 +83,20 @@ export default function MobileShelfLifePage({ onBack, openProjects, onCloseProje
   };
 
   const toggleAudio = () => {
-    if (!audio) return;
-    
     if (isPlaying) {
-      audio.pause();
       setIsPlaying(false);
+      // Pause the MediaPlayer
+      if (mediaPlayerRef.current) {
+        mediaPlayerRef.current.pauseAudio();
+      }
     } else {
-      audio.play();
       setIsPlaying(true);
+      // Play the Shelf-Life audio in MediaPlayer
+      if (mediaPlayerRef.current) {
+        mediaPlayerRef.current.playShelfLifeAudio();
+      }
     }
   };
-
-  useEffect(() => {
-    if (!audio) return;
-    
-    audio.addEventListener('ended', () => setIsPlaying(false));
-    return () => {
-      audio.removeEventListener('ended', () => setIsPlaying(false));
-    };
-  }, [audio]);
 
   return (
     <div className="h-screen bg-neutral-950 text-white w-full overflow-hidden">
@@ -103,9 +113,9 @@ export default function MobileShelfLifePage({ onBack, openProjects, onCloseProje
             isProjectPage={true}
             onLogoClick={onLogoClick}
           />
-        </div>
+      </div>
 
-        {/* Main Content */}
+      {/* Main Content */}
         <div className="flex-1 min-w-0 flex flex-col relative rounded-xl overflow-hidden h-full">
           <div
             aria-hidden="true"
@@ -147,7 +157,7 @@ export default function MobileShelfLifePage({ onBack, openProjects, onCloseProje
                       >
                         <div className="font-normal leading-[0] not-italic relative shrink-0 text-[17px] text-gray-300 text-left text-nowrap tracking-wide" style={{ fontFamily: 'var(--font-oregano)' }}>
                           <p className="block leading-[22px] whitespace-pre">Dual Interface</p>
-                        </div>
+                  </div>
                       </motion.div>
                       <motion.div
                         className="bg-[#2a2a2a] box-border content-stretch flex flex-row gap-2.5 items-center justify-center px-3 py-1 relative rounded-[999px] shrink-0 hover:bg-white/10 transition-colors duration-200"
@@ -155,7 +165,7 @@ export default function MobileShelfLifePage({ onBack, openProjects, onCloseProje
                       >
                         <div className="font-normal leading-[0] not-italic relative shrink-0 text-[17px] text-gray-300 text-left text-nowrap tracking-wide" style={{ fontFamily: 'var(--font-oregano)' }}>
                           <p className="block leading-[22px] whitespace-pre">Reduce Food Waste</p>
-                        </div>
+                      </div>
                       </motion.div>
                       <motion.div
                         className="bg-[#2a2a2a] box-border content-stretch flex flex-row gap-2.5 items-center justify-center px-3 py-1 relative rounded-[999px] shrink-0 hover:bg-white/10 transition-colors duration-200"
@@ -163,7 +173,7 @@ export default function MobileShelfLifePage({ onBack, openProjects, onCloseProje
                       >
                         <div className="font-normal leading-[0] not-italic relative shrink-0 text-[17px] text-gray-300 text-left text-nowrap tracking-wide" style={{ fontFamily: 'var(--font-oregano)' }}>
                           <p className="block leading-[22px] whitespace-pre">Sustainability</p>
-                        </div>
+                    </div>
                       </motion.div>
                     </div>
                     <h1 className="text-4xl font-bold mb-3">
@@ -214,8 +224,8 @@ export default function MobileShelfLifePage({ onBack, openProjects, onCloseProje
                 <div>
                   <div className="text-[#f4915c] text-sm mb-1">Collaborators</div>
                   <div className="text-gray-300">CEO & 1 Engineer</div>
-                </div>
-              </div>
+          </div>
+        </div>
 
               {/* Mobile Layout */}
               <div className="lg:hidden flex flex-col gap-6 items-center">
@@ -234,27 +244,27 @@ export default function MobileShelfLifePage({ onBack, openProjects, onCloseProje
                       <p className="text-gray-300">CEO & 1 Engineer</p>
                     </div>
                   </div>
-                  <motion.button
-                    onClick={toggleAudio}
-                    className="transition-transform duration-200 hover:scale-105"
-                    whileHover={{ scale: 1.1 }}
-                    whileTap={{ scale: 0.9 }}
-                  >
-                    {isPlaying ? (
-                      <svg width="52" height="52" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <rect width="52" height="52" rx="26" fill="white"/>
-                        <path d="M31.5002 17.75H28.7502C28.2439 17.75 27.8335 18.1604 27.8335 18.6667V33.3333C27.8335 33.8396 28.2439 34.25 28.7502 34.25H31.5002C32.0064 34.25 32.4168 33.8396 32.4168 33.3333V18.6667C32.4168 18.1604 32.0064 17.75 31.5002 17.75Z" fill="#121212"/>
-                        <path d="M23.2502 17.75H20.5002C19.9939 17.75 19.5835 18.1604 19.5835 18.6667V33.3333C19.5835 33.8396 19.9939 34.25 20.5002 34.25H23.2502C23.7564 34.25 24.1668 33.8396 24.1668 33.3333V18.6667C24.1668 18.1604 23.7564 17.75 23.2502 17.75Z" fill="#121212"/>
-                      </svg>
-                    ) : (
-                      <svg width="52" height="52" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <rect width="52" height="52" rx="26" fill="white"/>
-                        <path d="M19.8887 19.7782C19.8886 19.4654 19.971 19.1581 20.1277 18.8874C20.2843 18.6167 20.5096 18.392 20.7808 18.2362C21.0521 18.0804 21.3596 17.9989 21.6724 18C21.9852 18.0011 22.2921 18.0846 22.5623 18.2423L33.2256 24.4623C33.4947 24.6185 33.7181 24.8425 33.8735 25.1121C34.0289 25.3816 34.1108 25.6872 34.1111 25.9983C34.1113 26.3095 34.0299 26.6152 33.875 26.885C33.7201 27.1549 33.4971 27.3793 33.2282 27.5359L22.5623 33.7577C22.2921 33.9154 21.9852 33.9989 21.6724 34C21.3596 34.0011 21.0521 33.9196 20.7808 33.7638C20.5096 33.608 20.2843 33.3833 20.1277 33.1126C19.971 32.8419 19.8886 32.5346 19.8887 32.2218V19.7782Z" fill="#0A0A0A"/>
-                      </svg>
-                    )}
-                  </motion.button>
-                </div>
+                <motion.button
+                  onClick={toggleAudio}
+                  className="transition-transform duration-200 hover:scale-105"
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.9 }}
+                >
+                  {isPlaying ? (
+                    <svg width="52" height="52" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <rect width="52" height="52" rx="26" fill="white"/>
+                      <path d="M31.5002 17.75H28.7502C28.2439 17.75 27.8335 18.1604 27.8335 18.6667V33.3333C27.8335 33.8396 28.2439 34.25 28.7502 34.25H31.5002C32.0064 34.25 32.4168 33.8396 32.4168 33.3333V18.6667C32.4168 18.1604 32.0064 17.75 31.5002 17.75Z" fill="#121212"/>
+                      <path d="M23.2502 17.75H20.5002C19.9939 17.75 19.5835 18.1604 19.5835 18.6667V33.3333C19.5835 33.8396 19.9939 34.25 20.5002 34.25H23.2502C23.7564 34.25 24.1668 33.8396 24.1668 33.3333V18.6667C24.1668 18.1604 23.7564 17.75 23.2502 17.75Z" fill="#121212"/>
+                    </svg>
+                  ) : (
+                    <svg width="52" height="52" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <rect width="52" height="52" rx="26" fill="white"/>
+                      <path d="M19.8887 19.7782C19.8886 19.4654 19.971 19.1581 20.1277 18.8874C20.2843 18.6167 20.5096 18.392 20.7808 18.2362C21.0521 18.0804 21.3596 17.9989 21.6724 18C21.9852 18.0011 22.2921 18.0846 22.5623 18.2423L33.2256 24.4623C33.4947 24.6185 33.7181 24.8425 33.8735 25.1121C34.0289 25.3816 34.1108 25.6872 34.1111 25.9983C34.1113 26.3095 34.0299 26.6152 33.875 26.885C33.7201 27.1549 33.4971 27.3793 33.2282 27.5359L22.5623 33.7577C22.2921 33.9154 21.9852 33.9989 21.6724 34C21.3596 34.0011 21.0521 33.9196 20.7808 33.7638C20.5096 33.608 20.2843 33.3833 20.1277 33.1126C19.971 32.8419 19.8886 32.5346 19.8887 32.2218V19.7782Z" fill="#0A0A0A"/>
+                    </svg>
+                  )}
+                </motion.button>
               </div>
+            </div>
             </div>
 
             {/* Separator */}
@@ -298,8 +308,8 @@ export default function MobileShelfLifePage({ onBack, openProjects, onCloseProje
                 <h2 className="text-3xl font-bold leading-[1.5]">
                   Empowering restaurants to turn waste into value.
                 </h2>
-              </div>
-            </div>
+          </div>
+        </div>
 
             {/* Separator */}
             <div className="px-6 md:px-12 lg:px-24">
@@ -332,7 +342,7 @@ export default function MobileShelfLifePage({ onBack, openProjects, onCloseProje
                   <h3 className="text-2xl font-bold">
                     Competitive Analysis
                   </h3>
-                </div>
+          </div>
                 <div className="text-lg text-gray-300 mb-8">
                   <p className="mb-4">
                     I studied the primary food waste app in the Taiwanese market, <span className="underline">Tasteme</span>, and discovered a key market gap.
@@ -543,7 +553,7 @@ export default function MobileShelfLifePage({ onBack, openProjects, onCloseProje
                   <p className="text-lg text-gray-400">findings from user interviews</p>
                 </div>
               </div>
-            </div>
+        </div>
 
             {/* Separator */}
             <div className="px-6 md:px-12 lg:px-24">
@@ -785,7 +795,7 @@ export default function MobileShelfLifePage({ onBack, openProjects, onCloseProje
                   <p>
                     Owners receive real-time notifications whenever customers place orders, enabling prompt preparation and efficient order fulfillment.
                   </p>
-                    </div>
+          </div>
                 <div className="flex justify-center mb-4">
                   <div 
                     className="w-full max-w-[715px] aspect-[715/500] bg-cover bg-center bg-no-repeat rounded-[12px] cursor-pointer hover:opacity-90 transition-opacity duration-200"
@@ -796,7 +806,7 @@ export default function MobileShelfLifePage({ onBack, openProjects, onCloseProje
                 <div className="text-center">
                   <p className="text-lg text-gray-400">Order Notifications</p>
                       </div>
-                    </div>
+        </div>
 
               {/* QR Code Scanning */}
               <div className="mb-16">
@@ -817,8 +827,8 @@ export default function MobileShelfLifePage({ onBack, openProjects, onCloseProje
                 </div>
                 <div className="text-center">
                   <p className="text-lg text-gray-400">QR Code Scanning</p>
-                </div>
-              </div>
+            </div>
+          </div>
 
               {/* Customer Reviews */}
               <div className="mb-16">
@@ -841,7 +851,7 @@ export default function MobileShelfLifePage({ onBack, openProjects, onCloseProje
                   <p className="text-lg text-gray-400">Customer Reviews</p>
                 </div>
               </div>
-            </div>
+        </div>
 
             {/* Separator */}
             <div className="px-6 md:px-12 lg:px-24">
@@ -854,7 +864,7 @@ export default function MobileShelfLifePage({ onBack, openProjects, onCloseProje
                 <h2 className="text-[28px] font-bold text-[#e6ff02]">
                   Future Plans
               </h2>
-            </div>
+          </div>
 
               <div className="mb-16">
                 <div className="text-lg text-gray-300 leading-[1.5]">
@@ -876,16 +886,16 @@ export default function MobileShelfLifePage({ onBack, openProjects, onCloseProje
                     Working with a client who aimed to reduce food surplus but was uncertain about the product&apos;s impact on B2B users, I conducted extensive market research to define user needs. This process emphasized the importance of user-centric design, catering to diverse demographics, and incorporating user feedback to create efficient interfaces.
                   </p>
                 </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-      
+
       {/* Footer Attribution - Bottom of page */}
       <div className="hidden lg:block bg-neutral-950 px-4 py-2 mb-[74px]">
-        <Footer />
-      </div>
+          <Footer />
+        </div>
 
       {/* Audio Player - Sticky to bottom */}
       <div className="absolute bottom-0 left-0 right-0 flex-shrink-0 bg-neutral-950 w-full" style={{ height: '74px' }}>
@@ -896,27 +906,27 @@ export default function MobileShelfLifePage({ onBack, openProjects, onCloseProje
 
 
       {/* Zoom Modal */}
-               {isZoomed && (
+        {isZoomed && (
            <div
-             className="fixed inset-0 bg-black bg-opacity-90 z-50 flex items-center justify-center p-4 overflow-auto"
-             onClick={closeZoom}
-           >
-             <div className="relative w-[85vw] h-[85vh] flex items-center justify-center">
+            className="fixed inset-0 bg-black bg-opacity-90 z-50 flex items-center justify-center p-4 overflow-auto"
+            onClick={closeZoom}
+          >
+            <div className="relative w-[85vw] h-[85vh] flex items-center justify-center">
                <button
                  onClick={closeZoom}
                  className="absolute top-4 right-4 text-white text-4xl font-bold hover:text-gray-300 z-10 bg-black bg-opacity-50 rounded-full w-12 h-12 flex items-center justify-center hover:bg-opacity-70 transition-all duration-200"
                >
                  ×
                </button>
-               <img
-                 src={zoomedImage}
-                 alt="Zoomed view"
-                 className="max-w-full max-h-full object-contain"
-                 onClick={(e) => e.stopPropagation()}
-               />
+              <img
+                src={zoomedImage}
+                alt="Zoomed view"
+                className="max-w-full max-h-full object-contain"
+                onClick={(e) => e.stopPropagation()}
+              />
              </div>
-           </div>
-         )}
+            </div>
+        )}
     </div>
   );
 }

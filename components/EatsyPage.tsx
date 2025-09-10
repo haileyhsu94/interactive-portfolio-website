@@ -40,11 +40,24 @@ interface EatsyPageProps {
 
 export default function EatsyPage({ onBack, openProjects, onCloseProject, onNavigateToProject, onLogoClick }: EatsyPageProps) {
   const [navigation, setNavigation] = useState<NavigationState>({ activeSection: 'more' });
-  const mediaPlayerRef = useRef<{ playAirframeAudio: () => void; playEatsyAudio: () => void; playBrainBoxAudio: () => void; pauseAudio: () => void }>(null);
+  const mediaPlayerRef = useRef<{ playAirframeAudio: () => void; playEatsyAudio: () => void; playBrainBoxAudio: () => void; playShelfLifeAudio: () => void; pauseAudio: () => void }>(null);
   const [zoomedImage, setZoomedImage] = useState<string>('');
   const [isZoomed, setIsZoomed] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
-  const [audio] = useState(() => typeof window !== 'undefined' ? new Audio('/audio/reservation-audio.mp3') : null);
+
+  // Listen for MediaPlayer state changes
+  useEffect(() => {
+    const checkMediaPlayerState = () => {
+      const handleMediaStateChange = (event: CustomEvent) => {
+        setIsPlaying(event.detail.isPlaying);
+      };
+      window.addEventListener('mediaStateChange', handleMediaStateChange as EventListener);
+      return () => {
+        window.removeEventListener('mediaStateChange', handleMediaStateChange as EventListener);
+      };
+    };
+    return checkMediaPlayerState();
+  }, []);
 
 
 
@@ -68,25 +81,19 @@ export default function EatsyPage({ onBack, openProjects, onCloseProject, onNavi
   };
 
   const toggleAudio = () => {
-    if (!audio) return;
-    
     if (isPlaying) {
-      audio.pause();
       setIsPlaying(false);
+      if (mediaPlayerRef.current) {
+        mediaPlayerRef.current.pauseAudio();
+      }
     } else {
-      audio.play();
       setIsPlaying(true);
+      if (mediaPlayerRef.current) {
+        mediaPlayerRef.current.playEatsyAudio();
+      }
     }
   };
 
-  useEffect(() => {
-    if (!audio) return;
-    
-    audio.addEventListener('ended', () => setIsPlaying(false));
-    return () => {
-      audio.removeEventListener('ended', () => setIsPlaying(false));
-    };
-  }, [audio]);
 
   return (
     <div className="h-screen bg-neutral-950 text-white w-full overflow-hidden">
