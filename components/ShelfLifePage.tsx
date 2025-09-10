@@ -271,7 +271,7 @@ export default function ShelfLifePage({ onBack, openProjects, onCloseProject, on
                 </h2>
                 <div className="text-lg text-gray-300 leading-[1.5] max-w-none">
                   <p className="mb-4">
-                    Restaurants lose billions of dollars annually due to unsold food, which is ultimately discarded, causing both financial and significant environmental harm. The founding purpose of "Shelf Life" was to directly address this urgent problem of food waste.
+                    Restaurants lose billions of dollars annually due to unsold food, which is ultimately discarded, causing both financial and significant environmental harm. The founding purpose of &ldquo;Shelf Life&rdquo; was to directly address this urgent problem of food waste.
                   </p>
                   <p>
                     Through a specially designed backend management interface for restaurants, we enable vendors to easily list surplus or soon-to-expire food products for sale at discounted prices to nearby consumers. This not only helps vendors convert what would have been a loss into extra revenue but also contributes to environmental protection. 
@@ -402,10 +402,10 @@ export default function ShelfLifePage({ onBack, openProjects, onCloseProject, on
                       <span className="text-lg text-white uppercase">Phase</span>
               </div>
                     <div className="bg-[#292929] px-5 py-3 w-[422px] flex items-center justify-center border-r border-[#0A0A0A]">
-                      <span className="text-lg text-white uppercase">Restaurant Owner's Journey</span>
+                      <span className="text-lg text-white uppercase">Restaurant Owner&apos;s Journey</span>
               </div>
                     <div className="bg-[#292929] px-5 py-3 w-[390px] flex items-center justify-center">
-                      <span className="text-lg text-white uppercase">Consumer's Journey</span>
+                      <span className="text-lg text-white uppercase">Consumer&apos;s Journey</span>
                     </div>
               </div>
 
@@ -683,7 +683,7 @@ export default function ShelfLifePage({ onBack, openProjects, onCloseProject, on
                     </svg>
                   </div>
                   <h3 className="text-lg text-gray-300">
-                    The Restaurant Owner's Interface
+                    The Restaurant Owner&apos;s Interface
                   </h3>
                 </div>
                 </div>
@@ -761,7 +761,7 @@ export default function ShelfLifePage({ onBack, openProjects, onCloseProject, on
                     Order Status
                   </p>
                   <p>
-                    Order Status helps users quickly identify each order with clear tags, showing whether it's new or ready, and indicating if payment is completed or pending.
+                    Order Status helps users quickly identify each order with clear tags, showing whether it&apos;s new or ready, and indicating if payment is completed or pending.
                   </p>
                 </div>
                 <div className="flex justify-center mb-4">
