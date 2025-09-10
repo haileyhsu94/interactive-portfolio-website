@@ -683,7 +683,7 @@ export default function MobileBrainBoxPage({ onBack, openProjects, onCloseProjec
 
             {/* Personal Growth */}
                           <div className="px-6 md:px-12 lg:px-24 text-center" style={{ paddingBottom: '100px' }}>
-                <p className="text-xl text-gray-400 mb-6 uppercase tracking-wide">Personal Growth</p>
+                <p className="text-xl text-gray-400 mb-6 uppercase tracking-wide">PERSONAL GROWTH</p>
                 <p className="text-lg text-gray-300 leading-[1.5] max-w-4xl mx-auto">
                   From this project, I learned the importance of clear communication when leading a large design team and collaborating with stakeholders. Keeping everyone aligned with the product vision was key to building a cohesive platform. The experience also gave me the opportunity to oversee the entire product, which helped me identify design blind spots and improve overall quality.
                 </p>
