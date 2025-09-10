@@ -362,8 +362,8 @@ export default function MobileBrainBoxPage({ onBack, openProjects, onCloseProjec
                   <p>
                     During the ideation phase, given the initially unclear product scope, we began by identifying features that would best serve user needs and preferences. To meet our launch deadline, we refined our goals to focus on essential features. This decision was reached through multiple rounds of stakeholder discussions (including users, client, and engineers) and iterative market research to ensure alignment with user expectations and satisfaction.
                   </p>
-                </div>
-                
+        </div>
+
                 <div className="flex justify-center mb-1">
                   <div 
                     className="w-full max-w-4xl aspect-[2064/1162] bg-cover bg-center bg-no-repeat cursor-pointer hover:opacity-90 transition-opacity duration-200 rounded-xl"
@@ -516,7 +516,7 @@ export default function MobileBrainBoxPage({ onBack, openProjects, onCloseProjec
         </div>
                 <div className="text-center text-lg text-gray-400 mb-8">
                   One of the A/B test - using UseBerry
-                </div>
+        </div>
 
                 <div className="flex justify-center mb-1">
                   <div 
