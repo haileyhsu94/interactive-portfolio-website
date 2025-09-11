@@ -533,12 +533,17 @@ function FeaturedSection({ sectionRef, mediaPlayerRef, onNavigateToProject }: { 
               
               <div className="box-border content-stretch flex flex-row gap-4 items-start justify-start p-0 relative shrink-0 w-full">
                 <motion.div
-                  className="basis-0 bg-[#e6ff02] grow min-h-px min-w-px relative rounded-[999px] shrink-0 hover:bg-[#d9f00c] transition-colors duration-200"
+                  className="basis-0 bg-[#e6ff02] grow min-h-px min-w-px relative rounded-[999px] shrink-0 hover:bg-[#d9f00c] transition-colors duration-200 cursor-pointer"
                   data-name="contact"
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                   onClick={(e) => {
                     e.stopPropagation();
+                    if (onNavigateToProject) {
+                      onNavigateToProject('airframe');
+                    } else {
+                      window.location.href = '/project/airframe/';
+                    }
                   }}
                 >
                   <div className="flex flex-row items-center justify-center relative size-full">
