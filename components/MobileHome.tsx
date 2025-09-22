@@ -144,7 +144,20 @@ export default function MobileHome({
               <p className="leading-[normal] whitespace-pre">Featured Project</p>
             </div>
           </div>
-          <div className="bg-[#121212] content-stretch flex flex-col gap-4 items-start justify-start relative rounded-[16px] shrink-0 w-full" data-name="container" data-node-id="3000:1721">
+          <motion.div 
+            onClick={() => {
+              if (onNavigateToProject) {
+                onNavigateToProject('airframe');
+              } else {
+                toast.info("Opening Airframe project...");
+              }
+            }}
+            className="bg-[#121212] content-stretch flex flex-col gap-4 items-start justify-start relative rounded-[16px] shrink-0 w-full hover:bg-[#1a1a1a] transition-colors duration-200 cursor-pointer" 
+            data-name="container" 
+            data-node-id="3000:1721"
+            whileHover={{ scale: 1 }}
+            whileTap={{ scale: 0.99 }}
+          >
             <div aria-hidden="true" className="absolute border border-[#252525] border-solid inset-0 pointer-events-none rounded-[16px]" />
             <div className="box-border content-stretch flex flex-col gap-4 items-start justify-start p-[16px] relative shrink-0 w-full" data-name="text" data-node-id="3000:1722">
               <div className="content-stretch flex flex-col gap-4 items-start justify-start relative shrink-0 w-full" data-node-id="3000:1723">
@@ -177,7 +190,8 @@ export default function MobileHome({
               </div>
               <div className="content-stretch flex items-start justify-start relative shrink-0 w-full" data-node-id="3000:1744">
                 <button 
-                  onClick={() => {
+                  onClick={(e) => {
+                    e.stopPropagation();
                     if (onNavigateToProject) {
                       onNavigateToProject('airframe');
                     } else {
@@ -192,7 +206,7 @@ export default function MobileHome({
                 </button>
               </div>
             </div>
-          </div>
+          </motion.div>
         </div>
 
         {/* More Projects Section */}
