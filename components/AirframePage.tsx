@@ -16,7 +16,7 @@ const airframeImages = {
   rfp: '/images/airframe/rfp.png',
   expert: '/images/airframe/expert.png',
   guide: '/images/airframe/guide.png',
-  // Carousel 1: 3 sets of 4 images (12 total) - for HMW #1
+  // Carousel 1: 3 sets of 4 images + 2 additional images (14 total) - for HMW #1
   carousel1: [
     // Set 1
     '/images/airframe/carousel1-1.png',
@@ -33,6 +33,9 @@ const airframeImages = {
     '/images/airframe/carousel1-10.png',
     '/images/airframe/carousel1-11.png',
     '/images/airframe/carousel1-12.png',
+    // Additional images
+    '/images/airframe/carousel1-13.png',
+    '/images/airframe/carousel1-14.png',
   ],
   // Carousel 2: 3 sets of 4 images (12 total) - for HMW #2
   carousel2: [
