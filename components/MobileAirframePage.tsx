@@ -1216,9 +1216,14 @@ export default function MobileAirframePage({ onBack, openProjects, onCloseProjec
                     despite limited domain knowledge?
                   </p>
                   <p className="text-lg text-gray-400 leading-relaxed mt-4">
-                    We developed a comprehensive set of market guides tailored to various industries. I
-                    examine the details of each product, analyzing the advantages and disadvantages from multiple
-                    perspectives to provide deeper insights.
+                    We offer two types of resources:
+                  </p>
+                  <ul className="text-lg text-gray-300 space-y-1 list-disc list-inside ml-4">
+                    <li>Market guides: Provide an industry-level view, outlining trends, key players, and positioning.</li>
+                    <li>Product guides: Dive into individual products with insights such as product overviews, typical customer company size, customer stories, customer feedback and Net Promoter Score, and competitor reviews.</li>
+                  </ul>
+                  <p className="text-lg text-gray-400 leading-relaxed mt-4">
+                    Together, these guides save users the effort of searching across multiple sources, helping them evaluate vendors with confidence.
                   </p>
           </div>
                 <div className="hidden md:block w-[417px] h-80 rounded overflow-hidden">
