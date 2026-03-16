@@ -15,7 +15,7 @@ export default function App() {
   const [currentPage, setCurrentPage] = useState<'home' | 'airframe' | 'eatsy' | 'brainbox'>('home');
   const { openProjects, removeProject } = useOpenProjects();
   const [isMobile, setIsMobile] = useState(false);
-  
+
   useEffect(() => {
     const checkDeviceType = () => {
       const mobile = window.innerWidth <= 768;

@@ -27,7 +27,8 @@ export default function EatsyProject() {
     { id: 'airframe', title: 'AI-Powered Design System' },
     { id: 'eatsy', title: 'Customizable Reservation Platform' },
     { id: 'brainbox', title: 'Educational AI Platform' },
-    { id: 'shelf-life', title: 'Food Waste Management' }
+    { id: 'shelf-life', title: 'Food Waste Management' },
+    { id: 'realry', title: 'Realry' },
   ];
   const handleNavigateToProject = (projectId: string) => router.push(`/projects/${projectId}`);
 

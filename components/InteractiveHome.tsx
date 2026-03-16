@@ -631,6 +631,13 @@ function MoreProjectsSection({ sectionRef, onNavigateToProject }: { sectionRef: 
       tags: ["Dual Interface", "Sustainability"],
       image: imgImage2 
     },
+    { 
+      id: "realry",
+      title: "Smart Shopping Platform Redesign", 
+      description: "Redesigned navigation and UX for a 1.2M MAU price comparison platform. A/B testing showed 17% revenue increase, 50% higher homepage-to-product CTR, and 18% reduction in landing page drop rate.",
+      tags: ["1.2M MAU", "Revenue +17%"],
+      image: imgImage3 
+    },
   ];
 
   return (
@@ -647,7 +654,7 @@ function MoreProjectsSection({ sectionRef, onNavigateToProject }: { sectionRef: 
           <p className="block leading-[normal] text-nowrap whitespace-pre">More Projects</p>
         </div>
         <div className="font-didact-gothic font-normal relative shrink-0 text-[14px] text-gray-300">
-          <p className="block leading-[22px] text-nowrap whitespace-pre">3 more</p>
+          <p className="block leading-[22px] text-nowrap whitespace-pre">4 more</p>
         </div>
       </div>
       <div
