@@ -43,7 +43,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <head>
-        {/* Google Tag Manager - as high in head as possible */}
+        {/* Google Tag Manager - add GA4 tag (G-RGJFCMBNFE) inside GTM for charts */}
         <script
           dangerouslySetInnerHTML={{
             __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
