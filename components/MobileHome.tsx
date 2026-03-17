@@ -86,7 +86,7 @@ export default function MobileHome({
   useEffect(() => setMounted(true), []);
 
   const navBar = (
-    <div className="fixed inset-x-0 top-0 z-[9999] bg-black box-border content-stretch flex items-center justify-between left-0 p-[16px] right-0 mobile-header" data-node-id="3000:1702">
+    <div className={`fixed inset-x-0 top-0 bg-black box-border content-stretch flex items-center justify-between left-0 p-[16px] right-0 mobile-header ${isMenuOpen ? 'z-40' : 'z-[9999]'}`} data-node-id="3000:1702">
       <div className="content-stretch flex gap-[7px] items-center justify-start relative shrink-0" data-name="header" data-node-id="2997:1690">
         <img 
           src={imgLogo} 
