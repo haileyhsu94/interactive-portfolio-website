@@ -285,10 +285,10 @@ export default function RealryPage({
                   <div className="bg-[#1a1a1a] rounded-xl p-6 border border-[#252525]">
                     <div className="text-[#f4915c] text-sm font-medium mb-2">PROBLEM 1</div>
                     <h3 className="text-xl font-bold mb-3">Landing Page Layout</h3>
-                    <p className="text-gray-400 mb-4">
+                    <p className="text-gray-400 text-base mb-4">
                       Users were abandoning the platform before engaging with products due to unclear value proposition and poor information hierarchy.
                     </p>
-                    <ul className="text-gray-400 text-sm space-y-1">
+                    <ul className="text-gray-400 text-base space-y-1.5">
                       <li>• Unclear hero section: AI feature dominated but lacked clear description</li>
                       <li>• Misplaced content: AI blog appeared before products</li>
                       <li>• Buried products: Core shopping experience hidden below the fold</li>
@@ -304,10 +304,10 @@ export default function RealryPage({
                   <div className="bg-[#1a1a1a] rounded-xl p-6 border border-[#252525]">
                     <div className="text-[#f4915c] text-sm font-medium mb-2">PROBLEM 2</div>
                     <h3 className="text-xl font-bold mb-3">Unintuitive Search</h3>
-                    <p className="text-gray-400 mb-4">
+                    <p className="text-gray-400 text-base mb-4">
                       Users were dropping off during search due to forced AI activation, disrupting their shopping flow and causing confusion.
                     </p>
-                    <ul className="text-gray-400 text-sm space-y-1">
+                    <ul className="text-gray-400 text-base space-y-1.5">
                       <li>• AI and search bar combined into one interface</li>
                       <li>• Search keywords triggered AI conversation instead of results</li>
                       <li>• Search bar disappeared after exiting AI</li>
@@ -323,10 +323,10 @@ export default function RealryPage({
                   <div className="bg-[#1a1a1a] rounded-xl p-6 border border-[#252525]">
                     <div className="text-[#f4915c] text-sm font-medium mb-2">PROBLEM 3</div>
                     <h3 className="text-xl font-bold mb-3">Category Navigation</h3>
-                    <p className="text-gray-400 mb-4">
+                    <p className="text-gray-400 text-base mb-4">
                       Users couldn&apos;t find products through browsing due to confusing, non-standard category structure that led to dead ends.
                     </p>
-                    <ul className="text-gray-400 text-sm space-y-1">
+                    <ul className="text-gray-400 text-base space-y-1.5">
                       <li>• Categories appeared as horizontal buttons (looked like tags)</li>
                       <li>• Sub-category pages looked like product listings</li>
                       <li>• &quot;Back&quot; button returned to homepage, not parent category</li>
@@ -342,10 +342,10 @@ export default function RealryPage({
                   <div className="bg-[#1a1a1a] rounded-xl p-6 border border-[#252525]">
                     <div className="text-[#f4915c] text-sm font-medium mb-2">PROBLEM 4</div>
                     <h3 className="text-xl font-bold mb-3">Price Comparison Unclear</h3>
-                    <p className="text-gray-400 mb-4">
+                    <p className="text-gray-400 text-base mb-4">
                       The main price comparison feature was buried and invisible to users, undermining the platform&apos;s core value.
                     </p>
-                    <ul className="text-gray-400 text-sm space-y-1">
+                    <ul className="text-gray-400 text-base space-y-1.5">
                       <li>• &quot;Do not purchase&quot; recommendation blocked conversions</li>
                       <li>• Related products pulled users out of conversion path</li>
                       <li>• Price insights hidden, requiring user exploration</li>
@@ -366,21 +366,21 @@ export default function RealryPage({
                   <div className="bg-[#1a1a1a] rounded-xl p-6 border border-[#252525]">
                     <div className="text-3xl mb-3">⏱️</div>
                     <h3 className="text-lg font-bold mb-2">Timeline Pressure</h3>
-                    <p className="text-gray-400 text-sm">
+                    <p className="text-gray-400 text-base">
                       6 weeks to redesign the entire platform, driven by an upcoming investment pitch deadline.
                     </p>
                   </div>
                   <div className="bg-[#1a1a1a] rounded-xl p-6 border border-[#252525]">
                     <div className="text-3xl mb-3">📱</div>
                     <h3 className="text-lg font-bold mb-2">Multi-Platform</h3>
-                    <p className="text-gray-400 text-sm">
+                    <p className="text-gray-400 text-base">
                       Needed to design both web and iOS app simultaneously. Device distribution was split 50/50.
                     </p>
                   </div>
                   <div className="bg-[#1a1a1a] rounded-xl p-6 border border-[#252525]">
                     <div className="text-3xl mb-3">🧩</div>
                     <h3 className="text-lg font-bold mb-2">Design System</h3>
-                    <p className="text-gray-400 text-sm">
+                    <p className="text-gray-400 text-base">
                       Had to create reusable components from the start to ensure consistency across web and mobile.
                     </p>
                   </div>
@@ -394,32 +394,32 @@ export default function RealryPage({
                   <div className="text-center">
                     <div className="w-12 h-12 bg-[#4A6FA5] rounded-full flex items-center justify-center mx-auto mb-3 text-white font-bold">1</div>
                     <h3 className="text-lg font-bold mb-2">Discovery & Audit</h3>
-                    <p className="text-gray-400 text-sm">Analytics review</p>
+                    <p className="text-gray-400 text-base">Analytics review</p>
                   </div>
                   <div className="text-center">
                     <div className="w-12 h-12 bg-[#4A6FA5] rounded-full flex items-center justify-center mx-auto mb-3 text-white font-bold">2</div>
                     <h3 className="text-lg font-bold mb-2">Competitive Analysis</h3>
-                    <p className="text-gray-400 text-sm">Honey, ShopBack</p>
+                    <p className="text-gray-400 text-base">Honey, ShopBack</p>
                   </div>
                   <div className="text-center">
                     <div className="w-12 h-12 bg-[#4A6FA5] rounded-full flex items-center justify-center mx-auto mb-3 text-white font-bold">3</div>
                     <h3 className="text-lg font-bold mb-2">Design Exploration</h3>
-                    <p className="text-gray-400 text-sm">Daily syncs w/ CEO</p>
+                    <p className="text-gray-400 text-base">Daily syncs w/ CEO</p>
                   </div>
                   <div className="text-center">
                     <div className="w-12 h-12 bg-[#4A6FA5] rounded-full flex items-center justify-center mx-auto mb-3 text-white font-bold">4</div>
                     <h3 className="text-lg font-bold mb-2">Design System</h3>
-                    <p className="text-gray-400 text-sm">IBM Carbon base</p>
+                    <p className="text-gray-400 text-base">IBM Carbon base</p>
                   </div>
                   <div className="text-center">
                     <div className="w-12 h-12 bg-[#4A6FA5] rounded-full flex items-center justify-center mx-auto mb-3 text-white font-bold">5</div>
                     <h3 className="text-lg font-bold mb-2">Handoff</h3>
-                    <p className="text-gray-400 text-sm">Dev collaboration</p>
+                    <p className="text-gray-400 text-base">Dev collaboration</p>
                   </div>
                   <div className="text-center">
                     <div className="w-12 h-12 bg-[#4A6FA5] rounded-full flex items-center justify-center mx-auto mb-3 text-white font-bold">6</div>
                     <h3 className="text-lg font-bold mb-2">A/B Testing</h3>
-                    <p className="text-gray-400 text-sm">Iteration</p>
+                    <p className="text-gray-400 text-base">Iteration</p>
                   </div>
                 </div>
               </div>
@@ -621,32 +621,32 @@ export default function RealryPage({
                   <div className="bg-[#1a1a1a] rounded-xl p-5 text-center border border-[#252525]">
                     <div className="text-2xl font-bold text-green-400 mb-1">+23%</div>
                     <div className="text-sm text-gray-400">Partner Click-out Rate</div>
-                    <div className="text-xs text-gray-500 mt-1">6.8% → 8.4%</div>
+                    <div className="text-base text-gray-500 mt-1">6.8% → 8.4%</div>
                   </div>
                   <div className="bg-[#1a1a1a] rounded-xl p-5 text-center border border-[#252525]">
                     <div className="text-2xl font-bold text-green-400 mb-1">+39%</div>
                     <div className="text-sm text-gray-400">Search → Product CTR</div>
-                    <div className="text-xs text-gray-500 mt-1">15.2% → 21.2%</div>
+                    <div className="text-base text-gray-500 mt-1">15.2% → 21.2%</div>
                   </div>
                   <div className="bg-[#1a1a1a] rounded-xl p-5 text-center border border-[#252525]">
                     <div className="text-2xl font-bold text-green-400 mb-1">+50%</div>
                     <div className="text-sm text-gray-400">Home → Product CTR</div>
-                    <div className="text-xs text-gray-500 mt-1">7.2% → 10.8%</div>
+                    <div className="text-base text-gray-500 mt-1">7.2% → 10.8%</div>
                   </div>
                   <div className="bg-[#1a1a1a] rounded-xl p-5 text-center border border-[#252525]">
                     <div className="text-2xl font-bold text-green-400 mb-1">+28%</div>
                     <div className="text-sm text-gray-400">Product → Partner CTR</div>
-                    <div className="text-xs text-gray-500 mt-1">12.4% → 15.9%</div>
+                    <div className="text-base text-gray-500 mt-1">12.4% → 15.9%</div>
                   </div>
                   <div className="bg-[#1a1a1a] rounded-xl p-5 text-center border border-[#252525]">
                     <div className="text-2xl font-bold text-red-400 mb-1">-10%</div>
                     <div className="text-sm text-gray-400">Bounce Rate</div>
-                    <div className="text-xs text-gray-500 mt-1">65.0% → 58.5%</div>
+                    <div className="text-base text-gray-500 mt-1">65.0% → 58.5%</div>
                   </div>
                   <div className="bg-[#1a1a1a] rounded-xl p-5 text-center border border-[#252525]">
                     <div className="text-2xl font-bold text-red-400 mb-1">-18%</div>
                     <div className="text-sm text-gray-400">Landing Drop Rate</div>
-                    <div className="text-xs text-gray-500 mt-1">68.5% → 56.2%</div>
+                    <div className="text-base text-gray-500 mt-1">68.5% → 56.2%</div>
                   </div>
                 </div>
               </div>
