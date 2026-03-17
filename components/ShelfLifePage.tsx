@@ -40,7 +40,7 @@ interface ShelfLifePageProps {
 
 export default function ShelfLifePage({ onBack, openProjects, onCloseProject, onNavigateToProject, onLogoClick }: ShelfLifePageProps) {
   const [navigation, setNavigation] = useState<NavigationState>({ activeSection: 'more' });
-  const mediaPlayerRef = useRef<{ playAirframeAudio: () => void; playEatsyAudio: () => void; playBrainBoxAudio: () => void; playShelfLifeAudio: () => void; pauseAudio: () => void }>(null);
+  const mediaPlayerRef = useRef<{ playRealryAudio: () => void; playAirframeAudio: () => void; playEatsyAudio: () => void; playBrainBoxAudio: () => void; playShelfLifeAudio: () => void; pauseAudio: () => void }>(null);
   const [zoomedImage, setZoomedImage] = useState<string>('');
   const [isZoomed, setIsZoomed] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);

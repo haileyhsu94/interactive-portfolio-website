@@ -21,7 +21,7 @@ export default function RealryProject() {
   }, []);
 
   useEffect(() => {
-    addProject({ id: 'realry', title: 'Realry' });
+    addProject({ id: 'realry', title: 'Realry - Reshaping Shopping Experience' });
   }, [addProject]);
 
   const handleBack = () => {

@@ -4,8 +4,12 @@ import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronLeft, ChevronRight, X } from 'lucide-react';
 import { Card } from './ui/card';
+import MobileMenu from './MobileMenu';
 import { Separator } from './ui/separator';
 import Footer from './Footer';
+
+const imgLogo = '/images/logo.png';
+const imgMenuIcon = '/images/menu-icon.png';
 
 // Image imports
 const eatsyImages = {
@@ -19,6 +23,7 @@ const eatsyImages = {
 
 interface MobileEatsyPageProps {
   onBack?: () => void;
+  onNavigateToProject?: (projectId: string) => void;
 }
 
 function InteractiveCarousel({ images, bgColor, title }: { images: string[]; bgColor: string; title?: string }) {
@@ -67,7 +72,7 @@ function InteractiveCarousel({ images, bgColor, title }: { images: string[]; bgC
   );
 }
 
-export default function MobileEatsyPage({ onBack }: MobileEatsyPageProps) {
+export default function MobileEatsyPage({ onBack, onNavigateToProject }: MobileEatsyPageProps) {
   const [isZoomed, setIsZoomed] = useState(false);
   const [zoomedImage, setZoomedImage] = useState<string>('');
   const [isPlaying, setIsPlaying] = useState(false);
@@ -100,27 +105,30 @@ export default function MobileEatsyPage({ onBack }: MobileEatsyPageProps) {
     };
   }, [audio]);
 
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
   return (
     <div className="bg-black relative size-full min-h-screen mobile-container" data-name="mobile/eatsy">
-      {/* Header */}
-      <div className="fixed bg-black box-border content-stretch flex items-center justify-between left-0 p-[16px] right-0 top-0 z-50">
-        <div className="content-stretch flex gap-[7px] items-center justify-start relative shrink-0">
-          <button 
-            onClick={onBack}
-            className="w-8 h-8 flex items-center justify-center text-white"
-          >
-            <ChevronLeft size={24} />
-          </button>
+      {/* Fixed top nav bar - same as mobile home */}
+      <div className="fixed bg-black box-border content-stretch flex items-center justify-between left-0 p-[16px] right-0 top-0 z-50 mobile-header">
+        <button type="button" onClick={onBack} className="content-stretch flex gap-[7px] items-center justify-start relative shrink-0" aria-label="Back to home">
+          <img src={imgLogo} alt="Hailey Hsu Logo" className="block max-w-none size-9 rounded-[999px]" />
           <div className="content-stretch flex flex-col gap-1 items-start justify-start relative shrink-0 w-[132px]">
             <div className="font-didact-gothic leading-[0] not-italic relative shrink-0 text-[#ffffff] text-[16px] w-full">
               <p className="leading-[normal]">Hailey Hsu</p>
             </div>
-            <div className="font-didact-gothic leading-[0] not-italic relative shrink-0 text-[#ffffff] text-[12px] w-full">
-              <p className="leading-[normal]">Product Designer</p>
-            </div>
           </div>
-        </div>
+        </button>
+        <button type="button" onClick={() => setIsMenuOpen(true)} className="block w-[31.5px] h-[31.5px] cursor-pointer hover:opacity-80 transition-opacity duration-200" aria-label="Open menu">
+          <img src={imgMenuIcon} alt="Menu" className="block max-w-none w-full h-full" />
+        </button>
       </div>
+      <MobileMenu
+        isOpen={isMenuOpen}
+        onClose={() => setIsMenuOpen(false)}
+        onNavigateToProject={onNavigateToProject}
+        onBackToHome={onBack}
+      />
 
       {/* Main Content */}
       <div className="absolute box-border content-stretch flex flex-col gap-8 items-center justify-start left-0 pb-20 pt-[80px] px-4 right-0 top-[72px] overflow-y-auto min-h-[calc(100vh-72px)] scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-transparent mobile-content">

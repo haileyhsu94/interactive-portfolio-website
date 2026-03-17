@@ -4,9 +4,13 @@ import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronLeft, ChevronRight, X } from 'lucide-react';
 import { Sidebar, MediaPlayer } from './InteractiveHome';
+import MobileMenu from './MobileMenu';
 import { Card } from './ui/card';
 import { Separator } from './ui/separator';
 import Footer from './Footer';
+
+const imgLogo = '/images/logo.png';
+const imgMenuIcon = '/images/menu-icon.png';
 
 // Image assets from Figma - Now using proper local paths for Shelf-Life
 const imgShelfLifeThumbnail1 = "/images/project-3.jpg";
@@ -40,7 +44,8 @@ interface MobileShelfLifePageProps {
 
 export default function MobileShelfLifePage({ onBack, openProjects, onCloseProject, onNavigateToProject, onLogoClick }: MobileShelfLifePageProps) {
   const [navigation, setNavigation] = useState<NavigationState>({ activeSection: 'more' });
-  const mediaPlayerRef = useRef<{ playAirframeAudio: () => void; playEatsyAudio: () => void; playBrainBoxAudio: () => void; playShelfLifeAudio: () => void; pauseAudio: () => void }>(null);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const mediaPlayerRef = useRef<{ playRealryAudio: () => void; playAirframeAudio: () => void; playEatsyAudio: () => void; playBrainBoxAudio: () => void; playShelfLifeAudio: () => void; pauseAudio: () => void }>(null);
   const [zoomedImage, setZoomedImage] = useState<string>('');
   const [isZoomed, setIsZoomed] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
@@ -100,7 +105,23 @@ export default function MobileShelfLifePage({ onBack, openProjects, onCloseProje
 
   return (
     <div className="h-screen bg-neutral-950 text-white w-full overflow-hidden">
-      <div className="box-border content-stretch flex flex-row gap-4 items-stretch justify-start p-[12px] relative w-full min-w-0 overflow-hidden" style={{ height: 'calc(100vh - 74px)', maxHeight: 'calc(100vh - 74px)' }}>
+      {/* Mobile-only fixed top nav bar - same as mobile home */}
+      <header className="lg:hidden fixed top-0 left-0 right-0 z-50 bg-neutral-950 border-b border-[#252525] box-border flex items-center justify-between px-4 py-3 h-[72px]">
+        <button type="button" onClick={onLogoClick ?? onBack} className="flex gap-[7px] items-center justify-start shrink-0" aria-label="Back to home">
+          <img src={imgLogo} alt="Hailey Hsu Logo" className="block max-w-none size-9 rounded-[999px]" />
+          <span className="font-didact-gothic text-[16px] text-white">Hailey Hsu</span>
+        </button>
+        <button type="button" onClick={() => setIsMenuOpen(true)} className="block w-[31.5px] h-[31.5px] cursor-pointer hover:opacity-80 transition-opacity duration-200" aria-label="Open menu">
+          <img src={imgMenuIcon} alt="Menu" className="block max-w-none w-full h-full" />
+        </button>
+      </header>
+      <MobileMenu
+        isOpen={isMenuOpen}
+        onClose={() => setIsMenuOpen(false)}
+        onNavigateToProject={onNavigateToProject}
+        onBackToHome={onLogoClick ?? onBack}
+      />
+      <div className="box-border content-stretch flex flex-row gap-4 items-stretch justify-start p-[12px] relative w-full min-w-0 overflow-hidden pt-[84px] lg:pt-[12px] h-[calc(100vh-146px)] lg:h-[calc(100vh-74px)] max-h-[calc(100vh-146px)] lg:max-h-[calc(100vh-74px)]">
         {/* Sidebar */}
         <div className="hidden lg:block w-[200px] flex-shrink-0 h-full">
           <Sidebar 

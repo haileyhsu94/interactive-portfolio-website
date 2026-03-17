@@ -28,12 +28,12 @@ export default function EatsyProject() {
     { id: 'eatsy', title: 'Customizable Reservation Platform' },
     { id: 'brainbox', title: 'Educational AI Platform' },
     { id: 'shelf-life', title: 'Food Waste Management' },
-    { id: 'realry', title: 'Realry' },
+    { id: 'realry', title: 'Realry - Reshaping Shopping Experience' },
   ];
   const handleNavigateToProject = (projectId: string) => router.push(`/projects/${projectId}`);
 
   if (isMobile) {
-    return <MobileEatsyPage onBack={handleBack} />;
+    return <MobileEatsyPage onBack={handleBack} onNavigateToProject={handleNavigateToProject} />;
   }
 
   return (

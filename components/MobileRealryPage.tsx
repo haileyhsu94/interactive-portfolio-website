@@ -1,26 +1,29 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X } from 'lucide-react';
+import { X, ExternalLink } from 'lucide-react';
+import { MediaPlayer } from './InteractiveHome';
+import MobileMenu from './MobileMenu';
 import { Separator } from './ui/separator';
 import Footer from './Footer';
 
-const imgRealryThumbnail = '/images/realry/hero/thumbnail.png';
+const imgLogo = '/images/logo.png';
+const imgMenuIcon = '/images/menu-icon.png';
+const imgRealryThumbnail = '/images/realry/thumbnail.png';
 const imgOldLandingPage = '/images/realry/old-ui/landing-page.png';
 const imgOldSearch = '/images/realry/old-ui/search.png';
 const imgOldCategoryNav = '/images/realry/old-ui/category-nav.png';
 const imgOldPriceComparison = '/images/realry/old-ui/price-comparison.png';
-const imgHomepageBefore = '/images/realry/solutions/homepage-before.png';
-const imgHomepageAfter = '/images/realry/solutions/homepage-after.png';
-const imgHomepageBrands = '/images/realry/solutions/homepage-brands.png';
-const imgSearchBefore = '/images/realry/solutions/search-before.png';
-const imgSearchAfter = '/images/realry/solutions/search-after.png';
-const imgMenuBefore = '/images/realry/solutions/menu-before.png';
-const imgMenuAfter = '/images/realry/solutions/menu-after.png';
-const imgStoresDirectory = '/images/realry/solutions/stores-directory.png';
-const imgPriceBefore = '/images/realry/solutions/price-before.png';
-const imgPriceAfter = '/images/realry/solutions/price-after.png';
+const imgHomepageBefore = '/images/realry/solution/homepage-before.png';
+const imgHomepageAfter = '/images/realry/solution/homepage-after.png';
+const imgHomepageBrands = '/images/realry/solution/homepage-brand.png';
+const imgSearchBefore = '/images/realry/solution/search-before.png';
+const imgSearchAfter = '/images/realry/solution/search-after.png';
+const imgMenuBefore = '/images/realry/solution/menu-before.png';
+const imgMenuAfter = '/images/realry/solution/menu-after.png';
+const imgPriceBefore = '/images/realry/solution/price-before.png';
+const imgPriceAfter = '/images/realry/solution/price-after.png';
 
 interface MobileRealryPageProps {
   onBack?: () => void;
@@ -32,9 +35,31 @@ interface MobileRealryPageProps {
 
 export default function MobileRealryPage({
   onBack,
+  onNavigateToProject,
 }: MobileRealryPageProps) {
+  const mediaPlayerRef = useRef<{ playRealryAudio: () => void; playAirframeAudio: () => void; playEatsyAudio: () => void; playBrainBoxAudio: () => void; playShelfLifeAudio: () => void; pauseAudio: () => void }>(null);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [zoomedImage, setZoomedImage] = useState<string>('');
   const [isZoomed, setIsZoomed] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(false);
+
+  useEffect(() => {
+    const handleMediaStateChange = (event: CustomEvent) => {
+      setIsPlaying(event.detail?.isPlaying ?? false);
+    };
+    window.addEventListener('mediaStateChange', handleMediaStateChange as EventListener);
+    return () => window.removeEventListener('mediaStateChange', handleMediaStateChange as EventListener);
+  }, []);
+
+  const toggleAudio = () => {
+    if (isPlaying) {
+      mediaPlayerRef.current?.pauseAudio();
+      setIsPlaying(false);
+    } else {
+      mediaPlayerRef.current?.playRealryAudio();
+      setIsPlaying(true);
+    }
+  };
 
   const handleImageClick = (image: string) => {
     setZoomedImage(image);
@@ -47,9 +72,30 @@ export default function MobileRealryPage({
   };
 
   return (
-    <div className="bg-black relative size-full min-h-screen mobile-container overflow-y-auto" data-name="mobile/realry">
+    <div className="bg-black relative size-full min-h-screen mobile-container flex flex-col" data-name="mobile/realry">
+      {/* Fixed top nav bar - same as mobile home */}
+      <div className="fixed bg-black box-border content-stretch flex items-center justify-between left-0 p-[16px] right-0 top-0 z-50 mobile-header">
+        <button type="button" onClick={onBack} className="content-stretch flex gap-[7px] items-center justify-start relative shrink-0" aria-label="Back to home">
+          <img src={imgLogo} alt="Hailey Hsu Logo" className="block max-w-none size-9 rounded-[999px]" />
+          <div className="content-stretch flex flex-col gap-1 items-start justify-start relative shrink-0 w-[132px]">
+            <div className="font-didact-gothic leading-[0] not-italic relative shrink-0 text-[#ffffff] text-[16px] w-full">
+              <p className="leading-[normal]">Hailey Hsu</p>
+            </div>
+          </div>
+        </button>
+        <button type="button" onClick={() => setIsMenuOpen(true)} className="block w-[31.5px] h-[31.5px] cursor-pointer hover:opacity-80 transition-opacity duration-200" aria-label="Open menu">
+          <img src={imgMenuIcon} alt="Menu" className="block max-w-none w-full h-full" />
+        </button>
+      </div>
+      <MobileMenu
+        isOpen={isMenuOpen}
+        onClose={() => setIsMenuOpen(false)}
+        onNavigateToProject={onNavigateToProject}
+        onBackToHome={onBack}
+      />
+      <div className="flex-1 min-h-0 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-transparent pt-[72px]">
       {/* Hero */}
-      <div style={{ background: 'linear-gradient(179deg, #4A6FA5 -37.41%, #1E3A5F 41.39%)' }}>
+      <div style={{ background: 'linear-gradient(179deg, #626BD9 -37.41%, #343973 41.39%)' }}>
         <div className="p-4">
           <div className="flex items-center justify-between mb-4">
             <button
@@ -64,10 +110,9 @@ export default function MobileRealryPage({
                 <path d="M14 24H34" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
             </button>
-            <a href="https://realry.com" target="_blank" rel="noopener noreferrer">
-              <div className="bg-gray-300 text-neutral-900 px-3 py-1.5 rounded-full text-xs font-medium">
-                Visit Website
-              </div>
+            <a href="https://realry.com/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 bg-gray-300 text-neutral-900 px-3 py-1.5 rounded-full text-xs font-medium">
+              <ExternalLink className="w-3.5 h-3.5 shrink-0" strokeWidth={2} />
+              Website
             </a>
           </div>
 
@@ -98,19 +143,42 @@ export default function MobileRealryPage({
 
       {/* Details */}
       <div className="p-4">
-        <div className="flex flex-col gap-3 mb-4">
-          <div>
-            <div className="text-[#f4915c] text-xs mb-0.5">Duration</div>
-            <div className="text-gray-300 text-sm">6 weeks</div>
+        <div className="flex items-start justify-between gap-4 mb-4">
+          <div className="flex flex-col gap-3 min-w-0">
+            <div>
+              <div className="text-[#f4915c] text-xs mb-0.5">Duration</div>
+              <div className="text-gray-300 text-sm">6 weeks</div>
+            </div>
+            <div>
+              <div className="text-[#f4915c] text-xs mb-0.5">Role</div>
+              <div className="text-gray-300 text-sm">Product Designer</div>
+            </div>
+            <div>
+              <div className="text-[#f4915c] text-xs mb-0.5">Collaborators</div>
+              <div className="text-gray-300 text-sm">PM/CEO, 2 Frontend Dev, CTO, Backend Dev, iOS Dev, Data Scientist</div>
+            </div>
           </div>
-          <div>
-            <div className="text-[#f4915c] text-xs mb-0.5">Role</div>
-            <div className="text-gray-300 text-sm">Product Designer</div>
-          </div>
-          <div>
-            <div className="text-[#f4915c] text-xs mb-0.5">Collaborators</div>
-            <div className="text-gray-300 text-sm">PM/CEO, 2 Frontend Dev, CTO, Backend Dev, iOS Dev, Data Scientist</div>
-          </div>
+          <motion.button
+            type="button"
+            onClick={toggleAudio}
+            className="flex-shrink-0 transition-transform duration-200 hover:scale-105"
+            aria-label={isPlaying ? 'Pause audio' : 'Play audio'}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            {isPlaying ? (
+              <svg width="52" height="52" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect width="52" height="52" rx="26" fill="white"/>
+                <path d="M31.5002 17.75H28.7502C28.2439 17.75 27.8335 18.1604 27.8335 18.6667V33.3333C27.8335 33.8396 28.2439 34.25 28.7502 34.25H31.5002C32.0064 34.25 32.4168 33.8396 32.4168 33.3333V18.6667C32.4168 18.1604 32.0064 17.75 31.5002 17.75Z" fill="#121212"/>
+                <path d="M23.2502 17.75H20.5002C19.9939 17.75 19.5835 18.1604 19.5835 18.6667V33.3333C19.5835 33.8396 19.9939 34.25 20.5002 34.25H23.2502C23.7564 34.25 24.1668 33.8396 24.1668 33.3333V18.6667C24.1668 18.1604 23.7564 17.75 23.2502 17.75Z" fill="#121212"/>
+              </svg>
+            ) : (
+              <svg width="52" height="52" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect width="52" height="52" rx="26" fill="white"/>
+                <path d="M19.8887 19.7782C19.8886 19.4654 19.971 19.1581 20.1277 18.8874C20.2843 18.6167 20.5096 18.392 20.7808 18.2362C21.0521 18.0804 21.3596 17.9989 21.6724 18C21.9852 18.0011 22.2921 18.0846 22.5623 18.2423L33.2256 24.4623C33.4947 24.6185 33.7181 24.8425 33.8735 25.1121C34.0289 25.3816 34.1108 25.6872 34.1111 25.9983C34.1113 26.3095 34.0299 26.6152 33.875 26.885C33.7201 27.1549 33.4971 27.3793 33.2282 27.5359L22.5623 33.7577C22.2921 33.9154 21.9852 33.9989 21.6724 34C21.3596 34.0011 21.0521 33.9196 20.7808 33.7638C20.5096 33.608 20.2843 33.3833 20.1277 33.1126C19.971 32.8419 19.8886 32.5346 19.8887 32.2218V19.7782Z" fill="#0A0A0A"/>
+              </svg>
+            )}
+          </motion.button>
         </div>
 
         <Separator className="bg-[#252525] my-6" />
@@ -222,27 +290,33 @@ export default function MobileRealryPage({
           <div className="grid grid-cols-3 gap-3">
             <div className="text-center">
               <div className="w-10 h-10 bg-[#4A6FA5] rounded-full flex items-center justify-center mx-auto mb-2 text-white font-bold text-sm">1</div>
-              <div className="text-xs font-medium text-white">Discovery</div>
+              <h3 className="text-base font-bold text-white mb-1">Discovery</h3>
+              <p className="text-gray-400 text-sm">Analytics review</p>
             </div>
             <div className="text-center">
               <div className="w-10 h-10 bg-[#4A6FA5] rounded-full flex items-center justify-center mx-auto mb-2 text-white font-bold text-sm">2</div>
-              <div className="text-xs font-medium text-white">Competitive</div>
+              <h3 className="text-base font-bold text-white mb-1">Competitive</h3>
+              <p className="text-gray-400 text-sm">Honey, ShopBack</p>
             </div>
             <div className="text-center">
               <div className="w-10 h-10 bg-[#4A6FA5] rounded-full flex items-center justify-center mx-auto mb-2 text-white font-bold text-sm">3</div>
-              <div className="text-xs font-medium text-white">Exploration</div>
+              <h3 className="text-base font-bold text-white mb-1">Exploration</h3>
+              <p className="text-gray-400 text-sm">Daily syncs w/ CEO</p>
             </div>
             <div className="text-center">
               <div className="w-10 h-10 bg-[#4A6FA5] rounded-full flex items-center justify-center mx-auto mb-2 text-white font-bold text-sm">4</div>
-              <div className="text-xs font-medium text-white">System</div>
+              <h3 className="text-base font-bold text-white mb-1">System</h3>
+              <p className="text-gray-400 text-sm">IBM Carbon base</p>
             </div>
             <div className="text-center">
               <div className="w-10 h-10 bg-[#4A6FA5] rounded-full flex items-center justify-center mx-auto mb-2 text-white font-bold text-sm">5</div>
-              <div className="text-xs font-medium text-white">Handoff</div>
+              <h3 className="text-base font-bold text-white mb-1">Handoff</h3>
+              <p className="text-gray-400 text-sm">Dev collaboration</p>
             </div>
             <div className="text-center">
               <div className="w-10 h-10 bg-[#4A6FA5] rounded-full flex items-center justify-center mx-auto mb-2 text-white font-bold text-sm">6</div>
-              <div className="text-xs font-medium text-white">A/B Test</div>
+              <h3 className="text-base font-bold text-white mb-1">A/B Test</h3>
+              <p className="text-gray-400 text-sm">Iteration</p>
             </div>
           </div>
         </div>
@@ -335,11 +409,6 @@ export default function MobileRealryPage({
               />
             </div>
           </div>
-          <div
-            className="mt-4 w-full aspect-video bg-neutral-800 rounded-lg bg-cover bg-center cursor-pointer"
-            style={{ backgroundImage: `url('${imgStoresDirectory}')` }}
-            onClick={() => handleImageClick(imgStoresDirectory)}
-          />
         </div>
 
         {/* Solution 4 */}
@@ -451,6 +520,12 @@ export default function MobileRealryPage({
 
       {/* Footer */}
       <Footer />
+      </div>
+
+      {/* Audio Player - Bottom bar */}
+      <div className="flex-shrink-0 bg-neutral-950 w-full" style={{ height: '74px' }}>
+        <MediaPlayer ref={mediaPlayerRef} onNavigateToProject={onNavigateToProject} />
+      </div>
 
       {/* Image Zoom Modal */}
       <AnimatePresence>

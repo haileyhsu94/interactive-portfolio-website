@@ -1,27 +1,26 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X } from 'lucide-react';
-import { Sidebar } from './InteractiveHome';
+import { X, ExternalLink } from 'lucide-react';
+import { Sidebar, MediaPlayer } from './InteractiveHome';
 import { Separator } from './ui/separator';
 import Footer from './Footer';
 
-const imgRealryThumbnail = '/images/realry/hero/thumbnail.png';
+const imgRealryThumbnail = '/images/realry/thumbnail.png';
 const imgOldLandingPage = '/images/realry/old-ui/landing-page.png';
 const imgOldSearch = '/images/realry/old-ui/search.png';
 const imgOldCategoryNav = '/images/realry/old-ui/category-nav.png';
 const imgOldPriceComparison = '/images/realry/old-ui/price-comparison.png';
-const imgHomepageBefore = '/images/realry/solutions/homepage-before.png';
-const imgHomepageAfter = '/images/realry/solutions/homepage-after.png';
-const imgHomepageBrands = '/images/realry/solutions/homepage-brands.png';
-const imgSearchBefore = '/images/realry/solutions/search-before.png';
-const imgSearchAfter = '/images/realry/solutions/search-after.png';
-const imgMenuBefore = '/images/realry/solutions/menu-before.png';
-const imgMenuAfter = '/images/realry/solutions/menu-after.png';
-const imgStoresDirectory = '/images/realry/solutions/stores-directory.png';
-const imgPriceBefore = '/images/realry/solutions/price-before.png';
-const imgPriceAfter = '/images/realry/solutions/price-after.png';
+const imgHomepageBefore = '/images/realry/solution/homepage-before.png';
+const imgHomepageAfter = '/images/realry/solution/homepage-after.png';
+const imgHomepageBrands = '/images/realry/solution/homepage-brand.png';
+const imgSearchBefore = '/images/realry/solution/search-before.png';
+const imgSearchAfter = '/images/realry/solution/search-after.png';
+const imgMenuBefore = '/images/realry/solution/menu-before.png';
+const imgMenuAfter = '/images/realry/solution/menu-after.png';
+const imgPriceBefore = '/images/realry/solution/price-before.png';
+const imgPriceAfter = '/images/realry/solution/price-after.png';
 
 interface NavigationState {
   activeSection: 'featured' | 'more' | 'contact';
@@ -41,9 +40,29 @@ export default function RealryPage({
   onNavigateToProject,
   onLogoClick,
 }: RealryPageProps) {
+  const mediaPlayerRef = useRef<{ playRealryAudio: () => void; playAirframeAudio: () => void; playEatsyAudio: () => void; playBrainBoxAudio: () => void; playShelfLifeAudio: () => void; pauseAudio: () => void }>(null);
   const [navigation, setNavigation] = useState<NavigationState>({ activeSection: 'more' });
   const [zoomedImage, setZoomedImage] = useState<string>('');
   const [isZoomed, setIsZoomed] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(false);
+
+  useEffect(() => {
+    const handleMediaStateChange = (event: CustomEvent) => {
+      setIsPlaying(event.detail?.isPlaying ?? false);
+    };
+    window.addEventListener('mediaStateChange', handleMediaStateChange as EventListener);
+    return () => window.removeEventListener('mediaStateChange', handleMediaStateChange as EventListener);
+  }, []);
+
+  const toggleAudio = () => {
+    if (isPlaying) {
+      mediaPlayerRef.current?.pauseAudio();
+      setIsPlaying(false);
+    } else {
+      mediaPlayerRef.current?.playRealryAudio();
+      setIsPlaying(true);
+    }
+  };
 
   const handleNavigateToSection = (section: 'featured' | 'more' | 'contact') => {
     setNavigation({ activeSection: section });
@@ -60,9 +79,9 @@ export default function RealryPage({
   };
 
   return (
-    <div className="h-screen bg-neutral-950 text-white w-full overflow-hidden">
+    <div className="h-screen bg-neutral-950 text-white w-full overflow-hidden flex flex-col">
       <div
-        className="box-border content-stretch flex flex-row gap-4 items-stretch justify-start p-[12px] relative w-full min-w-0 overflow-hidden"
+        className="box-border content-stretch flex flex-row gap-4 items-stretch justify-start p-[12px] relative w-full min-w-0 overflow-hidden flex-shrink-0"
         style={{ height: 'calc(100vh - 74px)', maxHeight: 'calc(100vh - 74px)' }}
       >
         {/* Sidebar */}
@@ -91,7 +110,7 @@ export default function RealryPage({
             style={{ maxHeight: 'calc(100vh - 74px - 24px)' }}
           >
             {/* Hero */}
-            <div style={{ background: 'linear-gradient(179deg, #4A6FA5 -37.41%, #1E3A5F 41.39%)' }}>
+            <div style={{ background: 'linear-gradient(179deg, #626BD9 -37.41%, #343973 41.39%)' }}>
               <div className="p-7">
                 <div className="flex items-center justify-between mb-5">
                   <a href="/" className="w-12 h-12 flex items-center justify-center" aria-label="Back to home">
@@ -101,10 +120,9 @@ export default function RealryPage({
                       <path d="M14 24H34" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>
                   </a>
-                  <a href="https://realry.com" target="_blank" rel="noopener noreferrer">
-                    <div className="bg-gray-300 text-neutral-900 px-4 py-2 rounded-full text-sm font-medium hover:bg-white transition-colors">
-                      Visit Website
-                    </div>
+                  <a href="https://realry.com/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 bg-gray-300 text-neutral-900 px-4 py-2 rounded-full text-sm font-medium hover:bg-white transition-colors">
+                    <ExternalLink className="w-4 h-4 shrink-0" strokeWidth={2} />
+                    Website
                   </a>
                 </div>
 
@@ -152,26 +170,49 @@ export default function RealryPage({
 
             {/* Project Details */}
             <div className="p-7">
-              <div className="hidden lg:flex flex-col sm:flex-row gap-5 items-center">
-                <div>
-                  <div className="text-[#f4915c] text-sm mb-1">Duration</div>
-                  <div className="text-gray-300">6 weeks</div>
+              <div className="hidden lg:flex flex-row gap-5 items-center justify-between w-full">
+                <div className="flex flex-wrap items-center gap-5">
+                  <div>
+                    <div className="text-[#f4915c] text-sm mb-1">Duration</div>
+                    <div className="text-gray-300">6 weeks</div>
+                  </div>
+                  <Separator orientation="vertical" className="h-6" />
+                  <div>
+                    <div className="text-[#f4915c] text-sm mb-1">Role</div>
+                    <div className="text-gray-300">Product Designer</div>
+                  </div>
+                  <Separator orientation="vertical" className="h-6" />
+                  <div>
+                    <div className="text-[#f4915c] text-sm mb-1">Collaborators</div>
+                    <div className="text-gray-300">PM/CEO, 2 Frontend Dev, CTO, Backend Dev, iOS Dev, Data Scientist</div>
+                  </div>
                 </div>
-                <Separator orientation="vertical" className="h-6 hidden sm:block" />
-                <div>
-                  <div className="text-[#f4915c] text-sm mb-1">Role</div>
-                  <div className="text-gray-300">Product Designer</div>
-                </div>
-                <Separator orientation="vertical" className="h-6 hidden sm:block" />
-                <div>
-                  <div className="text-[#f4915c] text-sm mb-1">Collaborators</div>
-                  <div className="text-gray-300">PM/CEO, 2 Frontend Dev, CTO, Backend Dev, iOS Dev, Data Scientist</div>
-                </div>
+                <motion.button
+                  type="button"
+                  onClick={toggleAudio}
+                  className="flex-shrink-0 transition-transform duration-200 hover:scale-105"
+                  aria-label={isPlaying ? 'Pause audio' : 'Play audio'}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  {isPlaying ? (
+                    <svg width="52" height="52" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <rect width="52" height="52" rx="26" fill="white"/>
+                      <path d="M31.5002 17.75H28.7502C28.2439 17.75 27.8335 18.1604 27.8335 18.6667V33.3333C27.8335 33.8396 28.2439 34.25 28.7502 34.25H31.5002C32.0064 34.25 32.4168 33.8396 32.4168 33.3333V18.6667C32.4168 18.1604 32.0064 17.75 31.5002 17.75Z" fill="#121212"/>
+                      <path d="M23.2502 17.75H20.5002C19.9939 17.75 19.5835 18.1604 19.5835 18.6667V33.3333C19.5835 33.8396 19.9939 34.25 20.5002 34.25H23.2502C23.7564 34.25 24.1668 33.8396 24.1668 33.3333V18.6667C24.1668 18.1604 23.7564 17.75 23.2502 17.75Z" fill="#121212"/>
+                    </svg>
+                  ) : (
+                    <svg width="52" height="52" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <rect width="52" height="52" rx="26" fill="white"/>
+                      <path d="M19.8887 19.7782C19.8886 19.4654 19.971 19.1581 20.1277 18.8874C20.2843 18.6167 20.5096 18.392 20.7808 18.2362C21.0521 18.0804 21.3596 17.9989 21.6724 18C21.9852 18.0011 22.2921 18.0846 22.5623 18.2423L33.2256 24.4623C33.4947 24.6185 33.7181 24.8425 33.8735 25.1121C34.0289 25.3816 34.1108 25.6872 34.1111 25.9983C34.1113 26.3095 34.0299 26.6152 33.875 26.885C33.7201 27.1549 33.4971 27.3793 33.2282 27.5359L22.5623 33.7577C22.2921 33.9154 21.9852 33.9989 21.6724 34C21.3596 34.0011 21.0521 33.9196 20.7808 33.7638C20.5096 33.608 20.2843 33.3833 20.1277 33.1126C19.971 32.8419 19.8886 32.5346 19.8887 32.2218V19.7782Z" fill="#0A0A0A"/>
+                    </svg>
+                  )}
+                </motion.button>
               </div>
 
               {/* Mobile Details */}
               <div className="lg:hidden flex flex-col gap-4">
-                <div className="flex items-start justify-between w-full">
+                <div className="flex items-start justify-between w-full gap-4">
                   <div className="flex flex-col gap-4">
                     <div>
                       <div className="text-[#f4915c] text-sm mb-1">Duration</div>
@@ -186,6 +227,27 @@ export default function RealryPage({
                       <div className="text-gray-300">PM/CEO, 2 Frontend Dev, CTO, Backend Dev, iOS Dev, Data Scientist</div>
                     </div>
                   </div>
+                  <motion.button
+                    type="button"
+                    onClick={toggleAudio}
+                    className="flex-shrink-0 transition-transform duration-200 hover:scale-105"
+                    aria-label={isPlaying ? 'Pause audio' : 'Play audio'}
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    {isPlaying ? (
+                      <svg width="52" height="52" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="52" height="52" rx="26" fill="white"/>
+                        <path d="M31.5002 17.75H28.7502C28.2439 17.75 27.8335 18.1604 27.8335 18.6667V33.3333C27.8335 33.8396 28.2439 34.25 28.7502 34.25H31.5002C32.0064 34.25 32.4168 33.8396 32.4168 33.3333V18.6667C32.4168 18.1604 32.0064 17.75 31.5002 17.75Z" fill="#121212"/>
+                        <path d="M23.2502 17.75H20.5002C19.9939 17.75 19.5835 18.1604 19.5835 18.6667V33.3333C19.5835 33.8396 19.9939 34.25 20.5002 34.25H23.2502C23.7564 34.25 24.1668 33.8396 24.1668 33.3333V18.6667C24.1668 18.1604 23.7564 17.75 23.2502 17.75Z" fill="#121212"/>
+                      </svg>
+                    ) : (
+                      <svg width="52" height="52" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="52" height="52" rx="26" fill="white"/>
+                        <path d="M19.8887 19.7782C19.8886 19.4654 19.971 19.1581 20.1277 18.8874C20.2843 18.6167 20.5096 18.392 20.7808 18.2362C21.0521 18.0804 21.3596 17.9989 21.6724 18C21.9852 18.0011 22.2921 18.0846 22.5623 18.2423L33.2256 24.4623C33.4947 24.6185 33.7181 24.8425 33.8735 25.1121C34.0289 25.3816 34.1108 25.6872 34.1111 25.9983C34.1113 26.3095 34.0299 26.6152 33.875 26.885C33.7201 27.1549 33.4971 27.3793 33.2282 27.5359L22.5623 33.7577C22.2921 33.9154 21.9852 33.9989 21.6724 34C21.3596 34.0011 21.0521 33.9196 20.7808 33.7638C20.5096 33.608 20.2843 33.3833 20.1277 33.1126C19.971 32.8419 19.8886 32.5346 19.8887 32.2218V19.7782Z" fill="#0A0A0A"/>
+                      </svg>
+                    )}
+                  </motion.button>
                 </div>
               </div>
             </div>
@@ -331,33 +393,33 @@ export default function RealryPage({
                 <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
                   <div className="text-center">
                     <div className="w-12 h-12 bg-[#4A6FA5] rounded-full flex items-center justify-center mx-auto mb-3 text-white font-bold">1</div>
-                    <div className="text-sm font-medium">Discovery & Audit</div>
-                    <div className="text-xs text-gray-500 mt-1">Analytics review</div>
+                    <h3 className="text-lg font-bold mb-2">Discovery & Audit</h3>
+                    <p className="text-gray-400 text-sm">Analytics review</p>
                   </div>
                   <div className="text-center">
                     <div className="w-12 h-12 bg-[#4A6FA5] rounded-full flex items-center justify-center mx-auto mb-3 text-white font-bold">2</div>
-                    <div className="text-sm font-medium">Competitive Analysis</div>
-                    <div className="text-xs text-gray-500 mt-1">Honey, ShopBack</div>
+                    <h3 className="text-lg font-bold mb-2">Competitive Analysis</h3>
+                    <p className="text-gray-400 text-sm">Honey, ShopBack</p>
                   </div>
                   <div className="text-center">
                     <div className="w-12 h-12 bg-[#4A6FA5] rounded-full flex items-center justify-center mx-auto mb-3 text-white font-bold">3</div>
-                    <div className="text-sm font-medium">Design Exploration</div>
-                    <div className="text-xs text-gray-500 mt-1">Daily syncs w/ CEO</div>
+                    <h3 className="text-lg font-bold mb-2">Design Exploration</h3>
+                    <p className="text-gray-400 text-sm">Daily syncs w/ CEO</p>
                   </div>
                   <div className="text-center">
                     <div className="w-12 h-12 bg-[#4A6FA5] rounded-full flex items-center justify-center mx-auto mb-3 text-white font-bold">4</div>
-                    <div className="text-sm font-medium">Design System</div>
-                    <div className="text-xs text-gray-500 mt-1">IBM Carbon base</div>
+                    <h3 className="text-lg font-bold mb-2">Design System</h3>
+                    <p className="text-gray-400 text-sm">IBM Carbon base</p>
                   </div>
                   <div className="text-center">
                     <div className="w-12 h-12 bg-[#4A6FA5] rounded-full flex items-center justify-center mx-auto mb-3 text-white font-bold">5</div>
-                    <div className="text-sm font-medium">Handoff</div>
-                    <div className="text-xs text-gray-500 mt-1">Dev collaboration</div>
+                    <h3 className="text-lg font-bold mb-2">Handoff</h3>
+                    <p className="text-gray-400 text-sm">Dev collaboration</p>
                   </div>
                   <div className="text-center">
                     <div className="w-12 h-12 bg-[#4A6FA5] rounded-full flex items-center justify-center mx-auto mb-3 text-white font-bold">6</div>
-                    <div className="text-sm font-medium">A/B Testing</div>
-                    <div className="text-xs text-gray-500 mt-1">Iteration</div>
+                    <h3 className="text-lg font-bold mb-2">A/B Testing</h3>
+                    <p className="text-gray-400 text-sm">Iteration</p>
                   </div>
                 </div>
               </div>
@@ -497,11 +559,6 @@ export default function RealryPage({
                     />
                   </div>
                 </div>
-                <div
-                  className="w-full max-w-2xl mx-auto aspect-video bg-neutral-800 rounded-lg bg-cover bg-center cursor-pointer hover:opacity-90 transition-opacity"
-                  style={{ backgroundImage: `url('${imgStoresDirectory}')` }}
-                  onClick={() => handleImageClick(imgStoresDirectory)}
-                />
               </div>
 
               {/* Solution 4: Transparent Price Insights */}
@@ -636,6 +693,11 @@ export default function RealryPage({
             <Footer />
           </div>
         </div>
+      </div>
+
+      {/* Audio Player - Bottom bar */}
+      <div className="flex-shrink-0 bg-neutral-950 w-full" style={{ height: '74px' }}>
+        <MediaPlayer ref={mediaPlayerRef} onNavigateToProject={onNavigateToProject} />
       </div>
 
       {/* Image Zoom Modal */}

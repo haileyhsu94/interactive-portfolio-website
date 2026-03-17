@@ -38,11 +38,11 @@ export default function RealryProject() {
   };
 
   const openProjects = [
-    { id: 'airframe', title: 'AI-powered B2B Procurement Platform' },
-    { id: 'eatsy', title: 'Customizable Reservation Platform' },
-    { id: 'brainbox', title: 'AI-Powered SAT Preparation Platform' },
-    { id: 'shelf-life', title: 'Dual-Interface Platform to Reduce Food Waste' },
-    { id: 'realry', title: 'Realry' },
+    { id: 'airframe', title: 'Airframe - AI-powered B2B Procurement Platform' },
+    { id: 'eatsy', title: 'Eatsy - Customizable Reservation Platform' },
+    { id: 'brainbox', title: 'BrainBox - AI-Powered SAT Preparation Platform' },
+    { id: 'shelf-life', title: 'Shelf Life - Dual-Interface Platform to Reduce Food Waste' },
+    { id: 'realry', title: 'Realry - Reshaping Shopping Experience' },
   ];
 
   if (isMobile) {
