@@ -33,6 +33,7 @@ export default function BrainBoxProject() {
         if (project === 'airframe') window.location.href = '/projects/airframe';
         if (project === 'eatsy') window.location.href = '/projects/eatsy';
         if (project === 'shelf-life') window.location.href = '/projects/shelf-life';
+        if (project === 'realry') window.location.href = '/projects/realry';
       }}
       onLogoClick={() => window.location.href = '/'}
     />

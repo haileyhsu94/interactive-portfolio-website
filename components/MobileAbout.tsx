@@ -104,9 +104,9 @@ export default function MobileAbout({
       </div>
 
       {/* Main Content */}
-      <div className="absolute box-border content-stretch flex flex-col gap-[60px] items-center justify-start left-[9px] pb-20 pt-[60px] px-0 right-2 top-[72px] overflow-y-auto scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-transparent min-h-[calc(100vh-72px)] mobile-content">
+      <div className="absolute box-border content-stretch flex flex-col gap-[60px] items-center justify-start right-0 w-full pb-20 pt-[60px] px-4 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-transparent min-h-[calc(100vh-72px)] mobile-content">
         {/* Hero Section */}
-        <div className="box-border content-stretch flex flex-col gap-10 items-center justify-start px-[21px] py-5 relative shrink-0 w-full">
+        <div className="box-border content-stretch flex flex-col gap-10 items-center justify-start px-0 py-5 min-[500px]:px-[21px] relative shrink-0 w-full">
           {/* Avatar */}
           <div className="relative shrink-0 size-[61px]" data-name="avatar">
             <img 
@@ -123,13 +123,12 @@ export default function MobileAbout({
             <div className="basis-0 font-didact-gothic grow leading-[0] min-h-px min-w-px not-italic relative shrink-0 text-[20px] text-gray-300">
               <p className="leading-[28px] mb-0">
                 <span className="">I design products that make complex information </span>
-                <span className="text-[#f4915c]">easy to use</span>
-                <span className="">.</span>
+                <span className="text-[#f4915c]">easy to use.</span>
               </p>
-              <p className="leading-[28px]">
-                <span className="">I focus on practical workflows and turn messy problems into systems that </span>
-                <span className="text-[#f4915c]">grow smoothly</span>
-                <span className="">.</span>
+              <p className="leading-[28px] mb-0">
+                <span className="">I can </span>
+                <span className="text-[#f4915c]">ship production code</span>
+                <span className=""> by leveraging AI tools—bridging design and implementation.</span>
               </p>
             </div>
           </div>
@@ -173,7 +172,7 @@ export default function MobileAbout({
                   <p className="">experience</p>
                 </div>
                 <div className="font-didact-gothic leading-[0] not-italic relative shrink-0 text-[#ffffff] text-[25px] w-full">
-                  <p className="leading-[normal]">4</p>
+                  <p className="leading-[normal]">4+</p>
                 </div>
               </div>
               <div className="flex-1 box-border content-stretch flex flex-col gap-3 items-start justify-start min-h-px min-w-px p-[12px] relative rounded-[20px] shrink-0" data-name="client">
@@ -271,6 +270,18 @@ export default function MobileAbout({
                           <path d="M13.3333 6.66699C14.6593 6.66699 15.9311 7.19378 16.8688 8.13146C17.8065 9.06914 18.3333 10.3409 18.3333 11.667V17.5003H14.9999V11.667C14.9999 11.225 14.8243 10.801 14.5118 10.4885C14.1992 10.1759 13.7753 10.0003 13.3333 10.0003C12.8912 10.0003 12.4673 10.1759 12.1547 10.4885C11.8422 10.801 11.6666 11.225 11.6666 11.667V17.5003H8.33325V11.667C8.33325 10.3409 8.86004 9.06914 9.79772 8.13146C10.7354 7.19378 12.0072 6.66699 13.3333 6.66699Z" stroke="#D1D5DB" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
                           <path d="M5.00008 7.5H1.66675V17.5H5.00008V7.5Z" stroke="#D1D5DB" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
                           <path d="M3.33341 5.00033C4.25389 5.00033 5.00008 4.25413 5.00008 3.33366C5.00008 2.41318 4.25389 1.66699 3.33341 1.66699C2.41294 1.66699 1.66675 2.41318 1.66675 3.33366C1.66675 4.25413 2.41294 5.00033 3.33341 5.00033Z" stroke="#D1D5DB" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
+                        </svg>
+                      </a>
+                      <a
+                        href="https://github.com/haileyhsu94"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="relative shrink-0 size-5 cursor-pointer hover:opacity-80 transition-opacity duration-200"
+                        aria-label="GitHub"
+                      >
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#D1D5DB" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round">
+                          <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4" />
+                          <path d="M9 18c-4.51 2-5-2-7-2" />
                         </svg>
                       </a>
                       <a

@@ -1,35 +1,49 @@
 "use client";
 
-import { useState, useRef } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { useState, RefObject, useEffect } from "react";
+import { createPortal } from "react-dom";
+import { motion } from "framer-motion";
 import { toast } from "sonner";
 import MobileMenu from './MobileMenu';
 import Footer from './Footer';
 
 // Image paths - replace with your actual images
-const imgHeroImage1 = "/images/airframe/thumbnail.png"; // Featured project hero image
+const imgHeroImage1 = "/images/airframe-audio.png"; // Airframe thumbnail (used in More)
+const imgRealryFeatured = "/images/hero-image-realry.png"; // Realry featured project thumbnail
 const imgImage = "/images/project-1.png";      // Project 1 image
 const imgImage1 = "/images/project-2.png";     // Project 2 image  
 const imgImage2 = "/images/project-3.jpg";     // Project 3 image
 const imgLogo = "/images/logo.png";            // Logo image
 const imgMenuIcon = "/images/menu-icon.png";   // Menu icon
 
+const MORE_GAP_PX = 16;
+
+const MORE_PROJECTS_MOBILE = [
+  { id: 'airframe', image: imgHeroImage1, title: 'AI-powered B2B Procurement Platform', description: 'Projected to cut vendor sourcing time by 40%. Delivered 250+ high-fidelity screens for buyer & vendor flows.', tags: ['$4M funding', 'AI Prototype'] },
+  { id: 'eatsy', image: imgImage, title: 'Customizable Reservation Platform', description: 'Reduced booking setup steps by 40% in prototype testing. Designed fully customizable workflows, giving small restaurants control over reservations and payments.', tags: ['Cost Reduction', 'Prototype Testing'] },
+  { id: 'brainbox', image: imgImage1, title: 'AI-Powered SAT Preparation Platform', description: 'Conducted heatmap analysis and A/B testing to refine practice setup flow and dashboard layout. Led 4 designers to deliver 200+ screens, integrating AI tutor and performance reports.', tags: ['Heatmap Analysis', 'A/B Testing'] },
+  { id: 'shelf-life', image: imgImage2, title: 'Dual-Interface Platform to Reduce Food Waste', description: 'Expected to help restaurants clear surplus food faster by streamlining listing to under 2 minutes. Delivered mobile B2C app & tablet B2B dashboard with 50+ unique screens.', tags: ['Dual Interface', 'Sustainability'] },
+] as const;
+
 interface FormData {
   email: string;
   message: string;
 }
 
+type MediaPlayerRef = { playRealryAudio: () => void; playAirframeAudio: () => void; playEatsyAudio: () => void; playBrainBoxAudio: () => void; playShelfLifeAudio: () => void; pauseAudio: () => void } | null;
+
 export default function MobileHome({ 
   onNavigateToProject, 
-  onNavigateToAbout 
+  onNavigateToAbout,
+  mediaPlayerRef 
 }: { 
   onNavigateToProject?: (project: string) => void;
   onNavigateToAbout?: () => void;
+  mediaPlayerRef?: RefObject<MediaPlayerRef>;
 }) {
   const [formData, setFormData] = useState<FormData>({ email: '', message: '' });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!formData.email || !formData.message) {
@@ -68,32 +82,36 @@ export default function MobileHome({
     }
   };
 
-  return (
-    <div className="bg-black !bg-black relative w-full h-full min-h-screen mobile-container" data-name="mobile/home" data-node-id="2997:1646">
-      {/* Header */}
-      <div className="fixed bg-black box-border content-stretch flex items-center justify-between left-0 p-[16px] right-0 top-0 z-50 mobile-header" data-node-id="3000:1702">
-        <div className="content-stretch flex gap-[7px] items-center justify-start relative shrink-0" data-name="header" data-node-id="2997:1690">
-          <img 
-            src={imgLogo} 
-            alt="Hailey Hsu Logo" 
-            className="block max-w-none size-9 rounded-[999px]"
-          />
-          <div className="content-stretch flex flex-col gap-1 items-start justify-start relative shrink-0 w-[132px]" data-name="name and title" data-node-id="2997:1693">
-            <div className="font-didact-gothic leading-[0] not-italic relative shrink-0 text-[#ffffff] text-[16px] w-full" data-node-id="2997:1694">
-              <p className="leading-[normal]">Hailey Hsu</p>
-            </div>
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+
+  const navBar = (
+    <div className={`fixed inset-x-0 top-0 bg-black box-border content-stretch flex items-center justify-between left-0 p-[16px] right-0 mobile-header ${isMenuOpen ? 'z-40' : 'z-[9999]'}`} data-node-id="3000:1702">
+      <div className="content-stretch flex gap-[7px] items-center justify-start relative shrink-0" data-name="header" data-node-id="2997:1690">
+        <img 
+          src={imgLogo} 
+          alt="Hailey Hsu Logo" 
+          className="block max-w-none size-9 rounded-[999px]"
+        />
+        <div className="content-stretch flex flex-col gap-1 items-start justify-start relative shrink-0 w-[132px]" data-name="name and title" data-node-id="2997:1693">
+          <div className="font-didact-gothic leading-[0] not-italic relative shrink-0 text-[#ffffff] text-[16px] w-full" data-node-id="2997:1694">
+            <p className="leading-[normal]">Hailey Hsu</p>
           </div>
         </div>
-        <img 
-          src={imgMenuIcon} 
-          alt="Menu" 
-          className="block max-w-none w-[31.5px] h-[31.5px] cursor-pointer hover:opacity-80 transition-opacity duration-200"
-          onClick={() => setIsMenuOpen(true)}
-        />
       </div>
+      <button type="button" aria-label="Open menu" className="block w-[31.5px] h-[31.5px] cursor-pointer hover:opacity-80 transition-opacity duration-200" onClick={() => setIsMenuOpen(true)}>
+        <img src={imgMenuIcon} alt="" className="block max-w-none w-full h-full" />
+      </button>
+    </div>
+  );
+
+  return (
+    <div className="bg-black !bg-black relative w-full h-full min-h-screen mobile-container" data-name="mobile/home" data-node-id="2997:1646">
+      {/* Nav bar: render in portal so it always stays on top after client-side navigation */}
+      {mounted && typeof document !== 'undefined' && createPortal(navBar, document.body)}
 
       {/* Main Content */}
-      <div className="absolute box-border content-stretch flex flex-col gap-8 items-center justify-start left-0 pb-24 pt-[80px] px-4 right-0 top-[72px] overflow-y-auto mobile-content scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-transparent" data-node-id="3000:1756">
+      <div className="absolute box-border content-stretch flex flex-col gap-8 items-center justify-start left-0 right-0 pb-24 pt-[80px] px-4 top-[72px] overflow-y-auto mobile-content scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-transparent min-h-[calc(100vh-72px)]" data-node-id="3000:1756" style={{ width: '100%' }}>
         {/* Hero Section */}
         <div className="box-border content-stretch flex flex-col gap-10 items-center justify-start px-2.5 py-5 relative shrink-0 w-full mb-20" data-node-id="3000:1755">
           <div className="content-stretch flex gap-2.5 items-center justify-center relative shrink-0 w-full" data-node-id="3000:1704">
@@ -101,10 +119,6 @@ export default function MobileHome({
               <p className="font-didact-gothic leading-[28px] mb-0">
                 <span>{`I design products that make complex information `}</span>
                 <span className="text-[#f4915c]">easy to use.</span>
-              </p>
-              <p className="font-didact-gothic leading-[28px]">
-                <span>{`I focus on practical workflows and turn messy problems into systems that `}</span>
-                <span className="text-[#f4915c]">grow smoothly.</span>
               </p>
             </div>
           </div>
@@ -137,7 +151,7 @@ export default function MobileHome({
           </div>
         </div>
 
-        {/* Featured Project Section */}
+        {/* Featured Project Section - Realry */}
         <div className="box-border content-stretch flex flex-col gap-4 items-start justify-start px-2.5 py-0 relative shrink-0 w-full" data-name="feature" data-node-id="3000:1717">
           <div className="content-stretch flex gap-6 items-start justify-start relative shrink-0 w-full" data-name="title" data-node-id="3000:1718">
             <div className="font-didact-gothic leading-[0] not-italic relative shrink-0 text-[#ffffff] text-[21px] text-nowrap" data-node-id="3000:1719">
@@ -147,9 +161,9 @@ export default function MobileHome({
           <motion.div 
             onClick={() => {
               if (onNavigateToProject) {
-                onNavigateToProject('airframe');
+                onNavigateToProject('realry');
               } else {
-                toast.info("Opening Airframe project...");
+                window.location.href = '/project/realry/';
               }
             }}
             className="bg-[#121212] content-stretch flex flex-col gap-4 items-start justify-start relative rounded-[16px] shrink-0 w-full hover:bg-[#1a1a1a] transition-colors duration-200 cursor-pointer" 
@@ -161,47 +175,75 @@ export default function MobileHome({
             <div aria-hidden="true" className="absolute border border-[#252525] border-solid inset-0 pointer-events-none rounded-[16px]" />
             <div className="box-border content-stretch flex flex-col gap-4 items-start justify-start p-[16px] relative shrink-0 w-full" data-name="text" data-node-id="3000:1722">
               <div className="content-stretch flex flex-col gap-4 items-start justify-start relative shrink-0 w-full" data-node-id="3000:1723">
-                <div className="aspect-[852/676] bg-center bg-cover bg-no-repeat rounded-[12px] shrink-0 w-full" data-name="hero image 1" data-node-id="3000:1753" style={{ backgroundImage: `url('${imgHeroImage1}')` }} />
+                <div className="aspect-[852/676] bg-center bg-cover bg-no-repeat rounded-[12px] shrink-0 w-full" data-name="hero image 1" data-node-id="3000:1753" style={{ backgroundImage: `url('${imgRealryFeatured}')` }} />
                 <div className="content-stretch flex flex-col gap-3 items-start justify-start relative shrink-0 w-full" data-node-id="3000:1731">
                   <div className="content-stretch flex flex-col font-didact-gothic gap-2 items-start justify-start leading-[0] not-italic relative shrink-0 w-full" data-name="title" data-node-id="3000:1732">
                     <div className="relative shrink-0 text-[#ffffff] text-[20px] w-full" data-node-id="3000:1733">
-                      <p className="leading-[normal]">AI-powered B2B Procurement Platform</p>
+                      <p className="leading-[normal]">Reshaping Shopping Experience</p>
                     </div>
                     <div className="relative shrink-0 text-[#f4915c] text-[16px] w-full" data-node-id="3000:1734">
-                      <p className="leading-[normal]">Projected to cut vendor sourcing time by 40%</p>
+                      <p className="leading-[normal]">Helping users shop more efficiently across the web</p>
                     </div>
                   </div>
                   <div className="font-didact-gothic leading-[0] not-italic relative shrink-0 text-[16px] text-gray-300 w-full" data-node-id="3000:1736">
-                    <p className="leading-[22px]">{`Delivered 250+ high-fidelity screens for buyer & vendor flows.`}</p>
+                    <p className="leading-[22px]">Redesigned navigation and UX for a 1.2M MAU price comparison platform. A/B testing showed 17% revenue increase.</p>
                   </div>
                   <div className="content-start flex flex-wrap gap-2 items-start justify-start relative shrink-0 w-full" data-name="tags" data-node-id="3000:1737">
                     <div className="bg-[#333333] box-border content-stretch flex gap-2.5 items-center justify-center px-3 py-1 relative rounded-[999px] shrink-0" data-node-id="3000:1738">
-                                          <div className="font-oregano leading-[0] not-italic relative shrink-0 text-[15px] text-gray-300 text-nowrap" style={{ letterSpacing: '0.01em' }} data-node-id="3000:1739">
-                      <p className="leading-[22px] whitespace-pre">$4M funding</p>
-                    </div>
+                      <div className="font-oregano leading-[0] not-italic relative shrink-0 text-[15px] text-gray-300 text-nowrap" style={{ letterSpacing: '0.01em' }} data-node-id="3000:1739">
+                        <p className="leading-[22px] whitespace-pre">Smart Shopping</p>
+                      </div>
                     </div>
                     <div className="bg-[#333333] box-border content-stretch flex gap-2.5 items-center justify-center px-3 py-1 relative rounded-[999px] shrink-0" data-node-id="3000:1742">
-                                          <div className="font-oregano leading-[0] not-italic relative shrink-0 text-[15px] text-gray-300 text-nowrap" style={{ letterSpacing: '0.01em' }} data-node-id="3000:1743">
-                      <p className="leading-[22px] whitespace-pre">AI Prototype</p>
+                      <div className="font-oregano leading-[0] not-italic relative shrink-0 text-[15px] text-gray-300 text-nowrap" style={{ letterSpacing: '0.01em' }} data-node-id="3000:1743">
+                        <p className="leading-[22px] whitespace-pre">1.2M MAU</p>
+                      </div>
                     </div>
+                    <div className="bg-[#333333] box-border content-stretch flex gap-2.5 items-center justify-center px-3 py-1 relative rounded-[999px] shrink-0" data-node-id="3000:1742">
+                      <div className="font-oregano leading-[0] not-italic relative shrink-0 text-[15px] text-gray-300 text-nowrap" style={{ letterSpacing: '0.01em' }} data-node-id="3000:1743">
+                        <p className="leading-[22px] whitespace-pre">Revenue +17%</p>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
-              <div className="content-stretch flex items-start justify-start relative shrink-0 w-full" data-node-id="3000:1744">
+              <div className="content-stretch flex flex-row gap-3 items-start justify-start relative shrink-0 w-full" data-node-id="3000:1744">
                 <button 
                   onClick={(e) => {
                     e.stopPropagation();
                     if (onNavigateToProject) {
-                      onNavigateToProject('airframe');
+                      onNavigateToProject('realry');
                     } else {
-                      toast.info("Opening Airframe project...");
+                      window.location.href = '/project/realry/';
                     }
                   }}
-                  className="bg-[#e6ff02] box-border content-stretch flex gap-2.5 items-center justify-center px-4 py-3 relative rounded-[999px] shrink-0 w-full hover:bg-[#d9f00c] transition-colors duration-200 cursor-pointer" data-name="contact" data-node-id="3000:1745"
+                  className="bg-[#e6ff02] box-border content-stretch flex gap-2.5 items-center justify-center px-4 py-3 relative rounded-[999px] shrink-0 flex-1 hover:bg-[#d9f00c] transition-colors duration-200 cursor-pointer" data-name="contact" data-node-id="3000:1745"
                 >
                   <div className="font-didact-gothic leading-[0] not-italic relative shrink-0 text-[16px] text-neutral-950 text-nowrap" data-node-id="3000:1746">
                     <p className="leading-[22px] whitespace-pre">See work</p>
+                  </div>
+                </button>
+                <button 
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    e.preventDefault();
+                    if (mediaPlayerRef?.current) {
+                      mediaPlayerRef.current.playRealryAudio();
+                    } else if (onNavigateToProject) {
+                      onNavigateToProject('realry');
+                    } else {
+                      window.location.href = '/project/realry/';
+                    }
+                  }}
+                  className="bg-[#333333] border border-[#444] box-border content-stretch flex gap-2.5 items-center justify-center px-4 py-3 relative rounded-[999px] shrink-0 hover:bg-white/10 transition-colors duration-200 cursor-pointer"
+                >
+                  <svg className="shrink-0 size-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+                    <path d="M11 5L6 9H2v6h4l5 4V5z" />
+                    <path d="M15.54 8.46a5 5 0 0 1 0 7.07" />
+                    <path d="M19.07 4.93a10 10 0 0 1 0 14.14" />
+                  </svg>
+                  <div className="font-didact-gothic leading-[0] not-italic relative shrink-0 text-[16px] text-white text-nowrap">
+                    <p className="leading-[22px] whitespace-pre">Listen</p>
                   </div>
                 </button>
               </div>
@@ -209,113 +251,59 @@ export default function MobileHome({
           </motion.div>
         </div>
 
-        {/* More Projects Section */}
+        {/* More Projects Section - 4 projects, show 3 at a time with slider */}
         <div className="box-border content-stretch flex flex-col gap-4 items-start justify-start px-2.5 py-0 relative shrink-0 w-full" data-name="more" data-node-id="3000:1757">
-          <div className="content-stretch flex gap-6 items-start justify-start relative shrink-0 w-full" data-name="title" data-node-id="3000:1758">
+          <div className="content-stretch flex gap-4 items-center justify-between relative shrink-0 w-full" data-name="title" data-node-id="3000:1758">
             <div className="font-didact-gothic leading-[0] not-italic relative shrink-0 text-[#ffffff] text-[21px] text-nowrap" data-node-id="3000:1759">
               <p className="leading-[normal] whitespace-pre">More Projects</p>
             </div>
           </div>
-          <div className="content-stretch flex flex-col gap-4 items-start justify-start relative shrink-0 w-full" data-name="container" data-node-id="3000:1761">
-            <div 
-              onClick={() => {
-                if (onNavigateToProject) {
-                  onNavigateToProject('eatsy');
-                } else {
-                  toast.info("Opening Eatsy project...");
-                }
-              }}
-              className="bg-[#121212] box-border content-stretch flex flex-col gap-4 items-start justify-start p-[16px] relative rounded-[16px] shrink-0 w-full hover:bg-[#1a1a1a] transition-colors duration-200 cursor-pointer" data-name="project" data-node-id="3000:1762"
+          <div
+            className="flex flex-col items-stretch relative shrink-0 w-full min-h-0"
+            data-name="container"
+            data-node-id="3000:1761"
+            style={{ gap: MORE_GAP_PX }}
+          >
+            <motion.div
+              className="flex flex-col items-stretch shrink-0 w-full"
+              style={{ gap: MORE_GAP_PX }}
+              transition={{ type: "tween", duration: 1, ease: [0.25, 0.1, 0.25, 1] }}
             >
-              <div aria-hidden="true" className="absolute border border-[#252525] border-solid inset-0 pointer-events-none rounded-[16px]" />
-              <div className="aspect-[225/144] bg-center bg-cover bg-no-repeat rounded-[12px] shrink-0 w-full" data-name="image" data-node-id="3000:1770" style={{ backgroundImage: `url('${imgImage}')` }} />
-              <div className="content-stretch flex flex-col gap-2 items-start justify-start relative shrink-0 w-full" data-name="title" data-node-id="3000:1771">
-                <div className="font-didact-gothic leading-[0] not-italic relative shrink-0 text-[#ffffff] text-[20px] w-full" data-node-id="3000:1772">
-                  <p className="leading-[normal]">Customizable Reservation Platform</p>
-                </div>
-              </div>
-              <div className="font-didact-gothic leading-[0] min-w-full not-italic relative shrink-0 text-[16px] text-gray-300" data-node-id="3000:1774" style={{ width: "min-content" }}>
-                <p className="leading-[22px]">Reduced booking setup steps by 40% in prototype testing. Designed fully customizable workflows, giving small restaurants control over reservations and payments.</p>
-              </div>
-              <div className="box-border content-start flex flex-wrap gap-2 items-start justify-start pb-0 pt-1 px-0 relative shrink-0 w-full" data-node-id="3000:1775">
-                <div className="bg-[#333333] box-border content-stretch flex gap-2.5 items-center justify-center px-3 py-1 relative rounded-[999px] shrink-0" data-node-id="3000:1776">
-                  <div className="font-oregano leading-[0] not-italic relative shrink-0 text-[15px] text-gray-300 text-nowrap" style={{ letterSpacing: '0.01em' }} data-node-id="3000:1777">
-                    <p className="leading-[22px] whitespace-pre">Cost Reduction</p>
+              {MORE_PROJECTS_MOBILE.map((project) => (
+                <div
+                  key={project.id}
+                  onClick={() => {
+                    if (onNavigateToProject) {
+                      onNavigateToProject(project.id);
+                    } else {
+                      window.location.href = `/project/${project.id}/`;
+                    }
+                  }}
+                  className="bg-[#121212] box-border flex flex-col gap-4 items-start justify-start p-[16px] relative rounded-[16px] shrink-0 w-full hover:bg-[#1a1a1a] transition-colors duration-200 cursor-pointer min-h-0"
+                  data-name="project"
+                >
+                  <div aria-hidden="true" className="absolute border border-[#252525] border-solid inset-0 pointer-events-none rounded-[16px]" />
+                  <div className="aspect-[225/144] bg-center bg-cover bg-no-repeat rounded-[12px] shrink-0 w-full" style={{ backgroundImage: `url('${project.image}')` }} />
+                  <div className="content-stretch flex flex-col gap-2 items-start justify-start relative shrink-0 w-full">
+                    <div className="font-didact-gothic leading-[0] not-italic relative shrink-0 text-[#ffffff] text-[20px] w-full">
+                      <p className="leading-[normal]">{project.title}</p>
+                    </div>
+                  </div>
+                  <div className="font-didact-gothic leading-[0] min-w-full not-italic relative shrink-0 text-[16px] text-gray-300" style={{ width: "min-content" }}>
+                    <p className="leading-[22px]">{project.description}</p>
+                  </div>
+                  <div className="box-border content-start flex flex-wrap gap-2 items-start justify-start pb-0 pt-1 px-0 relative shrink-0 w-full">
+                    {project.tags.map((tag) => (
+                      <div key={tag} className="bg-[#333333] box-border content-stretch flex gap-2.5 items-center justify-center px-3 py-1 relative rounded-[999px] shrink-0">
+                        <div className="font-oregano leading-[0] not-italic relative shrink-0 text-[15px] text-gray-300 text-nowrap" style={{ letterSpacing: '0.01em' }}>
+                          <p className="leading-[22px] whitespace-pre">{tag}</p>
+                        </div>
+                      </div>
+                    ))}
                   </div>
                 </div>
-                <div className="bg-[#333333] box-border content-stretch flex gap-2.5 items-center justify-center px-3 py-1 relative rounded-[999px] shrink-0" data-node-id="3000:1778">
-                  <div className="font-oregano leading-[0] not-italic relative shrink-0 text-[15px] text-gray-300 text-nowrap" style={{ letterSpacing: '0.01em' }} data-node-id="3000:1779">
-                    <p className="leading-[22px] whitespace-pre">Prototype Testing</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div 
-              onClick={() => {
-                if (onNavigateToProject) {
-                  onNavigateToProject('brainbox');
-                } else {
-                  toast.info("Opening BrainBox project...");
-                }
-              }}
-              className="bg-[#121212] box-border content-stretch flex flex-col gap-4 items-start justify-start p-[16px] relative rounded-[16px] shrink-0 w-full hover:bg-[#1a1a1a] transition-colors duration-200 cursor-pointer" data-name="project" data-node-id="3000:1788"
-            >
-              <div aria-hidden="true" className="absolute border border-[#252525] border-solid inset-0 pointer-events-none rounded-[16px]" />
-              <div className="aspect-[225/144] bg-center bg-cover bg-no-repeat rounded-[12px] shrink-0 w-full" data-name="image" data-node-id="3000:1796" style={{ backgroundImage: `url('${imgImage1}')` }} />
-              <div className="content-stretch flex flex-col gap-2 items-start justify-start relative shrink-0 w-full" data-name="title" data-node-id="3000:1797">
-                <div className="font-didact-gothic leading-[0] not-italic relative shrink-0 text-[#ffffff] text-[20px] w-full" data-node-id="3000:1798">
-                  <p className="leading-[normal]">AI-Powered SAT Preparation Platform</p>
-                </div>
-              </div>
-              <div className="font-didact-gothic leading-[0] min-w-full not-italic relative shrink-0 text-[16px] text-gray-300" data-node-id="3000:1800" style={{ width: "min-content" }}>
-                <p className="leading-[22px]">Conducted heatmap analysis and A/B testing to refine practice setup flow and dashboard layout. Led 4 designers to deliver 200+ screens, integrating AI tutor and performance reports.</p>
-              </div>
-              <div className="box-border content-start flex flex-wrap gap-2 items-start justify-start pb-0 pt-1 px-0 relative shrink-0 w-full" data-node-id="3000:1801">
-                <div className="bg-[#333333] box-border content-stretch flex gap-2.5 items-center justify-center px-3 py-1 relative rounded-[999px] shrink-0" data-node-id="3000:1802">
-                  <div className="font-oregano leading-[0] not-italic relative shrink-0 text-[15px] text-gray-300 text-nowrap" style={{ letterSpacing: '0.01em' }} data-node-id="3000:1803">
-                    <p className="leading-[22px] whitespace-pre">Heatmap Analysis</p>
-                  </div>
-                </div>
-                <div className="bg-[#333333] box-border content-stretch flex gap-2.5 items-center justify-center px-3 py-1 relative rounded-[999px] shrink-0" data-node-id="3000:1804">
-                  <div className="font-oregano leading-[0] not-italic relative shrink-0 text-[15px] text-gray-300 text-nowrap" style={{ letterSpacing: '0.01em' }} data-node-id="3000:1805">
-                    <p className="leading-[22px] whitespace-pre">A/B Testing</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div 
-              onClick={() => {
-                if (onNavigateToProject) {
-                  onNavigateToProject('shelf-life');
-                } else {
-                  toast.info("Opening Shelf Life project...");
-                }
-              }}
-              className="bg-[#121212] box-border content-stretch flex flex-col gap-4 items-start justify-start p-[16px] relative rounded-[16px] shrink-0 w-full hover:bg-[#1a1a1a] transition-colors duration-200 cursor-pointer" data-name="project" data-node-id="3000:1812"
-            >
-              <div aria-hidden="true" className="absolute border border-[#252525] border-solid inset-0 pointer-events-none rounded-[16px]" />
-              <div className="aspect-[225/144] bg-center bg-cover bg-no-repeat rounded-[12px] shrink-0 w-full" data-name="image" data-node-id="3000:1820" style={{ backgroundImage: `url('${imgImage2}')` }} />
-              <div className="content-stretch flex flex-col gap-2 items-start justify-start relative shrink-0 w-full" data-name="title" data-node-id="3000:1821">
-                <div className="font-didact-gothic leading-[0] not-italic relative shrink-0 text-[#ffffff] text-[20px] w-full" data-node-id="3000:1822">
-                  <p className="leading-[normal]">Dual-Interface Platform to Reduce Food Waste</p>
-                </div>
-              </div>
-              <div className="font-didact-gothic leading-[0] min-w-full not-italic relative shrink-0 text-[16px] text-gray-300" data-node-id="3000:1824" style={{ width: "min-content" }}>
-                <p className="leading-[22px]">{`Expected to help restaurants clear surplus food faster by streamlining listing to under 2 minutes. Delivered mobile B2C app & tablet B2B dashboard with 50+ unique screens.`}</p>
-              </div>
-              <div className="box-border content-start flex flex-wrap gap-2 items-start justify-start pb-0 pt-1 px-0 relative shrink-0 w-full" data-node-id="3000:1825">
-                <div className="bg-[#333333] box-border content-stretch flex gap-2.5 items-center justify-center px-3 py-1 relative rounded-[999px] shrink-0" data-node-id="3000:1826">
-                  <div className="font-oregano leading-[0] not-italic relative shrink-0 text-[15px] text-gray-300 text-nowrap" style={{ letterSpacing: '0.01em' }} data-node-id="3000:1827">
-                    <p className="leading-[22px] whitespace-pre">Dual Interface</p>
-                  </div>
-                </div>
-                <div className="bg-[#333333] box-border content-stretch flex gap-2.5 items-center justify-center px-3 py-1 relative rounded-[999px] shrink-0" data-node-id="3000:1828">
-                  <div className="font-oregano leading-[0] not-italic relative shrink-0 text-[15px] text-gray-300 text-nowrap" style={{ letterSpacing: '0.01em' }} data-node-id="3000:1829">
-                    <p className="leading-[22px] whitespace-pre">Sustainability</p>
-                  </div>
-                </div>
-              </div>
-            </div>
+              ))}
+            </motion.div>
           </div>
         </div>
 
@@ -390,6 +378,18 @@ export default function MobileHome({
                           <path d="M13.3333 6.66699C14.6593 6.66699 15.9311 7.19378 16.8688 8.13146C17.8065 9.06914 18.3333 10.3409 18.3333 11.667V17.5003H14.9999V11.667C14.9999 11.225 14.8243 10.801 14.5118 10.4885C14.1992 10.1759 13.7753 10.0003 13.3333 10.0003C12.8912 10.0003 12.4673 10.1759 12.1547 10.4885C11.8422 10.801 11.6666 11.225 11.6666 11.667V17.5003H8.33325V11.667C8.33325 10.3409 8.86004 9.06914 9.79772 8.13146C10.7354 7.19378 12.0072 6.66699 13.3333 6.66699Z" stroke="#D1D5DB" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
                           <path d="M5.00008 7.5H1.66675V17.5H5.00008V7.5Z" stroke="#D1D5DB" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
                           <path d="M3.33341 5.00033C4.25389 5.00033 5.00008 4.25413 5.00008 3.33366C5.00008 2.41318 4.25389 1.66699 3.33341 1.66699C2.41294 1.66699 1.66675 2.41318 1.66675 3.33366C1.66675 4.25413 2.41294 5.00033 3.33341 5.00033Z" stroke="#D1D5DB" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
+                        </svg>
+                      </a>
+                      <a
+                        href="https://github.com/haileyhsu94"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="relative shrink-0 size-5 cursor-pointer hover:opacity-80 transition-opacity duration-200"
+                        aria-label="GitHub"
+                      >
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#D1D5DB" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round">
+                          <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4" />
+                          <path d="M9 18c-4.51 2-5-2-7-2" />
                         </svg>
                       </a>
                       <a

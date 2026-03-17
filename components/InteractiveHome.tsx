@@ -409,7 +409,7 @@ function InteractiveContactForm() {
   );
 }
 
-function FeaturedSection({ sectionRef, mediaPlayerRef, onNavigateToProject }: { sectionRef: RefObject<HTMLDivElement>; mediaPlayerRef: RefObject<{ playAirframeAudio: () => void; playEatsyAudio: () => void; playBrainBoxAudio: () => void; playShelfLifeAudio: () => void; pauseAudio: () => void }>; onNavigateToProject?: (project: string) => void }) {
+function FeaturedSection({ sectionRef, mediaPlayerRef, onNavigateToProject }: { sectionRef: RefObject<HTMLDivElement>; mediaPlayerRef: RefObject<{ playRealryAudio: () => void; playAirframeAudio: () => void; playEatsyAudio: () => void; playBrainBoxAudio: () => void; playShelfLifeAudio: () => void; pauseAudio: () => void }>; onNavigateToProject?: (project: string) => void }) {
   return (
     <div
       ref={sectionRef}
@@ -429,7 +429,7 @@ function FeaturedSection({ sectionRef, mediaPlayerRef, onNavigateToProject }: { 
       </div>
       
       <motion.a 
-        href="/project/airframe/"
+        href="/project/realry/"
         className="box-border content-stretch flex flex-row gap-5 items-center justify-start p-0 relative rounded-3xl shrink-0 w-full hover:bg-white/5 transition-colors duration-300 cursor-pointer"
         data-name="container"
         whileHover={{ scale: 1.01 }}
@@ -447,50 +447,11 @@ function FeaturedSection({ sectionRef, mediaPlayerRef, onNavigateToProject }: { 
                     aria-hidden="true"
                     className="absolute border border-[#252525] border-solid inset-0 pointer-events-none rounded-[99px]"
                   />
-                  <div className="relative shrink-0 size-8" data-name="Frame">
-                    <svg className="block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 32 32">
-                      <g id="Frame">
-                        <path
-                          d={svgPaths.p1886fec0}
-                          id="Vector"
-                          stroke="var(--stroke-0, white)"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth="2"
-                        />
-                        <path
-                          d={svgPaths.p24479680}
-                          id="Vector_2"
-                          stroke="var(--stroke-0, white)"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth="2"
-                        />
-                        <path
-                          d={svgPaths.p1876b860}
-                          id="Vector_3"
-                          stroke="var(--stroke-0, white)"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth="2"
-                        />
-                        <path
-                          d={svgPaths.p2a760800}
-                          id="Vector_4"
-                          stroke="var(--stroke-0, white)"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth="2"
-                        />
-                        <path
-                          d={svgPaths.p3c441300}
-                          id="Vector_5"
-                          stroke="var(--stroke-0, white)"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth="2"
-                        />
-                      </g>
+                  <div className="relative shrink-0 size-6" data-name="Frame" aria-hidden="true">
+                    <svg className="block size-full" fill="none" viewBox="0 0 24 24" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <circle cx="9" cy="21" r="1" />
+                      <circle cx="20" cy="21" r="1" />
+                      <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" />
                     </svg>
                   </div>
                 </div>
@@ -501,14 +462,14 @@ function FeaturedSection({ sectionRef, mediaPlayerRef, onNavigateToProject }: { 
                     data-name="title"
                   >
                     <div className="font-didact-gothic font-bold relative shrink-0 text-[#ffffff] w-full">
-                      <p className="block leading-[normal]">AI-powered B2B Procurement Platform</p>
+                      <p className="block leading-[normal]">Reshaping Shopping Experience</p>
                     </div>
                     <div className="font-didact-gothic font-medium relative shrink-0 text-[#f4915c] w-full">
-                      <p className="block leading-[normal]">Projected to cut vendor sourcing time by 40%</p>
+                      <p className="block leading-[normal]">Helping users shop more efficiently across the web</p>
                     </div>
                   </div>
                   <div className="font-didact-gothic font-normal leading-[0] not-italic relative shrink-0 text-[15px] text-gray-300 text-left w-full">
-                    <p className="block leading-[22px]">{`Delivered 250+ high-fidelity screens for buyer & vendor flows.`}</p>
+                    <p className="block leading-[22px]">Redesigned navigation and UX for a 1.2M MAU price comparison platform. A/B testing showed 17% revenue increase and 50% higher homepage-to-product CTR.</p>
                   </div>
                   <div
                     className="[flex-flow:wrap] box-border content-start flex gap-2 items-start justify-start p-0 relative shrink-0 w-full"
@@ -519,7 +480,7 @@ function FeaturedSection({ sectionRef, mediaPlayerRef, onNavigateToProject }: { 
                       whileHover={{ scale: 1.05 }}
                     >
                       <div className="font-normal leading-[0] not-italic relative shrink-0 text-[15px] text-gray-300 text-left text-nowrap tracking-wide" style={{ fontFamily: 'var(--font-oregano)' }}>
-                        <p className="block leading-[22px] whitespace-pre">$4M funding</p>
+                        <p className="block leading-[22px] whitespace-pre">Smart Shopping</p>
                       </div>
                     </motion.div>
                     <motion.div
@@ -527,7 +488,15 @@ function FeaturedSection({ sectionRef, mediaPlayerRef, onNavigateToProject }: { 
                       whileHover={{ scale: 1.05 }}
                     >
                       <div className="font-normal leading-[0] not-italic relative shrink-0 text-[15px] text-gray-300 text-left text-nowrap tracking-wide" style={{ fontFamily: 'var(--font-oregano)' }}>
-                        <p className="block leading-[22px] whitespace-pre">AI Agent</p>
+                        <p className="block leading-[22px] whitespace-pre">1.2M MAU</p>
+                      </div>
+                    </motion.div>
+                    <motion.div
+                      className="bg-[#1f1f1f] box-border content-stretch flex flex-row gap-2.5 items-center justify-center px-3 py-1 relative rounded-[999px] shrink-0 hover:bg-white/10 transition-colors duration-200"
+                      whileHover={{ scale: 1.05 }}
+                    >
+                      <div className="font-normal leading-[0] not-italic relative shrink-0 text-[15px] text-gray-300 text-left text-nowrap tracking-wide" style={{ fontFamily: 'var(--font-oregano)' }}>
+                        <p className="block leading-[22px] whitespace-pre">Revenue +17%</p>
                       </div>
                     </motion.div>
                   </div>
@@ -543,9 +512,9 @@ function FeaturedSection({ sectionRef, mediaPlayerRef, onNavigateToProject }: { 
                   onClick={(e) => {
                     e.stopPropagation();
                     if (onNavigateToProject) {
-                      onNavigateToProject('airframe');
+                      onNavigateToProject('realry');
                     } else {
-                      window.location.href = '/project/airframe/';
+                      window.location.href = '/project/realry/';
                     }
                   }}
                 >
@@ -557,42 +526,27 @@ function FeaturedSection({ sectionRef, mediaPlayerRef, onNavigateToProject }: { 
                     </div>
                   </div>
                 </motion.div>
-                
-                <motion.button
-                  className="basis-0 grow min-h-px min-w-px relative rounded-[999px] shrink-0 border border-gray-600 border-solid hover:bg-white/5 transition-colors duration-200"
-                  data-name="contact"
+                <motion.div
+                  className="bg-[#1f1f1f] box-border content-stretch flex flex-row gap-2.5 items-center justify-center px-3 py-2 relative rounded-[999px] shrink-0 hover:bg-white/10 transition-colors duration-200 cursor-pointer border border-[#333]"
+                  data-name="listen"
+                  role="button"
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                   onClick={(e) => {
+                    e.preventDefault();
                     e.stopPropagation();
-                    toast.info("Currently streaming your selected episode…");
-                    if (mediaPlayerRef.current) {
-                      mediaPlayerRef.current.playAirframeAudio();
-                    }
+                    mediaPlayerRef.current?.playRealryAudio();
                   }}
                 >
-                  <div className="flex flex-row items-center justify-center relative size-full">
-                    <div className="box-border content-stretch flex flex-row gap-1 items-center justify-center px-3 py-2 relative w-full">
-                      <div className="relative shrink-0 size-4" data-name="Frame">
-                        <svg className="block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 16 16">
-                          <g id="Frame">
-                            <path
-                              d={svgPaths.p6bc0c00}
-                              id="Vector"
-                              stroke="var(--stroke-0, white)"
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth="1.2"
-                            />
-                          </g>
-                        </svg>
-                      </div>
-                      <div className="font-didact-gothic font-medium leading-[0] not-italic relative shrink-0 text-[#ffffff] text-[17px] text-left text-nowrap">
-                        <p className="block leading-[22px] whitespace-pre text-[15px]">Listen</p>
-                      </div>
-                    </div>
+                  <svg className="shrink-0 size-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+                    <path d="M11 5L6 9H2v6h4l5 4V5z" />
+                    <path d="M15.54 8.46a5 5 0 0 1 0 7.07" />
+                    <path d="M19.07 4.93a10 10 0 0 1 0 14.14" />
+                  </svg>
+                  <div className="font-didact-gothic font-medium leading-[0] not-italic relative shrink-0 text-[15px] text-left text-white text-nowrap">
+                    <p className="block leading-[22px] whitespace-pre">Listen</p>
                   </div>
-                </motion.button>
+                </motion.div>
               </div>
             </div>
           </div>
@@ -601,15 +555,30 @@ function FeaturedSection({ sectionRef, mediaPlayerRef, onNavigateToProject }: { 
         <div
           className="bg-center bg-contain bg-no-repeat h-[338px] flex-shrink-0 w-[426px] max-w-[50%] rounded-tr-3xl rounded-br-3xl overflow-hidden"
           data-name="hero image"
-          style={{ backgroundImage: `url('${imgHeroImage}')` }}
+          style={{ backgroundImage: `url('/images/hero-image-realry.png')` }}
         />
       </motion.a>
     </div>
   );
 }
 
+const MORE_PROJECTS_VISIBLE = 3;
+
+const GAP_PX = 12;
+
 function MoreProjectsSection({ sectionRef, onNavigateToProject }: { sectionRef: RefObject<HTMLDivElement>; onNavigateToProject?: (project: string) => void }) {
+  const [scrollIndex, setScrollIndex] = useState(0);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [stepPx, setStepPx] = useState(0);
+
   const projects = [
+    { 
+      id: "airframe",
+      title: "AI-powered B2B Procurement Platform", 
+      description: "Delivered 250+ high-fidelity screens for buyer & vendor flows. Projected to cut vendor sourcing time by 40%.",
+      tags: ["$4M funding", "AI Agent"],
+      image: imgAudioPlayer 
+    },
     { 
       id: "eatsy",
       title: "Customizable Reservation Platform", 
@@ -633,6 +602,22 @@ function MoreProjectsSection({ sectionRef, onNavigateToProject }: { sectionRef: 
     },
   ];
 
+  useEffect(() => {
+    const el = containerRef.current;
+    if (!el) return;
+    const update = () => {
+      const width = el.offsetWidth;
+      const cardWidth = (width - GAP_PX * (MORE_PROJECTS_VISIBLE - 1)) / MORE_PROJECTS_VISIBLE;
+      setStepPx(cardWidth + GAP_PX);
+    };
+    update();
+    const ro = new ResizeObserver(update);
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, []);
+
+  const maxScroll = Math.max(0, projects.length - MORE_PROJECTS_VISIBLE);
+
   return (
     <div
       ref={sectionRef}
@@ -640,70 +625,105 @@ function MoreProjectsSection({ sectionRef, onNavigateToProject }: { sectionRef: 
       data-name="more"
     >
       <div
-        className="box-border content-stretch flex flex-row items-start justify-between leading-[0] not-italic p-0 relative shrink-0 text-left text-nowrap w-full"
+        className="box-border content-stretch flex flex-row items-center justify-between gap-3 p-0 relative shrink-0 text-left w-full"
         data-name="title"
       >
         <div className="font-didact-gothic font-bold relative shrink-0 text-[#ffffff] text-[20px]">
           <p className="block leading-[normal] text-nowrap whitespace-pre">More Projects</p>
         </div>
-        <div className="font-didact-gothic font-normal relative shrink-0 text-[14px] text-gray-300">
-          <p className="block leading-[22px] text-nowrap whitespace-pre">3 more</p>
+        <div className="flex flex-row items-center gap-2 shrink-0">
+          <span className="font-didact-gothic font-normal text-[14px] text-gray-300 whitespace-nowrap">
+            {projects.length} more
+          </span>
+          <div className="flex flex-row items-center gap-1">
+            <button
+              type="button"
+              onClick={() => setScrollIndex((i) => Math.max(0, i - 1))}
+              disabled={scrollIndex === 0}
+              className="w-8 h-8 rounded-full border border-gray-600 flex items-center justify-center text-white hover:bg-white/10 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
+              aria-label="Previous projects"
+            >
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M15 18l-6-6 6-6" />
+              </svg>
+            </button>
+            <button
+              type="button"
+              onClick={() => setScrollIndex((i) => Math.min(maxScroll, i + 1))}
+              disabled={scrollIndex >= maxScroll}
+              className="w-8 h-8 rounded-full border border-gray-600 flex items-center justify-center text-white hover:bg-white/10 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
+              aria-label="Next projects"
+            >
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M9 18l6-6-6-6" />
+              </svg>
+            </button>
+          </div>
         </div>
       </div>
       <div
-        className="box-border content-stretch flex flex-row gap-3 items-start justify-start p-0 relative shrink-0 w-full"
+        ref={containerRef}
+        className="box-border flex flex-row gap-3 items-stretch justify-start p-0 relative shrink-0 w-full overflow-hidden"
         data-name="container"
+        style={{ gap: GAP_PX }}
       >
-        {projects.map((project, index) => (
-          <motion.a 
-            key={project.title}
-                              href={`/project/${project.id}/`}
-            className="basis-0 grow min-h-px min-w-px relative shrink-0 hover:bg-white/5 rounded-xl transition-colors duration-300 cursor-pointer" 
-            data-name="project"
-            whileHover={{ scale: 1.01 }}
-            whileTap={{ scale: 0.99 }}
-          >
-            <div className="relative size-full">
-              <div className="box-border content-stretch flex flex-col gap-4 items-start justify-start p-[12px] relative w-full">
-                <div
-                  className="bg-center bg-cover bg-no-repeat rounded-xl shrink-0 w-full"
-                  style={{ 
-                    backgroundImage: `url('${project.image}')`,
-                    aspectRatio: '16/10'
-                  }}
-                  data-name="image"
-                />
-                <div
-                  className="box-border content-stretch flex flex-col gap-2 items-start justify-start p-0 relative shrink-0 w-full"
-                  data-name="title"
-                >
-                  <div className="font-didact-gothic font-bold leading-[0] not-italic relative shrink-0 text-[#ffffff] text-[16px] text-left w-full">
-                    <p className="block leading-[normal]">{project.title}</p>
+        <motion.div
+          className="flex flex-row items-stretch shrink-0"
+          style={{ gap: GAP_PX, x: stepPx ? -scrollIndex * stepPx : 0 }}
+          transition={{ type: "tween", duration: 1, ease: [0.25, 0.1, 0.25, 1] }}
+        >
+          {projects.map((project) => (
+            <motion.a 
+              key={project.id}
+              href={`/project/${project.id}/`}
+              className="min-h-px relative shrink-0 hover:bg-white/5 rounded-xl transition-colors duration-300 cursor-pointer"
+              style={{ width: stepPx ? stepPx - GAP_PX : undefined, minWidth: stepPx ? stepPx - GAP_PX : undefined }}
+              data-name="project"
+              whileHover={{ scale: 1.01 }}
+              whileTap={{ scale: 0.99 }}
+            >
+              <div className="relative size-full">
+                <div className="box-border content-stretch flex flex-col gap-4 items-start justify-start p-[12px] relative w-full">
+                  <div
+                    className="bg-center bg-cover bg-no-repeat rounded-xl shrink-0 w-full"
+                    style={{ 
+                      backgroundImage: `url('${project.image}')`,
+                      aspectRatio: '16/10'
+                    }}
+                    data-name="image"
+                  />
+                  <div
+                    className="box-border content-stretch flex flex-col gap-2 items-start justify-start p-0 relative shrink-0 w-full"
+                    data-name="title"
+                  >
+                    <div className="font-didact-gothic font-bold leading-[0] not-italic relative shrink-0 text-[#ffffff] text-[16px] text-left w-full">
+                      <p className="block leading-[normal]">{project.title}</p>
+                    </div>
+                  </div>
+                  <div
+                    className="font-didact-gothic font-normal leading-[0] min-w-full not-italic relative shrink-0 text-[14px] text-gray-300 text-left"
+                    style={{ width: "min-content" }}
+                  >
+                    <p className="block leading-[22px]">{project.description}</p>
+                  </div>
+                  <div className="[flex-flow:wrap] box-border content-start flex gap-2 items-start justify-start pb-0 pt-1 px-0 relative shrink-0 w-full">
+                    {project.tags.map((tag) => (
+                      <motion.div
+                        key={tag}
+                        className="bg-[#1f1f1f] box-border content-stretch flex flex-row gap-2.5 items-center justify-center px-3 py-1 relative rounded-[999px] shrink-0 hover:bg-white/10 transition-colors duration-200"
+                        whileHover={{ scale: 1.05 }}
+                      >
+                        <div className="font-oregano leading-[0] not-italic relative shrink-0 text-[14px] text-gray-300 text-left text-nowrap">
+                          <p className="block leading-[22px] whitespace-pre">{tag}</p>
+                        </div>
+                      </motion.div>
+                    ))}
                   </div>
                 </div>
-                <div
-                  className="font-didact-gothic font-normal leading-[0] min-w-full not-italic relative shrink-0 text-[14px] text-gray-300 text-left"
-                  style={{ width: "min-content" }}
-                >
-                  <p className="block leading-[22px]">{project.description}</p>
-                </div>
-                <div className="[flex-flow:wrap] box-border content-start flex gap-2 items-start justify-start pb-0 pt-1 px-0 relative shrink-0 w-full">
-                  {project.tags.map((tag) => (
-                    <motion.div
-                      key={tag}
-                      className="bg-[#1f1f1f] box-border content-stretch flex flex-row gap-2.5 items-center justify-center px-3 py-1 relative rounded-[999px] shrink-0 hover:bg-white/10 transition-colors duration-200"
-                      whileHover={{ scale: 1.05 }}
-                    >
-                      <div className="font-oregano leading-[0] not-italic relative shrink-0 text-[14px] text-gray-300 text-left text-nowrap">
-                        <p className="block leading-[22px] whitespace-pre">{tag}</p>
-                      </div>
-                    </motion.div>
-                  ))}
-                </div>
               </div>
-            </div>
-          </motion.a>
-        ))}
+            </motion.a>
+          ))}
+        </motion.div>
       </div>
     </div>
   );
@@ -878,7 +898,20 @@ function ContactSection({ sectionRef }: { sectionRef: RefObject<HTMLDivElement> 
                                   <path d="M13.3333 6.66699C14.6593 6.66699 15.9311 7.19378 16.8688 8.13146C17.8065 9.06914 18.3333 10.3409 18.3333 11.667V17.5003H14.9999V11.667C14.9999 11.225 14.8243 10.801 14.5118 10.4885C14.1992 10.1759 13.7753 10.0003 13.3333 10.0003C12.8912 10.0003 12.4673 10.1759 12.1547 10.4885C11.8422 10.801 11.6666 11.225 11.6666 11.667V17.5003H8.33325V11.667C8.33325 10.3409 8.86004 9.06914 9.79772 8.13146C10.7354 7.19378 12.0072 6.66699 13.3333 6.66699Z" stroke="#D1D5DB" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
                                   <path d="M5.00008 7.5H1.66675V17.5H5.00008V7.5Z" stroke="#D1D5DB" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
                                   <path d="M3.33341 5.00033C4.25389 5.00033 5.00008 4.25413 5.00008 3.33366C5.00008 2.41318 4.25389 1.66699 3.33341 1.66699C2.41294 1.66699 1.66675 2.41318 1.66675 3.33366C1.66675 4.25413 2.41294 5.00033 3.33341 5.00033Z" stroke="#D1D5DB" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
-                                  </svg>
+                                </svg>
+                              </motion.a>
+                              <motion.a
+                                href="https://github.com/haileyhsu94"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="box-border content-stretch flex flex-row gap-3 items-center justify-start p-0 relative shrink-0 hover:bg-white/5 rounded-lg px-2 py-1 transition-colors duration-200"
+                                whileHover={{ scale: 1.05 }}
+                                aria-label="GitHub"
+                              >
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#D1D5DB" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round">
+                                  <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4" />
+                                  <path d="M9 18c-4.51 2-5-2-7-2" />
+                                </svg>
                               </motion.a>
                               <motion.a
                                 href="https://medium.com/@haileyhsu."
@@ -948,7 +981,7 @@ function ContactSection({ sectionRef }: { sectionRef: RefObject<HTMLDivElement> 
   );
 }
 
-export const MediaPlayer = forwardRef<{ playAirframeAudio: () => void; playEatsyAudio: () => void; playBrainBoxAudio: () => void; playShelfLifeAudio: () => void; pauseAudio: () => void }, { onNavigateToProject?: (project: string) => void }>(({ onNavigateToProject }, ref) => {
+export const MediaPlayer = forwardRef<{ playRealryAudio: () => void; playAirframeAudio: () => void; playEatsyAudio: () => void; playBrainBoxAudio: () => void; playShelfLifeAudio: () => void; pauseAudio: () => void }, { onNavigateToProject?: (project: string) => void }>(({ onNavigateToProject }, ref) => {
   const [mediaState, setMediaState] = useState<MediaPlayerState>({
     isPlaying: false,
     currentTime: 0,
@@ -962,11 +995,23 @@ export const MediaPlayer = forwardRef<{ playAirframeAudio: () => void; playEatsy
   const audioRef = useRef<HTMLAudioElement>(null);
 
   // Expose play and pause functions for external use
+  const playRealryAudio = () => {
+    const audio = audioRef.current;
+    if (!audio) return;
+    setMediaState(prev => ({ ...prev, currentProjectIndex: 0, currentTime: 0, isPlaying: false }));
+    audio.src = "/audio/realry-audio.mp3";
+    audio.load();
+    const onCanPlay = () => {
+      audioRef.current?.play().catch(() => {});
+      audio.removeEventListener("canplay", onCanPlay);
+    };
+    audio.addEventListener("canplay", onCanPlay);
+    if (audio.readyState >= 2) audio.play().catch(() => {});
+  };
+
   const playAirframeAudio = () => {
     if (audioRef.current) {
-      // Set to Airframe project (index 0)
-      setMediaState(prev => ({ ...prev, currentProjectIndex: 0, currentTime: 0 }));
-      // Play the audio
+      setMediaState(prev => ({ ...prev, currentProjectIndex: 1, currentTime: 0 }));
       setTimeout(() => {
         if (audioRef.current) {
           audioRef.current.play();
@@ -977,9 +1022,7 @@ export const MediaPlayer = forwardRef<{ playAirframeAudio: () => void; playEatsy
 
   const playEatsyAudio = () => {
     if (audioRef.current) {
-      // Set to Eatsy project (index 1)
-      setMediaState(prev => ({ ...prev, currentProjectIndex: 1, currentTime: 0 }));
-      // Play the audio
+      setMediaState(prev => ({ ...prev, currentProjectIndex: 2, currentTime: 0 }));
       setTimeout(() => {
         if (audioRef.current) {
           audioRef.current.play();
@@ -990,9 +1033,7 @@ export const MediaPlayer = forwardRef<{ playAirframeAudio: () => void; playEatsy
 
   const playBrainBoxAudio = () => {
     if (audioRef.current) {
-      // Set to BrainBox project (index 2)
-      setMediaState(prev => ({ ...prev, currentProjectIndex: 2, currentTime: 0 }));
-      // Play the audio
+      setMediaState(prev => ({ ...prev, currentProjectIndex: 3, currentTime: 0 }));
       setTimeout(() => {
         if (audioRef.current) {
           audioRef.current.play();
@@ -1003,9 +1044,7 @@ export const MediaPlayer = forwardRef<{ playAirframeAudio: () => void; playEatsy
 
   const playShelfLifeAudio = () => {
     if (audioRef.current) {
-      // Set to Shelf-Life project (index 3)
-      setMediaState(prev => ({ ...prev, currentProjectIndex: 3, currentTime: 0 }));
-      // Play the audio
+      setMediaState(prev => ({ ...prev, currentProjectIndex: 4, currentTime: 0 }));
       setTimeout(() => {
         if (audioRef.current) {
           audioRef.current.play();
@@ -1022,6 +1061,7 @@ export const MediaPlayer = forwardRef<{ playAirframeAudio: () => void; playEatsy
 
   // Expose the play and pause functions via ref
   useImperativeHandle(ref, () => ({
+    playRealryAudio,
     playAirframeAudio,
     playEatsyAudio,
     playBrainBoxAudio,
@@ -1108,12 +1148,18 @@ export const MediaPlayer = forwardRef<{ playAirframeAudio: () => void; playEatsy
 
 
 
-  // Project data for the audio player
+  // Project data for the audio player (index 0 = Realry featured)
   const projects = [
+    {
+      title: "Reshaping Shopping Experience",
+      subtitle: "Realry",
+      image: "/images/hero-image-realry.png",
+      audio: "/audio/realry-audio.mp3"
+    },
     {
       title: "AI-powered B2B Procurement Platform",
       subtitle: "Airframe",
-      image: imgAudioPlayer, // Special Airframe image
+      image: imgAudioPlayer,
       audio: "/audio/airframe-audio.mp3"
     },
     {
@@ -1141,7 +1187,7 @@ export const MediaPlayer = forwardRef<{ playAirframeAudio: () => void; playEatsy
   // Generate waveform data for each project
   const generateProjectWaveform = (duration: number, projectIndex: number) => {
     // Create different waveform patterns for each project
-    const complexity = [1.2, 0.8, 1.5, 1.0][projectIndex] || 1.0;
+    const complexity = [1.0, 1.2, 0.8, 1.5, 1.0][projectIndex] || 1.0;
     return generateRealisticWaveform(duration, complexity);
   };
 
@@ -1392,7 +1438,7 @@ export const MediaPlayer = forwardRef<{ playAirframeAudio: () => void; playEatsy
             data-name="action"
           >
             <motion.a
-                                href={`/project/${['airframe', 'eatsy', 'brainbox', 'shelf-life'][mediaState.currentProjectIndex]}/`}
+                                href={`/project/${['realry', 'airframe', 'eatsy', 'brainbox', 'shelf-life'][mediaState.currentProjectIndex]}/`}
               className="box-border content-stretch flex flex-row gap-2.5 items-center justify-end px-4 py-[6px] relative rounded-[999px] shrink-0 border border-[#e6ff02] border-solid hover:bg-[#e6ff02]/10 transition-colors duration-200"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
@@ -1524,7 +1570,7 @@ function TabletHome({ onNavigateToProject, onNavigateToAbout }: { onNavigateToPr
   const featuredRef = useRef<HTMLDivElement>(null);
   const moreRef = useRef<HTMLDivElement>(null);
   const contactRef = useRef<HTMLDivElement>(null);
-  const mediaPlayerRef = useRef<{ playAirframeAudio: () => void; playEatsyAudio: () => void; playBrainBoxAudio: () => void; playShelfLifeAudio: () => void; pauseAudio: () => void }>(null);
+  const mediaPlayerRef = useRef<{ playRealryAudio: () => void; playAirframeAudio: () => void; playEatsyAudio: () => void; playBrainBoxAudio: () => void; playShelfLifeAudio: () => void; pauseAudio: () => void }>(null);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -1610,10 +1656,6 @@ function TabletHome({ onNavigateToProject, onNavigateToAbout }: { onNavigateToPr
                 <span>{`I design products that make complex information `}</span>
                 <span className="text-[#f4915c]">easy to use.</span>
               </p>
-              <p className="font-didact-gothic leading-[28px]">
-                <span>{`I focus on practical workflows and turn messy problems into systems that `}</span>
-                <span className="text-[#f4915c]">grow smoothly.</span>
-              </p>
             </div>
           </div>
           <div className="content-start flex flex-wrap gap-2 items-start justify-center relative shrink-0 w-full">
@@ -1693,7 +1735,7 @@ export default function InteractiveHome({ onNavigateToProject, openProjects, onC
   const featuredRef = useRef<HTMLDivElement>(null);
   const moreRef = useRef<HTMLDivElement>(null);
   const contactRef = useRef<HTMLDivElement>(null);
-  const mediaPlayerRef = useRef<{ playAirframeAudio: () => void; playEatsyAudio: () => void; playBrainBoxAudio: () => void; playShelfLifeAudio: () => void; pauseAudio: () => void }>(null);
+  const mediaPlayerRef = useRef<{ playRealryAudio: () => void; playAirframeAudio: () => void; playEatsyAudio: () => void; playBrainBoxAudio: () => void; playShelfLifeAudio: () => void; pauseAudio: () => void }>(null);
 
   // Debug logging
   console.log('InteractiveHome render - deviceType:', deviceType, 'window.innerWidth:', typeof window !== 'undefined' ? window.innerWidth : 'N/A');
@@ -1792,7 +1834,18 @@ export default function InteractiveHome({ onNavigateToProject, openProjects, onC
     if (isAboutPage) {
       return <MobileAbout onNavigateToProject={onNavigateToProject} onBackToHome={handleBackToHome} />;
     }
-    return <MobileHome onNavigateToProject={onNavigateToProject} onNavigateToAbout={handleNavigateToAbout} />;
+    return (
+      <>
+        <MobileHome
+          onNavigateToProject={onNavigateToProject}
+          onNavigateToAbout={handleNavigateToAbout}
+          mediaPlayerRef={mediaPlayerRef}
+        />
+        <div className="hidden md:block fixed bottom-0 left-0 right-0 z-40 flex-shrink-0 bg-neutral-950 w-full" style={{ height: '74px' }}>
+          <MediaPlayer ref={mediaPlayerRef} onNavigateToProject={onNavigateToProject} />
+        </div>
+      </>
+    );
   }
 
   // Render tablet version on tablet devices
@@ -1874,10 +1927,11 @@ export default function InteractiveHome({ onNavigateToProject, openProjects, onC
                     </span>
                   </p>
                   <p className="leading-[22px]">
-                    <span>{`I focus on practical workflows and turn messy problems into systems that `}</span>
+                    <span>{`I can `}</span>
                     <span className="font-didact-gothic font-normal not-italic text-[#F4915C]">
-                      grow smoothly.
+                      ship production code
                     </span>
+                    <span>{` by leveraging AI tools—bridging design and implementation.`}</span>
                   </p>
                 </div>
               </div>
@@ -1900,7 +1954,7 @@ export default function InteractiveHome({ onNavigateToProject, openProjects, onC
                               <p className="block leading-[22px]">Years of experience</p>
                             </div>
                             <div className="font-didact-gothic font-semibold relative shrink-0 text-[#ffffff] text-[24px] w-full">
-                              <p className="block leading-[normal]">4</p>
+                              <p className="block leading-[normal]">4+</p>
                             </div>
                           </div>
                         </div>
