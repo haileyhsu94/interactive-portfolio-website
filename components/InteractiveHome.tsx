@@ -10,6 +10,13 @@ import MobileHome from './MobileHome';
 import MobileAbout from './MobileAbout';
 import MobileMenu from './MobileMenu';
 import Footer from './Footer';
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
 
 // Image paths - replace with your actual images
 // Add your images to the public/images/ folder and update these paths
@@ -562,15 +569,7 @@ function FeaturedSection({ sectionRef, mediaPlayerRef, onNavigateToProject }: { 
   );
 }
 
-const MORE_PROJECTS_VISIBLE = 3;
-
-const GAP_PX = 12;
-
 function MoreProjectsSection({ sectionRef, onNavigateToProject }: { sectionRef: RefObject<HTMLDivElement>; onNavigateToProject?: (project: string) => void }) {
-  const [scrollIndex, setScrollIndex] = useState(0);
-  const containerRef = useRef<HTMLDivElement>(null);
-  const [stepPx, setStepPx] = useState(0);
-
   const projects = [
     { 
       id: "airframe",
@@ -602,130 +601,102 @@ function MoreProjectsSection({ sectionRef, onNavigateToProject }: { sectionRef: 
     },
   ];
 
-  useEffect(() => {
-    const el = containerRef.current;
-    if (!el) return;
-    const update = () => {
-      const width = el.offsetWidth;
-      const cardWidth = (width - GAP_PX * (MORE_PROJECTS_VISIBLE - 1)) / MORE_PROJECTS_VISIBLE;
-      setStepPx(cardWidth + GAP_PX);
-    };
-    update();
-    const ro = new ResizeObserver(update);
-    ro.observe(el);
-    return () => ro.disconnect();
-  }, []);
-
-  const maxScroll = Math.max(0, projects.length - MORE_PROJECTS_VISIBLE);
+  const carouselButtonClass =
+    "!static !top-auto !left-auto !right-auto !translate-y-0 w-8 h-8 rounded-full border border-gray-600 bg-transparent text-white hover:bg-white/10 hover:text-white disabled:opacity-40 disabled:cursor-not-allowed transition-colors border-border";
 
   return (
-    <div
+    <section
       ref={sectionRef}
       className="box-border content-stretch flex flex-col gap-5 items-start justify-start p-0 relative shrink-0 w-full scroll-mt-6"
       data-name="more"
+      aria-label="More projects"
     >
-      <div
-        className="box-border content-stretch flex flex-row items-center justify-between gap-3 p-0 relative shrink-0 text-left w-full"
-        data-name="title"
+      <Carousel
+        opts={{ align: "start", loop: false, duration: 15 }}
+        className="w-full"
       >
-        <div className="font-didact-gothic font-bold relative shrink-0 text-[#ffffff] text-[20px]">
-          <p className="block leading-[normal] text-nowrap whitespace-pre">More Projects</p>
-        </div>
-        <div className="flex flex-row items-center gap-2 shrink-0">
-          <span className="font-didact-gothic font-normal text-[14px] text-gray-300 whitespace-nowrap">
-            {projects.length} more
-          </span>
-          <div className="flex flex-row items-center gap-1">
-            <button
-              type="button"
-              onClick={() => setScrollIndex((i) => Math.max(0, i - 1))}
-              disabled={scrollIndex === 0}
-              className="w-8 h-8 rounded-full border border-gray-600 flex items-center justify-center text-white hover:bg-white/10 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
-              aria-label="Previous projects"
-            >
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M15 18l-6-6 6-6" />
-              </svg>
-            </button>
-            <button
-              type="button"
-              onClick={() => setScrollIndex((i) => Math.min(maxScroll, i + 1))}
-              disabled={scrollIndex >= maxScroll}
-              className="w-8 h-8 rounded-full border border-gray-600 flex items-center justify-center text-white hover:bg-white/10 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
-              aria-label="Next projects"
-            >
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M9 18l6-6-6-6" />
-              </svg>
-            </button>
+        <div
+          className="box-border content-stretch flex flex-row items-center justify-between gap-3 p-0 relative shrink-0 text-left w-full"
+          data-name="title"
+        >
+          <div className="font-didact-gothic font-bold relative shrink-0 text-[#ffffff] text-[20px]">
+            <p className="block leading-[normal] text-nowrap whitespace-pre">More Projects</p>
+          </div>
+          <div className="flex flex-row items-center gap-2 shrink-0">
+            <span className="font-didact-gothic font-normal text-[14px] text-gray-300 whitespace-nowrap">
+              {projects.length} more
+            </span>
+            <div className="flex flex-row items-center gap-1" role="group" aria-label="Carousel navigation">
+              <CarouselPrevious
+                variant="ghost"
+                size="icon"
+                className={carouselButtonClass}
+                aria-label="Previous projects"
+              />
+              <CarouselNext
+                variant="ghost"
+                size="icon"
+                className={carouselButtonClass}
+                aria-label="Next projects"
+              />
+            </div>
           </div>
         </div>
-      </div>
-      <div
-        ref={containerRef}
-        className="box-border flex flex-row gap-3 items-stretch justify-start p-0 relative shrink-0 w-full overflow-hidden"
-        data-name="container"
-        style={{ gap: GAP_PX }}
-      >
-        <motion.div
-          className="flex flex-row items-stretch shrink-0"
-          style={{ gap: GAP_PX, x: stepPx ? -scrollIndex * stepPx : 0 }}
-          transition={{ type: "tween", duration: 1, ease: [0.25, 0.1, 0.25, 1] }}
-        >
+        <CarouselContent className="-ml-3 mt-0 flex items-stretch">
           {projects.map((project) => (
-            <motion.a 
-              key={project.id}
-              href={`/project/${project.id}/`}
-              className="min-h-px relative shrink-0 hover:bg-white/5 rounded-xl transition-colors duration-300 cursor-pointer"
-              style={{ width: stepPx ? stepPx - GAP_PX : undefined, minWidth: stepPx ? stepPx - GAP_PX : undefined }}
-              data-name="project"
-              whileHover={{ scale: 1.01 }}
-              whileTap={{ scale: 0.99 }}
-            >
-              <div className="relative size-full">
-                <div className="box-border content-stretch flex flex-col gap-4 items-start justify-start p-[12px] relative w-full">
-                  <div
-                    className="bg-center bg-cover bg-no-repeat rounded-xl shrink-0 w-full"
-                    style={{ 
-                      backgroundImage: `url('${project.image}')`,
-                      aspectRatio: '16/10'
-                    }}
-                    data-name="image"
-                  />
-                  <div
-                    className="box-border content-stretch flex flex-col gap-2 items-start justify-start p-0 relative shrink-0 w-full"
-                    data-name="title"
-                  >
-                    <div className="font-didact-gothic font-bold leading-[0] not-italic relative shrink-0 text-[#ffffff] text-[16px] text-left w-full">
-                      <p className="block leading-[normal]">{project.title}</p>
+            <CarouselItem key={project.id} className="pl-3 basis-1/2 md:basis-1/3">
+              <motion.a
+                href={`/project/${project.id}/`}
+                className="block size-full min-h-px hover:bg-white/5 rounded-xl transition-colors duration-300 cursor-pointer"
+                data-name="project"
+                whileHover={{ scale: 1.01 }}
+                whileTap={{ scale: 0.99 }}
+              >
+                <div className="relative size-full">
+                  <div className="box-border content-stretch flex flex-col gap-4 items-start justify-start p-[12px] relative w-full">
+                    <div
+                      className="bg-center bg-cover bg-no-repeat rounded-xl shrink-0 w-full"
+                      style={{ 
+                        backgroundImage: `url('${project.image}')`,
+                        aspectRatio: '16/10'
+                      }}
+                      data-name="image"
+                    />
+                    <div
+                      className="box-border content-stretch flex flex-col gap-2 items-start justify-start p-0 relative shrink-0 w-full"
+                      data-name="title"
+                    >
+                      <div className="font-didact-gothic font-bold leading-[0] not-italic relative shrink-0 text-[#ffffff] text-[16px] text-left w-full">
+                        <p className="block leading-[normal]">{project.title}</p>
+                      </div>
+                    </div>
+                    <div
+                      className="font-didact-gothic font-normal leading-[0] min-w-full not-italic relative shrink-0 text-[14px] text-gray-300 text-left"
+                      style={{ width: "min-content" }}
+                    >
+                      <p className="block leading-[22px]">{project.description}</p>
+                    </div>
+                    <div className="[flex-flow:wrap] box-border content-start flex gap-2 items-start justify-start pb-0 pt-1 px-0 relative shrink-0 w-full">
+                      {project.tags.map((tag) => (
+                        <motion.div
+                          key={tag}
+                          className="bg-[#1f1f1f] box-border content-stretch flex flex-row gap-2.5 items-center justify-center px-3 py-1 relative rounded-[999px] shrink-0 hover:bg-white/10 transition-colors duration-200"
+                          whileHover={{ scale: 1.05 }}
+                        >
+                          <div className="font-oregano leading-[0] not-italic relative shrink-0 text-[14px] text-gray-300 text-left text-nowrap">
+                            <p className="block leading-[22px] whitespace-pre">{tag}</p>
+                          </div>
+                        </motion.div>
+                      ))}
                     </div>
                   </div>
-                  <div
-                    className="font-didact-gothic font-normal leading-[0] min-w-full not-italic relative shrink-0 text-[14px] text-gray-300 text-left"
-                    style={{ width: "min-content" }}
-                  >
-                    <p className="block leading-[22px]">{project.description}</p>
-                  </div>
-                  <div className="[flex-flow:wrap] box-border content-start flex gap-2 items-start justify-start pb-0 pt-1 px-0 relative shrink-0 w-full">
-                    {project.tags.map((tag) => (
-                      <motion.div
-                        key={tag}
-                        className="bg-[#1f1f1f] box-border content-stretch flex flex-row gap-2.5 items-center justify-center px-3 py-1 relative rounded-[999px] shrink-0 hover:bg-white/10 transition-colors duration-200"
-                        whileHover={{ scale: 1.05 }}
-                      >
-                        <div className="font-oregano leading-[0] not-italic relative shrink-0 text-[14px] text-gray-300 text-left text-nowrap">
-                          <p className="block leading-[22px] whitespace-pre">{tag}</p>
-                        </div>
-                      </motion.div>
-                    ))}
-                  </div>
                 </div>
-              </div>
-            </motion.a>
+              </motion.a>
+            </CarouselItem>
           ))}
-        </motion.div>
-      </div>
-    </div>
+        </CarouselContent>
+      </Carousel>
+    </section>
   );
 }
 
