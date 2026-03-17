@@ -35,6 +35,7 @@ interface RealryPageProps {
 }
 
 export default function RealryPage({
+  onBack,
   openProjects,
   onCloseProject,
   onNavigateToProject,
@@ -113,7 +114,17 @@ export default function RealryPage({
             <div style={{ background: 'linear-gradient(179deg, #626BD9 -37.41%, #343973 41.39%)' }}>
               <div className="p-7">
                 <div className="flex items-center justify-between mb-5">
-                  <a href="/" className="w-12 h-12 flex items-center justify-center" aria-label="Back to home">
+                  <a
+                    href="/"
+                    className="w-12 h-12 flex items-center justify-center"
+                    aria-label="Back to home"
+                    onClick={(e) => {
+                      if (onBack) {
+                        e.preventDefault();
+                        onBack();
+                      }
+                    }}
+                  >
                     <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <rect x="0.5" y="0.5" width="47" height="47" rx="23.5" stroke="white" />
                       <path d="M18 20L14 24L18 28" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
