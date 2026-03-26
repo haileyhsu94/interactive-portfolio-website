@@ -20,6 +20,7 @@
   ],
   "scripts": {
     "dev": "next dev",
+    "dev:poll": "WATCHPACK_POLLING=true next dev",
     "build": "next build",
     "export": "next build",
     "start": "next start",
